@@ -17,8 +17,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Manual Docker'
-copyright = '2019, Francisco Humeres M.'
+project = 'Manual SSL/TSL'
+copyright = '2020, Francisco Humeres M.'
 author = 'Francisco Humeres M.'
 
 # The full version, including alpha/beta/rc tags
