@@ -4,7 +4,6 @@ pages:
   stage: deploy
   script:
     - mkdir .public
-    - mv index.html .public/index.html
     - cp -r build/* .public
     - mv .public public
   artifacts:
