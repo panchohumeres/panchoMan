@@ -1,5 +1,6 @@
 # panchoMan
 Manuales varios de Francisco Humeres M.
+Vínculos:
 
 [Linux](https://panchohumeres.gitlab.io/linux_man/)
 
