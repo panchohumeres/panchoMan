@@ -10,7 +10,7 @@ Manual SSL/TSL de Francisco Humeres M.
    :maxdepth: 2
    :caption: Contents:
 
-   1. Prueba de Concepto <../_sections/concept-test>
-   2. Ejemplos de Archivos de Certidicados <../_sections/examples>
+   1. CSR y Private Key <../_sections/example-csr-privatekey>
+   2. CSR y Private Key de certificado autofirmado <../_sections/example-self-signed>
 
 

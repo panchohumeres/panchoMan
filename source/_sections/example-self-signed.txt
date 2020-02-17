@@ -1,0 +1,46 @@
+Certificate Request:
+    Data:
+        Version: 0 (0x0)
+        Subject: C=cl, ST=rm, L=scl, O=yo, OU=yo, CN=yo.cl/emailAddress=yo@yo.cl
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:ca:52:f2:f9:1a:2a:7e:a8:d2:df:a8:47:cb:7f:
+                    38:e7:d8:39:e6:05:92:57:82:0d:5a:7f:1a:63:54:
+                    a4:93:b1:ef:eb:80:c9:e2:c5:33:f2:da:2d:7f:62:
+                    9b:65:df:a0:63:01:1c:0c:14:88:0d:32:76:4e:cc:
+                    fc:53:1c:15:8e:ed:e9:e3:2f:db:ec:d5:e4:cd:c3:
+                    d0:1d:ac:d8:63:a7:3c:d8:14:17:35:a9:1a:f4:04:
+                    3d:15:d7:12:32:f5:f3:68:59:26:2a:6b:b4:06:a0:
+                    29:4d:3b:ac:6f:a4:a8:7a:1a:e0:b3:c4:76:63:f5:
+                    13:01:b1:2d:d3:67:41:12:d4:0e:10:9e:58:e9:49:
+                    b2:1c:3b:e6:60:db:a7:2e:19:cf:f7:e4:75:d6:a3:
+                    bd:73:67:5b:f1:33:67:51:9e:d9:0e:87:8e:eb:97:
+                    28:82:22:32:02:d0:2e:69:36:8a:bd:4f:5c:75:2c:
+                    02:1d:a8:f3:9c:a3:0c:d1:d7:93:88:a0:d1:98:d7:
+                    8b:d7:71:5c:a9:72:78:83:7f:c4:7a:e5:e6:94:20:
+                    6a:f4:a8:47:ed:74:b3:0f:12:4c:2b:40:12:41:ff:
+                    83:15:37:51:a3:89:ea:9a:15:54:6d:20:ef:9b:f1:
+                    4c:c0:e3:9b:98:ae:f5:0d:84:03:45:c2:b7:f4:ed:
+                    5e:11
+                Exponent: 65537 (0x10001)
+        Attributes:
+            unstructuredName         :yo
+            challengePassword        :holayo
+    Signature Algorithm: sha256WithRSAEncryption
+         30:c8:4d:58:0e:08:8d:d6:51:69:b6:4a:13:8f:5a:66:08:da:
+         df:7b:84:e4:9c:91:f1:78:e9:1c:a7:52:16:2f:99:5e:0e:89:
+         4d:62:b2:4c:f5:e0:a5:ff:2f:52:a5:e9:44:fd:e9:d4:a8:25:
+         36:64:98:27:58:f2:dc:be:44:1f:1b:31:13:62:47:14:30:b6:
+         ce:2a:ba:a5:e9:18:08:10:85:67:cf:2d:e5:56:04:f6:ed:48:
+         48:ee:f6:3f:c1:af:59:55:c8:4a:a3:44:4b:9d:74:ea:4c:37:
+         d5:06:c6:c9:1c:60:8d:0b:c7:dc:94:ce:92:47:89:41:ed:0d:
+         f3:5f:45:ef:89:e1:7b:3d:10:59:b7:cb:16:11:6f:39:f0:1e:
+         2b:00:cb:50:bd:97:18:b5:0e:ab:70:84:88:27:fa:89:08:30:
+         75:14:b9:9a:c6:5a:bb:e3:67:f2:f9:c1:bc:b6:f5:95:06:ee:
+         14:29:c7:75:6f:50:4d:bc:69:d3:0e:9f:35:e4:b2:4e:ee:1c:
+         dc:ce:8d:f0:60:55:33:c2:d5:a0:f5:92:f2:60:89:21:ab:ac:
+         92:5d:93:eb:3e:49:2f:0c:49:db:2e:4e:9f:1c:48:eb:b0:27:
+         b9:2f:d6:83:93:7d:b6:66:d8:3e:75:0d:1a:42:4e:a6:28:21:
+         8d:59:6c:e9
