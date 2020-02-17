@@ -1,9 +1,9 @@
 # panchoMan
 Manuales varios de Francisco Humeres M.
 
-[Linux](/linux/build/index.html)
+[Linux](https://panchohumeres.gitlab.io/linux_man/)
 
-[Docker](/Docker/build/index.html)
+[Docker](https://panchohumeres.gitlab.io/docker_man_page/)
 
 [Sphinx](/sphinx/sphinx.md)
 
