@@ -8,4 +8,6 @@ Vínculos:
 
 [Sphinx](/sphinx/sphinx.md)
 
-[Git](/sphinx/git.md)
+[Git](/GIT/git.md)
+
+[SSL/TSL](https://panchohumeres.gitlab.io/ssl_tsl_man)

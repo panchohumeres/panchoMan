@@ -19,3 +19,5 @@ git push -u origin --all
 git push -u origin --tags
 
 git push https://gitlab.com/panchohumeres/linux_man.git linux:master
+
+git clone -b mybranch --single-branch git://sub.domain.com/repo.git
