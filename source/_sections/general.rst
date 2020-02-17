@@ -10,6 +10,7 @@ Comandos Docker generales:
 docker-compose stop ----->(preferido)
 
 docker kill $(docker ps -q)-------->para todos los del host (no recomendado)
+
 * **meterse a un contenedor en específico:**
 docker-compose exec <nombre_contenedor> bash
 
