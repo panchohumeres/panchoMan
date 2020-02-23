@@ -21,3 +21,28 @@ git push -u origin --tags
 git push https://gitlab.com/panchohumeres/linux_man.git linux:master
 
 git clone -b mybranch --single-branch git://sub.domain.com/repo.git
+
+https://www.cocoanetics.com/2012/12/changing-history-gits/
+
+https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository
+
+https://help.github.com/es/github/managing-large-files/removing-files-from-a-repositorys-history
+
+https://myopswork.com/how-remove-files-completely-from-git-repository-history-47ed3e0c4c35
+
+git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to_file" HEAD
+
+git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to_folder" HEAD
+
+git filter-branch --force --index-filter "git rm -rf --cached --ignore-unmatch path_to_folder" --prune-empty --tag-name-filter cat -- --all HEAD
+
+
+git push origin master --force
+
+
+https://gitlab.com/gitlab-com/support-forum/issues/207
+
+https://www.git-tower.com/learn/git/faq/undo-last-commit
+git reset --soft HEAD~1
+
+git filter-branch --force --index-filter "git rm -rf --cached --ignore-unmatch build" --prune-empty --tag-name-filter cat -- --all HEAD
