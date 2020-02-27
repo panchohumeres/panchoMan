@@ -3,15 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Manual Docker de Francisco Humeres M. (c) 2020
+Manual Kibana de Francisco Humeres M.
 ==================================================
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contenidos:
 
-   1. Generales <../_sections/general>
-   2. Revisar Logs de Contenedores <../_sections/logs>
-   3. Borrar, Limpiar Contenedores <../_sections/prune>
+   1. Manual Nivel Usuario  <../_sections/usuario>
+   2. Vega <../_sections/vega>
+   3. Troubleshooting <../_sections/troubleshooting>
 
 
