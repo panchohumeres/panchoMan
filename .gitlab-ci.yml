@@ -4,7 +4,7 @@ pages:
   stage: deploy
   script:
     - mkdir .public
-    - cp -r build/* .public
+    - cp -r kibana/build/* .public
     - mv .public public
   artifacts:
     paths:
