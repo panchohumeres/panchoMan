@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Docker: Comandos de utilidad general &#8212; documentación de Manual Docker - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Docker: Revisar Logs de Contenedores" href="logs.html" />
+    <link rel="prev" title="Manual Docker de Francisco Humeres M." href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="docker-comandos-de-utilidad-general">
+<h1>Docker: Comandos de utilidad general<a class="headerlink" href="#docker-comandos-de-utilidad-general" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>Comandos Docker generales:</dt><dd><p>Incluye Docker-Compose</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<ul>
+<li><p><strong>matar todos los contenedores (no se pierde la data) –DEL HOST</strong></p>
+<blockquote>
+<div><p>docker-compose stop —–&gt;(preferido)
+docker kill $(docker ps -q)——–&gt;para todos los del host (no recomendado)</p>
+</div></blockquote>
+</li>
+<li><p><strong>meterse a un contenedor en específico:</strong></p>
+<blockquote>
+<div><p>docker-compose exec &lt;nombre_contenedor&gt; bash</p>
+</div></blockquote>
+</li>
+<li><p><strong>borrar un contenedor (se pierde data en el contenedor, si es que no está respaldada en volumen externo):</strong></p>
+<blockquote>
+<div><p>docker-compose rm &lt;nombre_contenedor&gt;</p>
+</div></blockquote>
+</li>
+<li><p><strong>borrar TODOS volúmenes asociados (internos):</strong></p>
+<blockquote>
+<div><p>docker-compose down -v</p>
+</div></blockquote>
+</li>
+<li><p><strong>listar espacio en disco que ocupan contenedores y volúmenes</strong></p>
+<blockquote>
+<div><p>docker system df
+docker system df -v | con más detalles</p>
+</div></blockquote>
+</li>
+<li><p><strong>resetear todos los contenedores (se borran y recrean los contenedores, si no hay volumen externo montado se pierde la data)</strong></p>
+<blockquote>
+<div><p>docker-compose up –build</p>
+</div></blockquote>
+</li>
+<li><p><strong>borrar todos los contenedores</strong></p>
+<blockquote>
+<div><p>docker-compose rm ——–&gt;borra todos los contenedores del docker-compose (preferir)
+docker rm $(docker ps -a -q)————–&gt;borra todos los contenedores del host (NO PREFERIR)</p>
+</div></blockquote>
+</li>
+<li><p><strong>revisar archivo docker-compose con variables de entorno sustituidas</strong></p>
+<blockquote>
+<div><p>docker-compose config
+docker-compose -f &lt;archivo-compose-de-interés-yaml&gt; config</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Docker</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Generales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logs.html">2. Revisar Logs de Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prune.html">3. Borrar, Limpiar Contenedores</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="capítulo anterior">Manual Docker de Francisco Humeres M.</a></li>
+      <li>Next: <a href="logs.html" title="próximo capítulo">Docker: Revisar Logs de Contenedores</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/general.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
