@@ -12,3 +12,4 @@ Manual Nivel Usuario:
    :caption: Contenidos:
 
    1. Dashboards  <../_sections/usuario-dashboard>
+   2. Reportes  <../_sections/usuario-reportes>

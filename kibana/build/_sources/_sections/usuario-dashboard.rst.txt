@@ -1,5 +1,5 @@
 =====================================
-Kibana: Dashboards
+Kibana: Dashboards, Nivel Usuario
 =====================================
 
 Pasos para acceder y desplegar un Dashboard:
