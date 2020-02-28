@@ -12,4 +12,5 @@ Manual Nivel Usuario:
    :caption: Contenidos:
 
    1. Dashboards  <../_sections/usuario-dashboard>
-   2. Reportes  <../_sections/usuario-reportes>
+   2. Filtrar contenido de Dashboards  <../_sections/usuario-dashboard-filtros>
+   3. Reportes  <../_sections/usuario-reportes>
