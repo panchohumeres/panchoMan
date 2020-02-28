@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Manual Docker'
+project = 'Manual Kibana'
 copyright = '2020, Francisco Humeres M.'
 author = 'Francisco Humeres M.'
 
@@ -60,3 +60,23 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+
+rst_prolog = """
+panchoMan |panchoman| panchoMan GitHub Repo |github| panchoMan Kibana GitLab Repo |gitlab|
+
+.. |panchoman| image:: https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png
+    :target: https://panchohumeres.github.io/panchoMan
+    :height: 20
+    :width: 20
+
+.. |github| image:: https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png
+    :target: https://github.com/panchohumeres/panchoMan
+    :height: 20
+    :width: 20
+
+.. |gitlab| image:: https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png
+    :target: https://github.com/panchohumeres/panchoMan
+    :height: 20
+    :width: 20
+"""
