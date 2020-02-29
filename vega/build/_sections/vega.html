@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vega: Configuraciones recurrentes &#8212; documentación de Manual Vega - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Manual Vega y Vega-Lite de Francisco Humeres M." href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="vega-configuraciones-recurrentes">
+<h1>Vega: Configuraciones recurrentes<a class="headerlink" href="#vega-configuraciones-recurrentes" title="Enlazar permanentemente con este título">¶</a></h1>
+<hr class="docutils" />
+<ul>
+<li><dl class="simple">
+<dt><strong>Especificar font general de la visualización</strong>:</dt><dd><p>En directiva config, al principio de la definición de la visualización. Va a ser reemplazada por cualquier especificación particular de font:
+<a class="reference external" href="https://vega.github.io/vega-lite/docs/mark.html#config">https://vega.github.io/vega-lite/docs/mark.html#config</a></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{ config: {&quot;text&quot; : {&quot;font&quot;:&quot;Rubik&quot;}
+}
+</pre></div>
+</div>
+</li>
+<li><p><strong>Ejemplo config. del título en Vega v.3</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;Consumo Total del Mes (Millones de $ CLP y MWh)&quot;</span><span class="p">,</span>
+<span class="nt">&quot;fontSize&quot;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;#FFFFFF&quot;</span><span class="p">,</span><span class="nt">&quot;font&quot;</span><span class="p">:</span><span class="s2">&quot;Rubik&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><dl>
+<dt><strong>Ejemplo inserción de Imagen Vega v.3</strong>:</dt><dd><p><a class="reference external" href="https://vega.github.io/vega/docs/marks/image/">https://vega.github.io/vega/docs/marks/image/</a></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span>
+<span class="nt">&quot;encode&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="nt">&quot;enter&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;https://vega.github.io/images/idl-logo.png&quot;</span>
+<span class="p">}}</span>
+<span class="p">}}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p><strong>Ejemplo de desplegar imágenes según condición</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+&quot;type&quot;: &quot;image&quot;,
+&quot;from&quot;: {&quot;data&quot;: &quot;results&quot;}
+&quot;encode&quot;: {
+&quot;enter&quot;: {
+&quot;url&quot;: {
+&quot;signal&quot;: &quot;if(datum.up, &#39;https://wenu.s3-sa-east-1.amazonaws.com/Green_Arrow_Down.png&#39;, if(datum.down_mwh, &#39;https://wenu.s3-sa-east-1.amazonaws.com/Green_Arrow_Down.png&#39;, &#39;https://wenu.s3-sa-east-1.amazonaws.com/factory.svg&#39;))&quot;,
+}
+      align: {value: &quot;center&quot;}
+      baseline: {value: &quot;middle&quot;}
+      xc: {signal: &quot;width/2-50&quot;}
+      yc: {signal: &quot;height/2&quot;}
+}
+}}
+</pre></div>
+</div>
+</li>
+</ul>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Vega</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Configuraciones recurrentes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="capítulo anterior">Manual Vega y Vega-Lite de Francisco Humeres M.</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/vega.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
