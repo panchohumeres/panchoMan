@@ -8,8 +8,9 @@ Manual Linux de Francisco Humeres M. (c) 2020
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contenidos:
 
    1. Comandos Útiles <../_sections/useful-commands>
+   2. Nube pública (Cloud) <../_sections/cloud>
 
 
