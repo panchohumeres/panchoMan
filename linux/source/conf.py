@@ -76,7 +76,7 @@ panchoMan |panchoman| panchoMan GitHub Repo |github| panchoMan Kibana GitLab Rep
     :width: 20
 
 .. |gitlab| image:: https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png
-    :target: https://panchohumeres.gitlab.io/linux_man
+    :target: https://gitlab.com/panchohumeres/linux_man
     :height: 20
     :width: 20
 """
