@@ -10,8 +10,9 @@ Manual Docker de Francisco Humeres M.
    :maxdepth: 2
    :caption: Contenidos:
 
-   1. Generales <../_sections/general>
-   2. Revisar Logs de Contenedores <../_sections/logs>
-   3. Borrar, Limpiar Contenedores <../_sections/prune>
+   1. Instalar <../_sections/instalar>
+   2. Generales <../_sections/general>
+   3. Revisar Logs de Contenedores <../_sections/logs>
+   4. Borrar, Limpiar Contenedores <../_sections/prune>
 
 
