@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Manual Linux de Francisco Humeres M. (c) 2020
+Manual Linux de Francisco Humeres M.
 ==================================================
 
 .. toctree::
@@ -12,5 +12,6 @@ Manual Linux de Francisco Humeres M. (c) 2020
 
    1. Comandos Útiles <../_sections/useful-commands>
    2. Nube pública (Cloud) <../_sections/cloud>
+   3. Bash <../_sections/bash>
 
 

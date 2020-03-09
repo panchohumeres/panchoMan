@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Manual Linux'
-copyright = '2019, Francisco Humeres M.'
+copyright = '2020, Francisco Humeres M.'
 author = 'Francisco Humeres M.'
 
 # The full version, including alpha/beta/rc tags
