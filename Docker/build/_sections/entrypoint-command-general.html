@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Linux: Comandos Útiles &#8212; documentación de Manual Docker - 1.0</title>
+    <title>Docker: Entrypoint y Command &#8212; documentación de Manual Docker - 1.0</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -32,11 +32,27 @@
           <div class="body" role="main">
             
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/docker_man_page"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
-<div class="section" id="linux-comandos-utiles">
-<h1>Linux: Comandos Útiles<a class="headerlink" href="#linux-comandos-utiles" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Comandos Linux útiles:</p>
-<div class="toctree-wrapper compound">
+<div class="section" id="docker-entrypoint-y-command">
+<h1>Docker: Entrypoint y Command<a class="headerlink" href="#docker-entrypoint-y-command" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Instrucciones generales</p>
+<hr class="docutils" />
+<ul>
+<li><dl>
+<dt>Ejemplo llamar script bash con <strong>«command»</strong> en Docker-compose:</dt><dd><p><a class="reference external" href="https://stackoverflow.com/questions/57840820/run-a-shell-script-form-docker-compose-command-inside-the-container">https://stackoverflow.com/questions/57840820/run-a-shell-script-form-docker-compose-command-inside-the-container</a></p>
+<p>version: «2»</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
+    <span class="nt">api</span><span class="p">:</span>
+        <span class="nt">build</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">.</span>
+        <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
+        <span class="nt">command</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/bin/sh -c &quot;entrypoint.sh&quot;</span>
+        <span class="nt">expose</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&quot;5000&quot;</span>
+</pre></div>
 </div>
+</dd>
+</dl>
+</li>
+</ul>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
@@ -66,7 +82,6 @@
 <li class="toctree-l1"><a class="reference internal" href="general.html">2. Generales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logs.html">3. Revisar Logs de Contenedores</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prune.html">4. Borrar, Limpiar Contenedores</a></li>
-<li class="toctree-l1"><a class="reference internal" href="entrypoint-command.html">5. Entrypoint y Command</a></li>
 </ul>
 
 <div class="relations">
@@ -106,7 +121,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/_sections/useful-commands.rst.txt"
+      <a href="../_sources/_sections/entrypoint-command-general.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
