@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>NGINX: Comandos Útiles &#8212; documentación de Manual Nginx - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Manual Nginx de Francisco Humeres M." href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/nginx_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="nginx-comandos-utiles">
+<h1>NGINX: Comandos Útiles<a class="headerlink" href="#nginx-comandos-utiles" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Comandos de utilidad en NGINX:</p>
+<hr class="docutils" />
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>Referencias:</dt><dd><p><a class="reference external" href="https://www.tecmint.com/useful-nginx-command-examples/">https://www.tecmint.com/useful-nginx-command-examples/</a></p>
+</dd>
+</dl>
+</li>
+<li><p>Revisar versión:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nginx -v
+
+<span class="c1">#Output esperado:</span>
+
+nginx version: nginx/1.12.2
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Revisar versión y opciones de configuración:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nginx -V
+
+<span class="c1">#Output esperado:</span>
+
+nginx version: nginx/1.12.2
+built by gcc <span class="m">4</span>.8.5 <span class="m">20150623</span> <span class="o">(</span>Red Hat <span class="m">4</span>.8.5-16<span class="o">)</span> <span class="o">(</span>GCC<span class="o">)</span>
+built with OpenSSL <span class="m">1</span>.0.2k-fips  <span class="m">26</span> Jan <span class="m">2017</span>
+TLS SNI support enabled
+configure arguments: --prefix<span class="o">=</span>/usr/share/nginx --sbin-path<span class="o">=</span>/usr/sbin/nginx --modules-path<span class="o">=</span>/usr/lib64/nginx/modules --conf-path<span class="o">=</span>/etc/nginx/nginx.conf --error-log-path<span class="o">=</span>/var/log/nginx/error.log --http-log-path<span class="o">=</span>/var/log/nginx/access.log --http-client-body-temp-path<span class="o">=</span>/var/lib/nginx/tmp/client_body --http-proxy-temp-path<span class="o">=</span>/var/lib/nginx/tmp/proxy --http-fastcgi-temp-path<span class="o">=</span>/var/lib/nginx/tmp/fastcgi --http-uwsgi-temp-path<span class="o">=</span>/var/lib/nginx/tmp/uwsgi --http-scgi-temp-path<span class="o">=</span>/var/lib/nginx/tmp/scgi --pid-path<span class="o">=</span>/run/nginx.pid --lock-path<span class="o">=</span>/run/lock/subsys/nginx --user<span class="o">=</span>nginx --group<span class="o">=</span>nginx --with-file-aio --with-ipv6 --with-http_auth_request_module --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module<span class="o">=</span>dynamic --with-http_image_filter_module<span class="o">=</span>dynamic --with-http_geoip_module<span class="o">=</span>dynamic --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-http_perl_module<span class="o">=</span>dynamic --with-mail<span class="o">=</span>dynamic --with-mail_ssl_module --with-pcre --with-pcre-jit --with-stream<span class="o">=</span>dynamic --with-stream_ssl_module --with-google_perftools_module --with-debug --with-cc-opt<span class="o">=</span><span class="s1">&#39;-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic&#39;</span> --with-ld-opt<span class="o">=</span><span class="s1">&#39;-Wl,-z,relro -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -Wl,-E&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Revisar sintaxis de Configuración de NGINX:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo nginx -t
+
+<span class="c1">#Output esperado:</span>
+
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf <span class="nb">test</span> is successful
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Mostrar texto de configuración completo:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo nginx -T
+
+<span class="c1">#enviarla a un archivo de texto:</span>
+
+sudo nginx -T &gt;&gt; test_config.nginx
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Iniciar servicio:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl start nginx
+
+<span class="c1">#Ó:</span>
+
+sudo service nginx start
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Habilitar servicio Nginx (<strong>para que se inicie con boot del sistema</strong>):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl <span class="nb">enable</span> nginx
+
+<span class="c1">#Ó:</span>
+
+sudo service nginx <span class="nb">enable</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Reiniciar servicio Nginx:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl restart nginx
+
+<span class="c1">#Ó:</span>
+
+sudo service nginx restart
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Recargar configuración (Reload de archivo(s) de configuración):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl reload nginx
+
+<span class="c1">#Ó:</span>
+
+sudo service nginx reload
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Verificar status servicio NGINX:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl status nginx
+
+<span class="c1">#Ó:</span>
+
+sudo service nginx status
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Referencia de comandos (ayuda):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl -h nginx
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Nginx</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Comandos de utilidad</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="capítulo anterior">Manual Nginx de Francisco Humeres M.</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/utilidad.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
