@@ -10,4 +10,6 @@ Tips para scripts Bash en Linux:
    :maxdepth: 2
    :caption: Contenidos:
 
+   1. Arrays <../_sections/arrays-bash>
    2. Pasar argumentos <../_sections/args-bash>
+   3. Manipular strings <../_sections/strings-bash>

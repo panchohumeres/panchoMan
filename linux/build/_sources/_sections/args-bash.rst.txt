@@ -77,3 +77,31 @@ Ejemplos de pasar argumentos en scripts Bash:
 
         User:ismail
         Password:poftut
+
+-------------------------------------------
+
+* Como llamar otro Script Bash:
+    Opciones:
+
+-------------------------------------------
+
+    1. Llamar el otro script como un comando normal (después de hacerlo ejecutable y agregarlo a la variable de entorno $PATH).
+
+    2. Lammarlo con source:
+
+        source another_script.sh
+
+        #O con Alias ".".
+
+        . another_script.sh
+
+    3. Llamarlo con bash:
+
+    .. code-block:: bash
+
+        bash another_script.sh
+
+    * **1. y 3.** ejecutan el otro script como otro nuevo proceso, por lo que no comparte ni hereda variables de entorno.
+    * **2.** trae variables de entorno del otro script, las agrega a las propias y ejecuta el segundo script.
+    * Comando "**exit**" rompe ambos scripts en caso **2.**, lo que **NO** ocurre en **1. y 3.*+.
+    * **Referencias:** https://stackoverflow.com/questions/8352851/how-to-call-one-shell-script-from-another-shell-script

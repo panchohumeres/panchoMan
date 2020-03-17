@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Linux: Bash &#8212; documentación de Manual Linux - 1.0</title>
+    <title>Linux: Bash Arrays &#8212; documentación de Manual Linux - 1.0</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="Linux: Bash Arrays" href="arrays-bash.html" />
-    <link rel="prev" title="Linux: Cloud - Montar Volúmenes" href="cloud-volume.html" />
+    <link rel="next" title="Linux: Bash" href="args-bash.html" />
+    <link rel="prev" title="Linux: Bash" href="bash.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -34,18 +34,75 @@
           <div class="body" role="main">
             
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/linux_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
-<div class="section" id="linux-bash">
-<h1>Linux: Bash<a class="headerlink" href="#linux-bash" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Tips para scripts Bash en Linux:</p>
+<div class="section" id="linux-bash-arrays">
+<h1>Linux: Bash Arrays<a class="headerlink" href="#linux-bash-arrays" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Conceptos y ejemplos de arrays en Bash Scripting:</p>
 <hr class="docutils" />
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="arrays-bash.html">1. Arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="args-bash.html">2. Pasar argumentos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><p><a class="reference external" href="https://tecadmin.net/working-with-array-bash-script/">https://tecadmin.net/working-with-array-bash-script/</a></p>
+</dd>
+</dl>
+</li>
 </ul>
+<hr class="docutils" />
+<ul>
+<li><p>Definir un Array:</p>
+<blockquote>
+<div><p>Declarándolo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">declare</span> -a test_array
+</pre></div>
 </div>
+<p>Asignando elementos (no es necesario declararlo):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">test_array</span><span class="o">=(</span>apple orange lemon<span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Agregar nuevos elementos a un array:</dt><dd><p>Usando operador <strong>«+=»</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">test_array</span><span class="o">+=(</span>mango banana<span class="o">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p>Actualizar elemento de un array:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>test_array<span class="o">[</span><span class="m">2</span><span class="o">]=</span>grapes
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Borrar elemento de un array:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">unset</span> test_array<span class="o">[</span><span class="m">2</span><span class="o">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Acceder elementos de un Array:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="si">${</span><span class="nv">test_array</span><span class="p">[0]</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>Para acceder a <strong>todos</strong> los elementos, usar <strong>&#64;</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="si">${</span><span class="nv">test_array</span><span class="p">[@]</span><span class="si">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Loop (recorrer elementos) de un array:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> i in <span class="si">${</span><span class="nv">test_array</span><span class="p">[@]</span><span class="si">}</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="nv">$i</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
@@ -73,8 +130,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="useful-commands.html">1. Comandos Útiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cloud.html">2. Nube pública (Cloud)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Bash</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="arrays-bash.html">1. Arrays</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bash.html">3. Bash</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="args-bash.html">2. Pasar argumentos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
 </ul>
@@ -85,8 +142,10 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="cloud-volume.html" title="capítulo anterior">Linux: Cloud - Montar Volúmenes</a></li>
-      <li>Next: <a href="arrays-bash.html" title="próximo capítulo">Linux: Bash Arrays</a></li>
+  <li><a href="bash.html">Linux: Bash</a><ul>
+      <li>Previous: <a href="bash.html" title="capítulo anterior">Linux: Bash</a></li>
+      <li>Next: <a href="args-bash.html" title="próximo capítulo">Linux: Bash</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -120,7 +179,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/_sections/bash.rst.txt"
+      <a href="../_sources/_sections/arrays-bash.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
