@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Linux: Bash &#8212; documentación de Manual Linux - 1.0</title>
+    <title>Linux: Bash $ &#8212; documentación de Manual Linux - 1.0</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="Linux: Bash Arrays" href="arrays-bash.html" />
-    <link rel="prev" title="Linux: Cloud - Montar Volúmenes" href="cloud-volume.html" />
+    <link rel="next" title="Linux: Bash Commas" href="commas-bash.html" />
+    <link rel="prev" title="Linux: Bash Strings" href="strings-bash.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -35,19 +35,74 @@
             
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/linux_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
 <div class="section" id="linux-bash">
-<h1>Linux: Bash<a class="headerlink" href="#linux-bash" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Tips para scripts Bash en Linux:</p>
+<h1>Linux: Bash $<a class="headerlink" href="#linux-bash" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl>
+<dt>Bash:</dt><dd><p>Usos del signo $.</p>
+<p><strong>Referencia</strong>: <a class="reference external" href="https://stackoverflow.com/questions/10870719/inline-code-highlighting-in-restructuredtext">https://stackoverflow.com/questions/10870719/inline-code-highlighting-in-restructuredtext</a></p>
+</dd>
+</dl>
 <hr class="docutils" />
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="arrays-bash.html">1. Arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="args-bash.html">2. Pasar argumentos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="$-bash.html">4. $</a></li>
-<li class="toctree-l1"><a class="reference internal" href="commas-bash.html">5. Expansión de Variables (uso de &quot;&quot; y '')</a></li>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$1,</span> <span class="pre">$2,</span> <span class="pre">$3</span></code></dt><dd><p>Parámetros posicionales</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">&quot;$&#64;&quot;</span></code></dt><dd><dl class="simple">
+<dt>Parámetros posicionales, como array: i.e. la forma:</dt><dd><p>{$1, $2, $3 …}.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">&quot;$*&quot;</span></code></dt><dd><p>«Expansión» <strong>IFS</strong> de parámetros posicionales. P.ej (IFS=”|”): «$1|$2|$3».
+Ver: <a class="reference external" href="https://bash.cyberciti.biz/guide/$IFS">https://bash.cyberciti.biz/guide/$IFS</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$#</span></code></dt><dd><p>El número de parámetros posicionales.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$-</span></code></dt><dd><p>Número de opciones para el «Shell» actual.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$$</span></code></dt><dd><p>«Process ID» <strong>(PID)</strong> del actual «Shell» (<strong>NO</strong> sub-shell).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$_</span></code></dt><dd><p>Parámetro más reciente.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$IFS</span></code></dt><dd><p>Separador o delimitador de parámetros en string de entrada (input). Ver: <a class="reference internal" href="strings-bash.html"><span class="doc">Linux: Bash Strings</span></a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$?</span></code></dt><dd><p>Status más reciente anterior a un «exit».</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$!</span></code></dt><dd><p>PID del comando más reciente ejecutado en el background.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$0</span></code></dt><dd><p>El nombre del shell o script shell.</p>
+</dd>
+</dl>
+</li>
 </ul>
-</div>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
@@ -75,12 +130,12 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="useful-commands.html">1. Comandos Útiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cloud.html">2. Nube pública (Cloud)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Bash</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="bash.html">3. Bash</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="arrays-bash.html">1. Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="args-bash.html">2. Pasar argumentos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="$-bash.html">4. $</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commas-bash.html">5. Expansión de Variables (uso de &quot;&quot; y '')</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. $</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commas-bash.html">5. &quot; &quot; y ' ' en contexto bash</a></li>
 </ul>
 </li>
 </ul>
@@ -89,8 +144,10 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="cloud-volume.html" title="capítulo anterior">Linux: Cloud - Montar Volúmenes</a></li>
-      <li>Next: <a href="arrays-bash.html" title="próximo capítulo">Linux: Bash Arrays</a></li>
+  <li><a href="bash.html">Linux: Bash</a><ul>
+      <li>Previous: <a href="strings-bash.html" title="capítulo anterior">Linux: Bash Strings</a></li>
+      <li>Next: <a href="commas-bash.html" title="próximo capítulo">Linux: Bash Commas</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -124,7 +181,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/_sections/bash.rst.txt"
+      <a href="../_sources/_sections/$-bash.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
