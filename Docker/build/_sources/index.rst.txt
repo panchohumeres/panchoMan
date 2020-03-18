@@ -12,8 +12,10 @@ Manual Docker de Francisco Humeres M.
 
    1. Instalar <../_sections/instalar>
    2. Generales <../_sections/general>
-   3. Revisar Logs de Contenedores <../_sections/logs>
-   4. Borrar, Limpiar Contenedores <../_sections/prune>
-   5. Entrypoint y Command <../_sections/entrypoint-command>
+   3. Conceptos <../_sections/conceptos>
+   4. Revisar Logs de Contenedores <../_sections/logs>
+   5. Borrar, Limpiar Contenedores <../_sections/prune>
+   6. Entrypoint y Command <../_sections/entrypoint-command>
+   7. Casos Especiales <../_sections/special-cases>
 
 

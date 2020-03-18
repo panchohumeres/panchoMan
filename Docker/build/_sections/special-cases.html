@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Linux: Comandos Útiles &#8212; documentación de Manual Docker - 1.0</title>
+    <title>Docker: Casos Especiales &#8212; documentación de Manual Docker - 1.0</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Docker: Entrypoint y Command" href="entrypoint-command-troubleshooting.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,11 +33,37 @@
           <div class="body" role="main">
             
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/docker_man_page"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
-<div class="section" id="linux-comandos-utiles">
-<h1>Linux: Comandos Útiles<a class="headerlink" href="#linux-comandos-utiles" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Comandos Linux útiles:</p>
-<div class="toctree-wrapper compound">
+<div class="section" id="docker-casos-especiales">
+<h1>Docker: Casos Especiales<a class="headerlink" href="#docker-casos-especiales" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Ejemplos de casos especiales:</p>
+<hr class="docutils" />
+<ul>
+<li><dl>
+<dt>Usar Bash con distribuciones «Alpine» (<strong>que no tienen bash</strong>):</dt><dd><p><a class="reference external" href="https://stackoverflow.com/questions/40944479/how-to-use-bash-with-an-alpine-based-docker-image/40944512">https://stackoverflow.com/questions/40944479/how-to-use-bash-with-an-alpine-based-docker-image/40944512</a></p>
+<ol class="arabic">
+<li><p>Instalar Bash:</p>
+<blockquote>
+<div><div class="highlight-docker notranslate"><div class="highlight"><pre><span></span><span class="k">RUN</span> apk update <span class="o">&amp;&amp;</span> apk add bash
+
+<span class="c">#Ó</span>
+
+<span class="k">RUN</span> apk add --update bash
+</pre></div>
 </div>
+</div></blockquote>
+</li>
+<li><p>Cambiar a shell Bash:</p>
+<blockquote>
+<div><div class="highlight-docker notranslate"><div class="highlight"><pre><span></span><span class="k">SHELL</span> <span class="p">[</span><span class="s2">&quot;/bin/bash&quot;</span><span class="p">,</span> <span class="s2">&quot;-c&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
@@ -61,20 +88,21 @@
 
 <h3>Navegación</h3>
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="instalar.html">1. Instalar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="general.html">2. Generales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conceptos.html">3. Conceptos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logs.html">4. Revisar Logs de Contenedores</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prune.html">5. Borrar, Limpiar Contenedores</a></li>
 <li class="toctree-l1"><a class="reference internal" href="entrypoint-command.html">6. Entrypoint y Command</a></li>
-<li class="toctree-l1"><a class="reference internal" href="special-cases.html">7. Casos Especiales</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Casos Especiales</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="entrypoint-command-troubleshooting.html" title="capítulo anterior">Docker: Entrypoint y Command</a></li>
   </ul></li>
 </ul>
 </div>
@@ -108,7 +136,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/_sections/useful-commands.rst.txt"
+      <a href="../_sources/_sections/special-cases.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

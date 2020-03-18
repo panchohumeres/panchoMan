@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Linux: Comandos Útiles &#8212; documentación de Manual Docker - 1.0</title>
+    <title>Docker: Conceptos y Aclaraciones &#8212; documentación de Manual Docker - 1.0</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -15,6 +15,8 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Docker: Revisar Logs de Contenedores" href="logs.html" />
+    <link rel="prev" title="Docker: Comandos de utilidad general" href="general.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,11 +34,34 @@
           <div class="body" role="main">
             
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/docker_man_page"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
-<div class="section" id="linux-comandos-utiles">
-<h1>Linux: Comandos Útiles<a class="headerlink" href="#linux-comandos-utiles" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Comandos Linux útiles:</p>
-<div class="toctree-wrapper compound">
-</div>
+<div class="section" id="docker-conceptos-y-aclaraciones">
+<h1>Docker: Conceptos y Aclaraciones<a class="headerlink" href="#docker-conceptos-y-aclaraciones" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>Conceptos:</dt><dd><p>Conceptos de Docker y aclaraciones.</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<ul>
+<li><p><strong>Especificar volúmenes en Dockerfile y en mapeo</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><p><a class="reference external" href="https://forums.docker.com/t/whats-the-difference-between-adding-volume-in-a-dockerfile-and-running-an-image-with-volume/17480/6">https://forums.docker.com/t/whats-the-difference-between-adding-volume-in-a-dockerfile-and-running-an-image-with-volume/17480/6</a></p>
+</dd>
+</dl>
+<p>Tienen exactamente el mismo efecto. Por convención se incluye directorio a ser montado como volumen dentro del contenedor en Dockerfile, como guía para recordar que debe ser mapeado a un volumen externo.</p>
+</div></blockquote>
+</li>
+<li><p><strong>Workdir:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Especifica directorio donde cualquier commando RUN, CMD, ENTRYPOINT, COPY y ADD que siguen en el Dockerfile se ejecutan.</p></li>
+<li><p>Si no existe el directorio es creado.</p></li>
+<li><p>Puede ser usado múltiples veces en un Dockerfile.</p></li>
+<li><p>Si se especifica una ruta relativa, ésta será relativa en relación a la directiva WORKDIR anterior.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
@@ -61,10 +86,10 @@
 
 <h3>Navegación</h3>
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="instalar.html">1. Instalar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="general.html">2. Generales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="conceptos.html">3. Conceptos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Conceptos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logs.html">4. Revisar Logs de Contenedores</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prune.html">5. Borrar, Limpiar Contenedores</a></li>
 <li class="toctree-l1"><a class="reference internal" href="entrypoint-command.html">6. Entrypoint y Command</a></li>
@@ -75,6 +100,8 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="general.html" title="capítulo anterior">Docker: Comandos de utilidad general</a></li>
+      <li>Next: <a href="logs.html" title="próximo capítulo">Docker: Revisar Logs de Contenedores</a></li>
   </ul></li>
 </ul>
 </div>
@@ -108,7 +135,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/_sections/useful-commands.rst.txt"
+      <a href="../_sources/_sections/conceptos.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
