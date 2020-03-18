@@ -13,5 +13,6 @@ Manual Linux de Francisco Humeres M.
    1. Comandos Útiles <../_sections/useful-commands>
    2. Nube pública (Cloud) <../_sections/cloud>
    3. Bash <../_sections/bash>
+   4. Troubleshooting <../_sections/troubleshooting>
 
 
