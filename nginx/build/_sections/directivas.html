@@ -4,20 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Manual Nginx de Francisco Humeres M. &#8212; documentación de Manual Nginx - 1.0</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/translations.js"></script>
-    <link rel="index" title="Índice" href="genindex.html" />
-    <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="NGINX: Comandos Útiles" href="_sections/utilidad.html" />
+    <title>NGINX: Directivas &#8212; documentación de Manual Nginx - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="NGINX: Docker" href="docker.html" />
+    <link rel="prev" title="NGINX: Comandos Útiles" href="utilidad.html" />
    
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
@@ -33,17 +34,21 @@
           <div class="body" role="main">
             
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/nginx_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
-<div class="section" id="manual-nginx-de-francisco-humeres-m">
-<h1>Manual Nginx de Francisco Humeres M.<a class="headerlink" href="#manual-nginx-de-francisco-humeres-m" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="_sections/utilidad.html">1. Comandos de utilidad</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/directivas.html">2. Diccionario de Directivas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/docker.html">3. Docker y Docker-Compose</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/multihost.html">4. Multihost</a></li>
-</ul>
+<div class="section" id="nginx-directivas">
+<h1>NGINX: Directivas<a class="headerlink" href="#nginx-directivas" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>Diccionario de directivas:</dt><dd><p>Instrucciones utilizadas en archivos de configuración NGINX (.conf, etc.)</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<blockquote>
+<div><ul>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server_tokens off<span class="p">;</span>
+</pre></div>
 </div>
+</li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
@@ -57,7 +62,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">Manual Nginx</a></h1>
+<h1 class="logo"><a href="../index.html">Manual Nginx</a></h1>
 
 
 
@@ -68,25 +73,25 @@
 
 <h3>Navegación</h3>
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="_sections/utilidad.html">1. Comandos de utilidad</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/directivas.html">2. Diccionario de Directivas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/docker.html">3. Docker y Docker-Compose</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/multihost.html">4. Multihost</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="utilidad.html">1. Comandos de utilidad</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Diccionario de Directivas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">3. Docker y Docker-Compose</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="_sections/utilidad.html" title="próximo capítulo">NGINX: Comandos Útiles</a></li>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="utilidad.html" title="capítulo anterior">NGINX: Comandos Útiles</a></li>
+      <li>Next: <a href="docker.html" title="próximo capítulo">NGINX: Docker</a></li>
   </ul></li>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Búsqueda rápida</h3>
     <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
+    <form class="search" action="../search.html" method="get">
       <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Ir a" />
     </form>
@@ -113,7 +118,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="_sources/index.rst.txt"
+      <a href="../_sources/_sections/directivas.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

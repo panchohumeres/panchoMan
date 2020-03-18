@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>NGINX: Docker &#8212; documentación de Manual Nginx - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="NGINX: Múltiples Host" href="multihost.html" />
+    <link rel="prev" title="NGINX: Directivas" href="directivas.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/nginx_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="nginx-docker">
+<h1>NGINX: Docker<a class="headerlink" href="#nginx-docker" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>Comandos de utilidad en NGINX:</dt><dd><p>En Docker y Docker-Compose</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<ul>
+<li><p>Revisar mapeo de «IP:puertos» en el contenedor:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><dl class="simple">
+<dt>Ingresar al contenedor, usando alguno de los siguientes comando (dependiendo si se está utilizando Docker o Docker-compose, bash o sh y el nombre del contenedor).</dt><dd><ul class="simple">
+<li><p>docker-compose exec nginx bash</p></li>
+<li><p>docker-compose exec nginx sh</p></li>
+<li><p>docker exec -it nginx bash</p></li>
+<li><p>docker exec -it nginx bash</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>netstat -an<span class="p">|</span>grep LISTEN
+</pre></div>
+</div>
+</li>
+</ol>
+<ul>
+<li><p>Ejemplo resultado:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">127</span>.0.0.11:36775        <span class="m">0</span>.0.0.0:*               LISTEN
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Referencia:</strong> <a class="reference external" href="https://serverfault.com/questions/769578/curl-56-recv-failure-connection-reset-by-peer-when-hitting-docker-container">https://serverfault.com/questions/769578/curl-56-recv-failure-connection-reset-by-peer-when-hitting-docker-container</a></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Revisar mapeo de puertos desde el host:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo netstat -tulpn <span class="p">|</span> grep :80
+</pre></div>
+</div>
+<p>Ejemplo resultado:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tcp6       <span class="m">0</span>      <span class="m">0</span> :::80                   :::*                    LISTEN      <span class="m">11708</span>/docker-proxy
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Referencia</strong>: <a class="reference external" href="https://docs.docker.com/network/network-tutorial-host/">https://docs.docker.com/network/network-tutorial-host/</a></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<dl class="simple">
+<dt>Templating de configuración:</dt><dd><p>En Docker y Docker-Compose
+* <strong>Referencias:</strong> <a class="reference external" href="https://thepracticalsysadmin.com/templated-nginx-configuration-with-bash-and-docker/">https://thepracticalsysadmin.com/templated-nginx-configuration-with-bash-and-docker/</a></p>
+</dd>
+</dl>
+<hr class="docutils" />
+<ol class="arabic">
+<li><dl>
+<dt>Crear un archivo template de configuración con variables, con variables a ser sustituidas de la siguiente manera:</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">${parameter}</span></code></p>
+<p>Ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>events <span class="o">{}</span>
+
+http <span class="o">{</span>
+error_log stderr<span class="p">;</span>
+access_log /dev/stdout<span class="p">;</span>
+
+upstream upstream_servers <span class="o">{</span>
+    server <span class="si">${</span><span class="nv">UPSTREAM</span><span class="si">}</span><span class="p">;</span>
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen <span class="si">${</span><span class="nv">LISTEN_PORT</span><span class="si">}</span><span class="p">;</span>
+    server_name <span class="si">${</span><span class="nv">SERVER_NAME</span><span class="si">}</span><span class="p">;</span>
+    resolver <span class="si">${</span><span class="nv">RESOLVER</span><span class="si">}</span><span class="p">;</span>
+    <span class="nb">set</span> <span class="si">${</span><span class="nv">ESC</span><span class="si">}</span>upstream <span class="si">${</span><span class="nv">UPSTREAM</span><span class="si">}</span><span class="p">;</span>
+
+    <span class="c1"># Allow injecting extra configuration into the server block</span>
+    <span class="si">${</span><span class="nv">SERVER_EXTRA_CONF</span><span class="si">}</span>
+
+    location / <span class="o">{</span>
+    proxy_pass <span class="si">${</span><span class="nv">ESC</span><span class="si">}</span>upstream<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p>Crear un Dockerfile que haga referencia al template, y substituya las variables con <strong>«envsubst»</strong>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>FROM nginx:alpine
+
+ENV <span class="nv">LISTEN_PORT</span><span class="o">=</span><span class="m">8080</span> <span class="se">\</span>
+<span class="nv">SERVER_NAME</span><span class="o">=</span>_ <span class="se">\</span>
+<span class="nv">RESOLVER</span><span class="o">=</span><span class="m">8</span>.8.8.8 <span class="se">\</span>
+<span class="nv">UPSTREAM</span><span class="o">=</span>icanhazip.com:80 <span class="se">\</span>
+<span class="nv">UPSTREAM_PROTO</span><span class="o">=</span>http <span class="se">\</span>
+<span class="nv">ESC</span><span class="o">=</span><span class="s1">&#39;$&#39;</span>
+
+COPY nginx.tmpl /etc/nginx/nginx.tmpl
+
+CMD /bin/sh -c <span class="s2">&quot;envsubst &lt; /etc/nginx/nginx.tmpl &gt; /etc/nginx/nginx.conf &amp;&amp; nginx -g &#39;daemon off;&#39; || cat /etc/nginx/nginx.conf&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Si se desea integrarlo en un Docker-Compose:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>version: <span class="s1">&#39;3&#39;</span>
+services:
+nginx_proxy:
+    build:
+    context: .
+    dockerfile: Dockerfile
+    <span class="c1"># Only test the configuration</span>
+    <span class="c1">#command: /bin/sh -c &quot;envsubst &lt; /etc/nginx/nginx.tmpl &gt; /etc/nginx/nginx.conf &amp;&amp; cat /etc/nginx/nginx.conf&quot;</span>
+    volumes:
+    - <span class="s2">&quot;./nginx.tmpl:/etc/nginx/nginx.tmpl&quot;</span>
+    ports:
+    - <span class="m">80</span>:80
+    environment:
+    - <span class="nv">SERVER_NAME</span><span class="o">=</span>_
+    - <span class="nv">LISTEN_PORT</span><span class="o">=</span><span class="m">80</span>
+    - <span class="nv">UPSTREAM</span><span class="o">=</span>test1.com
+    - <span class="nv">UPSTREAM_PROTO</span><span class="o">=</span>https
+    <span class="c1"># Override the resolver</span>
+    - <span class="nv">RESOLVER</span><span class="o">=</span><span class="m">4</span>.2.2.2
+    <span class="c1"># The following would add an escape if it isn&#39;t in the Dockerfile</span>
+    <span class="c1"># - ESC=$$</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Nginx</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="utilidad.html">1. Comandos de utilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directivas.html">2. Diccionario de Directivas</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Docker y Docker-Compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multihost.html">4. Multihost</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="directivas.html" title="capítulo anterior">NGINX: Directivas</a></li>
+      <li>Next: <a href="multihost.html" title="próximo capítulo">NGINX: Múltiples Host</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/docker.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

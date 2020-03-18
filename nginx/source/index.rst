@@ -11,6 +11,9 @@ Manual Nginx de Francisco Humeres M.
    :caption: Contenidos:
 
    1. Comandos de utilidad <../_sections/utilidad>
+   2. Diccionario de Directivas <../_sections/directivas>
+   3. Docker y Docker-Compose <../_sections/docker>
+   4. Multihost <../_sections/multihost>
 
 
 
