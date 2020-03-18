@@ -10,16 +10,16 @@ Bash:
 * **Referencias**:
         * https://www.gnu.org/software/bash/manual/htmlnode/Shell-Parameter-Expansion.html
 
-* El carácter **"$"** introduce expansión de parámetros, substitución de comandos, o expresión aritmética.
+* El carácter **\\"$\\"** introduce expansión de parámetros, substitución de comandos, o expresión aritmética.
 * Forma convencional:
     :code:`${parameter}`
     El valor de **parameter** es sustituido. **parameter** es un parámetro del shell como se describe anteriormente, o una referencia a un array.
-* El nombre del parámetro o símbolo puede estar contenido en corchetes, i.e. **"{}"**, los sirven para proteger la variable a ser expandida de otros carácteres que le siguen inmediatamente, y no sean confundidos como un string o parte del nombre de la variable.
-* Los corchetes **"{}"** son **REQUERIDOS** si es que el **parámetros** es **posicional y con más de un dígito.**
-* **SI ES QUE NO HAY OTRO TEXTO CONTIGUO**, los corchetes **"{}"** son **OPCIONALES**.
-* Si es que el **primer carácter** de **parameter** es un signo de exclamación, i.e. **!**, y **NO es un nameref** (Ver: :doc:`../sections/shell-parameters-bash`), se conoce como **"expansión indirecta"**:
-    1. Bash usa el valor formado por el resto del **parameter** como un **"nuevo" parameter**.
-    2. Luego este **"nuevo" parameter** es expandido, y este valor es utilizado en el resto de la expresión, en lugar del parámetro original.
+* El nombre del parámetro o símbolo puede estar contenido en corchetes, i.e. **\\"{}\\"**, los sirven para proteger la variable a ser expandida de otros carácteres que le siguen inmediatamente, y no sean confundidos como un string o parte del nombre de la variable.
+* Los corchetes **\\"{}\\"** son **REQUERIDOS** si es que el **parámetros** es **posicional y con más de un dígito.**
+* **SI ES QUE NO HAY OTRO TEXTO CONTIGUO**, los corchetes **\\"{}\\"** son **OPCIONALES**.
+* Si es que el **primer carácter** de **parameter** es un signo de exclamación, i.e. **!**, y **NO es un nameref** (Ver: :doc:`../sections/shell-parameters-bash`), se conoce como **\\"expansión indirecta\\"**:
+    1. Bash usa el valor formado por el resto del **parameter** como un **\\"nuevo\\" parameter**.
+    2. Luego este **\\"nuevo" parameter** es expandido, y este valor es utilizado en el resto de la expresión, en lugar del parámetro original.
     Ejemplo:
         ** Ref:** http://ahmed.amayem.com/bash-indirect-expansion-exploration/
 

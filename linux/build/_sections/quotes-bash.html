@@ -37,7 +37,7 @@
 <div class="section" id="linux-usos-de-comillas">
 <h1>Linux: Usos de Comillas<a class="headerlink" href="#linux-usos-de-comillas" title="Enlazar permanentemente con este título">¶</a></h1>
 <dl>
-<dt>Bash:</dt><dd><p>Usos de <strong>» «</strong> y <strong>“ “</strong>.</p>
+<dt>Bash:</dt><dd><p>Usos de <strong>&quot; &quot;</strong> y <strong>' '</strong>.</p>
 <p><strong>Referencia</strong>: <a class="reference external" href="https://stackoverflow.com/questions/6697753/difference-between-single-and-double-quotes-in-bash">https://stackoverflow.com/questions/6697753/difference-between-single-and-double-quotes-in-bash</a></p>
 </dd>
 </dl>
@@ -45,9 +45,9 @@
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 2%" />
+<col style="width: 12%" />
 <col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 77%" />
+<col style="width: 76%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"></th>
@@ -58,112 +58,112 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>1</p></td>
-<td><p>«$a»</p></td>
+<td><p>&quot;$a&quot;</p></td>
 <td><p>apple</p></td>
-<td><p>Variables se expanden dentro de <strong>«»</strong></p></td>
+<td><p>Variables se expanden dentro de <strong>&quot;&quot;</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>2</p></td>
-<td><p>“$a”</p></td>
+<td><p>'$a'</p></td>
 <td><p>$a</p></td>
-<td><p>Variables NO se expanden dentro de <strong>“”</strong></p></td>
+<td><p>Variables NO se expanden dentro de <strong>''</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>3</p></td>
-<td><p>«”$a”»</p></td>
-<td><p>“apple”</p></td>
-<td><p><strong>“”</strong> no tiene ningún singificado especial dentro de <strong>«»</strong></p></td>
+<td><p>&quot;'$a'&quot;</p></td>
+<td><p>'apple'</p></td>
+<td><p><strong>''</strong> no tiene ningún singificado especial dentro de <strong>&quot;&quot;</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>4</p></td>
-<td><p>“»$a»”</p></td>
-<td><p>«$a»</p></td>
-<td><p><strong>«»</strong> es tratado literalmente dentro de <strong>“”</strong></p></td>
+<td><p>'&quot;$a&quot;'</p></td>
+<td><p>&quot;$a&quot;</p></td>
+<td><p><strong>&quot;&quot;</strong> es tratado literalmente dentro de <strong>''</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>5</p></td>
-<td><p>“””</p></td>
+<td><p>'''</p></td>
 <td><p><strong>invalid</strong></p></td>
-<td><p>No se puede escapar <strong>“</strong> dentro de <strong>“”</strong>; usar <strong>«”»</strong> o <strong>$”””</strong> (comillas: ANSI-C)</p></td>
+<td><p>No se puede escapar <strong>'</strong> dentro de <strong>''</strong>; usar <strong>&quot;'&quot;</strong> o <strong>$'''</strong> (comillas: ANSI-C)</p></td>
 </tr>
 <tr class="row-odd"><td><p>6</p></td>
-<td><p>«red$arocks»</p></td>
+<td><p>&quot;red$arocks&quot;</p></td>
 <td><p>red</p></td>
 <td><p><strong>$arocks</strong> no expande <strong>$a</strong>; usar <strong>${a}rocks</strong> para preservar <strong>$a</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>7</p></td>
-<td><p>«redapple$»</p></td>
+<td><p>&quot;redapple$&quot;</p></td>
 <td><p>redapple$</p></td>
 <td><p><strong>$</strong> seguido de ninguna variable evalúa a: <strong>$</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>8</p></td>
-<td><p>“»”</p></td>
-<td><p>«</p></td>
-<td><p><strong>** no tiene ningún significado especial dentro de: **””</strong></p></td>
+<td><p>'&quot;'</p></td>
+<td><p>&quot;</p></td>
+<td><p><strong>** no tiene ningún significado especial dentro de: **''</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>9</p></td>
-<td><p>«”»</p></td>
-<td><p>“</p></td>
-<td><p><strong>“</strong> es interpretado dentro de <strong>«»</strong> pero no tiene ningún siginificado para: <em>“</em></p></td>
+<td><p>&quot;'&quot;</p></td>
+<td><p>'</p></td>
+<td><p><strong>'</strong> es interpretado dentro de <strong>&quot;&quot;</strong> pero no tiene ningún siginificado para: <em>'</em></p></td>
 </tr>
 <tr class="row-odd"><td><p>10</p></td>
-<td><p>«»»</p></td>
-<td><p>«</p></td>
-<td><p><strong>«</strong> es interpretado dentro de: <strong>«»</strong></p></td>
+<td><p>&quot;&quot;&quot;</p></td>
+<td><p>&quot;</p></td>
+<td><p><strong>&quot;</strong> es interpretado dentro de: <strong>&quot;&quot;</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>11</p></td>
-<td><p>«*»</p></td>
+<td><p>&quot;<a href="#id1"><span class="problematic" id="id2">*</span></a>&quot;</p></td>
 <td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td><p>glob no funciona dentro de: <strong>«»</strong> o: <strong>“”</strong></p></td>
+<td><p>glob no funciona dentro de: <strong>&quot;&quot;</strong> o: <strong>''</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>12</p></td>
-<td><p>«tn»</p></td>
+<td><p>&quot;tn&quot;</p></td>
 <td><p>tn</p></td>
-<td><p><strong>t</strong> y <strong>n</strong> no tienen significado especial dentro de: <strong>«»</strong> o: <strong>“”</strong>; usar comillas: ANSI-C</p></td>
+<td><p><strong>t</strong> y <strong>n</strong> no tienen significado especial dentro de: <strong>&quot;&quot;</strong> o: <strong>''</strong>; usar comillas: ANSI-C</p></td>
 </tr>
 <tr class="row-even"><td><p>13</p></td>
-<td><p>«<cite>echo hi</cite>»</p></td>
+<td><p>&quot;<cite>echo hi</cite>&quot;</p></td>
 <td><p>hi</p></td>
-<td><p><strong>``</strong> y <strong>$()</strong> son evaluadas dentro de: <strong>«»</strong></p></td>
+<td><p><strong>``</strong> y <strong>$()</strong> son evaluadas dentro de: <strong>&quot;&quot;</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>14</p></td>
-<td><p>“<cite>echo hi</cite>”</p></td>
+<td><p>'<cite>echo hi</cite>'</p></td>
 <td><p><cite>echo hi</cite></p></td>
-<td><p><strong>``</strong> y <strong>$()</strong> no son evaluadas dentro de <strong>“”</strong></p></td>
+<td><p><strong>``</strong> y <strong>$()</strong> no son evaluadas dentro de <strong>''</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>15</p></td>
-<td><p>“${arr[0]}”</p></td>
+<td><p>'${arr[0]}'</p></td>
 <td><p>${arr[0]}</p></td>
-<td><p>acceso a array no es posible dentro de: <strong>“”</strong></p></td>
+<td><p>acceso a array no es posible dentro de: <strong>''</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>16</p></td>
-<td><p>«${arr[0]}»</p></td>
+<td><p>&quot;${arr[0]}&quot;</p></td>
 <td><p>apple</p></td>
-<td><p>acceso a array funciona dentro de: <strong>«»</strong></p></td>
+<td><p>acceso a array funciona dentro de: <strong>&quot;&quot;</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>17</p></td>
-<td><p>$”$a””</p></td>
-<td><p>$a”</p></td>
-<td><p>comillas simples <strong>“”</strong> pueden ser escapadas dentro de comillas: ANSI-C</p></td>
+<td><p>$'$a''</p></td>
+<td><p>$a'</p></td>
+<td><p>comillas simples <strong>''</strong> pueden ser escapadas dentro de comillas: ANSI-C</p></td>
 </tr>
 <tr class="row-odd"><td><p>18</p></td>
-<td><p>«$”t”»</p></td>
-<td><p>$”t”</p></td>
-<td><p>comillas ANSI-C no son interpretadas dentro de <strong>«»</strong></p></td>
+<td><p>&quot;$'t'&quot;</p></td>
+<td><p>$'t'</p></td>
+<td><p>comillas ANSI-C no son interpretadas dentro de <strong>&quot;&quot;</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>19</p></td>
-<td><p>“!cmd”</p></td>
+<td><p>'!cmd'</p></td>
 <td><p>!cmd</p></td>
-<td><p>carácter de expansión de historial <strong>“!”</strong> es ignorado dentro de <strong>“”</strong></p></td>
+<td><p>carácter de expansión de historial <strong>'!'</strong> es ignorado dentro de <strong>''</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>20</p></td>
-<td><p>«!cmd»</p></td>
+<td><p>&quot;!cmd&quot;</p></td>
 <td><p>cmd args</p></td>
-<td><p>expande a comando más reciente que hace match con <strong>«cmd»</strong></p></td>
+<td><p>expande a comando más reciente que hace match con <strong>&quot;cmd&quot;</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>21</p></td>
-<td><p>$”!cmd”</p></td>
+<td><p>$'!cmd'</p></td>
 <td><p>!cmd</p></td>
-<td><p>carácter de expansión de historial <strong>“!”</strong> es ignorado dentro de comillas: ANSI-C</p></td>
+<td><p>carácter de expansión de historial <strong>'!'</strong> es ignorado dentro de comillas: ANSI-C</p></td>
 </tr>
 </tbody>
 </table>
@@ -199,7 +199,7 @@
 <li class="toctree-l2"><a class="reference internal" href="args-bash.html">2. Pasar argumentos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="$-bash.html">4. $ y Expansión de Parámetros</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5. Uso de &quot;&quot; y ''</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. Uso de &quot; &quot; y ' '</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shell-parameters-bash.html">6. Parámetros Shell</a></li>
 </ul>
 </li>

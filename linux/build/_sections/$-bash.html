@@ -49,21 +49,21 @@
 </dd>
 </dl>
 </li>
-<li><p>El carácter <strong>«$»</strong> introduce expansión de parámetros, substitución de comandos, o expresión aritmética.</p></li>
+<li><p>El carácter <strong>&quot;$&quot;</strong> introduce expansión de parámetros, substitución de comandos, o expresión aritmética.</p></li>
 <li><dl class="simple">
 <dt>Forma convencional:</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">${parameter}</span></code>
 El valor de <strong>parameter</strong> es sustituido. <strong>parameter</strong> es un parámetro del shell como se describe anteriormente, o una referencia a un array.</p>
 </dd>
 </dl>
 </li>
-<li><p>El nombre del parámetro o símbolo puede estar contenido en corchetes, i.e. <strong>«{}»</strong>, los sirven para proteger la variable a ser expandida de otros carácteres que le siguen inmediatamente, y no sean confundidos como un string o parte del nombre de la variable.</p></li>
-<li><p>Los corchetes <strong>«{}»</strong> son <strong>REQUERIDOS</strong> si es que el <strong>parámetros</strong> es <strong>posicional y con más de un dígito.</strong></p></li>
-<li><p><strong>SI ES QUE NO HAY OTRO TEXTO CONTIGUO</strong>, los corchetes <strong>«{}»</strong> son <strong>OPCIONALES</strong>.</p></li>
+<li><p>El nombre del parámetro o símbolo puede estar contenido en corchetes, i.e. <strong>&quot;{}&quot;</strong>, los sirven para proteger la variable a ser expandida de otros carácteres que le siguen inmediatamente, y no sean confundidos como un string o parte del nombre de la variable.</p></li>
+<li><p>Los corchetes <strong>&quot;{}&quot;</strong> son <strong>REQUERIDOS</strong> si es que el <strong>parámetros</strong> es <strong>posicional y con más de un dígito.</strong></p></li>
+<li><p><strong>SI ES QUE NO HAY OTRO TEXTO CONTIGUO</strong>, los corchetes <strong>&quot;{}&quot;</strong> son <strong>OPCIONALES</strong>.</p></li>
 <li><dl>
-<dt>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>NO es un nameref</strong> (Ver: <span class="xref std std-doc">../sections/shell-parameters-bash</span>), se conoce como <strong>«expansión indirecta»</strong>:</dt><dd><ol class="arabic simple">
-<li><p>Bash usa el valor formado por el resto del <strong>parameter</strong> como un <strong>«nuevo» parameter</strong>.</p></li>
+<dt>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>NO es un nameref</strong> (Ver: <span class="xref std std-doc">../sections/shell-parameters-bash</span>), se conoce como <strong>&quot;expansión indirecta&quot;</strong>:</dt><dd><ol class="arabic simple">
+<li><p>Bash usa el valor formado por el resto del <strong>parameter</strong> como un <strong>&quot;nuevo&quot; parameter</strong>.</p></li>
 </ol>
-<p>2. Luego este <strong>«nuevo» parameter</strong> es expandido, y este valor es utilizado en el resto de la expresión, en lugar del parámetro original.
+<p>2. Luego este <strong>&quot;nuevo» parameter</strong> es expandido, y este valor es utilizado en el resto de la expresión, en lugar del parámetro original.
 Ejemplo:</p>
 <blockquote>
 <div><p>** Ref:** http://ahmed.amayem.com/bash-indirect-expansion-exploration/</p>
@@ -197,7 +197,7 @@ Ver: <a class="reference external" href="https://bash.cyberciti.biz/guide/$IFS">
 <li class="toctree-l2"><a class="reference internal" href="args-bash.html">2. Pasar argumentos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">4. $ y Expansión de Parámetros</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quotes-bash.html">5. Uso de &quot;&quot; y ''</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quotes-bash.html">5. Uso de \\&quot; \\&quot; y \\' \\'</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shell-parameters-bash.html">6. Parámetros Shell</a></li>
 </ul>
 </li>
