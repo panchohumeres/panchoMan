@@ -15,7 +15,7 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="Docker: Revisar Logs de Contenedores" href="logs.html" />
+    <link rel="next" title="Docker: Conceptos y Aclaraciones" href="conceptos.html" />
     <link rel="prev" title="Docker: Instalar" href="instalar.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -74,6 +74,11 @@ docker system df -v | con más detalles</p>
 <div><p>docker-compose up –build</p>
 </div></blockquote>
 </li>
+<li><p><strong>mismo caso anterior pero para un sólo contenedor</strong></p>
+<blockquote>
+<div><p>docker-compose up –build &lt;nombre_contenedor&gt;</p>
+</div></blockquote>
+</li>
 <li><p><strong>borrar todos los contenedores</strong></p>
 <blockquote>
 <div><p>docker-compose rm ——–&gt;borra todos los contenedores del docker-compose (preferir)
@@ -114,8 +119,11 @@ docker-compose -f &lt;archivo-compose-de-interés-yaml&gt; config</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="instalar.html">1. Instalar</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. Generales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="logs.html">3. Revisar Logs de Contenedores</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prune.html">4. Borrar, Limpiar Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conceptos.html">3. Conceptos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logs.html">4. Revisar Logs de Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prune.html">5. Borrar, Limpiar Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entrypoint-command.html">6. Entrypoint y Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="special-cases.html">7. Casos Especiales</a></li>
 </ul>
 
 <div class="relations">
@@ -123,7 +131,7 @@ docker-compose -f &lt;archivo-compose-de-interés-yaml&gt; config</p>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="instalar.html" title="capítulo anterior">Docker: Instalar</a></li>
-      <li>Next: <a href="logs.html" title="próximo capítulo">Docker: Revisar Logs de Contenedores</a></li>
+      <li>Next: <a href="conceptos.html" title="próximo capítulo">Docker: Conceptos y Aclaraciones</a></li>
   </ul></li>
 </ul>
 </div>

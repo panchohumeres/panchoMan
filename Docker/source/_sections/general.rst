@@ -4,6 +4,7 @@ Docker: Comandos de utilidad general
 
 Comandos Docker generales:
     Incluye Docker-Compose
+    
 ----------------------------------------------
 
 * **matar todos los contenedores (no se pierde la data) --DEL HOST**
@@ -31,6 +32,10 @@ Comandos Docker generales:
 * **resetear todos los contenedores (se borran y recrean los contenedores, si no hay volumen externo montado se pierde la data)**
     
     docker-compose up --build
+
+* **mismo caso anterior pero para un sólo contenedor**
+
+    docker-compose up --build <nombre_contenedor>
 
 * **borrar todos los contenedores**
     
