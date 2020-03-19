@@ -159,10 +159,120 @@ sudo service nginx status
 </ul>
 </div></blockquote>
 <hr class="docutils" />
+<div class="section" id="alpine-linux">
+<h2>Alpine Linux:<a class="headerlink" href="#alpine-linux" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><blockquote>
+<div><p>Ver más detalles en: <a class="reference external" href="https://panchohumeres.gitlab.io/linux_man/_sections/alpine.html#comandos-para-administrar-servicios">https://panchohumeres.gitlab.io/linux_man/_sections/alpine.html#comandos-para-administrar-servicios</a></p>
+<p><strong>Otras Referencias:</strong> <a class="reference external" href="https://www.cyberciti.biz/faq/how-to-install-nginx-web-server-on-alpine-linux/">https://www.cyberciti.biz/faq/how-to-install-nginx-web-server-on-alpine-linux/</a></p>
+</div></blockquote>
+<ul>
+<li><p>Encontrar ip servidor:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ip a
+<span class="c1">#Ó</span>
+ifconfig -a
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Asegurarse que nginx inicie al momento de REBOOT:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-update add nginx default
+<span class="c1">#RESULTADO ESPERADO:</span>
+ * service nginx added to runlevel default
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Iniciar servidor nginx:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/init.d/nginx start
+<span class="c1">#Ó</span>
+rc-service nginx start
+<span class="c1">#Ó</span>
+service nginx start
+
+<span class="c1">#RESULTADOS ESPERADOS:</span>
+ * Caching service dependencies ...                              <span class="o">[</span> ok <span class="o">]</span>
+ * /run/nginx: creating directory
+ * /run/nginx: correcting owner                                  <span class="o">[</span> ok <span class="o">]</span>
+ * Starting nginx ...
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Re-iniciar servidor nginx:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-service nginx restart
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Parar servidor nginx:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-service nginx stop
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Ver status de Servidor nginx:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-service nginx status
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Verificar que servidor nginx está corriendo:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pgrep nginx
+<span class="c1">#Ó</span>
+ps aux <span class="p">|</span> grep <span class="s2">&quot;[n|N]ginx&quot;</span>
+
+<span class="c1">#RESULTADOS ESPERADOS (EJEMPLOS)</span>
+<span class="m">27876</span> root       <span class="m">0</span>:00 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+<span class="m">27877</span> nginx      <span class="m">0</span>:00 nginx: worker process
+<span class="m">27878</span> nginx      <span class="m">0</span>:00 nginx: worker process
+<span class="m">27879</span> nginx      <span class="m">0</span>:00 nginx: worker process
+<span class="m">27880</span> nginx      <span class="m">0</span>:00 nginx: worker process
+<span class="m">27882</span> nginx      <span class="m">0</span>:00 nginx: worker process
+<span class="m">27883</span> nginx      <span class="m">0</span>:00 nginx: worker process
+<span class="m">27884</span> nginx      <span class="m">0</span>:00 nginx: worker process
+<span class="m">27885</span> nginx      <span class="m">0</span>:00 nginx: worker process
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Verificar que el puerto de NGINX está abierto:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>netstat -tulpn <span class="p">|</span> grep :80
+
+<span class="c1">#RESULTADO ESPERADO:</span>
+tcp   <span class="m">0</span>  <span class="m">0</span> <span class="m">0</span>.0.0.0:80   <span class="m">0</span>.0.0.0:*     LISTEN      <span class="m">27876</span>/nginx.conf
+tcp   <span class="m">0</span>  <span class="m">0</span> :::80        :::*          LISTEN      <span class="m">27876</span>/nginx.conf
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Ver Logs:</dt><dd><p>Usar algunos de estos comandos:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>less /var/log/nginx/error.log
+less /var/log/nginx/access.log
+tail -f /var/log/nginx/www.cyberciti.biz_access.log
+grep <span class="s1">&#39;error&#39;</span> /var/log/nginx/www.cyberciti.biz_error.log
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
 
 </embed></div>
+</div>
 
 
           </div>
@@ -183,9 +293,13 @@ sudo service nginx status
 <h3>Navegación</h3>
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Comandos de utilidad</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Comandos de utilidad</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#alpine-linux">Alpine Linux:</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="directivas.html">2. Diccionario de Directivas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">3. Docker y Docker-Compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multihost.html">4. Multihost</a></li>
 </ul>
 
 <div class="relations">

@@ -74,6 +74,7 @@ Comandos de utilidad en NGINX:
 
                 sudo service nginx enable
 
+
     * Reiniciar servicio Nginx:
 
             .. code-block:: bash
@@ -102,13 +103,111 @@ Comandos de utilidad en NGINX:
 
                 #Ó:
 
-                sudo service nginx status   
+                sudo service nginx status
 
     * Referencia de comandos (ayuda):
 
             .. code-block:: bash
 
                 systemctl -h nginx
+----------------------------------------------
+
+Alpine Linux:
+==============================================
+
+         Ver más detalles en: https://panchohumeres.gitlab.io/linux_man/_sections/alpine.html#comandos-para-administrar-servicios
+         
+         **Otras Referencias:** https://www.cyberciti.biz/faq/how-to-install-nginx-web-server-on-alpine-linux/
+
+        * Encontrar ip servidor:
+
+            .. code-block:: bash
+
+                ip a
+                #Ó
+                ifconfig -a
+
+        * Asegurarse que nginx inicie al momento de REBOOT:
+
+            .. code-block:: bash
+
+                rc-update add nginx default
+                #RESULTADO ESPERADO:
+                 * service nginx added to runlevel default
+
+        * Iniciar servidor nginx:
+
+            .. code-block:: bash
+
+                /etc/init.d/nginx start
+                #Ó
+                rc-service nginx start
+                #Ó
+                service nginx start
+
+                #RESULTADOS ESPERADOS:
+                 * Caching service dependencies ...                              [ ok ]
+                 * /run/nginx: creating directory
+                 * /run/nginx: correcting owner                                  [ ok ]
+                 * Starting nginx ...
+
+        * Re-iniciar servidor nginx:
+
+            .. code-block:: bash
+
+                rc-service nginx restart
+
+        * Parar servidor nginx:
+
+            .. code-block:: bash
+
+                rc-service nginx stop
+
+        * Ver status de Servidor nginx:
+
+            .. code-block:: bash
+
+                rc-service nginx status
+
+        * Verificar que servidor nginx está corriendo:
+
+            .. code-block:: bash
+
+                pgrep nginx
+                #Ó
+                ps aux | grep "[n|N]ginx"
+
+                #RESULTADOS ESPERADOS (EJEMPLOS)
+                27876 root       0:00 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+                27877 nginx      0:00 nginx: worker process
+                27878 nginx      0:00 nginx: worker process
+                27879 nginx      0:00 nginx: worker process
+                27880 nginx      0:00 nginx: worker process
+                27882 nginx      0:00 nginx: worker process
+                27883 nginx      0:00 nginx: worker process
+                27884 nginx      0:00 nginx: worker process
+                27885 nginx      0:00 nginx: worker process
+
+        * Verificar que el puerto de NGINX está abierto:
+            
+            .. code-block:: bash
+
+                netstat -tulpn | grep :80
+
+                #RESULTADO ESPERADO:
+                tcp   0  0 0.0.0.0:80   0.0.0.0:*     LISTEN      27876/nginx.conf
+                tcp   0  0 :::80        :::*          LISTEN      27876/nginx.conf    
+
+        * Ver Logs:
+            Usar algunos de estos comandos:
+
+            .. code-block:: bash
+
+                less /var/log/nginx/error.log
+                less /var/log/nginx/access.log
+                tail -f /var/log/nginx/www.cyberciti.biz_access.log
+                grep 'error' /var/log/nginx/www.cyberciti.biz_error.log            
+
 
 
 
