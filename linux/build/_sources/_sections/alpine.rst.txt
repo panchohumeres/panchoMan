@@ -146,4 +146,12 @@ Reiniciar servicio:
         ### [ restart apache 2 después de reiniciar ] ###
         rc-service apache2 restart
 
+* Encontrar ip servidor:
+
+    .. code-block:: bash
+
+        ip a
+        #Ó
+        ifconfig -a
+
 
