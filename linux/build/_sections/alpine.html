@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Linux: Alpine Linux &#8212; documentación de Manual Linux - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="LINUX: Troubleshooting" href="troubleshooting.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/linux_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="linux-alpine-linux">
+<h1>Linux: Alpine Linux<a class="headerlink" href="#linux-alpine-linux" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="introduccion">
+<h2>Introducción:<a class="headerlink" href="#introduccion" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><p>Alpine es una distribución de Linux pequeña (lightweight), comúnmente utilizadas en imágenes Docker.
+Principales características:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Usa <strong>&quot;apk&quot;</strong> como administrador de paquetes (equivalente a apt o yum).</p></li>
+<li><p>Usa <strong>&quot;sh&quot;</strong> como Shell (en lugar de bash u otros similares).</p></li>
+<li><p><strong>NO USA &quot;systemd&quot; ni &quot;service&quot;</strong> para administrar <strong>servicios</strong> (utilizados en Debian).</p></li>
+<li><p>Usa <strong>&quot;OpenRC&quot;</strong> para <strong>administrar servicios</strong>.</p></li>
+</ul>
+</div></blockquote>
+<p><strong>Referencias:</strong> <a class="reference external" href="https://www.client9.com/article/docker-and-alpine-linux-and-systemd/">https://www.client9.com/article/docker-and-alpine-linux-and-systemd/</a></p>
+</div></blockquote>
+<hr class="docutils" />
+<p>Tips para instalar paquetes comunes en otras distribuciones de Linux:</p>
+<ul>
+<li><p>apk add openrc | instalar <strong>OpenRC</strong>.</p></li>
+<li><p>Bash:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apk update <span class="o">&amp;&amp;</span> apk add bash
+<span class="c1">#Ó</span>
+apk add --update bash
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="comandos-para-administrar-servicios">
+<h2>Comandos para administrar servicios:<a class="headerlink" href="#comandos-para-administrar-servicios" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul>
+<li><p><strong>Referencias:</strong> <a class="reference external" href="https://www.cyberciti.biz/faq/how-to-enable-and-start-services-on-alpine-linux/">https://www.cyberciti.biz/faq/how-to-enable-and-start-services-on-alpine-linux/</a></p></li>
+<li><p>Ver status de todos los servicios:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-status
+
+<span class="c1">#RESULTADO ESPERADO</span>
+
+Runlevel: default
+crond                                  <span class="o">[</span>  started  <span class="o">]</span>
+networking                             <span class="o">[</span>  started  <span class="o">]</span>
+Dynamic Runlevel: hotplugged
+Dynamic Runlevel: needed/wanted
+Dynamic Runlevel: manual
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Ver listas de servicios:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-status --list
+
+<span class="c1">#RESULTADO ESPERADO</span>
+
+boot
+nonetwork
+default
+sysinit
+shutdown
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Cambiar «<strong>RUNLEVEL</strong>»:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc <span class="o">{</span>runlevel<span class="o">}</span>
+rc boot
+rc default
+rc shutdown
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>boot</strong>: Automáticamente incluidos en el resto de los <strong>RUNLEVEL</strong>. Generalmente utilizado para funciones de sistemas, como montar volúmenes, periféricos, etc.</p></li>
+<li><p><strong>single</strong>: Para todos los servicios excepto aquellos en <strong>&quot;sysinit&quot;</strong> <strong>RUNLEVEL</strong>.</p></li>
+<li><p><strong>reboot</strong>: Cambiar a <strong>&quot;shutdown&quot;</strong> <strong>RUNLEVEL</strong>, y luego <strong>reinicia</strong> el host.</p></li>
+<li><p><strong>shutdown</strong>: Cambiar a <strong>&quot;shutdown&quot;</strong> <strong>RUNLEVEL</strong>, y luego <strong>para</strong> (halt) el host.</p></li>
+<li><p><strong>default</strong>: Utilizado por defecto (el <strong>RUNLEVEL</strong> al que comúnmente se le agregarn servicios).</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Ver servicios iniciados manualmente:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-status --manual
+
+<span class="c1">#RESULTADO ESPERADO</span>
+apache2
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Ver servicios caídos:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-status --crashed
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Listar todos los servicios disponibles:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-service --list
+rc-service --list <span class="p">|</span> grep -i nginx
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Agregar/Habilitar servicios en <strong>BOOT TIME</strong>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-update add <span class="o">{</span>service-name<span class="o">}</span> <span class="o">{</span>run-level-name<span class="o">}</span>
+
+<span class="c1">#P.EJ:</span>
+rc-update add apache2
+<span class="c1">#Ó:</span>
+rc-update add apache2 default
+
+<span class="c1">#RESULTADO ESPERADO:</span>
+* service apache2 added to runlevel default
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Iniciar servicio:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-service <span class="o">{</span>service-name<span class="o">}</span> start
+<span class="c1">#Ó</span>
+/etc/init.d/<span class="o">{</span>service-name<span class="o">}</span> start
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Parar servicio:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-service <span class="o">{</span>service-name<span class="o">}</span> stop
+<span class="c1">#Ó</span>
+/etc/init.d/<span class="o">{</span>service-name<span class="o">}</span> stop
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>Reiniciar servicio:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-service <span class="o">{</span>service-name<span class="o">}</span> restart
+<span class="c1">#Ó</span>
+/etc/init.d/<span class="o">{</span>service-name<span class="o">}</span> restart
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p>Ejemplo de flujo de parar, iniciar y reiniciar servicio:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rc-service apache2 stop
+rc-service apache2 start
+<span class="c1">###[ editar config file ] ###</span>
+vi /etc/apache2/httpd.conf
+<span class="c1">### [ restart apache 2 después de reiniciar ] ###</span>
+rc-service apache2 restart
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Linux</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="useful-commands.html">1. Comandos Útiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">2. Nube pública (Cloud)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bash.html">3. Bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Alpine Linux</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduccion">Introducción:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comandos-para-administrar-servicios">Comandos para administrar servicios:</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="troubleshooting.html" title="capítulo anterior">LINUX: Troubleshooting</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/alpine.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

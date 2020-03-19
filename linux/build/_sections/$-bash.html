@@ -60,7 +60,7 @@ El valor de <strong>parameter</strong> es sustituido. <strong>parameter</strong>
 <li><p>Los corchetes <strong>&quot;{}&quot;</strong> son <strong>REQUERIDOS</strong> si es que el <strong>parámetros</strong> es <strong>posicional y con más de un dígito.</strong></p></li>
 <li><p><strong>SI ES QUE NO HAY OTRO TEXTO CONTIGUO</strong>, los corchetes <strong>&quot;{}&quot;</strong> son <strong>OPCIONALES</strong>.</p></li>
 <li><dl>
-<dt>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>NO es un nameref</strong> (Ver: <span class="xref std std-doc">../sections/shell-parameters-bash</span>), se conoce como <strong>&quot;expansión indirecta&quot;</strong>:</dt><dd><ol class="arabic simple">
+<dt>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>NO es un nameref</strong> (Ver: <a class="reference internal" href="shell-parameters-bash.html"><span class="doc">Linux: Bash y Parámetros del Shell</span></a>), se conoce como <strong>&quot;expansión indirecta&quot;</strong>:</dt><dd><ol class="arabic simple">
 <li><p>Bash usa el valor formado por el resto del <strong>parameter</strong> como un <strong>&quot;nuevo&quot; parameter</strong>.</p></li>
 </ol>
 <p>2. Luego este <strong>&quot;nuevo» parameter</strong> es expandido, y este valor es utilizado en el resto de la expresión, en lugar del parámetro original.
@@ -90,7 +90,7 @@ fn x
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>ES un nameref</strong> (Ver: <span class="xref std std-doc">../sections/shell-parameters-bash</span>):</dt><dd><ol class="arabic simple">
+<dt>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>ES un nameref</strong> (Ver: <a class="reference internal" href="shell-parameters-bash.html"><span class="doc">Linux: Bash y Parámetros del Shell</span></a>):</dt><dd><ol class="arabic simple">
 <li><p>Se expande al valor de la variable referenciada por <strong>parameter</strong>, en lugar de la «expansión indirecta».</p></li>
 </ol>
 </dd>
@@ -145,7 +145,7 @@ Ver: <a class="reference external" href="https://bash.cyberciti.biz/guide/$IFS">
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="code docutils literal notranslate"><span class="pre">$IFS</span></code></dt><dd><p>Separador o delimitador de parámetros en string de entrada (input). Ver: <span class="xref std std-doc">../sections/strings-bash</span></p>
+<dt><code class="code docutils literal notranslate"><span class="pre">$IFS</span></code></dt><dd><p>Separador o delimitador de parámetros en string de entrada (input). Ver: <a class="reference internal" href="strings-bash.html"><span class="doc">Linux: Bash Strings</span></a></p>
 </dd>
 </dl>
 </li>
@@ -197,10 +197,12 @@ Ver: <a class="reference external" href="https://bash.cyberciti.biz/guide/$IFS">
 <li class="toctree-l2"><a class="reference internal" href="args-bash.html">2. Pasar argumentos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">4. $ y Expansión de Parámetros</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quotes-bash.html">5. Uso de \\&quot; \\&quot; y \\' \\'</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quotes-bash.html">5. Uso de &quot; &quot; y ' '</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shell-parameters-bash.html">6. Parámetros Shell</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alpine.html">5. Alpine Linux</a></li>
 </ul>
 
 <div class="relations">

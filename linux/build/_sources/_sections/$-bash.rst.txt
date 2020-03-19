@@ -5,11 +5,11 @@ Linux: Bash $ y Expansión de Parámetros
 Bash:
     Expansión de Parámetros: Conceptos
 
-----------------------------------------------
+=======================================
 
 * **Referencias**:
         * https://www.gnu.org/software/bash/manual/htmlnode/Shell-Parameter-Expansion.html
-
+        
 * El carácter **\\"$\\"** introduce expansión de parámetros, substitución de comandos, o expresión aritmética.
 * Forma convencional:
     :code:`${parameter}`
@@ -17,7 +17,7 @@ Bash:
 * El nombre del parámetro o símbolo puede estar contenido en corchetes, i.e. **\\"{}\\"**, los sirven para proteger la variable a ser expandida de otros carácteres que le siguen inmediatamente, y no sean confundidos como un string o parte del nombre de la variable.
 * Los corchetes **\\"{}\\"** son **REQUERIDOS** si es que el **parámetros** es **posicional y con más de un dígito.**
 * **SI ES QUE NO HAY OTRO TEXTO CONTIGUO**, los corchetes **\\"{}\\"** son **OPCIONALES**.
-* Si es que el **primer carácter** de **parameter** es un signo de exclamación, i.e. **!**, y **NO es un nameref** (Ver: :doc:`../sections/shell-parameters-bash`), se conoce como **\\"expansión indirecta\\"**:
+* Si es que el **primer carácter** de **parameter** es un signo de exclamación, i.e. **!**, y **NO es un nameref** (Ver: :doc:`../_sections/shell-parameters-bash`), se conoce como **\\"expansión indirecta\\"**:
     1. Bash usa el valor formado por el resto del **parameter** como un **\\"nuevo\\" parameter**.
     2. Luego este **\\"nuevo" parameter** es expandido, y este valor es utilizado en el resto de la expresión, en lugar del parámetro original.
     Ejemplo:
@@ -46,7 +46,7 @@ Bash:
             #ES:
             ${x}
 
-* Si es que el **primer carácter** de **parameter** es un signo de exclamación, i.e. **!**, y **ES un nameref** (Ver: :doc:`../sections/shell-parameters-bash`):
+* Si es que el **primer carácter** de **parameter** es un signo de exclamación, i.e. **!**, y **ES un nameref** (Ver: :doc:`../_sections/shell-parameters-bash`):
     1. Se expande al valor de la variable referenciada por **parameter**, en lugar de la "expansión indirecta".
 
 ----------------------------------------------
@@ -56,7 +56,7 @@ Bash:
 
     **Referencia**: https://stackoverflow.com/questions/10870719/inline-code-highlighting-in-restructuredtext
 
-----------------------------------------------
+======================================================================================================================
 
 * :code:`$1, $2, $3` 
     Parámetros posicionales
@@ -82,7 +82,7 @@ Bash:
     Parámetro más reciente.
 
 * :code:`$IFS`
-    Separador o delimitador de parámetros en string de entrada (input). Ver: :doc:`../sections/strings-bash`
+    Separador o delimitador de parámetros en string de entrada (input). Ver: :doc:`../_sections/strings-bash`
 
 * :code:`$?`
     Status más reciente anterior a un "exit".
