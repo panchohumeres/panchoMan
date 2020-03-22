@@ -27,3 +27,7 @@ Ejemplo de interfaces:
 
   .. image:: https://d33wubrfki0l68.cloudfront.net/d1dfdbe0a2f8f124011ec3f33e29a251024918f0/e1090/assets/docker-connection-refused/no-docker.svg
         :alt: localhost-networking
+
+Fuente Imagen: [1]_.
+
+.. [1] Itamar Turner-Trauring, https://pythonspeed.com/articles/docker-connection-refused/
