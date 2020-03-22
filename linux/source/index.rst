@@ -15,5 +15,6 @@ Manual Linux de Francisco Humeres M.
    3. Bash <../_sections/bash>
    4. Troubleshooting <../_sections/troubleshooting>
    5. Alpine Linux <../_sections/alpine>
+   6. Networking <../_sections/networking>
 
 

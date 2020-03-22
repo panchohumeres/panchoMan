@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Linux: Networking &#8212; documentación de Manual Linux - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Linux: Alpine Linux" href="alpine.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/linux_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="linux-networking">
+<h1>Linux: Networking<a class="headerlink" href="#linux-networking" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="interfaces">
+<h2>Interfaces:<a class="headerlink" href="#interfaces" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt>Ejemplo de interfaces:</dt><dd><ul class="simple">
+<li><p>Ver: <a class="reference external" href="https://pythonspeed.com/articles/docker-connection-refused/">https://pythonspeed.com/articles/docker-connection-refused/</a></p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ifconfig
+docker0: <span class="nv">flags</span><span class="o">=</span><span class="m">4099</span>&lt;UP,BROADCAST,MULTICAST&gt;  mtu <span class="m">1500</span>
+inet <span class="m">172</span>.17.0.1
+
+lo: <span class="nv">flags</span><span class="o">=</span><span class="m">73</span>&lt;UP,LOOPBACK,RUNNING&gt;  mtu <span class="m">65536</span>
+inet <span class="m">127</span>.0.0.1
+
+wlp0s20u8: <span class="nv">flags</span><span class="o">=</span><span class="m">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="m">1500</span>
+inet <span class="m">192</span>.168.7.202
+</pre></div>
+</div>
+<ul>
+<li><p><strong>&quot;docker0&quot;</strong> es el proceso Docker.</p></li>
+<li><p><strong>&quot;lo&quot;</strong> es <strong>&quot;loopback interface&quot;</strong>, con dirección IPv4 127.0.0.1. Es el propio host o computador, accesible desde la memoria sin intermediación de hardware.</p></li>
+<li><p><strong>&quot;wlp0s20u8&quot;</strong> es la <strong>tarjeta WiFI</strong>, dirección IPv4 192.168.7.202, encargada de enviar y recibir paquetes a internet.</p></li>
+<li><p>El esquema de conexión desde el browser al localhost sería este:</p>
+<img alt="localhost-networking" src="https://d33wubrfki0l68.cloudfront.net/d1dfdbe0a2f8f124011ec3f33e29a251024918f0/e1090/assets/docker-connection-refused/no-docker.svg" /></li>
+</ul>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Linux</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="useful-commands.html">1. Comandos Útiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">2. Nube pública (Cloud)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bash.html">3. Bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alpine.html">5. Alpine Linux</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Networking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#interfaces">Interfaces:</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="alpine.html" title="capítulo anterior">Linux: Alpine Linux</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/networking.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
