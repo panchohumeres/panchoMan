@@ -15,7 +15,7 @@
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="NGINX: Comandos Útiles" href="_sections/utilidad.html" />
+    <link rel="next" title="NGINX: Fundamentos" href="_sections/fundamentos.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -38,13 +38,33 @@
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="_sections/utilidad.html">1. Comandos de utilidad</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="_sections/fundamentos.html">1. Fundamentos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/fundamentos.html#como-nginx-procesa-solicitudes">Cómo NGINX procesa solicitudes:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/fundamentos.html#redireccion">Redirección:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/variables.html">2. Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/variables.html#host"><strong>$host</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/variables.html#request-uri"><strong>$request_uri</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/utilidad.html">3. Comandos de utilidad</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_sections/utilidad.html#alpine-linux">Alpine Linux:</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/directivas.html">2. Diccionario de Directivas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/docker.html">3. Docker y Docker-Compose</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/multihost.html">4. Multihost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/directivas.html">4. Diccionario de Directivas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/directivas.html#if"><strong>if</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/directivas.html#return"><strong>return</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/directivas.html#server-name"><strong>server_name</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/directivas.html#proxy-pass"><strong>proxy_pass</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/directivas.html#location"><strong>location</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/directivas.html#listen"><strong>listen</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/directivas.html#server-tokens"><strong>server_tokens</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/directivas.html#upstream"><strong>upstream</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/docker.html">5. Docker y Docker-Compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/multihost.html">6. Multihost</a></li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -72,17 +92,19 @@
 <h3>Navegación</h3>
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="_sections/utilidad.html">1. Comandos de utilidad</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/directivas.html">2. Diccionario de Directivas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/docker.html">3. Docker y Docker-Compose</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/multihost.html">4. Multihost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/fundamentos.html">1. Fundamentos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/variables.html">2. Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/utilidad.html">3. Comandos de utilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/directivas.html">4. Diccionario de Directivas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/docker.html">5. Docker y Docker-Compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/multihost.html">6. Multihost</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="_sections/utilidad.html" title="próximo capítulo">NGINX: Comandos Útiles</a></li>
+      <li>Next: <a href="_sections/fundamentos.html" title="próximo capítulo">NGINX: Fundamentos</a></li>
   </ul></li>
 </ul>
 </div>
