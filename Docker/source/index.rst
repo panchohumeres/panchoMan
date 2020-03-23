@@ -17,5 +17,7 @@ Manual Docker de Francisco Humeres M.
    5. Borrar, Limpiar Contenedores <../_sections/prune>
    6. Entrypoint y Command <../_sections/entrypoint-command>
    7. Casos Especiales <../_sections/special-cases>
+   8. Networking <../_sections/networking>
+   9. Troubleshooting <../_sections/troubleshooting>
 
 

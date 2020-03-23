@@ -24,3 +24,9 @@ Ejemplos de casos especiales:
         .. code-block:: docker    
         
             SHELL ["/bin/bash", "-c"]
+
+* **CERTBOT** (Let's Encrypt) en Docker con NGINX. Ver:
+    - PanchoMan SSL / TSL: https://panchohumeres.gitlab.io/ssl_tsl_man/_sections/certbot-docker.html
+    - Repo Github: https://github.com/wmnnd/nginx-certbot
+    - Fork de repo Github en panchoMan: https://github.com/panchohumeres/nginx-certbot
+    - Artículo Medium: https://medium.com/@pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71

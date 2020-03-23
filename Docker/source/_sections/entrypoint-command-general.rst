@@ -20,3 +20,7 @@ Instrucciones generales
                 command: /bin/sh -c "entrypoint.sh"
                 expose:
                     - "5000"
+
+**OJO!!**: Método **bash o \\"entrypoint\\" NO está testeado**, **preferir** método **Dockerfile**. Método bash genera problemas de networking entre contenedor y el host, ver:
+    - :ref:`redirección_de_puertos`
+    - :ref:`connection_refuse_connection_rest_by_peer`

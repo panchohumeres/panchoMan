@@ -15,6 +15,8 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Docker: Entrypoint y Command" href="entrypoint-command-troubleshooting.html" />
+    <link rel="prev" title="Docker: Entrypoint y Command" href="entrypoint-command-general.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -56,11 +58,27 @@ location /api <span class="o">{</span>
 <span class="o">}</span>
 </pre></div>
 </div>
+<p>Ejemplo script bash:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env sh</span>
 <span class="nb">set</span> -eu <span class="c1">#output para cada paso del script</span>
 envsubst <span class="s1">&#39;${API_HOST} ${API_PORT}&#39;</span> &lt; /etc/nginx/conf.d/default.conf.template &gt; /etc/nginx/conf.d/default.conf
+nginx -g <span class="s2">&quot;daemon off;&quot;</span>
 </pre></div>
 </div>
+<p>Ejemplo Dockerfile en base a imagen alipne linux:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>FROM nginx:1.15-alpine
+
+    RUN envsubst <span class="s1">&#39;${LOCALHOST} ${DOMAIN_KIBANA} ${DOMAIN_ELASTIC} ${DOMAIN_JUPYTER} ${SERVER_NAME_KIBANA} ${SERVER_NAME_ELASTIC} ${SERVER_NAME_JUPYTER} ${KIBANA_PORT} ${ELASTIC_PORT} ${JUPYTER_PORT}&#39;</span> &lt; /etc/nginx/conf.d/nginx.conf.template &gt; /etc/nginx/conf.d/nginx.conf
+    <span class="c1">#OTROS COMANDOS NECESARIOS....</span>
+</pre></div>
+</div>
+<p><strong>OJO!!</strong>: Método <strong>bash o &quot;entrypoint&quot; NO está testeado</strong>, <strong>preferir</strong> método <strong>Dockerfile</strong>. Método bash genera problemas de networking entre contenedor y el host, ver:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="networking.html#redireccion-de-puertos"><span class="std std-ref">Redirección de Puertos</span></a></p></li>
+<li><p><a class="reference internal" href="troubleshooting.html#connection-refuse-connection-rest-by-peer"><span class="std std-ref">&quot;Connection refused&quot; o &quot;Connection reset by peer&quot;</span></a></p></li>
+</ul>
+</div></blockquote>
 </dd>
 </dl>
 </li>
@@ -89,17 +107,31 @@ envsubst <span class="s1">&#39;${API_HOST} ${API_PORT}&#39;</span> &lt; /etc/ngi
 
 <h3>Navegación</h3>
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="instalar.html">1. Instalar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="general.html">2. Generales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="logs.html">3. Revisar Logs de Contenedores</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prune.html">4. Borrar, Limpiar Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conceptos.html">3. Conceptos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logs.html">4. Revisar Logs de Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prune.html">5. Borrar, Limpiar Contenedores</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="entrypoint-command.html">6. Entrypoint y Command</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="entrypoint-command-general.html">1. Generales</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Reemplazar variables de entorno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrypoint-command-troubleshooting.html">3. Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="special-cases.html">7. Casos Especiales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">8. Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">9. Troubleshooting</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="entrypoint-command.html">Docker: Entrypoint y Command</a><ul>
+      <li>Previous: <a href="entrypoint-command-general.html" title="capítulo anterior">Docker: Entrypoint y Command</a></li>
+      <li>Next: <a href="entrypoint-command-troubleshooting.html" title="próximo capítulo">Docker: Entrypoint y Command</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>

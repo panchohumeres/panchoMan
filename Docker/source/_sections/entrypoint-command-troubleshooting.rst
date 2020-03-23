@@ -31,5 +31,9 @@ Troubleshooting
     * **NOTA**: Los contenedores docker usan su propio sistema de archivos, pero copian todo, **incluyendo los permisos** de los archivos en los volúmenes montados.
 
 * Errores de sintaxis:
-    * **Dentro** del script se usa **"&&"** para separar condiciones, y cuando se ingresa **el comando escapado como string** en Docker-compose **.yaml es sólo "&"**.    
+    * **Dentro** del script se usa **"&&"** para separar condiciones, y cuando se ingresa **el comando escapado como string** en Docker-compose **.yaml es sólo "&"**.
+
+**OJO!!**: Método **bash o \\"entrypoint\\" NO está testeado**, **preferir** método **Dockerfile**. Método bash genera problemas de networking entre contenedor y el host, ver:
+    - :ref:`redirección_de_puertos`
+    - :ref:`connection_refuse_connection_rest_by_peer`    
             

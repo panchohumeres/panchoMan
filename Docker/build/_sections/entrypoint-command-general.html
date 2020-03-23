@@ -15,6 +15,8 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Docker: Entrypoint y Command" href="entrypoint-command-envsubst.html" />
+    <link rel="prev" title="Docker: Entrypoint y Command" href="entrypoint-command.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -53,6 +55,13 @@
 </dl>
 </li>
 </ul>
+<dl class="simple">
+<dt><strong>OJO!!</strong>: Método <strong>bash o &quot;entrypoint&quot; NO está testeado</strong>, <strong>preferir</strong> método <strong>Dockerfile</strong>. Método bash genera problemas de networking entre contenedor y el host, ver:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="networking.html#redireccion-de-puertos"><span class="std std-ref">Redirección de Puertos</span></a></p></li>
+<li><p><a class="reference internal" href="troubleshooting.html#connection-refuse-connection-rest-by-peer"><span class="std std-ref">&quot;Connection refused&quot; o &quot;Connection reset by peer&quot;</span></a></p></li>
+</ul>
+</dd>
+</dl>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
@@ -77,17 +86,31 @@
 
 <h3>Navegación</h3>
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="instalar.html">1. Instalar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="general.html">2. Generales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="logs.html">3. Revisar Logs de Contenedores</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prune.html">4. Borrar, Limpiar Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conceptos.html">3. Conceptos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logs.html">4. Revisar Logs de Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prune.html">5. Borrar, Limpiar Contenedores</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="entrypoint-command.html">6. Entrypoint y Command</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Generales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrypoint-command-envsubst.html">2. Reemplazar variables de entorno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrypoint-command-troubleshooting.html">3. Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="special-cases.html">7. Casos Especiales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">8. Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">9. Troubleshooting</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="entrypoint-command.html">Docker: Entrypoint y Command</a><ul>
+      <li>Previous: <a href="entrypoint-command.html" title="capítulo anterior">Docker: Entrypoint y Command</a></li>
+      <li>Next: <a href="entrypoint-command-envsubst.html" title="próximo capítulo">Docker: Entrypoint y Command</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
