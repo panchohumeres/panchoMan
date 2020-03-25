@@ -42,13 +42,12 @@ Comandos de utilidad en NGINX:
 
     * **Referencia**: https://docs.docker.com/network/network-tutorial-host/
 
-----------------------------------------------
-
 Templating de configuración:
-    En Docker y Docker-Compose
-    * **Referencias:** https://thepracticalsysadmin.com/templated-nginx-configuration-with-bash-and-docker/
+-----------------------------------------------
 
-----------------------------------------------
+    En Docker y Docker-Compose
+    * **Referencias:** 
+        - https://thepracticalsysadmin.com/templated-nginx-configuration-with-bash-and-docker/
 
 1. Crear un archivo template de configuración con variables, con variables a ser sustituidas de la siguiente manera:
     :code:`${parameter}`
@@ -124,3 +123,52 @@ Templating de configuración:
             - RESOLVER=4.2.2.2
             # The following would add an escape if it isn't in the Dockerfile
             # - ESC=$$    
+
+Templating de configuración, **CASO 2**:
+----------------------------------------------
+
+    En Docker y Docker-Compose
+    * **Referencias:** https://serverfault.com/questions/577370/how-can-i-use-environment-variables-in-nginx-conf
+
+1. **nginx-default.conf.template**
+
+    .. code-block:: bash
+
+        resolver  127.0.0.11 valid=10s;  # recover from the backend's IP changing
+
+        server {
+        listen  80;
+
+        location / {
+            root  /usr/share/nginx/html;
+        }
+
+        location /api {
+            proxy_pass  http://${API_HOST}:${API_PORT};
+            proxy_set_header  Host $http_host;
+        }
+        }
+
+2. **docker-entrypoint.sh**
+
+    .. code-block:: bash
+
+        #!/usr/bin/env sh
+        set -eu
+
+        envsubst '${API_HOST} ${API_PORT}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
+
+        exec "$@"
+
+3. **Dockerfile**
+
+    .. code-block:: bash
+
+        FROM nginx:1.15-alpine
+
+        COPY nginx-default.conf.template /etc/nginx/conf.d/default.conf.template
+
+        COPY docker-entrypoint.sh /
+        ENTRYPOINT ["/docker-entrypoint.sh"]
+        CMD ["nginx", "-g", "daemon off;"]
+

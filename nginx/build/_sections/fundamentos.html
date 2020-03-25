@@ -76,8 +76,10 @@ server <span class="o">{</span>
 </pre></div>
 </div>
 <dl class="simple">
-<dt>Ver lo que es el campo <strong>&quot;Host&quot;</strong> del <strong>header</strong> del <strong>request</strong> acá:</dt><dd><p><a class="reference external" href="https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Host">https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Host</a>
-<a class="reference external" href="https://stackoverflow.com/questions/50321842/http-is-an-ip-address-allowed-in-the-host-header-field">https://stackoverflow.com/questions/50321842/http-is-an-ip-address-allowed-in-the-host-header-field</a></p>
+<dt>Ver lo que es el campo <strong>&quot;Host&quot;</strong> del <strong>header</strong> del <strong>request</strong> acá:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Host">https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Host</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/50321842/http-is-an-ip-address-allowed-in-the-host-header-field">https://stackoverflow.com/questions/50321842/http-is-an-ip-address-allowed-in-the-host-header-field</a></p></li>
+</ul>
 </dd>
 </dl>
 </dd>
@@ -179,6 +181,27 @@ En este caso la solicitud se:</p>
 </dd>
 </dl>
 </div></blockquote>
+</div>
+<div class="section" id="orden-de-lineas-i-e-comandos">
+<h2>Orden de lineas i.e. Comandos<a class="headerlink" href="#orden-de-lineas-i-e-comandos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias:</strong> <a class="reference external" href="https://serverfault.com/questions/836504/does-order-of-lines-matter-in-nginx">https://serverfault.com/questions/836504/does-order-of-lines-matter-in-nginx</a></p>
+<p>El <strong>ORDEN IMPORTA</strong> en los comandos dentro de directivas, dependiendo del <strong>CONTEXTO</strong>.
+P.ej:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+listen <span class="m">80</span><span class="p">;</span>
+server_name subdomain.example.com<span class="p">;</span>
+
+<span class="k">return</span> <span class="m">301</span> https://<span class="nv">$server_name$request_uri</span><span class="p">;</span>
+
+location /.well-known/acme-challenge <span class="o">{</span>
+        root /var/www/letsencrypt<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Este ejemplo <strong>falla</strong> debido a que la directiva <strong>&quot;return&quot;</strong> para el proceso, <strong>dejando sin efecto la directiva &quot;location&quot; a continuación</strong>.</p>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
@@ -208,6 +231,7 @@ En este caso la solicitud se:</p>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Fundamentos</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#como-nginx-procesa-solicitudes">Cómo NGINX procesa solicitudes:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#redireccion">Redirección:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#orden-de-lineas-i-e-comandos">Orden de lineas i.e. Comandos</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">2. Variables</a></li>

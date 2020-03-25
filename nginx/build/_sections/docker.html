@@ -87,13 +87,17 @@
 </div></blockquote>
 </li>
 </ul>
-<hr class="docutils" />
-<dl class="simple">
-<dt>Templating de configuración:</dt><dd><p>En Docker y Docker-Compose
-* <strong>Referencias:</strong> <a class="reference external" href="https://thepracticalsysadmin.com/templated-nginx-configuration-with-bash-and-docker/">https://thepracticalsysadmin.com/templated-nginx-configuration-with-bash-and-docker/</a></p>
-</dd>
-</dl>
-<hr class="docutils" />
+<div class="section" id="templating-de-configuracion">
+<h2>Templating de configuración:<a class="headerlink" href="#templating-de-configuracion" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><p>En Docker y Docker-Compose
+* <strong>Referencias:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://thepracticalsysadmin.com/templated-nginx-configuration-with-bash-and-docker/">https://thepracticalsysadmin.com/templated-nginx-configuration-with-bash-and-docker/</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
 <ol class="arabic">
 <li><dl>
 <dt>Crear un archivo template de configuración con variables, con variables a ser sustituidas de la siguiente manera:</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">${parameter}</span></code></p>
@@ -173,11 +177,66 @@ nginx_proxy:
 </div></blockquote>
 </li>
 </ol>
+</div>
+<div class="section" id="templating-de-configuracion-caso-2">
+<h2>Templating de configuración, <strong>CASO 2</strong>:<a class="headerlink" href="#templating-de-configuracion-caso-2" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><p>En Docker y Docker-Compose
+* <strong>Referencias:</strong> <a class="reference external" href="https://serverfault.com/questions/577370/how-can-i-use-environment-variables-in-nginx-conf">https://serverfault.com/questions/577370/how-can-i-use-environment-variables-in-nginx-conf</a></p>
+</div></blockquote>
+<ol class="arabic">
+<li><p><strong>nginx-default.conf.template</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>resolver  <span class="m">127</span>.0.0.11 <span class="nv">valid</span><span class="o">=</span>10s<span class="p">;</span>  <span class="c1"># recover from the backend&#39;s IP changing</span>
+
+server <span class="o">{</span>
+listen  <span class="m">80</span><span class="p">;</span>
+
+location / <span class="o">{</span>
+    root  /usr/share/nginx/html<span class="p">;</span>
+<span class="o">}</span>
+
+location /api <span class="o">{</span>
+    proxy_pass  http://<span class="si">${</span><span class="nv">API_HOST</span><span class="si">}</span>:<span class="si">${</span><span class="nv">API_PORT</span><span class="si">}</span><span class="p">;</span>
+    proxy_set_header  Host <span class="nv">$http_host</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>docker-entrypoint.sh</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env sh</span>
+<span class="nb">set</span> -eu
+
+envsubst <span class="s1">&#39;${API_HOST} ${API_PORT}&#39;</span> &lt; /etc/nginx/conf.d/default.conf.template &gt; /etc/nginx/conf.d/default.conf
+
+<span class="nb">exec</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Dockerfile</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>FROM nginx:1.15-alpine
+
+COPY nginx-default.conf.template /etc/nginx/conf.d/default.conf.template
+
+COPY docker-entrypoint.sh /
+ENTRYPOINT <span class="o">[</span><span class="s2">&quot;/docker-entrypoint.sh&quot;</span><span class="o">]</span>
+CMD <span class="o">[</span><span class="s2">&quot;nginx&quot;</span>, <span class="s2">&quot;-g&quot;</span>, <span class="s2">&quot;daemon off;&quot;</span><span class="o">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
 
 </embed></div>
+</div>
 
 
           </div>
@@ -198,10 +257,16 @@ nginx_proxy:
 <h3>Navegación</h3>
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="utilidad.html">1. Comandos de utilidad</a></li>
-<li class="toctree-l1"><a class="reference internal" href="directivas.html">2. Diccionario de Directivas</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Docker y Docker-Compose</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multihost.html">4. Multihost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fundamentos.html">1. Fundamentos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">2. Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilidad.html">3. Comandos de utilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directivas.html">4. Diccionario de Directivas</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Docker y Docker-Compose</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#templating-de-configuracion">Templating de configuración:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#templating-de-configuracion-caso-2">Templating de configuración, <strong>CASO 2</strong>:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multihost.html">6. Multihost</a></li>
 </ul>
 
 <div class="relations">

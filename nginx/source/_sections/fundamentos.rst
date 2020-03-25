@@ -46,8 +46,8 @@ Cómo NGINX procesa solicitudes:
             <puerto> #PUERTO (OPCIONAL)--->PUERTO EN QUE ESTÁ ESCUCHANDO (DEFECTO 80)
         
         Ver lo que es el campo **\\"Host\\"** del **header** del **request** acá: 
-            https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Host
-            https://stackoverflow.com/questions/50321842/http-is-an-ip-address-allowed-in-the-host-header-field
+            - https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Host
+            - https://stackoverflow.com/questions/50321842/http-is-an-ip-address-allowed-in-the-host-header-field
 
 
 *   Servidores virtuales en **\\"MIXTOS\\"**: con **Nombres de Dominios y/o IPs**:
@@ -128,3 +128,27 @@ Redirección:
         - https://bjornjohansen.no/nginx-redirect
         - https://bjornjohansen.no/redirect-to-https-with-nginx 
         - Ver: :ref:`directiva_return`       
+
+
+Orden de lineas i.e. Comandos
+--------------------------------
+
+**Referencias:** https://serverfault.com/questions/836504/does-order-of-lines-matter-in-nginx
+
+El **ORDEN IMPORTA** en los comandos dentro de directivas, dependiendo del **CONTEXTO**.
+P.ej:
+
+    .. code-block:: bash
+
+        server {
+        listen 80;
+        server_name subdomain.example.com;
+
+        return 301 https://$server_name$request_uri;
+
+        location /.well-known/acme-challenge {
+                root /var/www/letsencrypt;
+            }
+        }
+
+Este ejemplo **falla** debido a que la directiva **\\"return\\"** para el proceso, **dejando sin efecto la directiva \\"location\\" a continuación**.
