@@ -54,5 +54,23 @@ El esquema de conexión desde el browser al localhost sería este:
 
 Fuente Imagen: [1]_.
 
+**\\"localhost\\"** en Docker-Compose:
+------------------------------------------
+
+**Referencias:** https://github.com/moby/moby/issues/1143
+
+Usar comando Linux para obtener la IP del **localhost**:
+
+    .. code-block:: bash
+
+        ip route | awk '/^default via /{print $3}'
+
+        #Pasar el valor a alguna variable
+        export LOCALHOST=$(ip route | awk '/^default via /{print $3}')
+
+Se sugiere incluir este comando en un script **ENTRYPOINT** para **Docker-compose**.
+
+
+
 .. [1] Itamar Turner-Trauring, https://pythonspeed.com/articles/docker-connection-refused/
 

@@ -76,6 +76,20 @@ Esto significa:</p>
 </div>
 <p>El esquema de conexión desde el browser al localhost sería este:</p>
 <img alt="localhost-networking" src="https://d33wubrfki0l68.cloudfront.net/2aa3f7cbeb5bcfc6d8e24903d8c7df97d5693a14/43003/assets/docker-connection-refused/docker-portforward-listen-everywhere.svg" /><p>Fuente Imagen: <a class="footnote-reference brackets" href="#id3" id="id2">1</a>.</p>
+</div>
+<div class="section" id="localhost-en-docker-compose">
+<h2><strong>&quot;localhost&quot;</strong> en Docker-Compose:<a class="headerlink" href="#localhost-en-docker-compose" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias:</strong> <a class="reference external" href="https://github.com/moby/moby/issues/1143">https://github.com/moby/moby/issues/1143</a></p>
+<p>Usar comando Linux para obtener la IP del <strong>localhost</strong>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ip route <span class="p">|</span> awk <span class="s1">&#39;/^default via /{print $3}&#39;</span>
+
+<span class="c1">#Pasar el valor a alguna variable</span>
+<span class="nb">export</span> <span class="nv">LOCALHOST</span><span class="o">=</span><span class="k">$(</span>ip route <span class="p">|</span> awk <span class="s1">&#39;/^default via /{print $3}&#39;</span><span class="k">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Se sugiere incluir este comando en un script <strong>ENTRYPOINT</strong> para <strong>Docker-compose</strong>.</p>
 <dl class="footnote brackets">
 <dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
 <dd><p>Itamar Turner-Trauring, <a class="reference external" href="https://pythonspeed.com/articles/docker-connection-refused/">https://pythonspeed.com/articles/docker-connection-refused/</a></p>
@@ -112,14 +126,16 @@ Esto significa:</p>
 <li class="toctree-l1"><a class="reference internal" href="conceptos.html">3. Conceptos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logs.html">4. Revisar Logs de Contenedores</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prune.html">5. Borrar, Limpiar Contenedores</a></li>
-<li class="toctree-l1"><a class="reference internal" href="entrypoint-command.html">6. Entrypoint y Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entrypoint-command.html">6. ENTRYPOINT, COMMAND y RUN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="special-cases.html">7. Casos Especiales</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">8. Networking</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#namespaces">Namespaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#redireccion-de-puertos">Redirección de Puertos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#localhost-en-docker-compose"><strong>&quot;localhost&quot;</strong> en Docker-Compose:</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">9. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="not.html">10. Lo que no se puede hacer</a></li>
 </ul>
 
 <div class="relations">
