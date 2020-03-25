@@ -2,6 +2,13 @@
 Linux: Bash
 =======================
 
+Comandos
+----------
+
+* set -u | Tratar variables **NO \\"seteadas\\"** como **ERROR** al sustituir.
+    Ver: https://unix.stackexchange.com/questions/544993/what-does-set-u-do-in-bash-script
+
+
 Ejemplos de pasar argumentos en scripts Bash:
 
 ----------------------------------------------
@@ -12,8 +19,7 @@ Ejemplos de pasar argumentos en scripts Bash:
 
 -------------------------------------------
 
-* **Caso 1**, while LOOP: 
-
+**Caso 1**, while LOOP: 
 -------------------------------------------
 
     .. code-block:: bash
@@ -43,10 +49,7 @@ Ejemplos de pasar argumentos en scripts Bash:
         # set positional arguments in their proper place
         eval set -- "$PARAMS"      
 
--------------------------------------------
-
-* **Caso 2**, usando getopts: 
-
+**Caso 2**, usando getopts
 -------------------------------------------
 
     .. code-block:: bash
@@ -78,11 +81,7 @@ Ejemplos de pasar argumentos en scripts Bash:
         User:ismail
         Password:poftut
 
--------------------------------------------
-
-* Como llamar otro Script Bash:
-    Opciones:
-
+Como llamar otro Script Bash:
 -------------------------------------------
 
     1. Llamar el otro script como un comando normal (después de hacerlo ejecutable y agregarlo a la variable de entorno $PATH).
@@ -103,5 +102,5 @@ Ejemplos de pasar argumentos en scripts Bash:
 
     * **1. y 3.** ejecutan el otro script como otro nuevo proceso, por lo que no comparte ni hereda variables de entorno.
     * **2.** trae variables de entorno del otro script, las agrega a las propias y ejecuta el segundo script.
-    * Comando "**exit**" rompe ambos scripts en caso **2.**, lo que **NO** ocurre en **1. y 3.*+.
+    * Comando **\\"exit\\"** rompe ambos scripts en caso **2.**, lo que **NO** ocurre en **1. y 3.**.
     * **Referencias:** https://stackoverflow.com/questions/8352851/how-to-call-one-shell-script-from-another-shell-script
