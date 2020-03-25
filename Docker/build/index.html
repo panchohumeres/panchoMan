@@ -40,7 +40,13 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="_sections/instalar.html">1. Instalar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_sections/general.html">2. Generales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/conceptos.html">3. Conceptos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/conceptos.html">3. Conceptos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/conceptos.html#especificar-volumenes-en-dockerfile-y-en-mapeo">Especificar volúmenes en Dockerfile y en mapeo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/conceptos.html#workdir">&quot;Workdir&quot;:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/conceptos.html#imagenes-docker-y-capas">Imágenes Docker y Capas:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/conceptos.html#shell-y-exec">&quot;Shell&quot; y &quot;Exec&quot;:</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="_sections/logs.html">4. Revisar Logs de Contenedores</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_sections/logs.html#comandos-docker-para-revisar-logs-de-contenedores">Comandos Docker para revisar logs de contenedores:</a></li>
 </ul>
@@ -49,8 +55,9 @@
 <li class="toctree-l2"><a class="reference internal" href="_sections/prune.html#comandos-docker-para-borrar-o-purgar-contenedores">Comandos Docker para borrar o purgar contenedores:</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/entrypoint-command.html">6. Entrypoint y Command</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="_sections/entrypoint-command-general.html">1. Generales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/entrypoint-command.html">6. ENTRYPOINT, COMMAND y RUN</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/entrypoint-command-concepts.html">1. Conceptos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/entrypoint-command-general.html">2. Generales</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_sections/entrypoint-command-envsubst.html">2. Reemplazar variables de entorno</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_sections/entrypoint-command-troubleshooting.html">3. Troubleshooting</a></li>
 </ul>
@@ -63,6 +70,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">9. Troubleshooting</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_sections/troubleshooting.html#connection-refused-o-connection-reset-by-peer">&quot;Connection refused&quot; o &quot;Connection reset by peer&quot;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/troubleshooting.html#bash-command-unexpected-eof-while-looking-for-matching">&quot;bash command unexpected EOF while looking for matching&quot;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/troubleshooting.html#un-contenedor-se-cierra-inesperadamente-despues-de-entrypoint">Un contenedor se cierra inesperadamente después de ENTRYPOINT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/not.html">10. Lo que no se puede hacer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/not.html#montar-volumenes-en-un-dockerfile">Montar volúmenes en un Dockerfile</a></li>
 </ul>
 </li>
 </ul>
@@ -97,10 +110,11 @@
 <li class="toctree-l1"><a class="reference internal" href="_sections/conceptos.html">3. Conceptos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_sections/logs.html">4. Revisar Logs de Contenedores</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_sections/prune.html">5. Borrar, Limpiar Contenedores</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/entrypoint-command.html">6. Entrypoint y Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/entrypoint-command.html">6. ENTRYPOINT, COMMAND y RUN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_sections/special-cases.html">7. Casos Especiales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_sections/networking.html">8. Networking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">9. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/not.html">10. Lo que no se puede hacer</a></li>
 </ul>
 
 <div class="relations">

@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Docker: Troubleshooting" href="not.html" />
     <link rel="prev" title="Docker: Networking" href="networking.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -43,7 +44,7 @@ Ver: <a class="reference internal" href="networking.html#redireccion-de-puertos"
 Como se muestra en el diagrama, esto ocurre en casos en que el <strong>contenedor</strong> está escuchando en la <strong>IP de la red interna</strong>, mientras que la redirección del puerto está llendo hacia <strong>la IP de la red externa del contenedor</strong>.
 En este <strong>ejemplo</strong>, el <strong>contenedor</strong> está escuchando en <strong>&quot;127.0.0.1&quot;</strong>, mientras que la <strong>redirección</strong> del puerto está llendo hacia <strong>&quot;127.17.0.2&quot;</strong>.</p>
 <blockquote>
-<div><img alt="localhost-networking" src="https://d33wubrfki0l68.cloudfront.net/eb92be77f9c223f325cc5937105548e9c0c2111e/b72c8/assets/docker-connection-refused/docker-portforward.svg" /><p>Fuente Imagen: <a class="footnote-reference brackets" href="#id2" id="id1">1</a>.</p>
+<div><img alt="localhost-networking" src="https://d33wubrfki0l68.cloudfront.net/eb92be77f9c223f325cc5937105548e9c0c2111e/b72c8/assets/docker-connection-refused/docker-portforward.svg" /><p>Fuente Imagen: <a class="footnote-reference brackets" href="#id4" id="id1">1</a>.</p>
 </div></blockquote>
 <dl>
 <dt><strong>Solución</strong>:</dt><dd><p>Usar opción <code class="code docutils literal notranslate"><span class="pre">--bind</span></code> + valor <strong>&quot;0.0.0.0&quot;</strong>. Esto significa que la red del <strong>contenedor</strong> escuchará en <strong>todas las interfaces</strong>.
@@ -61,8 +62,24 @@ CMD <span class="o">[</span><span class="s2">&quot;flask&quot;</span>, <span cla
 </div>
 </dd>
 </dl>
+</div>
+<div class="section" id="bash-command-unexpected-eof-while-looking-for-matching">
+<h2>&quot;bash command unexpected EOF while looking for matching&quot;<a class="headerlink" href="#bash-command-unexpected-eof-while-looking-for-matching" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias</strong>: <a class="reference external" href="https://stackoverflow.com/questions/52515680/bash-command-unexpected-eof-while-looking-for-matching">https://stackoverflow.com/questions/52515680/bash-command-unexpected-eof-while-looking-for-matching</a></p>
+<dl class="simple">
+<dt><strong>Solución</strong>:</dt><dd><p>Código mal escapado. Se debe incluir <strong>'</strong> dentro de <strong>&quot;</strong>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="un-contenedor-se-cierra-inesperadamente-despues-de-entrypoint">
+<h2>Un contenedor se cierra inesperadamente después de ENTRYPOINT<a class="headerlink" href="#un-contenedor-se-cierra-inesperadamente-despues-de-entrypoint" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias</strong>: <a class="reference external" href="https://stackoverflow.com/questions/39864106/docker-interactive-mode-exits-after-entrypoint">https://stackoverflow.com/questions/39864106/docker-interactive-mode-exits-after-entrypoint</a></p>
+<dl class="simple">
+<dt><strong>Solución</strong>:</dt><dd><p><a href="#id2"><span class="problematic" id="id3">**</span></a>ENTRYPOINT / CMD ** tiene que ejecutar un script que se mantenga en el largo plazo, o se cerrará y con esto al contenedor.</p>
+</dd>
+</dl>
 <dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>Itamar Turner-Trauring, <a class="reference external" href="https://pythonspeed.com/articles/docker-connection-refused/">https://pythonspeed.com/articles/docker-connection-refused/</a></p>
 </dd>
 </dl>
@@ -97,13 +114,16 @@ CMD <span class="o">[</span><span class="s2">&quot;flask&quot;</span>, <span cla
 <li class="toctree-l1"><a class="reference internal" href="conceptos.html">3. Conceptos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logs.html">4. Revisar Logs de Contenedores</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prune.html">5. Borrar, Limpiar Contenedores</a></li>
-<li class="toctree-l1"><a class="reference internal" href="entrypoint-command.html">6. Entrypoint y Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entrypoint-command.html">6. ENTRYPOINT, COMMAND y RUN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="special-cases.html">7. Casos Especiales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="networking.html">8. Networking</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">9. Troubleshooting</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#connection-refused-o-connection-reset-by-peer">&quot;Connection refused&quot; o &quot;Connection reset by peer&quot;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bash-command-unexpected-eof-while-looking-for-matching">&quot;bash command unexpected EOF while looking for matching&quot;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#un-contenedor-se-cierra-inesperadamente-despues-de-entrypoint">Un contenedor se cierra inesperadamente después de ENTRYPOINT</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="not.html">10. Lo que no se puede hacer</a></li>
 </ul>
 
 <div class="relations">
@@ -111,6 +131,7 @@ CMD <span class="o">[</span><span class="s2">&quot;flask&quot;</span>, <span cla
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="networking.html" title="capítulo anterior">Docker: Networking</a></li>
+      <li>Next: <a href="not.html" title="próximo capítulo">Docker: Troubleshooting</a></li>
   </ul></li>
 </ul>
 </div>

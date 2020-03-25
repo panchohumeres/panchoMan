@@ -1,5 +1,5 @@
 =====================================
-Docker: Entrypoint y Command
+Docker: ENTRYPOINT, CMD Y RUN
 =====================================
 
 Troubleshooting

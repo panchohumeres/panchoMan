@@ -37,5 +37,23 @@ En este **ejemplo**, el **contenedor** está escuchando en **\\"127.0.0.1\\"**, 
         ENV FLASK_APP=exampleapp:app
         CMD ["flask", "run", "--host", "0.0.0.0"]
 
+\\"bash command unexpected EOF while looking for matching\\"
+-------------------------------------------------------------------
+
+**Referencias**: https://stackoverflow.com/questions/52515680/bash-command-unexpected-eof-while-looking-for-matching
+
+**Solución**:
+   Código mal escapado. Se debe incluir **\\'** dentro de **\\"**. 
+
+
+Un contenedor se cierra inesperadamente después de ENTRYPOINT
+-------------------------------------------------------------------
+
+**Referencias**: https://stackoverflow.com/questions/39864106/docker-interactive-mode-exits-after-entrypoint
+
+**Solución**:
+   **ENTRYPOINT / CMD ** tiene que ejecutar un script que se mantenga en el largo plazo, o se cerrará y con esto al contenedor. 
+
 
 .. [1] Itamar Turner-Trauring, https://pythonspeed.com/articles/docker-connection-refused/
+
