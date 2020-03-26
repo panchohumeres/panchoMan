@@ -77,7 +77,7 @@ panchoMan |panchoman| panchoMan GitHub Repo |github| panchoMan Nginx GitLab Repo
     :width: 20
 
 .. |gitlab| image:: https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png
-    :target: https://gitlab.com/panchohumeres/nginx_man
+    :target: https://panchohumeres.gitlab.io/git_man
     :height: 20
     :width: 20
 """
