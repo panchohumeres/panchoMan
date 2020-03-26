@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Manual Jupyter Notebook de Francisco Humeres M. &#8212; documentación de Manual Jupyter - 1.0</title>
+    <title>Jupyter Notebooks: Seguridad &#8212; documentación de Manual Jupyter - 1.0</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,7 +15,6 @@
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="Jupyter Notebook: Manual Nivel Usuario" href="_sections/usuario.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,26 +32,27 @@
           <div class="body" role="main">
             
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Jupyter GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/jupyter_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
-<p><a class="reference external" href="URL">panchoMan</a></p>
-<div class="section" id="manual-jupyter-notebook-de-francisco-humeres-m">
-<h1>Manual Jupyter Notebook de Francisco Humeres M.<a class="headerlink" href="#manual-jupyter-notebook-de-francisco-humeres-m" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="_sections/usuario.html">1. Manual Nivel Usuario</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/seguridad.html">2. Seguridad en Notebooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="_sections/seguridad.html#pasos-para-obtener-contrasena-hasheada-a-partir-de-un-contenedor-docker">Pasos para Obtener contraseña hasheada a partir de un contenedor Docker</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="section" id="jupyter-notebooks-seguridad">
+<h1>Jupyter Notebooks: Seguridad<a class="headerlink" href="#jupyter-notebooks-seguridad" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Instrucciones para generar contraseñas y configurar seguirdad en Jupyter Notebook</p>
+<hr class="docutils" />
+<div class="section" id="pasos-para-obtener-contrasena-hasheada-a-partir-de-un-contenedor-docker">
+<h2>Pasos para Obtener contraseña hasheada a partir de un contenedor Docker<a class="headerlink" href="#pasos-para-obtener-contrasena-hasheada-a-partir-de-un-contenedor-docker" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic simple">
+<li><p>docker-compose start jupyter</p></li>
+<li><p>docker-compose exec jupyter bash</p></li>
+<li><p>ipython</p></li>
+<li><p>from IPython.lib import passwd</p></li>
+<li><p>passwd()</p></li>
+<li><p>ingresar password y copiar y pegar hash en archivo .env (variable «JUPYTER_PSSWD»)</p></li>
+<li><p>exit</p></li>
+</ol>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
 
 </embed></div>
+</div>
 
 
           </div>
@@ -61,7 +61,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">Manual Jupyter</a></h1>
+<h1 class="logo"><a href="index.html">Manual Jupyter</a></h1>
 
 
 
@@ -74,14 +74,12 @@
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="_sections/usuario.html">1. Manual Nivel Usuario</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/seguridad.html">2. Seguridad en Notebooks</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="_sections/usuario.html" title="próximo capítulo">Jupyter Notebook: Manual Nivel Usuario</a></li>
+  <li><a href="index.html">Documentation overview</a><ul>
   </ul></li>
 </ul>
 </div>
@@ -115,7 +113,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="_sources/index.rst.txt"
+      <a href="_sources/seguridad.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

@@ -8,5 +8,6 @@ Manual Jupyter Notebook de Francisco Humeres M.
    :caption: Contenidos:
 
    1. Manual Nivel Usuario  <../_sections/usuario>
+   2. Seguridad en Notebooks <../_sections/seguridad>
 
 
