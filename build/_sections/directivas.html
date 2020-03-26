@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>NGINX: Directivas &#8212; documentación de Manual Nginx - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="NGINX: Docker" href="docker.html" />
+    <link rel="prev" title="NGINX: Comandos Útiles" href="utilidad.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/nginx_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="nginx-directivas">
+<h1>NGINX: Directivas<a class="headerlink" href="#nginx-directivas" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>Diccionario de directivas:</dt><dd><p>Instrucciones utilizadas en archivos de configuración NGINX (.conf, etc.)</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<div class="section" id="if">
+<h2><strong>if</strong><a class="headerlink" href="#if" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias</strong>: <a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if">http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if</a>
+Evalúa una condición (<strong>condition</strong>), y si es verdadera (<strong>true</strong>), se ejecutan las directivas especificadas entre corchetes <strong>&quot;{…}&quot;</strong>. La solicitud es redirigida a la directiva al interior del bloque <strong>&quot;{…..}&quot;</strong>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Si es el <strong>nombre de una variable</strong>, se evalúa si <strong>existe</strong>. <strong>&quot;false&quot;</strong> es un <strong>string vacío</strong> o <strong>&quot;0&quot;</strong> (cero).</p></li>
+<li><p><strong>Operadores de nombre de variable</strong>: <strong>&quot;=&quot; y &quot;!=&quot;</strong>.</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">(</span>condition<span class="o">)</span> <span class="o">{</span> ... <span class="o">}</span> <span class="c1">#SINTAXIS</span>
+— <span class="c1">#DEFAULT (NINGUNO)</span>
+server, location <span class="c1">#CONTEXTO</span>
+</pre></div>
+</div>
+<p>Ejemplos:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">(</span><span class="nv">$http_user_agent</span> ~ MSIE<span class="o">)</span> <span class="o">{</span>
+    rewrite ^<span class="o">(</span>.*<span class="o">)</span>$ /msie/<span class="nv">$1</span> break<span class="p">;</span>
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">(</span><span class="nv">$http_cookie</span> ~* <span class="s2">&quot;id=([^;]+)(?:;|</span>$<span class="s2">)&quot;</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nb">set</span> <span class="nv">$id</span> <span class="nv">$1</span><span class="p">;</span>
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">(</span><span class="nv">$request_method</span> <span class="o">=</span> POST<span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="m">405</span><span class="p">;</span>
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">(</span><span class="nv">$slow</span><span class="o">)</span> <span class="o">{</span>
+    limit_rate 10k<span class="p">;</span>
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">(</span><span class="nv">$invalid_referer</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="m">403</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="return">
+<span id="directiva-return"></span><h2><strong>return</strong><a class="headerlink" href="#return" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><p><strong>Referencias:</strong> <a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return">http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return</a></p>
+<dl>
+<dt>Deja de procesar solicitud y responde con el código (<strong>&quot;code&quot;</strong>) especificado al cliente.</dt><dd><ul class="simple">
+<li><p>Para los códigos <strong>301, 302, 303, 307, y 308</strong> se puede especificar una <strong>URI de redirección</strong>.</p></li>
+<li><p>Para los otros códigos se puede responder con un <strong>texto</strong>.</p></li>
+</ul>
+<dl class="simple">
+<dt>Sintaxis:       <code class="code docutils literal notranslate"><span class="pre">return</span> <span class="pre">code</span> <span class="pre">[text];</span></code></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">return</span> <span class="pre">code</span> <span class="pre">URL;</span></code>
+<code class="code docutils literal notranslate"><span class="pre">return</span> <span class="pre">URL;</span></code></p>
+</dd>
+</dl>
+<p>Default:        Ninguno</p>
+<p>Contexto: <code class="code docutils literal notranslate"><span class="pre">server,</span> <span class="pre">location,</span> <span class="pre">if</span></code></p>
+</dd>
+</dl>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Parámetros:</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">server_name_in_redirect</span> <span class="pre">on</span> <span class="pre">|</span> <span class="pre">off;</span></code>
+Habilita o deshabilita el uso del nombre del servidor especificado por la directiva <strong>server_name</strong>.</p>
+<ul>
+<li><p>Cuando este parámetro está en <strong>&quot;off&quot;</strong>, el nombre del <strong>&quot;Host&quot;</strong> del <strong>header</strong> de la solicitud. Ver: <a class="reference internal" href="fundamentos.html#como-nginx-procesa-solicitudes"><span class="std std-ref">Cómo NGINX procesa solicitudes:</span></a>. Si este campo no está presente, se usa la <strong>IP</strong> del servidor.</p></li>
+<li><p>Valor por <strong>defecto</strong>: <strong>&quot;off&quot;</strong>.</p></li>
+<li><p>Se usa en <strong>redirecciones &quot;absolutas&quot;</strong> (no relativas): <a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#absolute_redirect">http://nginx.org/en/docs/http/ngx_http_core_module.html#absolute_redirect</a></p></li>
+<li><p>Ver: <a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name_in_redirect">http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name_in_redirect</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="server-name">
+<h2><strong>server_name</strong><a class="headerlink" href="#server-name" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><p>Ver: <a class="reference internal" href="fundamentos.html#como-nginx-procesa-solicitudes"><span class="std std-ref">Cómo NGINX procesa solicitudes:</span></a></p>
+</div></blockquote>
+</div>
+<div class="section" id="proxy-pass">
+<h2><strong>proxy_pass</strong><a class="headerlink" href="#proxy-pass" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><p>Define el protocolo y dirección de un <strong>&quot;servidor proxy&quot;</strong>.
+Como protocolos se pueden especificar <strong>&quot;http&quot; o &quot;https&quot;</strong>.
+Las direcciones se pueden especificar como <strong>dominio</strong> o <strong>dirección IP</strong>.Se puede especificar un <em>puerto*</em> opcional. Ejemplo:</p>
+<blockquote>
+<div><p><code class="code docutils literal notranslate"><span class="pre">proxy_pass</span> <span class="pre">http://localhost:8000/uri/;</span></code></p>
+</div></blockquote>
+<p>También se pueden especificar como <strong>UNIX-domain socket</strong>, después de la palabra <strong>&quot;unix&quot;</strong> y comillas. Ejemplo:</p>
+<blockquote>
+<div><p><code class="code docutils literal notranslate"><span class="pre">proxy_pass</span> <span class="pre">http://unix:/tmp/backend.socket:/uri/;</span></code></p>
+</div></blockquote>
+<p>Sintaxis:   <code class="code docutils literal notranslate"><span class="pre">proxy_pass</span> <span class="pre">URL;</span></code></p>
+<p>Default:    Ninguno</p>
+<p>Contexto: <code class="code docutils literal notranslate"><span class="pre">location,</span> <span class="pre">if</span> <span class="pre">in</span> <span class="pre">location,</span> <span class="pre">limit_except</span></code></p>
+<p>Ver: <a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass">http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="location">
+<h2><strong>location</strong><a class="headerlink" href="#location" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><p>Define configuraciones según una URI de consulta.
+Puede ser definida por <strong>strings</strong> o <strong>expresiones regulares</strong> (precedida en este caso del carácter <strong>&quot;~*&quot;</strong>.
+Las definiciones de <strong>location</strong> pueden estar <strong>anidadas</strong>.</p>
+<dl class="simple">
+<dt>Sintaxis:   <code class="code docutils literal notranslate"><span class="pre">location</span> <span class="pre">[</span> <span class="pre">=</span> <span class="pre">|</span> <span class="pre">~</span> <span class="pre">|</span> <span class="pre">~*</span> <span class="pre">|</span> <span class="pre">^~</span> <span class="pre">]</span> <span class="pre">uri</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code></dt><dd><p><code class="code docutils literal notranslate"><span class="pre">location</span> <span class="pre">&#64;name</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code></p>
+</dd>
+</dl>
+<p>Default:    Ninguno</p>
+<p>Contexto:   <code class="code docutils literal notranslate"><span class="pre">server,</span> <span class="pre">location</span></code></p>
+<dl class="simple">
+<dt>Ejemplo:</dt><dd><ul class="simple">
+<li><p>Solicitud para <strong>&quot;/&quot;</strong>, va a ser respondida con <strong>configuración A</strong>.</p></li>
+<li><p>Solicitud para <strong>&quot;/index.html&quot;</strong>, va a ser respondida con <strong>configuración B</strong>.</p></li>
+<li><p>Solicitud para <strong>&quot;/documents/document.html&quot;</strong>, va a ser respondida con <strong>configuración C</strong>.</p></li>
+<li><p>Solicitud para <strong>&quot;/images/1.gif&quot;</strong>, va a ser respondida con <strong>configuración D</strong>.</p></li>
+<li><p>Solicitud para <strong>&quot;/documents/1.jpg&quot;</strong>, va a ser respondida con <strong>configuración D</strong>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">location</span> <span class="o">=</span> / <span class="o">{</span>
+    <span class="o">[</span> configuration A <span class="o">]</span>
+<span class="o">}</span>
+
+location / <span class="o">{</span>
+    <span class="o">[</span> configuration B <span class="o">]</span>
+<span class="o">}</span>
+
+location /documents/ <span class="o">{</span>
+    <span class="o">[</span> configuration C <span class="o">]</span>
+<span class="o">}</span>
+
+location ^~ /images/ <span class="o">{</span>
+    <span class="o">[</span> configuration D <span class="o">]</span>
+<span class="o">}</span>
+
+location ~* <span class="se">\.</span><span class="o">(</span>gif<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="o">)</span>$ <span class="o">{</span>
+    <span class="o">[</span> configuration E <span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Ver: <a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location">http://nginx.org/en/docs/http/ngx_http_core_module.html#location</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="listen">
+<h2><strong>listen</strong><a class="headerlink" href="#listen" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt><strong>Referencias</strong>:</dt><dd><p><a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#listen">http://nginx.org/en/docs/http/ngx_http_core_module.html#listen</a></p>
+</dd>
+</dl>
+<p>Forma:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>listen address<span class="o">[</span>:port<span class="o">]</span> <span class="o">[</span>default_server<span class="o">]</span> <span class="o">[</span>ssl<span class="o">]</span> <span class="o">[</span>http2 <span class="p">|</span> spdy<span class="o">]</span> <span class="o">[</span>proxy_protocol<span class="o">]</span> <span class="o">[</span><span class="nv">setfib</span><span class="o">=</span>number<span class="o">]</span> <span class="o">[</span><span class="nv">fastopen</span><span class="o">=</span>number<span class="o">]</span> <span class="o">[</span><span class="nv">backlog</span><span class="o">=</span>number<span class="o">]</span> <span class="o">[</span><span class="nv">rcvbuf</span><span class="o">=</span>size<span class="o">]</span> <span class="o">[</span><span class="nv">sndbuf</span><span class="o">=</span>size<span class="o">]</span> <span class="o">[</span><span class="nv">accept_filter</span><span class="o">=</span>filter<span class="o">]</span> <span class="o">[</span>deferred<span class="o">]</span> <span class="o">[</span>bind<span class="o">]</span> <span class="o">[</span><span class="nv">ipv6only</span><span class="o">=</span>on<span class="p">|</span>off<span class="o">]</span> <span class="o">[</span>reuseport<span class="o">]</span> <span class="o">[</span><span class="nv">so_keepalive</span><span class="o">=</span>on<span class="p">|</span>off<span class="p">|</span><span class="o">[</span>keepidle<span class="o">]</span>:<span class="o">[</span>keepintvl<span class="o">]</span>:<span class="o">[</span>keepcnt<span class="o">]]</span><span class="p">;</span>
+listen port <span class="o">[</span>default_server<span class="o">]</span> <span class="o">[</span>ssl<span class="o">]</span> <span class="o">[</span>http2 <span class="p">|</span> spdy<span class="o">]</span> <span class="o">[</span>proxy_protocol<span class="o">]</span> <span class="o">[</span><span class="nv">setfib</span><span class="o">=</span>number<span class="o">]</span> <span class="o">[</span><span class="nv">fastopen</span><span class="o">=</span>number<span class="o">]</span> <span class="o">[</span><span class="nv">backlog</span><span class="o">=</span>number<span class="o">]</span> <span class="o">[</span><span class="nv">rcvbuf</span><span class="o">=</span>size<span class="o">]</span> <span class="o">[</span><span class="nv">sndbuf</span><span class="o">=</span>size<span class="o">]</span> <span class="o">[</span><span class="nv">accept_filter</span><span class="o">=</span>filter<span class="o">]</span> <span class="o">[</span>deferred<span class="o">]</span> <span class="o">[</span>bind<span class="o">]</span> <span class="o">[</span><span class="nv">ipv6only</span><span class="o">=</span>on<span class="p">|</span>off<span class="o">]</span> <span class="o">[</span>reuseport<span class="o">]</span> <span class="o">[</span><span class="nv">so_keepalive</span><span class="o">=</span>on<span class="p">|</span>off<span class="p">|</span><span class="o">[</span>keepidle<span class="o">]</span>:<span class="o">[</span>keepintvl<span class="o">]</span>:<span class="o">[</span>keepcnt<span class="o">]]</span><span class="p">;</span>
+listen unix:path <span class="o">[</span>default_server<span class="o">]</span> <span class="o">[</span>ssl<span class="o">]</span> <span class="o">[</span>http2 <span class="p">|</span> spdy<span class="o">]</span> <span class="o">[</span>proxy_protocol<span class="o">]</span> <span class="o">[</span><span class="nv">backlog</span><span class="o">=</span>number<span class="o">]</span> <span class="o">[</span><span class="nv">rcvbuf</span><span class="o">=</span>size<span class="o">]</span> <span class="o">[</span><span class="nv">sndbuf</span><span class="o">=</span>size<span class="o">]</span> <span class="o">[</span><span class="nv">accept_filter</span><span class="o">=</span>filter<span class="o">]</span> <span class="o">[</span>deferred<span class="o">]</span> <span class="o">[</span>bind<span class="o">]</span> <span class="o">[</span><span class="nv">so_keepalive</span><span class="o">=</span>on<span class="p">|</span>off<span class="p">|</span><span class="o">[</span>keepidle<span class="o">]</span>:<span class="o">[</span>keepintvl<span class="o">]</span>:<span class="o">[</span>keepcnt<span class="o">]]</span><span class="p">;</span>
+
+* Default: :code:<span class="sb">`</span>listen *:80 <span class="p">|</span> *:8000<span class="p">;</span><span class="sb">`</span>
+* Contexto: :code:<span class="sb">`</span>server<span class="sb">`</span> ------------------&gt; dentro de un bloque **server**.
+</pre></div>
+</div>
+<p>Configura la <strong>dirección</strong> y <strong>puerto</strong> para la <strong>IP</strong>, o la ruta o <strong>path</strong> para <strong>UNIX-domain socket</strong>, en los cuales el servidor (<strong>server</strong>) aceptará solicitudes.
+Tanto <strong>address</strong> como <strong>port</strong> puede ser especificados en conjunto o por separado.
+Un <strong>address</strong> también puede ser un <strong>hostname</strong>.
+Ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>listen <span class="m">127</span>.0.0.1:8000<span class="p">;</span>
+listen <span class="m">127</span>.0.0.1<span class="p">;</span>
+listen <span class="m">8000</span><span class="p">;</span>
+listen *:8000<span class="p">;</span>
+listen localhost:8000<span class="p">;</span>
+</pre></div>
+</div>
+<p>Direcciones IPv6 se especifican en corchetes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>listen <span class="o">[</span>::<span class="o">]</span>:8000<span class="p">;</span>
+listen <span class="o">[</span>::1<span class="o">]</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>&quot;UNIX-domain sockets&quot;</strong> (rutas) son especificadas con el prefijo <strong>«\unix:»\</strong>:</p>
+<blockquote>
+<div><p>listen unix:/var/run/nginx.sock;</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Si sólo <strong>address</strong> se especifica, se utiliza por <strong>defecto el puerto 80</strong>.</p></li>
+<li><p>Si es que la <strong>directiva NO existe</strong>, se usa ** <em>:80*</em> por defecto si nginx corre como <strong>sudo</strong>, o ** <em>:8000*</em> en caso contrario.</p></li>
+</ul>
+<dl>
+<dt>Parámetros:</dt><dd><ul>
+<li><dl>
+<dt><code class="code docutils literal notranslate"><span class="pre">default_server</span></code></dt><dd><p>Define a cual servidor virtual serán redireccionadas las solicitudes por defecto (si es que campo <strong>&quot;Host&quot;</strong> de la solicitud del cliente no coincide con ningún <strong>&quot;server_name&quot;</strong>.
+Ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+listen      <span class="m">80</span> default_server<span class="p">;</span>
+server_name example.net www.example.net<span class="p">;</span>
+...
+<span class="o">}</span>
+</pre></div>
+</div>
+<dl>
+<dt><strong>Referencias</strong>:</dt><dd><p><a class="reference external" href="http://nginx.org/en/docs/http/request_processing.html">http://nginx.org/en/docs/http/request_processing.html</a></p>
+<p><a class="reference internal" href="fundamentos.html#como-nginx-procesa-solicitudes"><span class="std std-ref">Cómo NGINX procesa solicitudes:</span></a></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="server-tokens">
+<h2><strong>server_tokens</strong><a class="headerlink" href="#server-tokens" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><p>Habilita («on») o deshabilita («off») emitir versión de NGINX en mensajes de error y el en «Sever response» campo del header.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server_tokens off<span class="p">;</span>
+</pre></div>
+</div>
+<p>Ver: <a class="reference external" href="https://serverfault.com/questions/696551/how-do-i-check-server-tokens-are-off">https://serverfault.com/questions/696551/how-do-i-check-server-tokens-are-off</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="upstream">
+<h2><strong>upstream</strong><a class="headerlink" href="#upstream" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt><strong>Referencias</strong>:</dt><dd><p><a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html">http://nginx.org/en/docs/http/ngx_http_upstream_module.html</a></p>
+</dd>
+</dl>
+<p>Permite definir grupos de servidores que puede ser referenciados por directivas como <strong>&quot;proxy_pass,fastcgi_pass,uwsgi_pass,scgi_pass,memcached_pass,grpc_pass&quot;</strong> etc.</p>
+<p>Configuración de Ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>upstream backend <span class="o">{</span>
+    server backend1.example.com       <span class="nv">weight</span><span class="o">=</span><span class="m">5</span><span class="p">;</span>
+    server backend2.example.com:8080<span class="p">;</span>
+    server unix:/tmp/backend3<span class="p">;</span>
+
+    server backup1.example.com:8080   backup<span class="p">;</span>
+    server backup2.example.com:8080   backup<span class="p">;</span>
+    <span class="o">}</span>
+
+    server <span class="o">{</span>
+        location / <span class="o">{</span>
+            proxy_pass http://backend<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</pre></div>
+</div>
+<p>Sintaxis:
+<code class="code docutils literal notranslate"><span class="pre">upstream</span> <span class="pre">{name}</span></code>
+Define un grupo de servidores. Los servidores pueden escuchar en diferentes puertos. Pueden mezclarse servidores que escuchan en <strong>&quot;sockets&quot;</strong> <strong>TCP y/o UNIX-domain</strong>.
+Configuración de Ejemplo:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>upstream backend <span class="o">{</span>
+server backend1.example.com <span class="nv">weight</span><span class="o">=</span><span class="m">5</span><span class="p">;</span>
+server <span class="m">127</span>.0.0.1:8080       <span class="nv">max_fails</span><span class="o">=</span><span class="m">3</span> <span class="nv">fail_timeout</span><span class="o">=</span>30s<span class="p">;</span>
+server unix:/tmp/backend3<span class="p">;</span>
+
+server backup1.example.com  backup<span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p>Dentro de la directiva <strong>upstream</strong>: <code class="code docutils literal notranslate"><span class="pre">server</span> <span class="pre">address</span> <span class="pre">[parameters];</span></code> Define la dirección y otros parámetros del servidor. <strong>adress</strong> puede ser un dominio o dirección IP, con un <strong>puerto opcional</strong>.</p></li>
+<li><dl>
+<dt>Otros parámetros que se pueden definir:</dt><dd><ul>
+<li><p><code class="code docutils literal notranslate"><span class="pre">weight=number</span></code>: peso del servidor, para balanceador de carga (default 1)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">max_conns=number</span></code>: máximo número de conexiones simultáneas permitidas al proxy del servidor (default 0, es decir no hay límite)</p></li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">max_fails=number</span></code>:</dt><dd><p>máximo de número permitido de intentos NO exitosos por conectarse con el servidor
+Intento no exitoso es definido por el parámetro «fail_timeout»
+Default == 1</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">fail_timeout=time</span></code>: período de tiempo desde consulta al servidor sin respuesta a partir del cual se considera no disponible</p></li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">backup</span></code>:</dt><dd><p>Flag que indica si el servidor es «backup»
+Si es «backup» se le van a redirigir consultas si los servidores «primarios» no están disponibles.</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">down</span></code>: Flag que indica que el servidor no está disponible</p></li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">resolve</span></code>:</dt><dd><p>Monitorea cambios de las IP correspondientes al nombre de dominio de un servidor, y automáticamente actualiza la configuración <strong>upstream</strong>.
+Evita la necesidad de resetear el servidor.
+Para que éste parámetro funciones, la directiva <strong>resolver</strong> debe estar especificada en el bloque <strong>&quot;http&quot;</strong> correspondiente en el bloque <strong>upstream</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="code docutils literal notranslate"><span class="pre">ip_hash;</span></code>:</dt><dd><p>Especifica que el grupo de servidores dentro del contexto de <strong>upstream</strong>, debe usar un balanceador de carga en base a las IP del cliente.
+Este método asegura que el mismo cliente siempre será redireccionado al mismo servidor, salvo que no esté disponible.
+Si el servidor no está disponible, las consultas del cliente serán pasadas a otros servidor (en la mayoría de los casos el mismo servidor).
+Configuración de Ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>upstream backend <span class="o">{</span>
+    ip_hash<span class="p">;</span>
+
+    server backend1.example.com<span class="p">;</span>
+    server backend2.example.com<span class="p">;</span>
+    server backend3.example.com down<span class="p">;</span>
+    server backend4.example.com<span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="code docutils literal notranslate"><span class="pre">resolver</span> <span class="pre">address</span> <span class="pre">...</span> <span class="pre">[valid=time]</span> <span class="pre">[ipv6=on|off]</span> <span class="pre">[status_zone=zone];</span></code>:</dt><dd><p>Configuración de los nombres de servidores utilizados para resolver nombres de servidores <strong>upstream</strong> en direcciones IP, por ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>resolver <span class="m">127</span>.0.0.1 <span class="o">[</span>::1<span class="o">]</span>:5353<span class="p">;</span>
+
+<span class="c1">#NGINX cachea los valores usando el valor TTL de una respuesta. El parámetro &quot;valid&quot; permite sobreescribirlo:</span>
+resolver <span class="m">127</span>.0.0.1 <span class="o">[</span>::1<span class="o">]</span>:5353 <span class="nv">valid</span><span class="o">=</span>30s<span class="p">;</span>
+</pre></div>
+</div>
+<p>Ver: <a class="reference external" href="https://searchnetworking.techtarget.com/definition/time-to-live">https://searchnetworking.techtarget.com/definition/time-to-live</a></p>
+<p>La dirección puede ser especificada como nombre de dominio o dirección IP, con un puerto opcional.
+Si el <strong>puerto NO es especificado</strong>, se usar el 53.</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">resolver_timeout</span> <span class="pre">time;</span></code>: Timeout para resolución de nombres. Por ejemplo: <code class="code docutils literal notranslate"><span class="pre">resolver_timeout</span> <span class="pre">5s;</span></code>. Default es 30s.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Nginx</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="fundamentos.html">1. Fundamentos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">2. Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilidad.html">3. Comandos de utilidad</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Diccionario de Directivas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#if"><strong>if</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#return"><strong>return</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server-name"><strong>server_name</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proxy-pass"><strong>proxy_pass</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#location"><strong>location</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#listen"><strong>listen</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server-tokens"><strong>server_tokens</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upstream"><strong>upstream</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">5. Docker y Docker-Compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multihost.html">6. Multihost</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="utilidad.html" title="capítulo anterior">NGINX: Comandos Útiles</a></li>
+      <li>Next: <a href="docker.html" title="próximo capítulo">NGINX: Docker</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/directivas.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
