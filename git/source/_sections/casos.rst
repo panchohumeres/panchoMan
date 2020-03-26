@@ -7,6 +7,32 @@ Casos Especiales:
 
 ------------------------------------------------------------------------
 
+Crear nuevo remoto:
+------------------------------
+
+**Fuente:** https://gitlab.com
+
+* Desde una carpeta existente:
+
+    .. code-block:: bash
+
+        cd existing_folder
+        git init
+        git remote add origin <url_remoto>
+        git add .
+        git commit -m "Initial commit"
+        git push -u origin master
+
+* Desde un repo existente:
+
+    .. code-block:: bash
+
+        cd existing_repo
+        git remote rename origin old-origin
+        git remote add origin <url_remoto>
+        git push -u origin --all
+        git push -u origin --tags
+
 
 Crear rama a partir de una sola Carpeta
 ---------------------------------------------------------------------

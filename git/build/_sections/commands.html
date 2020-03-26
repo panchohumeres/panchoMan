@@ -15,7 +15,7 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="GIT: Plataformas Repositorios" href="repos.html" />
+    <link rel="next" title="GIT: Casos Especiales" href="casos.html" />
     <link rel="prev" title="Manual GIT de Francisco Humeres M." href="../index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -67,9 +67,23 @@ git branch <span class="c1">#SÓLO LOCAL</span>
 </pre></div>
 </div>
 <p>Resultado esperado:</p>
+<img alt="show-branch" src="https://www.jquery-az.com/wp-content/uploads/2018/06/5.0_5-show-branches.png" />
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git show-branch -r <span class="c1">#(1) MOSTRAR RAMAS REMOTAS Y SUS COMMITS</span>
+git show-branch –all <span class="c1">#MOSTRAR RAMAS REMOTAS, LOCALES Y SUS COMMITS</span>
+</pre></div>
+</div>
 <p>Resultado esperado (1):</p>
 <img alt="show-branch" src="https://www.jquery-az.com/wp-content/uploads/2018/06/5.0_6-show-branches-remote.png" />
 <p>Fuente Imagen: <a class="footnote-reference brackets" href="#id2" id="id1">1</a>.</p>
+</div></blockquote>
+</div>
+<div class="section" id="deshacer-ultimo-commit">
+<h2>Deshacer último Commit<a class="headerlink" href="#deshacer-ultimo-commit" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias:</strong> <a class="reference external" href="https://www.git-tower.com/learn/git/faq/undo-last-commit">https://www.git-tower.com/learn/git/faq/undo-last-commit</a></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git reset --soft HEAD~1
+</pre></div>
+</div>
 </div></blockquote>
 <dl class="footnote brackets">
 <dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
@@ -105,8 +119,10 @@ git branch <span class="c1">#SÓLO LOCAL</span>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Comandos</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#borrar-archivo-permanentemente-del-historial">Borrar archivo permanentemente del historial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#listar-mostrar-ramas-y-su-info">Listar/mostrar ramas y su info.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deshacer-ultimo-commit">Deshacer último Commit</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="casos.html">2. Casos Especiales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="repos.html">3. Plataformas Repositorios</a></li>
 </ul>
 
@@ -115,7 +131,7 @@ git branch <span class="c1">#SÓLO LOCAL</span>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="../index.html" title="capítulo anterior">Manual GIT de Francisco Humeres M.</a></li>
-      <li>Next: <a href="repos.html" title="próximo capítulo">GIT: Plataformas Repositorios</a></li>
+      <li>Next: <a href="casos.html" title="próximo capítulo">GIT: Casos Especiales</a></li>
   </ul></li>
 </ul>
 </div>

@@ -15,6 +15,8 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="GIT: Plataformas Repositorios" href="repos.html" />
+    <link rel="prev" title="GIT: Comandos" href="commands.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -39,6 +41,35 @@
 </dd>
 </dl>
 <hr class="docutils" />
+<div class="section" id="crear-nuevo-remoto">
+<h2>Crear nuevo remoto:<a class="headerlink" href="#crear-nuevo-remoto" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Fuente:</strong> <a class="reference external" href="https://gitlab.com">https://gitlab.com</a></p>
+<ul>
+<li><p>Desde una carpeta existente:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> existing_folder
+git init
+git remote add origin &lt;url_remoto&gt;
+git add .
+git commit -m <span class="s2">&quot;Initial commit&quot;</span>
+git push -u origin master
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Desde un repo existente:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> existing_repo
+git remote rename origin old-origin
+git remote add origin &lt;url_remoto&gt;
+git push -u origin --all
+git push -u origin --tags
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
 <div class="section" id="crear-rama-a-partir-de-una-sola-carpeta">
 <h2>Crear rama a partir de una sola Carpeta<a class="headerlink" href="#crear-rama-a-partir-de-una-sola-carpeta" title="Enlazar permanentemente con este título">¶</a></h2>
 <blockquote>
@@ -228,8 +259,16 @@ $ git push
 
 <h3>Navegación</h3>
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="commands.html">1. Comandos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Casos Especiales</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#crear-nuevo-remoto">Crear nuevo remoto:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#crear-rama-a-partir-de-una-sola-carpeta">Crear rama a partir de una sola Carpeta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#agregar-un-nuevo-remoto">Agregar un nuevo remoto:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clonar-una-sola-rama">Clonar una sóla rama:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remover-archivos-completamente-del-historial">Remover archivos completamente del historial</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="repos.html">3. Plataformas Repositorios</a></li>
 </ul>
 
@@ -237,6 +276,8 @@ $ git push
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="commands.html" title="capítulo anterior">GIT: Comandos</a></li>
+      <li>Next: <a href="repos.html" title="próximo capítulo">GIT: Plataformas Repositorios</a></li>
   </ul></li>
 </ul>
 </div>

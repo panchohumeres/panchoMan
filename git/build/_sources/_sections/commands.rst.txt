@@ -46,6 +46,8 @@ Listar/mostrar ramas y su info.
     .. image:: https://www.jquery-az.com/wp-content/uploads/2018/06/5.0_5-show-branches.png
         :alt: show-branch
 
+    .. code-block:: bash
+
         git show-branch -r #(1) MOSTRAR RAMAS REMOTAS Y SUS COMMITS
         git show-branch –all #MOSTRAR RAMAS REMOTAS, LOCALES Y SUS COMMITS
 
@@ -55,6 +57,17 @@ Listar/mostrar ramas y su info.
         :alt: show-branch    
 
     Fuente Imagen: [1]_.
+
+
+Deshacer último Commit
+-----------------------------
+
+**Referencias:** https://www.git-tower.com/learn/git/faq/undo-last-commit
+
+    .. code-block:: bash
+
+        git reset --soft HEAD~1
+
 
 .. [1] jquery-az.com, https://www.jquery-az.com/list-branches-git/
 

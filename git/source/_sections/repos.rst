@@ -4,7 +4,7 @@ GIT: Plataformas Repositorios
 
 Documentación particular de plataformas como Github, Gitlab, Sourceforge, etc.:
 
------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 .. toctree::
    :maxdepth: 2
