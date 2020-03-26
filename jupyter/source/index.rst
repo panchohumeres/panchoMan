@@ -9,5 +9,6 @@ Manual Jupyter Notebook de Francisco Humeres M.
 
    1. Manual Nivel Usuario  <../_sections/usuario>
    2. Seguridad en Notebooks <../_sections/seguridad>
+   3. Troubleshooting <../_sections/troubleshooting>
 
 
