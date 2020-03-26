@@ -13,6 +13,7 @@ Manual GIT de Francisco Humeres M.
    1. Comandos <../_sections/commands>
    2. Casos Especiales <../_sections/casos>
    3. Plataformas Repositorios <../_sections/repos>
+   4. Herramientas <../_sections/tools>
 
 
 
