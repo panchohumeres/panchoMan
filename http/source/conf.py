@@ -17,7 +17,7 @@ master_doc = 'index'
 
 # -- Project information -----------------------------------------------------
 
-project = 'Manual Docker'
+project = 'Manual Networking (HTTP-TCP)'
 copyright = '2020, Francisco Humeres M.'
 author = 'Francisco Humeres M.'
 
@@ -77,7 +77,7 @@ panchoMan |panchoman| panchoMan GitHub Repo |github| panchoMan Kibana GitLab Rep
     :width: 20
 
 .. |gitlab| image:: https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png
-    :target: https://gitlab.com/panchohumeres/docker_man_page
+    :target: https://panchohumeres.gitlab.io/http_man
     :height: 20
     :width: 20
 """
