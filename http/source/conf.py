@@ -64,7 +64,7 @@ html_static_path = ['_static']
 
 
 rst_prolog = """
-panchoMan |panchoman| panchoMan GitHub Repo |github| panchoMan Kibana GitLab Repo |gitlab|
+panchoMan |panchoman| panchoMan GitHub Repo |github| panchoMan HTTP GitLab Repo |gitlab|
 
 .. |panchoman| image:: https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png
     :target: https://panchohumeres.github.io/panchoMan
