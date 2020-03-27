@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Docker: ENTRYPOINT, CMD Y RUN &#8212; documentación de Manual Docker - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Docker: ENTRYPOINT, CMD Y RUN" href="entrypoint-command-general.html" />
+    <link rel="prev" title="Docker: ENTRYPOINT, COMMAND Y RUN" href="entrypoint-command.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/docker_man_page"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="docker-entrypoint-cmd-y-run">
+<h1>Docker: ENTRYPOINT, CMD Y RUN<a class="headerlink" href="#docker-entrypoint-cmd-y-run" title="Enlazar permanentemente con este título">¶</a></h1>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Referencias</strong>:</dt><dd><p><a class="reference external" href="https://goinbigdata.com/docker-run-vs-cmd-vs-entrypoint/">https://goinbigdata.com/docker-run-vs-cmd-vs-entrypoint/</a></p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="ver-primero">
+<h2>Ver Primero<a class="headerlink" href="#ver-primero" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="conceptos.html#docker-imagenes-y-capas"><span class="std std-ref">Imágenes Docker y Capas:</span></a></p></li>
+<li><p><a class="reference internal" href="conceptos.html#shell-y-exec"><span class="std std-ref">&quot;Shell&quot; y &quot;Exec&quot;:</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul class="simple">
+<li><p>Usar <strong>RUN</strong> para <em>construir imagen</em>, <strong>agregando capas sobre la imagen fuente</strong> o original (definidad por <strong>&quot;FROM&quot;</strong>). Preferido para instalar paquetes y librerías.</p></li>
+<li><p>Preferir <strong>ENTRYPOINT</strong> sobre CMD, cuando al momento de <strong>construir imagen</strong> Docker <strong>siempre se requiere ejecutar un comando</strong>.</p></li>
+<li><p>Junto con el caso anterior, <strong>adicionalmente</strong> se puede ejecutar <strong>CMD</strong> si se necesita proveer <strong>argumentos por defecto adicionales</strong>, que pueden ser <strong>sobreescritos</strong> desde la línea de comandos cuando inicia el contenedor.</p></li>
+<li><p>Preferir <strong>CMD</strong> si se necesita proveer commandos o argumentos <strong>por defecto</strong>, que pueden ser <strong>sobreescritos</strong> desde la línea de comandos cuando el contenedor Docker se inicia.</p></li>
+</ul>
+</div>
+<div class="section" id="run">
+<h2><strong>RUN</strong><a class="headerlink" href="#run" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul>
+<li><p><strong>&quot;RUN&quot;</strong> ejecuta comandos en una nueva capa y crea una nueva imagen.</p></li>
+<li><p>Generalmente se usa para instalar paquetes o librerías.</p></li>
+<li><p>Tiene dos formas:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>RUN &lt;command&gt; <span class="c1">#(shell form)</span>
+RUN <span class="o">[</span><span class="s2">&quot;executable&quot;</span>, <span class="s2">&quot;param1&quot;</span>, <span class="s2">&quot;param2&quot;</span><span class="o">]</span> <span class="c1">#(exec form)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Ejemplo:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>RUN apt-get update <span class="o">&amp;&amp;</span> apt-get install -y <span class="se">\</span>
+    bzr <span class="se">\</span>
+    cvs <span class="se">\</span>
+    git <span class="se">\</span>
+    mercurial <span class="se">\</span>
+    subversion
+</pre></div>
+</div>
+<p><strong>Nota</strong>: <code class="code docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span></code> y <code class="code docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span></code> se <strong>ejecutan en una sola instrucción RUN</strong>, de lo contrario reutilizarían una imagen anterior, con paquetes más atrasados.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="cmd-command">
+<h2><strong>CMD (Command)</strong><a class="headerlink" href="#cmd-command" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul>
+<li><p><strong>&quot;CMD&quot;</strong> establece <strong>comandos default o parámetros</strong> que pueden ser <strong>sobreescritos</strong> cuando el contenedor <strong>inicia</strong>.</p></li>
+<li><p>Tiene tres formas:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CMD <span class="o">[</span><span class="s2">&quot;executable&quot;</span>,<span class="s2">&quot;param1&quot;</span>,<span class="s2">&quot;param2&quot;</span><span class="o">]</span> <span class="c1">#(exec form, preferred)</span>
+
+<span class="c1">#configura parámetros por defecto que serán AGREGADOS DESPUÉS de parámetros de ENTRYPOINT</span>
+CMD <span class="o">[</span><span class="s2">&quot;param1&quot;</span>,<span class="s2">&quot;param2&quot;</span><span class="o">]</span> <span class="c1">#(parámetros adicionales para ENTRYPOINT en formato exec)</span>
+
+CMD <span class="nb">command</span> param1 param2 <span class="c1">#(shell form)</span>
+</pre></div>
+</div>
+<p>Por ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#-------ejemplo 1---------------</span>
+<span class="c1">#DOCKERFILE</span>
+CMD <span class="nb">echo</span> <span class="s2">&quot;Hello world&quot;</span>
+
+<span class="c1">#INICIAR CONTENEDOR</span>
+docker run -it &lt;image&gt;
+
+<span class="c1">#RESULTADO.</span>
+Hello world
+
+<span class="c1">#-------ejemplo 2---------------</span>
+<span class="c1">#DOCKERFILE</span>
+CMD <span class="nb">echo</span> <span class="s2">&quot;Hello world&quot;</span>
+
+<span class="c1">#INICIAR CONTENEDOR</span>
+docker run -it &lt;image&gt; /bin/bash
+
+<span class="c1">#RESULTADO (ejecuta el intérprete interactivo).</span>
+root@7de4bed89922:/#
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="entrypoint">
+<h2><strong>ENTRYPOINT</strong><a class="headerlink" href="#entrypoint" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul>
+<li><p><strong>&quot;ENTRYPOINT&quot;</strong> configura un <strong>contenedor que va a correr como ejecutable</strong>.</p></li>
+<li><p>Tiene dos formas:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ENTRYPOINT <span class="o">[</span><span class="s2">&quot;executable&quot;</span>, <span class="s2">&quot;param1&quot;</span>, <span class="s2">&quot;param2&quot;</span><span class="o">]</span> <span class="c1">#(exec form, preferred)</span>
+ENTRYPOINT <span class="nb">command</span> param1 param2 <span class="c1">#(shell form)</span>
+</pre></div>
+</div>
+<p>Por ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#-------FORMATO EXEC---------------</span>
+<span class="c1">#DOCKERFILE</span>
+ENTRYPOINT <span class="o">[</span><span class="s2">&quot;/bin/echo&quot;</span>, <span class="s2">&quot;Hello&quot;</span><span class="o">]</span>
+CMD <span class="o">[</span><span class="s2">&quot;world&quot;</span><span class="o">]</span>
+
+<span class="c1">#INICIAR CONTENEDOR---&gt;forma 1</span>
+docker run -it &lt;image&gt;
+<span class="c1">#RESULTADO.</span>
+Hello world
+
+<span class="c1">#INICIAR CONTENEDOR---&gt;forma 2</span>
+docker run -it &lt;image&gt; John
+<span class="c1">#RESULTADO.</span>
+Hello John
+
+<span class="c1">#-------ejemplo 2---------------</span>
+<span class="c1">#DOCKERFILE</span>
+CMD <span class="nb">echo</span> <span class="s2">&quot;Hello world&quot;</span>
+
+<span class="c1">#INICIAR CONTENEDOR</span>
+docker run -it &lt;image&gt; /bin/bash
+
+<span class="c1">#RESULTADO (ejecuta el intérprete interactivo).</span>
+root@7de4bed89922:/#
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Docker</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="instalar.html">1. Instalar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general.html">2. Generales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conceptos.html">3. Conceptos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logs.html">4. Revisar Logs de Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prune.html">5. Borrar, Limpiar Contenedores</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="entrypoint-command.html">6. ENTRYPOINT, COMMAND y RUN</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Conceptos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrypoint-command-general.html">2. Generales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrypoint-command-envsubst.html">2. Reemplazar variables de entorno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrypoint-command-troubleshooting.html">3. Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="special-cases.html">7. Casos Especiales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">8. Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">9. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="not.html">10. Lo que no se puede hacer</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="entrypoint-command.html">Docker: ENTRYPOINT, COMMAND Y RUN</a><ul>
+      <li>Previous: <a href="entrypoint-command.html" title="capítulo anterior">Docker: ENTRYPOINT, COMMAND Y RUN</a></li>
+      <li>Next: <a href="entrypoint-command-general.html" title="próximo capítulo">Docker: ENTRYPOINT, CMD Y RUN</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/entrypoint-command-concepts.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Networking: CORS &#8212; documentación de Manual Docker - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Networking: Códigos HTTP" href="codes.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/docker_man_page"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="networking-cors">
+<h1>Networking: CORS<a class="headerlink" href="#networking-cors" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="que-es-cors">
+<h2>¿Qué es CORS?<a class="headerlink" href="#que-es-cors" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul class="simple">
+<li><p><strong>C</strong> ross <strong>O</strong> rigin <strong>R</strong> esource <strong>S</strong> haring.</p></li>
+<li><p>Una solicitud por un recuro (p.ej. una imagen o font), disponible afuera del el servidor que se está consultando, se incurre en <strong>&quot;cross-origin request&quot;</strong>.</p></li>
+<li><p><strong>CORS</strong> es el protocolo para manejar este tipo de solicitudes.</p></li>
+<li><p><strong>CORS</strong> permite a los <strong>servidores</strong> especificar quien (i.e. cuales <strong>&quot;orígenes&quot;) puede **acceder a los recursos del servidor</strong>, entre otras cosas.</p></li>
+<li><p>Una política CORS permite especificar que <strong>orígenes</strong> acceden a sus recursos, y cuales <strong>protocolos</strong> y <strong>métodos http</strong> (&quot;GET&quot;,&quot;PUT&quot;,&quot;PATCH&quot;,&quot;DELETE&quot;) están permitidos para accederlos.</p></li>
+</ul>
+<img alt="esquema-cors" src="https://s3.amazonaws.com/codecademy-content/articles/what-is-cors/cross-origin.svg" /><p>Fuente Imagen: <a class="footnote-reference brackets" href="#id3" id="id1">1</a>.</p>
+<div class="section" id="que-es-una-politica-de-seguridad">
+<h3>¿Qué es una política de Seguridad?<a class="headerlink" href="#que-es-una-politica-de-seguridad" title="Enlazar permanentemente con este título">¶</a></h3>
+<ul>
+<li><p>Cuando se consulta una página web, app, imagen, etc., se consultan en un servidor.</p></li>
+<li><p>Éstas políticas le dicen al <strong>browser</strong> si el <strong>servidor permite consultar</strong> recursos <strong>sólo alojados en el mismo servidor, o de otra URL</strong>.</p></li>
+<li><dl>
+<dt>Ejemplo, política <strong>&quot;same-origin&quot;</strong>:</dt><dd><p>Política más restrictiva. Con esta política, contenido alojado en servidor <strong>&quot;A&quot;</strong> sólo puede <strong>interactuar</strong> con contenido en servidor <strong>&quot;A&quot;</strong>.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://www.example.com/foo-bar.html <span class="c1">#URL 1</span>
+
+http://www.example.com/hello-world.html <span class="c1">#URL 2</span>
+
+https://www.en.example.com/hello.html <span class="c1">#URL 3</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li><p>Navegar a <strong>URL 2</strong> desde <strong>URL 1</strong>, está <strong>permitido</strong>, por que el <strong>protocolo</strong> (&quot;http&quot;), <strong>host</strong> (&quot;example.com&quot;), y <strong>puerto</strong> (&quot;80&quot;, por defecto en este caso), <strong>coinciden</strong>.</p></li>
+<li><p>Navegar a <strong>URL 3</strong> desde <strong>URL 2</strong>, <strong>NO está permitido</strong>, dado que el <strong>protocolo</strong> (&quot;https&quot;), y <strong>host</strong> (&quot;en.example.com&quot;) <strong>no coiciden</strong>.</p></li>
+<li><p>La última consulta <strong>podría ser permitida con una política CORS</strong>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="headers-cors">
+<h3>&quot;Headers&quot; CORS<a class="headerlink" href="#headers-cors" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Access-Control-Allow-Origin
+Access-Control-Allow-Credentials
+Access-Control-Allow-Headers
+Access-Control-Allow-Methods
+Access-Control-Expose-Headers
+Access-Control-Max-Age
+Access-Control-Request-Headers
+Access-Control-Request-Method
+Origin
+</pre></div>
+</div>
+<ul>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Access-Control-Allow-Origin</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Este header permite a los servidores <strong>especificar</strong> cómo sus <strong>recursos</strong> son compartidos con <strong>dominios externos</strong>.</p></li>
+<li><p>Cuando una solicitud <code class="code docutils literal notranslate"><span class="pre">GET</span></code> se hace para acceder al recurso en <strong>Servidor A</strong>, éste va a responder con un valor para el <strong>&quot;Header&quot;</strong> <code class="code docutils literal notranslate"><span class="pre">Access-Control-Allow-Origin</span></code>.</p></li>
+<li><p>Cuando el <strong>valor del header</strong> es <code class="code docutils literal notranslate"><span class="pre">*</span></code>, el <strong>servidor A</strong> va a compartir los <strong>recursos solicitados</strong> con <strong>cualquier</strong> dominio.</p></li>
+<li><p>En ocasiones, el <strong>valor del header</strong> puede ser un <strong>dominio en particular</strong> (o <strong>lista de dominios</strong>).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="pre-flight-headers">
+<h3>&quot;Pre-flight Headers&quot;<a class="headerlink" href="#pre-flight-headers" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Para cualquier de los siguientes <strong>métodos http</strong>, una solicitud <strong>&quot;pre-flight&quot;</strong> se ejecutará <strong>previamente</strong> a la solicitud propiamente tal.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>PUT
+DELETE
+CONNECT
+OPTIONS
+TRACE
+PATCH
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>&quot;pre-flight&quot;</strong> usa el header <code class="code docutils literal notranslate"><span class="pre">OPTIONS</span></code>.</p></li>
+<li><p>Si el servidor indica que el método en particular definido en <strong>OPTIONS</strong>, se procederá con la consulta original.</p></li>
+<li><p>También aplica para otros métodos como &quot;user-agent&quot;.</p></li>
+</ul>
+<img alt="esquema-cors-completo" src="https://s3.amazonaws.com/codecademy-content/articles/what-is-cors/preflight.svg" /><p>Fuente Imagen: <a class="footnote-reference brackets" href="#id3" id="id2">1</a>.</p>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>CodeAcademy, <a class="reference external" href="https://www.codecademy.com/articles/what-is-cors">https://www.codecademy.com/articles/what-is-cors</a></p>
+</dd>
+</dl>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Docker</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="codes.html">1. Códigos HTTP</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. CORS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#que-es-cors">¿Qué es CORS?</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="codes.html" title="capítulo anterior">Networking: Códigos HTTP</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/CORS.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
