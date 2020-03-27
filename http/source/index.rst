@@ -12,5 +12,6 @@ Manual de Networking (HTTP-TCP) de Francisco Humeres M.
 
    1. Códigos HTTP <../_sections/codes>
    2. CORS <../_sections/CORS>
+   3. Browsers <../_sections/browsers>
 
 
