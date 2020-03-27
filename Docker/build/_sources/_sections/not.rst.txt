@@ -1,8 +1,6 @@
 =====================================
-Docker: Troubleshooting
+Docker: No Permitido
 =====================================
-
-.. _connection_refuse_connection_rest_by_peer:
 
 Montar volúmenes en un Dockerfile
 -------------------------------------------------------------------
