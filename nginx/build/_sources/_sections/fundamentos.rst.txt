@@ -127,8 +127,89 @@ Redirección:
     **Referencias:**
         - https://bjornjohansen.no/nginx-redirect
         - https://bjornjohansen.no/redirect-to-https-with-nginx 
-        - Ver: :ref:`directiva_return`       
+        - Ver: :ref:`directiva_return` 
 
+Bloques **\\"Server\\"** y **\\"Location\\"**
+-------------------------------------------------------------------------------------------
+
+**Fuentes:** https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms
+
+
+    * Nginx **divide lógicamente** las **configuraciones** destinadas a servir diferentes contenidos (solicitados) en **bloques**, que conviven en una estructura jerárquica.
+    * Cada vez que un **cliente** hace una **solicitud**, Nginx comienza un proceso para determinar **cuál(es) bloque(s) de configuración(es) debe(n) ser usados** para manejar la solicitud.
+    * **Tipos de soclicitud** pueden ser definidas en base a la IP, dominios y/o puertos solicitados.
+
+
+server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    * Un **bloque** define un **\\"servidor virtual\\"** usado para manejar **solicitudes de determinado tipo**.
+    * La directiva :code:`listen` a cual **IP y puertos** va a responder el **bloque** de **virtualhost** (servidor virtual).
+    * La directiva :code:`listen` puede responder a una de las siguientes configuraciones:
+        - {IP}:{Puerto}
+        - {IP} --------->por defecto escuchará en el puerto 80
+        - {Puerto} --------->escuchará en **cualquier interfaz** en ese puerto
+        - {URI} --------> ruta a un socket UNIX (generalmente sólo tiene implicancias si se pasan solicitudes entre servidores).
+    * El valor por **defecto** de la directiva :code:`listen` es :code:`0.0.0.0:80`.
+
+
+    A) Como Nginx decide cual bloque \\"server\\" maneja una solicitud (directiva :code:`listen` ):
+        1. NGINX revisa la **IP y puerto de la solicitud**.
+        2. Las compara con directiva :code:`listen` dentro de cada **virtualhost** (servidor virtual) para construir una **lista de bloques** que pueden responder a la solicitud.
+        3. Si no existe directiva :code:`listen`, usar el valor por defecto :code:`listen` es :code:`0.0.0.0:80`.
+            Ejemplos:
+                - Bloque con valor :code:`listen` de :code:`111.111.111.111` sin puerto escucha al puerto 80, i.e. :code:`111.111.111.111:80`
+                - Bloque con valor :code:`listen` de :code:`8888` sin IP se transforma en :code:`0.0.0.0:8888`.
+        4. NGINX elabora una **lista** de servidores virtuales que coinciden con la IP y/o puerto de la solicitud (en base a la directiva :code:`listen`).
+            - Esto significa que cualquier **bloque** que use `0.0.0.0` como IP en la directiva :code:`listen`, tiene **menor prioridad** en relación a directivas que coincida con **IP y/o puertos** específicos.
+            - 
+        5. Si es que **hay sólo una coincidencia**, NGINX redirige a ese **virtualhost** o **bloque**.
+        6. Si es que hay **múltiples coincidencias**, NGINX procede a **revisar la directiva :code:`server_name`**, (**PASO B**).
+
+    B) Como NGINX decide cual bloque maneja una solicitud en base a **directiva :code:`server_name`**:
+        1. NGINX evalúa la lista de **bloques** obtenida del **paso A)**.
+        2. NGINX revisa el **header http \\"Host\\"**. Este \\"header\\" contiene el **dominio o IP** al cual la solicitud quiere llegar.
+        3. Primero NGINX intenta encontrar una **coincidencia exacta**. Si hay **multiples coincidencias, elige la primera**.
+        4. Si **NO se encuentran coincidencias exactas**, NGINX buscará el \\"wildcard\\" :code:`*` al **principio** de los **\\"strings\\"** especificados en las directivas :code:`server_name`. Si se encuentra **una coincidencia exacta, se usa esa**. Si hay **múltipes coincidencias exactas**, se usa el **string más largo**.
+        5. Si **NO hay coincidencias según el paso 4**, NGINX buscará el \\"wildcard\\" :code:`*` al **FINAL** de los **\\"strings\\"** especificados en las directivas :code:`server_name`. Si se encuentra **una coincidencia exacta, se usa esa**. Si hay **múltipes coincidencias exactas**, se usa el **string más largo**.
+        6. Si **NO hay coincidencias según el paso 5**, NGINX evalúa **bloques** que definan :code:`server_name` usando **\\"expresiones regulares\\"** (indicadas por el \\"wildcard\\" NGINX buscará el \\"wildcard\\" :code:`~` al **principio** de los **\\"strings\\"** especificados en las directivas. El **primer bloque que coincida** será utilizado.
+        7. Si es que *NO hay coincidencias en ninguno de los casos anteriores**, NGINX utiliza el bloque por **defecto**.
+
+
+location
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Un **bloque** location existe **dentro de un bloque \\"server\\"**, y define como NGINX debe manejar diferentes **solicitudes** para distintos **recursos y URIs** para el servidor virtual (ie. **\\"parent\\"**). El modelo para subdividir el **espacio de URIs** es bastante flexible.
+
+Locaciones:
+    * Forma:
+    
+        .. code-block:: bash
+
+            location optional_modifier location_match {
+
+                . . .
+
+            }
+
+        :code:`location_match` define la URI para buscar coincidencias. Posibles **valores** para :code:`optional_modifier`:
+            - **Ninguno**: La locación es interpretada como **prefijo** (la coincidencia se evalúa en base al **principio de la URI**).
+            - :code:`=:`: Se considera coincidencia si la **URI solicitad coincide exactamente con la locación**.
+            - :code:`~:`: Importan **UPPERCASE** o **lowercase** (mayúscula o minúscula) para evaluar las coincidencias.
+            - :code:`~*`: **NO** importan **UPPERCASE** o **lowercase** (mayúscula o minúscula) para evaluar las coincidencias.
+            - :code:`^~`: **NO se evalúan expresiones regulares**, si es que el **bloque** es seleccionado como la mejor coincidencia **sin expresiones regulares**.
+
+
+    * Como NGINX elige :code:`location`(s):
+        1. Busca todas las coincidencias **SIN expresiones regulares**.
+        2. Busca una **coincidencia exacta**. Si una locación tiene el operador :code:`=`, este **bloque** es inmediatamente seleccionado.
+        3. Si **NO** se cumple caso **2**, NGINX busca **coincidencias no-exactas de prefijos**. Encuentra el prefijo **más largo para evaluar**.
+        4. Si se cumple caso **3**, y tiene el operador :code:`^~`, NGINX **para la búsqueda** y **selecciona** esta locación.
+        5. Si se cumple caso **3**, y **NO** tiene el operador :code:`^~`, NGINX **guarda la conincidencia**, y procede.
+        6. NGINX busca **expresiones regulares**.
+        7. Si se cumple **6** y **3** (dentro de la **expresión regular**), NGINX la sube como **primera prioridad** de locación.
+        8. NGINX **elige la primera** locación que cumpla el caso **7**.
+        9. Si no se cumplen **6, 7 y 8**, la locación guardada en paso **5** es ocupada para servir la solicitud.
 
 Orden de lineas i.e. Comandos
 --------------------------------

@@ -182,6 +182,126 @@ En este caso la solicitud se:</p>
 </dl>
 </div></blockquote>
 </div>
+<div class="section" id="bloques-server-y-location">
+<h2>Bloques <strong>&quot;Server&quot;</strong> y <strong>&quot;Location&quot;</strong><a class="headerlink" href="#bloques-server-y-location" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Fuentes:</strong> <a class="reference external" href="https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms">https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms</a></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Nginx <strong>divide lógicamente</strong> las <strong>configuraciones</strong> destinadas a servir diferentes contenidos (solicitados) en <strong>bloques</strong>, que conviven en una estructura jerárquica.</p></li>
+<li><p>Cada vez que un <strong>cliente</strong> hace una <strong>solicitud</strong>, Nginx comienza un proceso para determinar <strong>cuál(es) bloque(s) de configuración(es) debe(n) ser usados</strong> para manejar la solicitud.</p></li>
+<li><p><strong>Tipos de soclicitud</strong> pueden ser definidas en base a la IP, dominios y/o puertos solicitados.</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="server">
+<h3>server<a class="headerlink" href="#server" title="Enlazar permanentemente con este título">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Un <strong>bloque</strong> define un <strong>&quot;servidor virtual&quot;</strong> usado para manejar <strong>solicitudes de determinado tipo</strong>.</p></li>
+<li><p>La directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code> a cual <strong>IP y puertos</strong> va a responder el <strong>bloque</strong> de <strong>virtualhost</strong> (servidor virtual).</p></li>
+<li><dl class="simple">
+<dt>La directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code> puede responder a una de las siguientes configuraciones:</dt><dd><ul>
+<li><p>{IP}:{Puerto}</p></li>
+<li><p>{IP} ———&gt;por defecto escuchará en el puerto 80</p></li>
+<li><p>{Puerto} ———&gt;escuchará en <strong>cualquier interfaz</strong> en ese puerto</p></li>
+<li><p>{URI} ——–&gt; ruta a un socket UNIX (generalmente sólo tiene implicancias si se pasan solicitudes entre servidores).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>El valor por <strong>defecto</strong> de la directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code> es <code class="code docutils literal notranslate"><span class="pre">0.0.0.0:80</span></code>.</p></li>
+</ul>
+<ol class="upperalpha simple">
+<li><dl class="simple">
+<dt>Como Nginx decide cual bloque &quot;server&quot; maneja una solicitud (directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code> ):</dt><dd><ol class="arabic simple">
+<li><p>NGINX revisa la <strong>IP y puerto de la solicitud</strong>.</p></li>
+<li><p>Las compara con directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code> dentro de cada <strong>virtualhost</strong> (servidor virtual) para construir una <strong>lista de bloques</strong> que pueden responder a la solicitud.</p></li>
+<li><dl class="simple">
+<dt>Si no existe directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code>, usar el valor por defecto <code class="code docutils literal notranslate"><span class="pre">listen</span></code> es <code class="code docutils literal notranslate"><span class="pre">0.0.0.0:80</span></code>.</dt><dd><dl class="simple">
+<dt>Ejemplos:</dt><dd><ul class="simple">
+<li><p>Bloque con valor <code class="code docutils literal notranslate"><span class="pre">listen</span></code> de <code class="code docutils literal notranslate"><span class="pre">111.111.111.111</span></code> sin puerto escucha al puerto 80, i.e. <code class="code docutils literal notranslate"><span class="pre">111.111.111.111:80</span></code></p></li>
+<li><p>Bloque con valor <code class="code docutils literal notranslate"><span class="pre">listen</span></code> de <code class="code docutils literal notranslate"><span class="pre">8888</span></code> sin IP se transforma en <code class="code docutils literal notranslate"><span class="pre">0.0.0.0:8888</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>NGINX elabora una <strong>lista</strong> de servidores virtuales que coinciden con la IP y/o puerto de la solicitud (en base a la directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code>).</dt><dd><ul class="simple">
+<li><p>Esto significa que cualquier <strong>bloque</strong> que use <cite>0.0.0.0</cite> como IP en la directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code>, tiene <strong>menor prioridad</strong> en relación a directivas que coincida con <strong>IP y/o puertos</strong> específicos.</p></li>
+<li></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Si es que <strong>hay sólo una coincidencia</strong>, NGINX redirige a ese <strong>virtualhost</strong> o <strong>bloque</strong>.</p></li>
+<li><p>Si es que hay <strong>múltiples coincidencias</strong>, NGINX procede a <strong>revisar la directiva :code:`server_name`</strong>, (<strong>PASO B</strong>).</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Como NGINX decide cual bloque maneja una solicitud en base a <strong>directiva :code:`server_name`</strong>:</dt><dd><ol class="arabic simple">
+<li><p>NGINX evalúa la lista de <strong>bloques</strong> obtenida del <strong>paso A)</strong>.</p></li>
+<li><p>NGINX revisa el <strong>header http &quot;Host&quot;</strong>. Este &quot;header&quot; contiene el <strong>dominio o IP</strong> al cual la solicitud quiere llegar.</p></li>
+<li><p>Primero NGINX intenta encontrar una <strong>coincidencia exacta</strong>. Si hay <strong>multiples coincidencias, elige la primera</strong>.</p></li>
+<li><p>Si <strong>NO se encuentran coincidencias exactas</strong>, NGINX buscará el &quot;wildcard&quot; <code class="code docutils literal notranslate"><span class="pre">*</span></code> al <strong>principio</strong> de los <strong>&quot;strings&quot;</strong> especificados en las directivas <code class="code docutils literal notranslate"><span class="pre">server_name</span></code>. Si se encuentra <strong>una coincidencia exacta, se usa esa</strong>. Si hay <strong>múltipes coincidencias exactas</strong>, se usa el <strong>string más largo</strong>.</p></li>
+<li><p>Si <strong>NO hay coincidencias según el paso 4</strong>, NGINX buscará el &quot;wildcard&quot; <code class="code docutils literal notranslate"><span class="pre">*</span></code> al <strong>FINAL</strong> de los <strong>&quot;strings&quot;</strong> especificados en las directivas <code class="code docutils literal notranslate"><span class="pre">server_name</span></code>. Si se encuentra <strong>una coincidencia exacta, se usa esa</strong>. Si hay <strong>múltipes coincidencias exactas</strong>, se usa el <strong>string más largo</strong>.</p></li>
+<li><p>Si <strong>NO hay coincidencias según el paso 5</strong>, NGINX evalúa <strong>bloques</strong> que definan <code class="code docutils literal notranslate"><span class="pre">server_name</span></code> usando <strong>&quot;expresiones regulares&quot;</strong> (indicadas por el &quot;wildcard&quot; NGINX buscará el &quot;wildcard&quot; <code class="code docutils literal notranslate"><span class="pre">~</span></code> al <strong>principio</strong> de los <strong>&quot;strings&quot;</strong> especificados en las directivas. El <strong>primer bloque que coincida</strong> será utilizado.</p></li>
+<li><p>Si es que <em>NO hay coincidencias en ninguno de los casos anteriores*</em>, NGINX utiliza el bloque por <strong>defecto</strong>.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="location">
+<h3>location<a class="headerlink" href="#location" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Un <strong>bloque</strong> location existe <strong>dentro de un bloque &quot;server&quot;</strong>, y define como NGINX debe manejar diferentes <strong>solicitudes</strong> para distintos <strong>recursos y URIs</strong> para el servidor virtual (ie. <strong>&quot;parent&quot;</strong>). El modelo para subdividir el <strong>espacio de URIs</strong> es bastante flexible.</p>
+<dl>
+<dt>Locaciones:</dt><dd><ul>
+<li><p>Forma:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>location optional_modifier location_match <span class="o">{</span>
+
+    . . .
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">location_match</span></code> define la URI para buscar coincidencias. Posibles <strong>valores</strong> para <code class="code docutils literal notranslate"><span class="pre">optional_modifier</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>Ninguno</strong>: La locación es interpretada como <strong>prefijo</strong> (la coincidencia se evalúa en base al <strong>principio de la URI</strong>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">=:</span></code>: Se considera coincidencia si la <strong>URI solicitad coincide exactamente con la locación</strong>.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">~:</span></code>: Importan <strong>UPPERCASE</strong> o <strong>lowercase</strong> (mayúscula o minúscula) para evaluar las coincidencias.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">~*</span></code>: <strong>NO</strong> importan <strong>UPPERCASE</strong> o <strong>lowercase</strong> (mayúscula o minúscula) para evaluar las coincidencias.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">^~</span></code>: <strong>NO se evalúan expresiones regulares</strong>, si es que el <strong>bloque</strong> es seleccionado como la mejor coincidencia <strong>sin expresiones regulares</strong>.</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt>Como NGINX elige :code:<a href="#id2"><span class="problematic" id="id3">`</span></a>location`(s):</dt><dd><ol class="arabic simple">
+<li><p>Busca todas las coincidencias <strong>SIN expresiones regulares</strong>.</p></li>
+<li><p>Busca una <strong>coincidencia exacta</strong>. Si una locación tiene el operador <code class="code docutils literal notranslate"><span class="pre">=</span></code>, este <strong>bloque</strong> es inmediatamente seleccionado.</p></li>
+<li><p>Si <strong>NO</strong> se cumple caso <strong>2</strong>, NGINX busca <strong>coincidencias no-exactas de prefijos</strong>. Encuentra el prefijo <strong>más largo para evaluar</strong>.</p></li>
+<li><p>Si se cumple caso <strong>3</strong>, y tiene el operador <code class="code docutils literal notranslate"><span class="pre">^~</span></code>, NGINX <strong>para la búsqueda</strong> y <strong>selecciona</strong> esta locación.</p></li>
+<li><p>Si se cumple caso <strong>3</strong>, y <strong>NO</strong> tiene el operador <code class="code docutils literal notranslate"><span class="pre">^~</span></code>, NGINX <strong>guarda la conincidencia</strong>, y procede.</p></li>
+<li><p>NGINX busca <strong>expresiones regulares</strong>.</p></li>
+<li><p>Si se cumple <strong>6</strong> y <strong>3</strong> (dentro de la <strong>expresión regular</strong>), NGINX la sube como <strong>primera prioridad</strong> de locación.</p></li>
+<li><p>NGINX <strong>elige la primera</strong> locación que cumpla el caso <strong>7</strong>.</p></li>
+<li><p>Si no se cumplen <strong>6, 7 y 8</strong>, la locación guardada en paso <strong>5</strong> es ocupada para servir la solicitud.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
 <div class="section" id="orden-de-lineas-i-e-comandos">
 <h2>Orden de lineas i.e. Comandos<a class="headerlink" href="#orden-de-lineas-i-e-comandos" title="Enlazar permanentemente con este título">¶</a></h2>
 <p><strong>Referencias:</strong> <a class="reference external" href="https://serverfault.com/questions/836504/does-order-of-lines-matter-in-nginx">https://serverfault.com/questions/836504/does-order-of-lines-matter-in-nginx</a></p>
@@ -231,6 +351,7 @@ location /.well-known/acme-challenge <span class="o">{</span>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Fundamentos</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#como-nginx-procesa-solicitudes">Cómo NGINX procesa solicitudes:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#redireccion">Redirección:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bloques-server-y-location">Bloques <strong>&quot;Server&quot;</strong> y <strong>&quot;Location&quot;</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#orden-de-lineas-i-e-comandos">Orden de lineas i.e. Comandos</a></li>
 </ul>
 </li>
