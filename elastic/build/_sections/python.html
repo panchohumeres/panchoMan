@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Elasticsearch: Python &#8212; documentación de Manual Elasticsearch - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Elasticsearch: Formato Kibana" href="queries-kibana.html" />
+    <link rel="prev" title="Elasticsearch: Queries SSL / TSL" href="queries-ssl.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="elasticsearch-python">
+<h1>Elasticsearch: Python<a class="headerlink" href="#elasticsearch-python" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Documentación sobre la API Python de Elasticsearch.</p>
+<hr class="docutils" />
+<div class="section" id="conexion-normal">
+<h2>Conexión Normal<a class="headerlink" href="#conexion-normal" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/41119788/user-authentication-in-elasticsearch-query-using-python">https://stackoverflow.com/questions/41119788/user-authentication-in-elasticsearch-query-using-python</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/50366668/authentication-in-elasticsearch-using-python">https://stackoverflow.com/questions/50366668/authentication-in-elasticsearch-using-python</a></p></li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li><p>Importar estas <strong>librerías</strong> para los ejemplos:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">elasticsearch</span> <span class="kn">import</span> <span class="n">Elasticsearch</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Sin certificados SSL</strong>, o con protección <strong>SSL detrás de algún proxy</strong> (como NGINX).</p></li>
+<li><p>Emula solicitudes como: <a class="reference internal" href="example-docker-proxy-ssl.html#ejemplo-ssl-docker-proxy"><span class="std std-ref">Elasticsearch: Ejemplo Docker SSL Interno / Proxy NGINX</span></a></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#SOLICITUD AUTENTICACIÓN BÁSICA HTTP</span>
+<span class="n">es</span> <span class="o">=</span> <span class="n">Elasticsearch</span><span class="p">([</span><span class="s1">&#39;http://{HOST}:{PUERTO}&#39;</span><span class="p">],</span> <span class="n">http_auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pass&#39;</span><span class="p">))</span>
+
+<span class="c1">#SOLICITUD AUTENTICACIÓN BÁSICA HTTPS</span>
+<span class="n">es</span> <span class="o">=</span> <span class="n">Elasticsearch</span><span class="p">([</span><span class="s1">&#39;http://{HOST}:{PUERTO}&#39;</span><span class="p">],</span> <span class="n">http_auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pass&#39;</span><span class="p">))</span>
+
+<span class="c1">#FORMA CON TODO LA SOLICITUD EN LA URL</span>
+<span class="n">es</span> <span class="o">=</span> <span class="n">Elasticsearch</span><span class="p">(</span><span class="n">hosts</span><span class="o">=</span><span class="s2">&quot;http://elastic:changeme@localhost:9200/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="conexion-ssl-usando-archivos-de-certificados">
+<h2>Conexión SSL (usando archivos de certificados)<a class="headerlink" href="#conexion-ssl-usando-archivos-de-certificados" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul>
+<li><dl>
+<dt>Emula solicitudes como:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="queries-ssl.html#queries-ssl-curl"><span class="std std-ref">curl</span></a></p></li>
+<li><p><a class="reference internal" href="example-docker-ssl.html#ejemplo-ssl-docker"><span class="std std-ref">Elasticsearch: Ejemplo Docker SSL Interno</span></a></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ssl</span> <span class="kn">import</span> <span class="n">create_default_context</span>
+
+<span class="n">ES_HOST</span> <span class="o">=</span> <span class="s2">&quot;https://mydomain:9200&quot;</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">create_default_context</span><span class="p">(</span><span class="n">cafile</span><span class="o">=</span><span class="s2">&quot;/certs/ca/ca.crt&quot;</span><span class="p">)</span>
+<span class="n">es</span> <span class="o">=</span> <span class="n">Elasticsearch</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">ES_HOST</span><span class="p">],</span>
+    <span class="n">http_auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;elastic&#39;</span><span class="p">,</span>  <span class="p">),</span>
+    <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;https&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">443</span><span class="p">,</span>
+    <span class="n">ssl_context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Elasticsearch</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="docker.html">2. Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queries-ssl.html">3. Queries usando SSL / TSL</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. API Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#conexion-normal">Conexión Normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conexion-ssl-usando-archivos-de-certificados">Conexión SSL (usando archivos de certificados)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="queries-kibana.html">5. Ejemplos queries en Kibana DevTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queries-ssl.html">6. Ejemplos queries usando HTTPS (SSL/TSL)</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="queries-ssl.html" title="capítulo anterior">Elasticsearch: Queries SSL / TSL</a></li>
+      <li>Next: <a href="queries-kibana.html" title="próximo capítulo">Elasticsearch: Formato Kibana</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/python.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

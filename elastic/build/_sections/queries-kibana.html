@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Elasticsearch: Formato Kibana &#8212; documentación de Manual Elasticsearch - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="elasticsearch-formato-kibana">
+<h1>Elasticsearch: Formato Kibana<a class="headerlink" href="#elasticsearch-formato-kibana" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Ejemplos de Queries usando &quot;Developers Tools&quot; de Kibana</p>
+<hr class="docutils" />
+<div class="section" id="histograma">
+<h2>Histograma<a class="headerlink" href="#histograma" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GET <span class="o">{</span>index<span class="o">}</span>/_search
+<span class="o">{</span>
+    <span class="s2">&quot;aggs&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;time_buckets&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;histogram&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;field_name&quot;</span>,
+        <span class="s2">&quot;interval&quot;</span>: <span class="m">10000</span>,
+                <span class="s2">&quot;min_doc_count&quot;</span>: <span class="m">0</span>
+    <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;size&quot;</span>: <span class="m">0</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="percentiles">
+<h2>Percentiles<a class="headerlink" href="#percentiles" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GET <span class="o">{</span>index<span class="o">}</span>/_search
+<span class="o">{</span>
+    <span class="s2">&quot;size&quot;</span>: <span class="m">0</span>,
+    <span class="s2">&quot;aggs&quot;</span> : <span class="o">{</span>
+        <span class="s2">&quot;load_time_outlier&quot;</span> : <span class="o">{</span>
+            <span class="s2">&quot;percentiles&quot;</span> : <span class="o">{</span>
+                <span class="s2">&quot;field&quot;</span> : <span class="s2">&quot;field_name&quot;</span> ,
+                <span class="s2">&quot;keyed&quot;</span>: <span class="nb">false</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="histograma-filtrados-por-valores-unicos-de-un-campo">
+<h2>Histograma filtrados por valores únicos de un campo<a class="headerlink" href="#histograma-filtrados-por-valores-unicos-de-un-campo" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GET <span class="o">{</span>index<span class="o">}</span>/_search
+<span class="o">{</span><span class="s2">&quot;size&quot;</span>:0,<span class="s2">&quot;aggs&quot;</span>:<span class="o">{</span>
+        <span class="s2">&quot;filters&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;terms&quot;</span> : <span class="o">{</span> <span class="s2">&quot;field&quot;</span>:<span class="s2">&quot;field_name&quot;</span> <span class="o">}</span>,
+            <span class="s2">&quot;aggs&quot;</span>:<span class="o">{</span>
+            <span class="s2">&quot;hists&quot;</span>:<span class="o">{</span>
+            <span class="s2">&quot;histogram&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;field_name_2&quot;</span>,
+            <span class="s2">&quot;interval&quot;</span>: <span class="m">5000</span>,
+            <span class="s2">&quot;keyed&quot;</span>: false,
+            <span class="s2">&quot;min_doc_count&quot;</span>: <span class="m">0</span>
+        <span class="o">}</span>
+
+            <span class="o">}</span>
+        <span class="o">}}}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="agregados-por-field-name">
+<h2>Agregados por field_name<a class="headerlink" href="#agregados-por-field-name" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>devuelve sólo los dos últimos dos resultados rankeados según el field_name</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GET <span class="o">{</span>index<span class="o">}</span>/_search
+<span class="o">{</span><span class="s2">&quot;size&quot;</span>:0,<span class="s2">&quot;aggs&quot;</span>:<span class="o">{</span>
+        <span class="s2">&quot;filters&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;terms&quot;</span> : <span class="o">{</span><span class="s2">&quot;field&quot;</span>:<span class="s2">&quot;field_name_0.keyword&quot;</span>,<span class="s2">&quot;size&quot;</span>:2,<span class="s2">&quot;order&quot;</span> : <span class="o">{</span> <span class="s2">&quot;_key&quot;</span> : <span class="s2">&quot;desc&quot;</span> <span class="o">}</span>  <span class="o">}</span>,
+            <span class="s2">&quot;aggs&quot;</span>:<span class="o">{</span>
+
+<span class="s2">&quot;sum_1&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;sum&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;field_name&quot;</span>
+    <span class="o">}</span>
+
+            <span class="o">}</span>
+        <span class="o">}}}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="agregados-por-dia">
+<h2>Agregados por dia<a class="headerlink" href="#agregados-por-dia" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GET <span class="o">{</span>index<span class="o">}</span>/_search
+<span class="o">{</span>
+<span class="s2">&quot;size&quot;</span>: <span class="m">0</span>,
+
+<span class="s2">&quot;aggs&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;field_name_3&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;date_histogram&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;field_name_0&quot;</span>,
+        <span class="s2">&quot;calendar_interval&quot;</span>: <span class="s2">&quot;day&quot;</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;aggs&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;field_name_4&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;sum&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;field_name_2&quot;</span>
+        <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;avg_monthly_field_name_4&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;avg_bucket&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;buckets_path&quot;</span>: <span class="s2">&quot;field_name_3&gt;field_name_4&quot;</span>
+    <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="agregado-promedio-por-dia-x-field-name">
+<h2>Agregado promedio por dia x field_name<a class="headerlink" href="#agregado-promedio-por-dia-x-field-name" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GET <span class="o">{</span>index<span class="o">}</span>/_search
+<span class="o">{</span><span class="s2">&quot;size&quot;</span>: <span class="m">0</span>,
+
+<span class="s2">&quot;aggs&quot;</span>: <span class="o">{</span>
+
+        <span class="s2">&quot;filters&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;terms&quot;</span> : <span class="o">{</span> <span class="s2">&quot;field&quot;</span>:<span class="s2">&quot;field_name&quot;</span> <span class="o">}</span>,
+            <span class="s2">&quot;aggs&quot;</span>:<span class="o">{</span>
+
+
+<span class="s2">&quot;sum_1&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;sum&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;field_name_5&quot;</span>
+    <span class="o">}</span>
+<span class="o">}</span>,
+<span class="s2">&quot;sum_2&quot;</span>:
+<span class="o">{</span><span class="s2">&quot;cardinality&quot;</span> : <span class="o">{</span>
+            <span class="s2">&quot;field&quot;</span> : <span class="s2">&quot;dia_field_name&quot;</span>,
+            <span class="s2">&quot;precision_threshold&quot;</span>: <span class="m">100</span>
+            <span class="o">}}</span>
+
+
+,
+<span class="s2">&quot;division&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;bucket_script&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;buckets_path&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;my_var1&quot;</span>: <span class="s2">&quot;sum_1&quot;</span>,
+        <span class="s2">&quot;my_var2&quot;</span>: <span class="s2">&quot;sum_2&quot;</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;script&quot;</span>: <span class="s2">&quot;params.my_var1 / params.my_var2&quot;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">}</span>
+<span class="o">}</span>
+<span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dividir-dos-campos-suma-de-ellos">
+<h2>dividir dos campos (suma de ellos)<a class="headerlink" href="#dividir-dos-campos-suma-de-ellos" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;aggs&quot;</span>: <span class="o">{</span>
+<span class="s2">&quot;sum_1&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;sum&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;flag_barisolve&quot;</span>
+    <span class="o">}</span>
+<span class="o">}</span>,
+<span class="s2">&quot;sum_2&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;sum&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;flag_anagrafe&quot;</span>
+    <span class="o">}</span>
+<span class="o">}</span>,
+<span class="s2">&quot;division&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;bucket_script&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;buckets_path&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;my_var1&quot;</span>: <span class="s2">&quot;sum_1&quot;</span>,
+        <span class="s2">&quot;my_var2&quot;</span>: <span class="s2">&quot;sum_2&quot;</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;script&quot;</span>: <span class="s2">&quot;params.my_var1 / params.my_var2&quot;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">}</span>
+
+
+
+GET models*/_search
+<span class="o">{</span>
+<span class="s2">&quot;query&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;match_all&quot;</span>: <span class="o">{}</span>
+<span class="o">}</span>,
+<span class="s2">&quot;size&quot;</span>: <span class="m">0</span>,
+<span class="s2">&quot;aggs&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;links&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;terms&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;links.keyword&quot;</span>,
+        <span class="s2">&quot;size&quot;</span>: <span class="m">10</span>
+    <span class="o">}</span>
+
+    <span class="o">}</span>,
+    <span class="s2">&quot;bucket_selector&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;buckets_path&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;key&quot;</span>: <span class="s2">&quot;links&quot;</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;script&quot;</span>: <span class="s2">&quot;!key.contains(&#39;foo&#39;)&quot;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="listar-index-patterns-por-nombre-y-id">
+<h2>listar index patterns por nombre y ID<a class="headerlink" href="#listar-index-patterns-por-nombre-y-id" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias:</strong> <a class="reference external" href="https://github.com/elastic/kibana/issues/9212">https://github.com/elastic/kibana/issues/9212</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GET .kibana/_search
+<span class="o">{</span> <span class="s2">&quot;_source&quot;</span>: <span class="o">[</span><span class="s2">&quot;index-pattern.title&quot;</span><span class="o">]</span>, <span class="s2">&quot;query&quot;</span>: <span class="o">{</span> <span class="s2">&quot;term&quot;</span>: <span class="o">{</span> <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;index-pattern&quot;</span> <span class="o">}</span> <span class="o">}}</span>
+</pre></div>
+</div>
+<p>cambiar time filter field de index patterns</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>POST /.kibana/_update/index-pattern:33e9f0c0-facd-11e9-a07d-2dba5adf8ca0/
+<span class="o">{</span> <span class="s2">&quot;doc&quot;</span>: <span class="o">{</span> <span class="s2">&quot;index-pattern&quot;</span>: <span class="o">{</span> <span class="s2">&quot;timeFieldName&quot;</span> : <span class="s2">&quot;field_name_0&quot;</span> <span class="o">}</span> <span class="o">}</span> <span class="o">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Elasticsearch</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">2. Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queries-ssl.html">3. Queries usando SSL / TSL</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/queries-kibana.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

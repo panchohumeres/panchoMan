@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Elasticsearch: Ejemplo Docker SSL Interno &#8212; documentación de Manual Elasticsearch - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Elasticsearch: Ejemplo Docker SSL Interno / Proxy NGINX" href="example-docker-proxy-ssl.html" />
+    <link rel="prev" title="Elasticsearch: Docker" href="docker.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="elasticsearch-ejemplo-docker-ssl-interno">
+<span id="ejemplo-ssl-docker"></span><h1>Elasticsearch: Ejemplo Docker SSL Interno<a class="headerlink" href="#elasticsearch-ejemplo-docker-ssl-interno" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>Ejemplo de configuración Docker-Compose de Elasticsearch con:</dt><dd><ul class="simple">
+<li><p><strong>2 Nodos</strong></p></li>
+<li><p><strong>&quot;es01&quot; Nodo Principal.</strong></p></li>
+<li><p><strong>T</strong> ransport <strong>L</strong> ayer <strong>S</strong> ecurity (comunicación interna de Elasticsearch), manejada con certificados auto-firmados de Elasticsearch.</p></li>
+<li><p><strong>Http</strong> &quot;layer&quot; o comunicaciones <strong>&quot;http&quot;</strong> manejada por certificados auto-firmados generados por Elasticsearch.</p></li>
+</ul>
+</dd>
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-tls-docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-tls-docker.html</a></p></li>
+<li><p><a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-tls.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-tls.html</a></p></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="generar-certificados">
+<h2>Generar certificados<a class="headerlink" href="#generar-certificados" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>generar certificados para comunicación interna de elastic-kibana (ejecutar una sóla vez) docker va a generar automáticamente la red especificada en el archivo -env (variable PROJECT_NAME) y los volumenes de certificados</p>
+<ol class="arabic simple">
+<li><p>crear directorio que va a contener certificados en volumen externo correspondiente (mkdir certs)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">-f</span> <span class="pre">create-certs.yml</span> <span class="pre">run</span> <span class="pre">--rm</span> <span class="pre">create_certs</span></code></p></li>
+</ol>
+</div>
+<div class="section" id="env">
+<h2>.env<a class="headerlink" href="#env" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">COMPOSE_PROJECT_NAME</span><span class="o">=</span>elastic_network
+<span class="nv">CERTS_DIR</span><span class="o">=</span>/usr/share/elasticsearch/config/certificates
+<span class="nv">ELASTIC_PASSWORD</span><span class="o">=</span>mypasswd1
+<span class="nv">KIBANA_PASSWORD</span><span class="o">=</span>mypasswd2
+<span class="nv">JUPYTER_PSSWD</span><span class="o">=</span><span class="s1">&#39;sha1:sha1_hash&#39;</span>
+<span class="nv">JUPYTER_ALLOW_ORIGIN</span><span class="o">=</span>*
+<span class="nv">KIBANA_GUEST_AUTH</span><span class="o">=</span><span class="s2">&quot;base64hash&quot;</span>
+<span class="nv">HOST_DATA_PATH</span><span class="o">=</span>../data_path
+<span class="nv">ELASTIC_PORT</span><span class="o">=</span><span class="m">9200</span>
+<span class="nv">KIBANA_PORT</span><span class="o">=</span><span class="m">5601</span>
+<span class="nv">JUPYTER_PORT</span><span class="o">=</span><span class="m">8888</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="docker-compose-yml">
+<h2>docker-compose.yml<a class="headerlink" href="#docker-compose-yml" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>version: <span class="s2">&quot;3&quot;</span>
+
+    services:
+
+    es01:
+        <span class="c1">#container_name: es01</span>
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+        environment:
+        - node.name<span class="o">=</span>es01
+        - discovery.seed_hosts<span class="o">=</span>es01,es02
+        - cluster.initial_master_nodes<span class="o">=</span>es01,es02
+        - <span class="nv">ELASTIC_PASSWORD</span><span class="o">=</span><span class="nv">$ELASTIC_PASSWORD</span>
+        - <span class="s2">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span>
+        - xpack.security.enabled<span class="o">=</span><span class="nb">true</span>
+        - xpack.security.http.ssl.enabled<span class="o">=</span><span class="nb">true</span>
+        - xpack.security.http.ssl.key<span class="o">=</span><span class="nv">$CERTS_DIR</span>/es01/es01.key
+        - xpack.security.http.ssl.certificate_authorities<span class="o">=</span><span class="nv">$CERTS_DIR</span>/ca/ca.crt
+        - xpack.security.http.ssl.certificate<span class="o">=</span><span class="nv">$CERTS_DIR</span>/es01/es01.crt
+        - xpack.security.transport.ssl.enabled<span class="o">=</span><span class="nb">true</span>
+        - xpack.security.transport.ssl.verification_mode<span class="o">=</span>certificate
+        - xpack.security.transport.ssl.certificate_authorities<span class="o">=</span><span class="nv">$CERTS_DIR</span>/ca/ca.crt
+        - xpack.security.transport.ssl.certificate<span class="o">=</span><span class="nv">$CERTS_DIR</span>/es01/es01.crt
+        - xpack.security.transport.ssl.key<span class="o">=</span><span class="nv">$CERTS_DIR</span>/es01/es01.key
+        - xpack.security.authc.anonymous.roles<span class="o">=</span>dashboard_only_custom
+        - xpack.security.authc.anonymous.authz_exception<span class="o">=</span><span class="nb">true</span>
+
+        volumes: <span class="o">[</span><span class="s1">&#39;${HOST_DATA_PATH}/data01:/usr/share/elasticsearch/data&#39;</span>, <span class="s1">&#39;certs:$CERTS_DIR&#39;</span><span class="o">]</span>
+        ports:
+        - <span class="si">${</span><span class="nv">ELASTIC_PORT</span><span class="si">}</span>:9200 <span class="c1">#default: 9200</span>
+        healthcheck:
+        test: curl --cacert <span class="nv">$CERTS_DIR</span>/ca/ca.crt -s https://localhost:9200 &gt;/dev/null<span class="p">;</span> <span class="k">if</span> <span class="o">[[</span> <span class="nv">$$</span>? <span class="o">==</span> <span class="m">52</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">echo</span> <span class="m">0</span><span class="p">;</span> <span class="k">else</span> <span class="nb">echo</span> <span class="m">1</span><span class="p">;</span> <span class="k">fi</span>
+        interval: 30s
+        timeout: 10s
+        retries: <span class="m">5</span>
+
+    es02:
+        <span class="c1">#container_name: es02</span>
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+        environment:
+        - node.name<span class="o">=</span>es02
+        - discovery.seed_hosts<span class="o">=</span>es01,es02
+        - cluster.initial_master_nodes<span class="o">=</span>es01,es02
+        - <span class="nv">ELASTIC_PASSWORD</span><span class="o">=</span><span class="nv">$ELASTIC_PASSWORD</span>
+        - <span class="s2">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span>
+        - xpack.security.enabled<span class="o">=</span><span class="nb">true</span>
+        - xpack.security.http.ssl.enabled<span class="o">=</span><span class="nb">true</span>
+        - xpack.security.http.ssl.key<span class="o">=</span><span class="nv">$CERTS_DIR</span>/es02/es02.key
+        - xpack.security.http.ssl.certificate_authorities<span class="o">=</span><span class="nv">$CERTS_DIR</span>/ca/ca.crt
+        - xpack.security.http.ssl.certificate<span class="o">=</span><span class="nv">$CERTS_DIR</span>/es02/es02.crt
+        - xpack.security.transport.ssl.enabled<span class="o">=</span><span class="nb">true</span>
+        - xpack.security.transport.ssl.verification_mode<span class="o">=</span>certificate
+        - xpack.security.transport.ssl.certificate_authorities<span class="o">=</span><span class="nv">$CERTS_DIR</span>/ca/ca.crt
+        - xpack.security.transport.ssl.certificate<span class="o">=</span><span class="nv">$CERTS_DIR</span>/es02/es02.crt
+        - xpack.security.transport.ssl.key<span class="o">=</span><span class="nv">$CERTS_DIR</span>/es02/es02.key
+        volumes: <span class="o">[</span><span class="s1">&#39;${HOST_DATA_PATH}/data02:/usr/share/elasticsearch/data&#39;</span>, <span class="s1">&#39;certs:$CERTS_DIR&#39;</span><span class="o">]</span>
+
+    nginx:
+        image: nginx:latest
+        environment:
+        - KIBANA_GUEST_AUTH
+        ports:
+            - <span class="si">${</span><span class="nv">NGINX_FRONT_END_PORT</span><span class="si">}</span>:80 <span class="c1">#default 8080</span>
+        volumes:
+            - <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>/nginx-config/:/etc/nginx/conf.d/
+        entrypoint: <span class="o">[</span><span class="s2">&quot;sh&quot;</span>, <span class="s2">&quot;etc/nginx/conf.d/docker-entrypoint.sh&quot;</span><span class="o">]</span>
+        command: <span class="o">[</span><span class="s2">&quot;nginx&quot;</span>, <span class="s2">&quot;-g&quot;</span>, <span class="s2">&quot;daemon off;&quot;</span><span class="o">]</span>
+        ulimits:
+        nproc: <span class="m">65535</span>
+
+
+    wait_until_ready:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+        command: /usr/bin/true
+        depends_on: <span class="o">[</span><span class="s2">&quot;es01&quot;</span><span class="o">]</span>
+
+    volumes:
+    certs:
+        driver: <span class="nb">local</span>
+        driver_opts:
+        type: none
+        device: <span class="nv">$PWD</span>/<span class="si">${</span><span class="nv">HOST_DATA_PATH</span><span class="si">}</span>/certs
+        o: <span class="nb">bind</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Elasticsearch</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="docker.html">2. Docker</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="docker.html#ejemplos-detallados">Ejemplos detallados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#caso-ssl-interno">Caso SSL interno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#caso-ssl-con-comunicaciones-http-manejadas-por-proxy">Caso SSL con comunicaciones HTTP manejadas por Proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="queries-ssl.html">3. Queries usando SSL / TSL</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="docker.html">Elasticsearch: Docker</a><ul>
+      <li>Previous: <a href="docker.html" title="capítulo anterior">Elasticsearch: Docker</a></li>
+      <li>Next: <a href="example-docker-proxy-ssl.html" title="próximo capítulo">Elasticsearch: Ejemplo Docker SSL Interno / Proxy NGINX</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/example-docker-ssl.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

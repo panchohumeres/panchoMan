@@ -9,6 +9,9 @@ Manual Elasticsearch de Francisco Humeres M.
 
    2. Docker <../_sections/docker>
    3. Queries usando SSL / TSL <../_sections/queries-ssl>
+   4. API Python <../_sections/python>
+   5. Ejemplos queries en Kibana DevTools <../_sections/queries-kibana>
+   6. Ejemplos queries usando HTTPS (SSL/TSL) <../_sections/queries-ssl>
 
 
 

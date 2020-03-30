@@ -4,41 +4,53 @@ Elasticsearch: Queries SSL / TSL
 
 Ejemplos de Queries usando certificados SSL / TSL
 
-----------------------------------------------
+---------------------------------------------------
+
+**Referencias:**
+    - https://www.elastic.co/guide/en/elasticsearch/reference/7.5/cat-indices.html 
+
+Ejemplo de Respuesta esperada
+--------------------------------------------
+
+    .. code-block:: bash
+
+        {
+        "name" : "es01",
+        "cluster_name" : "docker-cluster",
+        "cluster_uuid" : "obw-CSWyRliGmXUbcw6znQ",
+        "version" : {
+        "number" : "7.2.0",
+        "build_flavor" : "default",
+        "build_type" : "docker",
+        "build_hash" : "508c38a",
+        "build_date" : "2019-06-20T15:54:18.811730Z",
+        "build_snapshot" : false,
+        "lucene_version" : "8.0.0",
+        "minimum_wire_compatibility_version" : "6.8.0",
+        "minimum_index_compatibility_version" : "6.0.0-beta1"
+        },
+        "tagline" : "You Know, for Search"
+        }
 
 
-## Probar acceso a host elasticsearch, desde el contenedor de elasticsearch
+.. _queries_ssl_curl:
 
-* 1. docker-compose exec es01 bash
-* 2. 
-    curl --cacert {CERTS_DIR}/certificates/ca/ca.crt https://{USER}:{PSSWD}@localhost:9200
-* 3. Ejemplo respuesta esperada: 
-    {
-    "name" : "es01",
-    "cluster_name" : "docker-cluster",
-    "cluster_uuid" : "obw-CSWyRliGmXUbcw6znQ",
-    "version" : {
-    "number" : "7.2.0",
-    "build_flavor" : "default",
-    "build_type" : "docker",
-    "build_hash" : "508c38a",
-    "build_date" : "2019-06-20T15:54:18.811730Z",
-    "build_snapshot" : false,
-    "lucene_version" : "8.0.0",
-    "minimum_wire_compatibility_version" : "6.8.0",
-    "minimum_index_compatibility_version" : "6.0.0-beta1"
-    },
-    "tagline" : "You Know, for Search"
-    }
-* Asume Variables de entorno especificadas para este docker-compose en particular.
+curl
+-------
 
-## Probar acceso a host elasticsearch, desde el host (sin entrar a contenedores)
-curl --cacert {VOLUMEN_EXTERNO}/certs/ca/ca.crt https://{USER}:{PSSWD}@localhost:9200
+Probar acceso a host elasticsearch 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-## Listar todos los índices
+.. code-block:: bash
 
-https://www.elastic.co/guide/en/elasticsearch/reference/7.5/cat-indices.html
-curl --cacert {VOLUMEN_EXTERNO}/certs/ca/ca.crt https://{USER}:{PSSWD}@localhost:9200/_cat/indices
+    curl --cacert {CERTS_DIR}/certificates/ca/ca.crt https://{USER}:{PSSWD}@{HOST}:{PUERTO}
 
 
-curl http://localhost:9200/_aliases
+Listar todos los índices
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Rerencias**: https://www.elastic.co/guide/en/elasticsearch/reference/7.5/cat-indices.html
+
+.. code-block:: bash
+
+    curl http://{HOST}:{PUERTO}/_aliases
