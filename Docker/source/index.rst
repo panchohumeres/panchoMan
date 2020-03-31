@@ -20,5 +20,6 @@ Manual Docker de Francisco Humeres M.
    8. Networking <../_sections/networking>
    9. Troubleshooting <../_sections/troubleshooting>
    10. Lo que no se puede hacer <../_sections/not>
+   11. Borrar Contenedores, Imágenes y Volúmenes <../_sections/borrar>
 
 
