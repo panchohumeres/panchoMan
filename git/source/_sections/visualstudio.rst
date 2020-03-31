@@ -20,6 +20,8 @@ Merge
 Fuente Imagen: [1]_.
 
 2. Ejecutar :code:`git pull -all` (Asumiendo que en el remoto se subieron commits que van a causar conflictos con el repo local).
+    * Esto aplica para **cualquier** comando que pueda **generar conflictos**, p.ej. un \\"merge\\".
+    * Ver : https://code.visualstudio.com/docs/editor/versioncontrol
 3. Inmediatamente debieran visualizarse los conflictos en la GUI de Visual Studio Code, los que se pueden manejar con los menús en el snippet:
 
 .. image:: https://panchoman.s3-sa-east-1.amazonaws.com/vs-code-git-conflict.png
