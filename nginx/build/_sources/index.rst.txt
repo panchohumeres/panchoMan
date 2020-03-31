@@ -16,6 +16,7 @@ Manual Nginx de Francisco Humeres M.
    4. Diccionario de Directivas <../_sections/directivas>
    5. Docker y Docker-Compose <../_sections/docker>
    6. Multihost <../_sections/multihost>
+   7. Troubleshooting <../_sections/troubleshooting>
 
 
 
