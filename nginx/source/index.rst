@@ -17,6 +17,7 @@ Manual Nginx de Francisco Humeres M.
    5. Docker y Docker-Compose <../_sections/docker>
    6. Multihost <../_sections/multihost>
    7. Troubleshooting <../_sections/troubleshooting>
+   8. Casos Especiales <../_sections/cases>
 
 
 

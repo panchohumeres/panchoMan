@@ -74,7 +74,6 @@ Comandos de utilidad en NGINX:
 
                 sudo service nginx enable
 
-
     * Reiniciar servicio Nginx:
 
             .. code-block:: bash
@@ -110,6 +109,7 @@ Comandos de utilidad en NGINX:
             .. code-block:: bash
 
                 systemctl -h nginx
+                
 ----------------------------------------------
 
 Alpine Linux:

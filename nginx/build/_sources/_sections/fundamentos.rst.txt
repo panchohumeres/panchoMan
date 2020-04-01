@@ -175,6 +175,7 @@ server
         6. Si **NO hay coincidencias según el paso 5**, NGINX evalúa **bloques** que definan :code:`server_name` usando **\\"expresiones regulares\\"** (indicadas por el \\"wildcard\\" NGINX buscará el \\"wildcard\\" :code:`~` al **principio** de los **\\"strings\\"** especificados en las directivas. El **primer bloque que coincida** será utilizado.
         7. Si es que *NO hay coincidencias en ninguno de los casos anteriores**, NGINX utiliza el bloque por **defecto**.
 
+.. _bloque_location:
 
 location
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
