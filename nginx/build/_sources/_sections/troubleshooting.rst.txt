@@ -35,3 +35,30 @@ Errores comunes en NGINX y soluciones.
                     }
                 }
             }
+
+ssl3_get_record:wrong version number
+-----------------------------------------
+
+**Referencias:**
+    - https://stackoverflow.com/questions/53245818/nginx-upstream-to-https-host-ssl3-get-recordwrong-version-number
+    - https://discuss.konghq.com/t/ssl-errorssl-routineswrong-version-number-while-ssl-handshaking-to-upstream/5298
+
+**Causas**: 
+    -En algún bloque de configuración se **redirige tráfico SSL** a puertos como 80, que **sólo permiten HTTP** y **NO HTTPS**.
+        Ejemplo:
+
+            .. code-block:: bash
+
+                upstream: "https://<my-web-host-ip-here>:80/v1/some/page"
+    
+    - **Discordancias en protocolos** entre directivas como **\\"server\\"**, **\\"location\\"**, **\\"proxy_pass\\"** y **\\upstream\\**.
+
+**Solución**: Depende de cada caso, p.ej:
+    - Si se está redirigiendo tráfico SSL a un puerto 80:
+
+        .. code-block:: bash
+
+            server remote-hostname:443;
+
+    - Si se está redirigiendo tráfico desde un **\\"proxy_pass\\"** a un servidor **\\"upstream\\"**, procurar que sigan el mismo protocolo.
+
