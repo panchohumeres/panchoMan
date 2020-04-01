@@ -19,8 +19,20 @@ Descripción
 * El **cliente** envía **solicitudes** HTTP con la cabecera o **\\"header\\"**: **\\"Authorization\\"**.
 * El valor de **\\"Authorization\\"** contiene la palabra **\\"Basic\\"**, seguida de un **espacio** y un **string en base64** de la forma: :code:`username:password`.
 * Dado que **base64** es fácil de **decodificar**, se recomienda combinarla con otros mecanismos como **HTTPS/SSL**.
-* Ejemplo, **Usuario: \\"demo\\", Password: \\"p@55w0rd\\"**, el cliente enviaría la siguiente solicitud:
+* Ejemplo 1, **Usuario: \\"demo\\", Password: \\"p@55w0rd\\"**, el cliente enviaría la siguiente solicitud:
     :code:`Authorization: Basic ZGVtbzpwQDU1dzByZA==`
+* EJemplo 2, Ver: http://shairosenfeld.blogspot.com/2011/03/authorization-header-in-nginx-for.html:
+
+    .. code-block:: bash
+
+        #"user:password" # formato estándar autenticación básica
+        http://foo:bar@example.com #EJEMPLO
+
+        #base64
+        "dXNlcjpwYXNzd29yZA==" #Ejemplo en Base 64
+
+        #Cabecera completa
+        "Basic dXNlcjpwYXNzd29yZA=="
 
 Flujo
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -35,8 +47,10 @@ Flujo definido por estándar (RFC 7235)[https://tools.ietf.org/html/rfc7235].
 
         Fuente Imagen: [1]_.
 
+Herramientas para codificar/decodificar en Base64
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
+- https://www.base64decode.org/
 
 
 
