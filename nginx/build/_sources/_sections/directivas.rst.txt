@@ -84,8 +84,9 @@ Ejemplos:
 
     Ver: :ref:`como_nginx_procesa_solicitudes`
 
-**proxy_pass**
----------------
+
+**proxy_pass** y relacionados
+------------------------------
 
     Define el protocolo y dirección de un **\\"servidor proxy\\"**.
     Como protocolos se pueden especificar **\\"http\\" o \\"https\\"**.
@@ -105,6 +106,53 @@ Ejemplos:
     Contexto: :code:`location, if in location, limit_except`
 
     Ver: http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass
+
+.. _directivas_proxy_pass_relacionadas:
+
+Directivas relacionadas (**proxy_pass**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* **proxy_ssl_certificate**:
+
+    **Sintaxis**:	:code:`proxy_ssl_certificate file;`
+    **Default**:	Ninguno
+    **Contexto**:	:code:`http, server, location`
+
+    Especifica un archivo ( :code:`file` )  con el **certificado** en formato **PEM** usado para autenticarse a un **servidor proxy HTTPS**.
+
+* **proxy_ssl_certificate_key**:
+
+    **Sintaxis**:	:code:`proxy_ssl_certificate_key file;`
+    **Default**:	Ninguno
+    **Contexto**:	:code:`http, server, location`
+
+    Especifica un archivo ( :code:`file` ) con la llave o **\\"key\\"** en formato **PEM** usado para autenticarse a un **servidor proxy HTTPS**.
+
+* **proxy_ssl_trusted_certificate**:
+
+    **Sintaxis**:	:code:`proxy_ssl_trusted_certificate file;`
+    **Default**:	Ninguno
+    **Contexto**:	:code:`http, server, location`
+
+    Especifica un archivo ( :code:`file` ) con **Autoridades de Certificados** o **\\"CA\\"** en formato **PEM** usado para verificar la autoridad **CA** de un **servidor proxy HTTPS**.
+
+* **proxy_ssl_ciphers**:
+
+    **Sintaxis**:	:code:`proxy_ssl_ciphers ciphers;`
+    **Default**:	:code:`proxy_ssl_ciphers DEFAULT;`
+    **Contexto**:	:code:`http, server, location`
+
+    - Especifica los métodos de cifrado para las solicitudes al servidor **proxy HTTPS**. Son métodos o algoritumos entendidos por la librería **\\"OpenSSL\\"**.
+    - Usar el comando :code:`openssl ciphers` para ver los algoritmos disponibles.
+
+* **proxy_ssl_protocols**:
+
+    **Sintaxis**:	:code:`	proxy_ssl_certificate_key file;`
+    **Default**:	:code:`-`
+    **Contexto**:	:code:`http, server, location`
+
+    **Habilita** los **protocolos** especificados para las solcitudes a un **servidor proxy HTTPS**.
+    
 
 
 **location**
@@ -318,8 +366,6 @@ Ejemplos:
             Si el **puerto NO es especificado**, se usar el 53.
         * :code:`resolver_timeout time;`: Timeout para resolución de nombres. Por ejemplo: :code:`resolver_timeout 5s;`. Default es 30s.
 
-
-        
 
             
 

@@ -119,8 +119,8 @@ Habilita o deshabilita el uso del nombre del servidor especificado por la direct
 <div><p>Ver: <a class="reference internal" href="fundamentos.html#como-nginx-procesa-solicitudes"><span class="std std-ref">Cómo NGINX procesa solicitudes:</span></a></p>
 </div></blockquote>
 </div>
-<div class="section" id="proxy-pass">
-<h2><strong>proxy_pass</strong><a class="headerlink" href="#proxy-pass" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="proxy-pass-y-relacionados">
+<h2><strong>proxy_pass</strong> y relacionados<a class="headerlink" href="#proxy-pass-y-relacionados" title="Enlazar permanentemente con este título">¶</a></h2>
 <blockquote>
 <div><p>Define el protocolo y dirección de un <strong>&quot;servidor proxy&quot;</strong>.
 Como protocolos se pueden especificar <strong>&quot;http&quot; o &quot;https&quot;</strong>.
@@ -137,6 +137,54 @@ Las direcciones se pueden especificar como <strong>dominio</strong> o <strong>di
 <p>Contexto: <code class="code docutils literal notranslate"><span class="pre">location,</span> <span class="pre">if</span> <span class="pre">in</span> <span class="pre">location,</span> <span class="pre">limit_except</span></code></p>
 <p>Ver: <a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass">http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass</a></p>
 </div></blockquote>
+<div class="section" id="directivas-relacionadas-proxy-pass">
+<span id="directivas-proxy-pass-relacionadas"></span><h3>Directivas relacionadas (<strong>proxy_pass</strong>)<a class="headerlink" href="#directivas-relacionadas-proxy-pass" title="Enlazar permanentemente con este título">¶</a></h3>
+<ul>
+<li><p><strong>proxy_ssl_certificate</strong>:</p>
+<blockquote>
+<div><p><strong>Sintaxis</strong>:       <code class="code docutils literal notranslate"><span class="pre">proxy_ssl_certificate</span> <span class="pre">file;</span></code>
+<strong>Default</strong>:        Ninguno
+<strong>Contexto</strong>:       <code class="code docutils literal notranslate"><span class="pre">http,</span> <span class="pre">server,</span> <span class="pre">location</span></code></p>
+<p>Especifica un archivo ( <code class="code docutils literal notranslate"><span class="pre">file</span></code> )  con el <strong>certificado</strong> en formato <strong>PEM</strong> usado para autenticarse a un <strong>servidor proxy HTTPS</strong>.</p>
+</div></blockquote>
+</li>
+<li><p><strong>proxy_ssl_certificate_key</strong>:</p>
+<blockquote>
+<div><p><strong>Sintaxis</strong>:       <code class="code docutils literal notranslate"><span class="pre">proxy_ssl_certificate_key</span> <span class="pre">file;</span></code>
+<strong>Default</strong>:        Ninguno
+<strong>Contexto</strong>:       <code class="code docutils literal notranslate"><span class="pre">http,</span> <span class="pre">server,</span> <span class="pre">location</span></code></p>
+<p>Especifica un archivo ( <code class="code docutils literal notranslate"><span class="pre">file</span></code> ) con la llave o <strong>&quot;key&quot;</strong> en formato <strong>PEM</strong> usado para autenticarse a un <strong>servidor proxy HTTPS</strong>.</p>
+</div></blockquote>
+</li>
+<li><p><strong>proxy_ssl_trusted_certificate</strong>:</p>
+<blockquote>
+<div><p><strong>Sintaxis</strong>:       <code class="code docutils literal notranslate"><span class="pre">proxy_ssl_trusted_certificate</span> <span class="pre">file;</span></code>
+<strong>Default</strong>:        Ninguno
+<strong>Contexto</strong>:       <code class="code docutils literal notranslate"><span class="pre">http,</span> <span class="pre">server,</span> <span class="pre">location</span></code></p>
+<p>Especifica un archivo ( <code class="code docutils literal notranslate"><span class="pre">file</span></code> ) con <strong>Autoridades de Certificados</strong> o <strong>&quot;CA&quot;</strong> en formato <strong>PEM</strong> usado para verificar la autoridad <strong>CA</strong> de un <strong>servidor proxy HTTPS</strong>.</p>
+</div></blockquote>
+</li>
+<li><p><strong>proxy_ssl_ciphers</strong>:</p>
+<blockquote>
+<div><p><strong>Sintaxis</strong>:       <code class="code docutils literal notranslate"><span class="pre">proxy_ssl_ciphers</span> <span class="pre">ciphers;</span></code>
+<strong>Default</strong>:        <code class="code docutils literal notranslate"><span class="pre">proxy_ssl_ciphers</span> <span class="pre">DEFAULT;</span></code>
+<strong>Contexto</strong>:       <code class="code docutils literal notranslate"><span class="pre">http,</span> <span class="pre">server,</span> <span class="pre">location</span></code></p>
+<ul class="simple">
+<li><p>Especifica los métodos de cifrado para las solicitudes al servidor <strong>proxy HTTPS</strong>. Son métodos o algoritumos entendidos por la librería <strong>&quot;OpenSSL&quot;</strong>.</p></li>
+<li><p>Usar el comando <code class="code docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">ciphers</span></code> para ver los algoritmos disponibles.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>proxy_ssl_protocols</strong>:</p>
+<blockquote>
+<div><p><strong>Sintaxis</strong>:       :code:` proxy_ssl_certificate_key file;`
+<strong>Default</strong>:        <code class="code docutils literal notranslate"><span class="pre">-</span></code>
+<strong>Contexto</strong>:       <code class="code docutils literal notranslate"><span class="pre">http,</span> <span class="pre">server,</span> <span class="pre">location</span></code></p>
+<p><strong>Habilita</strong> los <strong>protocolos</strong> especificados para las solcitudes a un <strong>servidor proxy HTTPS</strong>.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="location">
 <h2><strong>location</strong><a class="headerlink" href="#location" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -399,7 +447,7 @@ Si el <strong>puerto NO es especificado</strong>, se usar el 53.</p>
 <li class="toctree-l2"><a class="reference internal" href="#if"><strong>if</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#return"><strong>return</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#server-name"><strong>server_name</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#proxy-pass"><strong>proxy_pass</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proxy-pass-y-relacionados"><strong>proxy_pass</strong> y relacionados</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#location"><strong>location</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#listen"><strong>listen</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#server-tokens"><strong>server_tokens</strong></a></li>
@@ -408,6 +456,8 @@ Si el <strong>puerto NO es especificado</strong>, se usar el 53.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">5. Docker y Docker-Compose</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multihost.html">6. Multihost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">7. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cases.html">8. Casos Especiales</a></li>
 </ul>
 
 <div class="relations">

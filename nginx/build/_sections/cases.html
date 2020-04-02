@@ -84,6 +84,104 @@
 </dl>
 </li>
 </ul>
+</div>
+<div class="section" id="ssl-y-proxy">
+<h2>SSL y Proxy:<a class="headerlink" href="#ssl-y-proxy" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Ejemplo que muestra como encriptar tráfico <strong>HTTP</strong> entre NGINX y un bloque <code class="code docutils literal notranslate"><span class="pre">upstream</span></code> o <strong>servidores proxy</strong>.</p>
+<p><strong>Basado en:</strong> <a class="reference external" href="https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/">https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/</a>
+<a href="#id1"><span class="problematic" id="id2">**</span></a>Directivas empleadas:* <a class="reference internal" href="directivas.html#directivas-proxy-pass-relacionadas"><span class="std std-ref">Directivas relacionadas (proxy_pass)</span></a></p>
+<ol class="arabic simple">
+<li><p>En este ejemplo, <code class="code docutils literal notranslate"><span class="pre">https</span></code> en la directiva <code class="code docutils literal notranslate"><span class="pre">proxy_pass</span></code> especifica que el tráfico <strong>redirigido</strong> por NGINX hacia los bloques <code class="code docutils literal notranslate"><span class="pre">upstream</span></code> esté protegida con esquema <strong>&quot;https&quot;</strong>.</p></li>
+<li><p>Cuando una conexión <strong>segura</strong> (&quot;https&quot;) es pasada por NGINX a <code class="code docutils literal notranslate"><span class="pre">upstream</span></code> por primera vez, el proceso de <strong>&quot;handshake&quot;</strong> completo es ejecutado.</p></li>
+<li><dl class="simple">
+<dt>Las siguientes <strong>directivas</strong> definen la ubicación de los <strong>certificados</strong> en formato PEM requeridos por el servidor <code class="code docutils literal notranslate"><span class="pre">upstream</span></code>. También definen (opcional) protocolos y métodos de encriptación.</dt><dd><ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">proxy_ssl_certificate</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">proxy_ssl_certificate_key</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">proxy_ssl_certificate_key</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">proxy_ssl_protocols</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">proxy_ssl_ciphers</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>La autoridad(es) <strong>&quot;CA&quot;</strong> especificada(s) anteriormente son utilizadas para verificar el certificado en <code class="code docutils literal notranslate"><span class="pre">upstream</span></code>.</p></li>
+<li><p>La directiva <code class="code docutils literal notranslate"><span class="pre">proxy_ssl_verify_depth</span></code> especifica que dos certificados en la cadena de certficados son verificados.</p></li>
+<li><p>Cada vez que NGINX pase una conexión a un bloque <code class="code docutils literal notranslate"><span class="pre">upstream</span></code>, los parámetros de la sesión van a ser <strong>reutilizados</strong> gracias a la directiva <code class="code docutils literal notranslate"><span class="pre">proxy_ssl_session_reuse</span></code>.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http <span class="o">{</span>
+    <span class="c1">#...</span>
+    upstream backend.example.com <span class="o">{</span>
+        server backend1.example.com:443<span class="p">;</span>
+        server backend2.example.com:443<span class="p">;</span>
+<span class="o">}</span>
+
+    server <span class="o">{</span>
+        listen      <span class="m">80</span><span class="p">;</span>
+        server_name www.example.com<span class="p">;</span>
+        <span class="c1">#...</span>
+
+        location /upstream <span class="o">{</span>
+
+            <span class="c1">#LLAMAR AL SERVIDOR UPSTREAM CON HTTPS CON LA DIRECTIVA &quot;proxy_pass&quot;</span>
+            proxy_pass                    https://backend.example.com<span class="p">;</span>
+
+            <span class="c1">#AGREGAR CERTIFICADOS CON LAS DIRECTIVAS &quot;proxy_ssl_certificate&quot; y &quot;proxy_ssl_certificate_key&quot;</span>
+            proxy_ssl_certificate         /etc/nginx/client.pem<span class="p">;</span>
+            proxy_ssl_certificate_key     /etc/nginx/client.key<span class="p">;</span>
+
+            <span class="c1">#OPCIONAL: DEFINIR PROTOCOLS Y MÉTODOS DE ENCRIPTACIÓN</span>
+            proxy_ssl_protocols           TLSv1 TLSv1.1 TLSv1.2<span class="p">;</span>
+            proxy_ssl_ciphers             HIGH:!aNULL:!MD5<span class="p">;</span>
+
+            <span class="c1">#AGREGAR &quot;CA&quot; (Certificate Authority) CON DIRECTIVA &quot;proxy_ssl_trusted_certificate&quot;</span>
+            proxy_ssl_trusted_certificate /etc/nginx/trusted_ca_cert.crt<span class="p">;</span>
+
+            <span class="c1">#OPCIONALMENTE INCLUIR DIRECTIVAS &quot;proxy_ssl_verify&quot; Y &quot;proxy_ssl_verify_depth&quot; PARA ...</span>
+            <span class="c1">#QUE NGINX REVISE LA VALIDEZ DE LOS CERTIFICADOS</span>
+            proxy_ssl_verify        on<span class="p">;</span>
+            proxy_ssl_verify_depth  <span class="m">2</span><span class="p">;</span>
+
+            <span class="c1">#REUTILIZAR HANDSHAKE EN CACHE (PARA NO HACER UNO NUEVO CON CADA CONEXIÓN, QUE USA MUCHA CPU)</span>
+            proxy_ssl_session_reuse on<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+
+    <span class="c1">#PARA CADA SERVIDOR MENCIONADO EN &quot;upstream&quot;, TAMBIÉN SE DEBEN ESPECIFICAR RUTAS A LOS CERTIFICADOS</span>
+    server <span class="o">{</span>
+        listen      <span class="m">443</span> ssl<span class="p">;</span>
+        server_name backend1.example.com<span class="p">;</span>
+
+        ssl_certificate        /etc/ssl/certs/server.crt<span class="p">;</span>
+        ssl_certificate_key    /etc/ssl/certs/server.key<span class="p">;</span>
+
+        <span class="c1">#RUTA A CERTIFICADO DE CLIENTE</span>
+        ssl_client_certificate /etc/ssl/certs/ca.crt<span class="p">;</span>
+
+        ssl_verify_client      optional<span class="p">;</span>
+
+        location /yourapp <span class="o">{</span>
+            proxy_pass http://url_to_app.com<span class="p">;</span>
+        <span class="c1">#...</span>
+        <span class="o">}</span>
+
+    server <span class="o">{</span>
+        listen      <span class="m">443</span> ssl<span class="p">;</span>
+        server_name backend2.example.com<span class="p">;</span>
+
+        ssl_certificate        /etc/ssl/certs/server.crt<span class="p">;</span>
+        ssl_certificate_key    /etc/ssl/certs/server.key<span class="p">;</span>
+        ssl_client_certificate /etc/ssl/certs/ca.crt<span class="p">;</span>
+        ssl_verify_client      optional<span class="p">;</span>
+
+        location /yourapp <span class="o">{</span>
+            proxy_pass http://url_to_app.com<span class="p">;</span>
+        <span class="c1">#...</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
@@ -119,6 +217,7 @@
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">7. Troubleshooting</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">8. Casos Especiales</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#autenticacion-basica-basic-auth-con-reverse-proxy">Autenticación Básica (&quot;basic auth&quot;) con reverse proxy:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ssl-y-proxy">SSL y Proxy:</a></li>
 </ul>
 </li>
 </ul>
