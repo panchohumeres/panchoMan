@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Kibana: Manual Nivel Usuario &#8212; documentación de Manual Kibana - 1.0</title>
+    <title>Kibana: Gráficas de Línea &#8212; documentación de Manual Kibana - 1.0</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="Kibana: Dashboards, Nivel Usuario" href="usuario-dashboard.html" />
-    <link rel="prev" title="Manual Kibana de Francisco Humeres M." href="../index.html" />
+    <link rel="next" title="Kibana: Reportes, manual Nivel Usuario" href="usuario-reportes.html" />
+    <link rel="prev" title="Kibana: Visualizaciones" href="create-viz.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -34,28 +34,9 @@
           <div class="body" role="main">
             
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
-<div class="section" id="kibana-manual-nivel-usuario">
-<h1>Kibana: Manual Nivel Usuario<a class="headerlink" href="#kibana-manual-nivel-usuario" title="Enlazar permanentemente con este título">¶</a></h1>
-<dl class="simple">
-<dt>Manual Nivel Usuario:</dt><dd><p>Interfaz Kibana</p>
-</dd>
-</dl>
-<hr class="docutils" />
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contenidos:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="usuario-dashboard.html">1. Dashboards</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usuario-dashboard-filtros.html">2. Filtrar contenido de Dashboards</a></li>
-<li class="toctree-l1"><a class="reference internal" href="visualizaciones.html">3. Visualizaciones</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html#crear-visualizaciones">Crear Visualizaciones</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html#tipos-de-visualizaciones">Tipos de Visualizaciones</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html#indice-general">Índice General</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="usuario-reportes.html">4. Reportes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index-patterns.html">6. Index Patterns</a></li>
-</ul>
-</div>
+<div class="section" id="kibana-graficas-de-linea">
+<h1>Kibana: Gráficas de Línea<a class="headerlink" href="#kibana-graficas-de-linea" title="Enlazar permanentemente con este título">¶</a></h1>
+<a class="reference internal image-reference" href="https://wenu.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png"><img alt="https://wenu.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png" src="https://wenu.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png" style="width: 80px;" /></a>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
@@ -81,12 +62,11 @@
 <h3>Navegación</h3>
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Manual Nivel Usuario</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="usuario.html">1. Manual Nivel Usuario</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="usuario-dashboard.html">1. Dashboards</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usuario-dashboard-filtros.html">2. Filtrar contenido de Dashboards</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html">3. Visualizaciones</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="visualizaciones.html">3. Visualizaciones</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usuario-reportes.html">4. Reportes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index-patterns.html">6. Index Patterns</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usuarios.html">2. Manejo de Usuarios</a></li>
@@ -99,8 +79,12 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../index.html" title="capítulo anterior">Manual Kibana de Francisco Humeres M.</a></li>
-      <li>Next: <a href="usuario-dashboard.html" title="próximo capítulo">Kibana: Dashboards, Nivel Usuario</a></li>
+  <li><a href="usuario.html">Kibana: Manual Nivel Usuario</a><ul>
+  <li><a href="visualizaciones.html">Kibana: Visualizaciones</a><ul>
+      <li>Previous: <a href="create-viz.html" title="capítulo anterior">Kibana: Visualizaciones</a></li>
+      <li>Next: <a href="usuario-reportes.html" title="próximo capítulo">Kibana: Reportes, manual Nivel Usuario</a></li>
+  </ul></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -134,7 +118,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/_sections/usuario.rst.txt"
+      <a href="../_sources/_sections/viz-linechart.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

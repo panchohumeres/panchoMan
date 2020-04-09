@@ -13,4 +13,6 @@ Manual Nivel Usuario:
 
    1. Dashboards  <../_sections/usuario-dashboard>
    2. Filtrar contenido de Dashboards  <../_sections/usuario-dashboard-filtros>
-   3. Reportes  <../_sections/usuario-reportes>
+   3. Visualizaciones <../_sections/visualizaciones>
+   4. Reportes  <../_sections/usuario-reportes>
+   6. Index Patterns <../_sections/index-patterns>
