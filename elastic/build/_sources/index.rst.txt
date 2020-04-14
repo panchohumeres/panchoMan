@@ -7,6 +7,7 @@ Manual Elasticsearch de Francisco Humeres M.
    :maxdepth: 2
    :caption: Contenidos:
 
+   1. Fundamentos <../_sections/fundamentos>
    2. Docker <../_sections/docker>
    3. Queries usando SSL / TSL <../_sections/queries-ssl>
    4. API Python <../_sections/python>
