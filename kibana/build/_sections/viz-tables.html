@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Kibana: Gráficas de Línea, Ejemplo &#8212; documentación de Manual Kibana - 1.0</title>
+    <title>Kibana: Tablas, Ejemplo &#8212; documentación de Manual Kibana - 1.0</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
     <link rel="next" title="Kibana: Reportes, manual Nivel Usuario" href="usuario-reportes.html" />
-    <link rel="prev" title="Kibana: Crear Visualizaciones" href="create-viz.html" />
+    <link rel="prev" title="Kibana: Gráficas de Línea, Ejemplo" href="viz-linechart.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -34,9 +34,9 @@
           <div class="body" role="main">
             
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
-<div class="section" id="kibana-graficas-de-linea-ejemplo">
-<h1>Kibana: Gráficas de Línea, Ejemplo<a class="headerlink" href="#kibana-graficas-de-linea-ejemplo" title="Enlazar permanentemente con este título">¶</a></h1>
-<a class="reference internal image-reference" href="https://panchoman.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png"><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png" style="width: 80px;" /></a>
+<div class="section" id="kibana-tablas-ejemplo">
+<h1>Kibana: Tablas, Ejemplo<a class="headerlink" href="#kibana-tablas-ejemplo" title="Enlazar permanentemente con este título">¶</a></h1>
+<a class="reference internal image-reference" href="https://panchoman.s3-sa-east-1.amazonaws.com/table-viz-icon.png"><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/table-viz-icon.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/table-viz-icon.png" style="width: 80px;" /></a>
 <dl class="simple">
 <dt><strong>Data:</strong> Factor de Emisión (Promedio Mensual) para la red eléctrica en Chile, disponible en el portal &quot;Minería Abierta&quot;:</dt><dd><ul class="simple">
 <li><p><a class="reference external" href="http://energiaabierta.cl/visualizaciones/factor-de-emision-sic-sing/">http://energiaabierta.cl/visualizaciones/factor-de-emision-sic-sing/</a></p></li>
@@ -127,10 +127,12 @@
 <blockquote>
 <div><ul>
 <li><p>En <strong>&quot;Sub aggregation&quot;</strong> seleccionar <strong>&quot;Terms&quot;</strong>, esto va a definir <strong>sub-grupos</strong> en base a los valores únicos presentes en el campo indicado a continuación.</p></li>
-<li><p>En <strong>&quot;Field&quot;</strong> seleccionar el campo que contiene los <strong>valores únicos que definen los sub-grupos</strong>. En este caso es <strong>&quot;sistema.keyword&quot;</strong>, que corresponde al campo <strong>&quot;sistema&quot;</strong> (que contiene las etiquetas de la red eléctrica en particular), más la convención de Kibana <strong>&quot;.keyword&quot;</strong> (que indica específicamente tomar el valor de texto o &quot;string&quot;).</p></li>
-<li><p><strong>&quot;Size&quot;</strong> define cuántos sub-grupos se van a mostrar.</p>
+<li><p>En <strong>&quot;Field&quot;</strong> seleccionar el campo que contiene los <strong>valores únicos que definen los sub-grupos</strong>. En este caso es <strong>&quot;year&quot;</strong>.</p></li>
+<li><p><strong>&quot;Size&quot;</strong> define cuántos sub-grupos se van a mostrar.</p></li>
+<li><p>Rellenar <strong>&quot;Custom Label&quot;</strong> con la <strong>etiqueta</strong> de preferencia para el <strong>Eje X</strong> (en este caso &quot;Año&quot;).</p></li>
+<li><p>Repetir pasos anteriores (definir un nuevo <strong>&quot;Sub bucket&quot;</strong>, para el campo <strong>&quot;mes&quot;</strong>, y <strong>&quot;Size&quot;</strong> = 12.</p>
 <blockquote>
-<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_sub-agg.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_sub-agg.png" />
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_table_terms_aggs.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_table_terms_aggs.png" />
 </div></blockquote>
 </li>
 </ul>
@@ -153,9 +155,9 @@
 </div>
 <div class="section" id="resultado">
 <h2>Resultado<a class="headerlink" href="#resultado" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Gráfica que muestra el <strong>Factor de Emisión Mensual</strong>, con una línea para cada <strong>grupo</strong> definido por el <strong>sistema o red eléctrica en particular</strong>.</p>
+<p>Tabla que muestra el <strong>Factor de Emisión Mensual</strong>, agrupado por <strong>Fecha, Año, Mes, Sistema</strong> y el <strong>Factor de Emisión Mensual</strong> propiamente tal.</p>
 <blockquote>
-<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_chart.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_chart.png" />
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_table_chart.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_table_chart.png" />
 </div></blockquote>
 <hr class="docutils" />
 <embed>
@@ -202,7 +204,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="usuario.html">Kibana: Manual Nivel Usuario</a><ul>
   <li><a href="visualizaciones.html">Kibana: Visualizaciones</a><ul>
-      <li>Previous: <a href="create-viz.html" title="capítulo anterior">Kibana: Crear Visualizaciones</a></li>
+      <li>Previous: <a href="viz-linechart.html" title="capítulo anterior">Kibana: Gráficas de Línea, Ejemplo</a></li>
       <li>Next: <a href="usuario-reportes.html" title="próximo capítulo">Kibana: Reportes, manual Nivel Usuario</a></li>
   </ul></li>
   </ul></li>
@@ -239,7 +241,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/_sections/viz-linechart.rst.txt"
+      <a href="../_sources/_sections/viz-tables.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

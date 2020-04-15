@@ -15,7 +15,7 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="Kibana: Visualizaciones" href="create-viz.html" />
+    <link rel="next" title="Kibana: Crear Visualizaciones" href="create-viz.html" />
     <link rel="prev" title="Kibana: Filtros para Dashboards, Nivel Usuario" href="usuario-dashboard-filtros.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -36,21 +36,79 @@
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
 <div class="section" id="kibana-visualizaciones">
 <h1>Kibana: Visualizaciones<a class="headerlink" href="#kibana-visualizaciones" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="fundamentos">
+<h2>Fundamentos<a class="headerlink" href="#fundamentos" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt>Se sugiere <strong>primero revisar los fundamentos de Elasticsearch</strong> (conceptos de <strong>&quot;documentos&quot; e &quot;índices&quot;</strong>):</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://panchohumeres.gitlab.io/elastic_man/_sections/fundamentos.html">https://panchohumeres.gitlab.io/elastic_man/_sections/fundamentos.html</a></p></li>
+</ul>
+</dd>
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://logz.io/blog/kibana-tutorial-2/">https://logz.io/blog/kibana-tutorial-2/</a></p></li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li><p>Todas las visualizaciones en Kibana están basadas en <strong>&quot;Agregaciones&quot;</strong> ejecutadas por <strong>Elasticsearch</strong> sobre un <strong>índice</strong>:</p></li>
+<li><dl class="simple">
+<dt>Existen <strong>DOS tipos de Agregaciones</strong>:</dt><dd><ul class="simple">
+<li><p><strong>&quot;Buckets&quot;</strong> o <strong>Grupos</strong>: Grupos de documentos según ciertas lógicas definidas por documentos. Por ejemplo:</p>
+<ul>
+<li><p><strong>&quot;Date Histogram&quot;</strong>: Grupos según histogramas de fechas (intervalos que definen grupos se eligen entre <strong>segundo, minuto, hora, día, mes, año, etc.</strong>.</p></li>
+<li><p><strong>&quot;Terms&quot;</strong>: Definir grupos según <strong>términos únicos</strong> de un determinado campo (p.ej. nombres de Países o Ciudades).</p></li>
+</ul>
+</li>
+<li><p><strong>&quot;Métricas&quot;</strong>: Usadas para calcular un valor para el conjunto de documentos contenidos en cada <strong>&quot;Bucket&quot;</strong> o <strong>grupo</strong>. Por ejemplo:</p>
+<ul>
+<li><p>Media (Promedio)</p></li>
+<li><p>Mínimo</p></li>
+<li><p>Máximo</p></li>
+<li><p>Count (contar número de documentos)</p></li>
+<li><p>Desviación Estándar</p></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Ejemplo:</dt><dd><p>Gráfica de Pie que muestra la distribución de cargas de datasets en el portal de Datos Abiertos del Gobierno de Chile (datos.gob.cl), según la Institución que los cargó.</p>
+<img alt="https://panchoman.s3-sa-east-1.amazonaws.com/screenshot_pie_kibana.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/screenshot_pie_kibana.png" />
+<p>Por ejemplo, el <strong>&quot;Servicio Nacional de Aduanas&quot;</strong> tiene <strong>1164</strong> datasets (equivalentes a <strong>documentos</strong>), con un <strong>14%</strong> del total de documentos.</p>
+<img alt="https://panchoman.s3-sa-east-1.amazonaws.com/zoom_slice_pie_chart_kibana.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/zoom_slice_pie_chart_kibana.png" />
+<dl class="simple">
+<dt>Ésta gráfica está definida por los siguientes <strong>parámetros</strong>:</dt><dd><ul class="simple">
+<li><p><strong>Índice:</strong> <strong>&quot;ckan&quot;</strong>——&gt; el índice donde se están haciendo las operaciones</p></li>
+<li><p><strong>Buckets:</strong> Grupos generados a partir de <strong>&quot;Terms&quot;</strong> (palabras únicas), sobre el <strong>Campo</strong> (&quot;Fields&quot;) <strong>&quot;inst&quot;</strong>.</p>
+<ul>
+<li><p><strong>Nota</strong>: &quot;keyword&quot; es un convencionalismo utilizado para acceder el valor como texto del campo.</p></li>
+</ul>
+</li>
+<li><p><strong>Métrica &quot;Count&quot;</strong>, que <strong>cuenta</strong> la cantidad de documentos contenidos en los grupos definidos por <strong>&quot;Buckets&quot;</strong>.</p></li>
+</ul>
+</dd>
+</dl>
+<img alt="https://panchoman.s3-sa-east-1.amazonaws.com/zoom_params_pie_chart_kibana.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/zoom_params_pie_chart_kibana.png" />
+</dd>
+</dl>
+</li>
+</ul>
+</div>
 <div class="section" id="crear-visualizaciones">
 <h2>Crear Visualizaciones<a class="headerlink" href="#crear-visualizaciones" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Ver: <a class="reference internal" href="create-viz.html"><span class="doc">Kibana: Visualizaciones</span></a></p>
+<p>Ver: <a class="reference internal" href="create-viz.html"><span class="doc">Kibana: Crear Visualizaciones</span></a></p>
 </div>
 <div class="section" id="tipos-de-visualizaciones">
 <h2>Tipos de Visualizaciones<a class="headerlink" href="#tipos-de-visualizaciones" title="Enlazar permanentemente con este título">¶</a></h2>
 <table class="colwidths-auto docutils align-center">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="https://wenu.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png"><img alt="line-chart-icon" src="https://wenu.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png" style="width: 80px;" /></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="https://panchoman.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png"><img alt="line-chart-icon" src="https://panchoman.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png" style="width: 80px;" /></a></p></td>
 <td><p>Gráfica de Líneas</p></td>
-<td><p><a class="reference internal" href="viz-linechart.html"><span class="doc">Kibana: Gráficas de Línea</span></a></p></td>
+<td><p><a class="reference internal" href="viz-linechart.html"><span class="doc">Kibana: Gráficas de Línea, Ejemplo</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="https://wenu.s3-sa-east-1.amazonaws.com/table-viz-icon.png"><img alt="table-chart-icon" src="https://wenu.s3-sa-east-1.amazonaws.com/table-viz-icon.png" style="width: 80px;" /></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="https://panchoman.s3-sa-east-1.amazonaws.com/table-viz-icon.png"><img alt="table-chart-icon" src="https://panchoman.s3-sa-east-1.amazonaws.com/table-viz-icon.png" style="width: 80px;" /></a></p></td>
 <td><p>Tablas</p></td>
-<td><p><span class="xref std std-doc">../_sections/viz-tables</span></p></td>
+<td><p><a class="reference internal" href="viz-tables.html"><span class="doc">Kibana: Tablas, Ejemplo</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -60,8 +118,23 @@
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="create-viz.html">1. Crear Visualizaciones</a></li>
-<li class="toctree-l1"><a class="reference internal" href="viz-linechart.html">2. Gráfica de Líneas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create-viz.html">1. Crear Visualizaciones</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="create-viz.html#requisitos">Requisitos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-viz.html#crear-visualizaciones">Crear Visualizaciones</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="viz-linechart.html">2. Gráfica de Líneas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="viz-linechart.html#requisitos">Requisitos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viz-linechart.html#pasos-ejemplo">Pasos Ejemplo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viz-linechart.html#resultado">Resultado</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="viz-tables.html">3. Tablas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="viz-tables.html#requisitos">Requisitos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viz-tables.html#pasos-ejemplo">Pasos Ejemplo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viz-tables.html#resultado">Resultado</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -92,10 +165,9 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="usuario.html">1. Manual Nivel Usuario</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="usuario-dashboard.html">1. Dashboards</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usuario-dashboard-filtros.html">2. Filtrar contenido de Dashboards</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Visualizaciones</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usuario-reportes.html">4. Reportes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index-patterns.html">6. Index Patterns</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Visualizaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usuario-reportes.html">3. Reportes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-patterns.html">4. Index Patterns</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usuarios.html">2. Manejo de Usuarios</a></li>
@@ -110,7 +182,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="usuario.html">Kibana: Manual Nivel Usuario</a><ul>
       <li>Previous: <a href="usuario-dashboard-filtros.html" title="capítulo anterior">Kibana: Filtros para Dashboards, Nivel Usuario</a></li>
-      <li>Next: <a href="create-viz.html" title="próximo capítulo">Kibana: Visualizaciones</a></li>
+      <li>Next: <a href="create-viz.html" title="próximo capítulo">Kibana: Crear Visualizaciones</a></li>
   </ul></li>
   </ul></li>
 </ul>

@@ -1,8 +1,8 @@
 ==============================================
-Kibana: Gráficas de Línea, Ejemplo
+Kibana: Tablas, Ejemplo
 ==============================================
 
-.. image:: https://panchoman.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png
+.. image:: https://panchoman.s3-sa-east-1.amazonaws.com/table-viz-icon.png
     :width: 80
 
 **Data:** Factor de Emisión (Promedio Mensual) para la red eléctrica en Chile, disponible en el portal \\"Minería Abierta\\":
@@ -64,10 +64,12 @@ Pasos Ejemplo
     * En este panel se define como se **sub-divide** la data en el **Eje X**.
 
         - En **\\"Sub aggregation\\"** seleccionar **\\"Terms\\"**, esto va a definir **sub-grupos** en base a los valores únicos presentes en el campo indicado a continuación.
-        - En **\\"Field\\"** seleccionar el campo que contiene los **valores únicos que definen los sub-grupos**. En este caso es **\\"sistema.keyword\\"**, que corresponde al campo **\\"sistema\\"** (que contiene las etiquetas de la red eléctrica en particular), más la convención de Kibana **\\".keyword\\"** (que indica específicamente tomar el valor de texto o \\"string\\").
+        - En **\\"Field\\"** seleccionar el campo que contiene los **valores únicos que definen los sub-grupos**. En este caso es **\\"year\\"**.
         - **\\"Size\\"** define cuántos sub-grupos se van a mostrar.
+        - Rellenar **\\"Custom Label\\"** con la **etiqueta** de preferencia para el **Eje X** (en este caso \\"Año\\").
+        - Repetir pasos anteriores (definir un nuevo **\\"Sub bucket\\"**, para el campo **\\"mes\\"**, y **\\"Size\\"** = 12.
 
-            .. image:: https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_sub-agg.png
+            .. image:: https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_table_terms_aggs.png
 
 6. Hacer click en botón **\\"Run\\"** para ver reflejados las agregaciones en la gráfica:
 
@@ -81,9 +83,9 @@ Pasos Ejemplo
 Resultado
 --------------------------------
 
-Gráfica que muestra el **Factor de Emisión Mensual**, con una línea para cada **grupo** definido por el **sistema o red eléctrica en particular**.
+Tabla que muestra el **Factor de Emisión Mensual**, agrupado por **Fecha, Año, Mes, Sistema** y el **Factor de Emisión Mensual** propiamente tal.
     
-    .. image:: https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_chart.png
+    .. image:: https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_table_chart.png
 
 
 
