@@ -8,6 +8,23 @@ Diccionario de comandos:
 ----------------------------------------------
 
 
+Borrar Ramas (Remoto y Local)
+-------------------------------------
+
+**Referencias:**
+    - https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/
+
+.. code-block:: bash
+
+    #LOCAL
+        
+    git branch -d localBranchName
+
+    #GLOBAL
+
+    git push origin --delete remoteBranchName
+
+
 Borrar archivo permanentemente del historial
 -------------------------------------------------
 

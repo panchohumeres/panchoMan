@@ -72,18 +72,53 @@ git push -u origin --tags
 </div>
 <div class="section" id="crear-rama-a-partir-de-una-sola-carpeta">
 <h2>Crear rama a partir de una sola Carpeta<a class="headerlink" href="#crear-rama-a-partir-de-una-sola-carpeta" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Fuente:</strong> <a class="reference external" href="https://stackoverflow.com/questions/9971332/git-create-a-new-branch-with-only-a-specified-directory-and-its-history-then-pus">https://stackoverflow.com/questions/9971332/git-create-a-new-branch-with-only-a-specified-directory-and-its-history-then-pus</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch subdir_branch HEAD
+git filter-branch --subdirectory-filter dir/to/filter -- subdir_branch
+<span class="c1">#Ó</span>
+git filter-branch -f --subdirectory-filter ./linux -- linux
+</pre></div>
+</div>
+</div>
+<div class="section" id="reintegrar-merge-cambios-hechos-en-rama-creada-a-partir-de-una-sola-carpeta">
+<h2>Reintegrar (merge) cambios hechos en rama creada a partir de una sóla Carpeta<a class="headerlink" href="#reintegrar-merge-cambios-hechos-en-rama-creada-a-partir-de-una-sola-carpeta" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Fuentes:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.datree.io/resources/git-error-fatal-refusing-to-merge-unrelated-histories">https://www.datree.io/resources/git-error-fatal-refusing-to-merge-unrelated-histories</a></p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic">
+<li><p>Clonar repositorio en carpeta local.</p></li>
+<li><p>Ejecutar:</p>
 <blockquote>
-<div><p><strong>Fuente:</strong>: <a class="reference external" href="https://stackoverflow.com/questions/9971332/git-create-a-new-branch-with-only-a-specified-directory-and-its-history-then-pus">https://stackoverflow.com/questions/9971332/git-create-a-new-branch-with-only-a-specified-directory-and-its-history-then-pus</a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch subdir_branch HEAD git filter-branch --subdirectory-filter dir/to/filter --subdir_branch ó git filter-branch -f --subdirectory-filter ./linux -- linux
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git fetch origin &lt;nombre_rama_filtrada&gt;:&lt;nombre_rama_filtrada&gt;
 </pre></div>
 </div>
 </div></blockquote>
+</li>
+<li><p><strong>VERIFICAR</strong> que sólo se han hecho <strong>cambios en la carpeta filtrada</strong>.</p></li>
+<li><p>Estando en rama master:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git merge &lt;nombre_rama_filtrada&gt; --allow-unrelated-histories
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="resetear-repositorio-push-a-remoto-ignorando-historia">
+<h2>Resetear repositorio (push a remoto ignorando historia)<a class="headerlink" href="#resetear-repositorio-push-a-remoto-ignorando-historia" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push -u --force &lt;nombre_remoto&gt; &lt;data_dict&gt;
+</pre></div>
+</div>
 </div>
 <div class="section" id="agregar-un-nuevo-remoto">
 <h2>Agregar un nuevo remoto:<a class="headerlink" href="#agregar-un-nuevo-remoto" title="Enlazar permanentemente con este título">¶</a></h2>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote rename origin &lt;antiguo_remoto&gt;
-git remote add origin &lt;nuevo_remoto&gt; git push -u origin --all git push -u origin --tags
+git remote add origin &lt;nuevo_remoto&gt;
+git push -u origin --all git push -u origin --tags
 git push &lt;nuevo_remoto&gt; &lt;rama_local&gt;:&lt;rama_remota&gt;
 </pre></div>
 </div>
@@ -264,13 +299,16 @@ $ git push
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. Casos Especiales</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#crear-nuevo-remoto">Crear nuevo remoto:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#crear-rama-a-partir-de-una-sola-carpeta">Crear rama a partir de una sola Carpeta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reintegrar-merge-cambios-hechos-en-rama-creada-a-partir-de-una-sola-carpeta">Reintegrar (merge) cambios hechos en rama creada a partir de una sóla Carpeta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resetear-repositorio-push-a-remoto-ignorando-historia">Resetear repositorio (push a remoto ignorando historia)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#agregar-un-nuevo-remoto">Agregar un nuevo remoto:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#clonar-una-sola-rama">Clonar una sóla rama:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#remover-archivos-completamente-del-historial">Remover archivos completamente del historial</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="repos.html">3. Plataformas Repositorios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="repos.html">4. Herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">4. Herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">5. Troubleshooting</a></li>
 </ul>
 
 <div class="relations">

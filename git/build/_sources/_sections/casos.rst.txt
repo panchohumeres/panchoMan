@@ -37,11 +37,42 @@ Crear nuevo remoto:
 Crear rama a partir de una sola Carpeta
 ---------------------------------------------------------------------
 
-    **Fuente:**: https://stackoverflow.com/questions/9971332/git-create-a-new-branch-with-only-a-specified-directory-and-its-history-then-pus
+**Fuente:** https://stackoverflow.com/questions/9971332/git-create-a-new-branch-with-only-a-specified-directory-and-its-history-then-pus
+
+.. code-block:: bash
+
+    git branch subdir_branch HEAD
+    git filter-branch --subdirectory-filter dir/to/filter -- subdir_branch
+    #Ó
+    git filter-branch -f --subdirectory-filter ./linux -- linux
+
+Reintegrar (merge) cambios hechos en rama creada a partir de una sóla Carpeta
+---------------------------------------------------------------------------------
+
+**Fuentes:**
+    - https://www.datree.io/resources/git-error-fatal-refusing-to-merge-unrelated-histories
+
+
+1. Clonar repositorio en carpeta local.
+2. Ejecutar:
 
     .. code-block:: bash
 
-        git branch subdir_branch HEAD git filter-branch --subdirectory-filter dir/to/filter --subdir_branch ó git filter-branch -f --subdirectory-filter ./linux -- linux
+        git fetch origin <nombre_rama_filtrada>:<nombre_rama_filtrada>
+
+3. **VERIFICAR** que sólo se han hecho **cambios en la carpeta filtrada**.
+4. Estando en rama master:
+
+    .. code-block:: bash
+
+        git merge <nombre_rama_filtrada> --allow-unrelated-histories
+
+Resetear repositorio (push a remoto ignorando historia)
+----------------------------------------------------------
+
+.. code-block:: bash
+
+    git push -u --force <nombre_remoto> <data_dict>
 
 
 Agregar un nuevo remoto:
@@ -50,7 +81,8 @@ Agregar un nuevo remoto:
     .. code-block:: bash
 
         git remote rename origin <antiguo_remoto> 
-        git remote add origin <nuevo_remoto> git push -u origin --all git push -u origin --tags
+        git remote add origin <nuevo_remoto> 
+        git push -u origin --all git push -u origin --tags
         git push <nuevo_remoto> <rama_local>:<rama_remota>
 
 Clonar una sóla rama:
@@ -59,6 +91,7 @@ Clonar una sóla rama:
     .. code-block:: bash
 
         git clone -b <mybranch> --single-branch <remote_repo>
+
 
 
 Remover archivos completamente del historial

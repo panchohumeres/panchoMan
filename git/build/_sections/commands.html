@@ -41,6 +41,24 @@
 </dd>
 </dl>
 <hr class="docutils" />
+<div class="section" id="borrar-ramas-remoto-y-local">
+<h2>Borrar Ramas (Remoto y Local)<a class="headerlink" href="#borrar-ramas-remoto-y-local" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/">https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/</a></p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#LOCAL</span>
+
+git branch -d localBranchName
+
+<span class="c1">#GLOBAL</span>
+
+git push origin --delete remoteBranchName
+</pre></div>
+</div>
+</div>
 <div class="section" id="borrar-archivo-permanentemente-del-historial">
 <h2>Borrar archivo permanentemente del historial<a class="headerlink" href="#borrar-archivo-permanentemente-del-historial" title="Enlazar permanentemente con este título">¶</a></h2>
 <p><strong>Referencias:</strong> <a class="reference external" href="https://stackoverflow.com/questions/6618612/ignoring-a-directory-from-a-git-repo-after-its-been-added">https://stackoverflow.com/questions/6618612/ignoring-a-directory-from-a-git-repo-after-its-been-added</a></p>
@@ -117,6 +135,7 @@ git show-branch –all <span class="c1">#MOSTRAR RAMAS REMOTAS, LOCALES Y SUS CO
 <p class="caption"><span class="caption-text">Contenidos:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Comandos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#borrar-ramas-remoto-y-local">Borrar Ramas (Remoto y Local)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#borrar-archivo-permanentemente-del-historial">Borrar archivo permanentemente del historial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#listar-mostrar-ramas-y-su-info">Listar/mostrar ramas y su info.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#deshacer-ultimo-commit">Deshacer último Commit</a></li>
@@ -124,7 +143,7 @@ git show-branch –all <span class="c1">#MOSTRAR RAMAS REMOTAS, LOCALES Y SUS CO
 </li>
 <li class="toctree-l1"><a class="reference internal" href="casos.html">2. Casos Especiales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="repos.html">3. Plataformas Repositorios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="repos.html">4. Herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">4. Herramientas</a></li>
 </ul>
 
 <div class="relations">

@@ -14,6 +14,7 @@ Manual GIT de Francisco Humeres M.
    2. Casos Especiales <../_sections/casos>
    3. Plataformas Repositorios <../_sections/repos>
    4. Herramientas <../_sections/tools>
+   5. Troubleshooting <../_sections/troubleshooting>
 
 
 
