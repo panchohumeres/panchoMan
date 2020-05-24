@@ -205,7 +205,9 @@ Remover archivos completamente del historial
 **Método \\"BFG Repo-Cleaner\\" (Plug-in) :**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    **Fuente:** https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository
+    **Fuente:** 
+        - https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository
+        - https://medium.com/@rhoprhh/removing-keys-passwords-and-other-sensitive-data-from-old-github-commits-on-osx-2fb903604a56
 
     El BFG Repo-Cleaner es una herramienta construida y mantenida por la comunidad de código abierto. Proporciona una alternativa más rápida y simple que git filter-branch para eliminar datos no deseados. Por ejemplo, para eliminar tu archivo con datos confidenciales y dejar intacta tu última confirmación, ejecuta lo siguiente:
 
@@ -218,3 +220,74 @@ Remover archivos completamente del historial
     .. code-block:: bash
 
         $ bfg --replace-text passwords.txt
+
+
+Remover líneas de código (información sensible) completamente del historial
+-----------------------------------------------------------------------------
+
+1. Instalar Hombebrew, para Linux:
+    Ver: 
+        - https://brew.sh/
+        - https://docs.brew.sh/Homebrew-on-Linux
+        - https://github.com/rtyley/bfg-repo-cleaner/issues/255
+
+    .. code-block:: bash
+
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+        #estos pasos dependen de la distribución, preferir instrucciones de la línea de comandos
+        test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+        test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+        test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+        echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+
+2. Clonar con método \\"mirror\\" el repo de origen:code:`git clone --mirror <remote_repo> <nombre_local_repo>`:
+    **Nota**: Va a hacer una copia \\"bare\\".
+3. cd  <nombre_local_repo>
+4. Crear un archivo de texto con reglas de sustitución, por ejemplo:
+
+    .. code-block:: bash
+
+        PASSWORD1 #Replace string 'PASSWORD1' with '***REMOVED***' (default)
+        PASSWORD2==>examplePass         # replace with 'examplePass' instead
+        PASSWORD3==>                    # replace with the empty string
+        regex:password=\w+==>password=  # Replace, using a regex
+        regex:\r(\n)==>$1               # Replace Windows newlines with Unix
+                                        newlines
+
+    **Nota:** Para expresiones regulares se recomienda ver:
+        - https://regexr.com/ (simulador de regex)
+        - https://www.regular-expressions.info/wordboundaries.html
+
+5. :code:`bfg --replace-text <nombre_archivo_sustitución>`
+6. Ejectuar comandos que sugiere la herramienta:
+
+    .. code-block:: bash
+
+        git reflog expire --expire=now --all && git gc --prune=now --  aggressive
+
+7. Empujar cambios al repositorio origen: :code:`git push`
+
+* **Nota**: Es posible de que primero haya que hacen un commit borrando la data que uno desea eliminar, para que los cambios sean efectivos (ver output de la herramienta).
+
+Migrar repositorio (con historial) de un origen a otro
+----------------------------------------------------------------------
+
+Ver: https://gist.github.com/niksumeiko/8972566
+
+.. code-block:: bash
+
+    git clone --mirror <url_of_old_repo>
+    cd <name_of_old_repo>
+    git remote add new-origin <url_of_new_repo>
+    git push new-origin --mirror
+
+
+Clonar Repositorio a partir de un commit específico
+----------------------------------------------------------------------
+
+Ver: https://coderwall.com/p/xyuoza/git-cloning-specific-commits
+
+    .. code-block:: bash
+
+        git clone <URL-commit>

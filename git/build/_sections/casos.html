@@ -258,7 +258,13 @@ $ git push
 <div class="section" id="metodo-bfg-repo-cleaner-plug-in">
 <h3><strong>Método &quot;BFG Repo-Cleaner&quot; (Plug-in) :</strong><a class="headerlink" href="#metodo-bfg-repo-cleaner-plug-in" title="Enlazar permanentemente con este título">¶</a></h3>
 <blockquote>
-<div><p><strong>Fuente:</strong> <a class="reference external" href="https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository">https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository</a></p>
+<div><dl class="simple">
+<dt><strong>Fuente:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository">https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/&#64;rhoprhh/removing-keys-passwords-and-other-sensitive-data-from-old-github-commits-on-osx-2fb903604a56">https://medium.com/&#64;rhoprhh/removing-keys-passwords-and-other-sensitive-data-from-old-github-commits-on-osx-2fb903604a56</a></p></li>
+</ul>
+</dd>
+</dl>
 <p>El BFG Repo-Cleaner es una herramienta construida y mantenida por la comunidad de código abierto. Proporciona una alternativa más rápida y simple que git filter-branch para eliminar datos no deseados. Por ejemplo, para eliminar tu archivo con datos confidenciales y dejar intacta tu última confirmación, ejecuta lo siguiente:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bfg --delete-files YOUR-FILE-WITH-SENSITIVE-DATA
 </pre></div>
@@ -268,12 +274,94 @@ $ git push
 </pre></div>
 </div>
 </div></blockquote>
+</div>
+</div>
+<div class="section" id="remover-lineas-de-codigo-informacion-sensible-completamente-del-historial">
+<h2>Remover líneas de código (información sensible) completamente del historial<a class="headerlink" href="#remover-lineas-de-codigo-informacion-sensible-completamente-del-historial" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic">
+<li><dl>
+<dt>Instalar Hombebrew, para Linux:</dt><dd><dl class="simple">
+<dt>Ver:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://brew.sh/">https://brew.sh/</a></p></li>
+<li><p><a class="reference external" href="https://docs.brew.sh/Homebrew-on-Linux">https://docs.brew.sh/Homebrew-on-Linux</a></p></li>
+<li><p><a class="reference external" href="https://github.com/rtyley/bfg-repo-cleaner/issues/255">https://github.com/rtyley/bfg-repo-cleaner/issues/255</a></p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/bin/bash -c <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="c1">#estos pasos dependen de la distribución, preferir instrucciones de la línea de comandos</span>
+<span class="nb">test</span> -d ~/.linuxbrew <span class="o">&amp;&amp;</span> <span class="nb">eval</span> <span class="k">$(</span>~/.linuxbrew/bin/brew shellenv<span class="k">)</span>
+<span class="nb">test</span> -d /home/linuxbrew/.linuxbrew <span class="o">&amp;&amp;</span> <span class="nb">eval</span> <span class="k">$(</span>/home/linuxbrew/.linuxbrew/bin/brew shellenv<span class="k">)</span>
+<span class="nb">test</span> -r ~/.bash_profile <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;eval \$(</span><span class="k">$(</span>brew --prefix<span class="k">)</span><span class="s2">/bin/brew shellenv)&quot;</span> &gt;&gt;~/.bash_profile
+<span class="nb">echo</span> <span class="s2">&quot;eval \$(</span><span class="k">$(</span>brew --prefix<span class="k">)</span><span class="s2">/bin/brew shellenv)&quot;</span> &gt;&gt;~/.profile
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Clonar con método &quot;mirror&quot; el repo de origen:code:<cite>git clone –mirror &lt;remote_repo&gt; &lt;nombre_local_repo&gt;</cite>:</dt><dd><p><strong>Nota</strong>: Va a hacer una copia &quot;bare&quot;.</p>
+</dd>
+</dl>
+</li>
+<li><p>cd  &lt;nombre_local_repo&gt;</p></li>
+<li><p>Crear un archivo de texto con reglas de sustitución, por ejemplo:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>PASSWORD1 <span class="c1">#Replace string &#39;PASSWORD1&#39; with &#39;***REMOVED***&#39; (default)</span>
+<span class="nv">PASSWORD2</span><span class="o">==</span>&gt;examplePass         <span class="c1"># replace with &#39;examplePass&#39; instead</span>
+<span class="nv">PASSWORD3</span><span class="o">==</span>&gt;                    <span class="c1"># replace with the empty string</span>
+regex:password<span class="o">=</span><span class="se">\w</span>+<span class="o">==</span>&gt;password<span class="o">=</span>  <span class="c1"># Replace, using a regex</span>
+regex:<span class="se">\r</span><span class="o">(</span><span class="se">\n</span><span class="o">)==</span>&gt;<span class="nv">$1</span>               <span class="c1"># Replace Windows newlines with Unix</span>
+                                newlines
+</pre></div>
+</div>
+<dl class="simple">
+<dt><strong>Nota:</strong> Para expresiones regulares se recomienda ver:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://regexr.com/">https://regexr.com/</a> (simulador de regex)</p></li>
+<li><p><a class="reference external" href="https://www.regular-expressions.info/wordboundaries.html">https://www.regular-expressions.info/wordboundaries.html</a></p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">bfg</span> <span class="pre">--replace-text</span> <span class="pre">&lt;nombre_archivo_sustitución&gt;</span></code></p></li>
+<li><p>Ejectuar comandos que sugiere la herramienta:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git reflog expire --expire<span class="o">=</span>now --all <span class="o">&amp;&amp;</span> git gc --prune<span class="o">=</span>now --  aggressive
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Empujar cambios al repositorio origen: <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></p></li>
+</ol>
+<ul class="simple">
+<li><p><strong>Nota</strong>: Es posible de que primero haya que hacen un commit borrando la data que uno desea eliminar, para que los cambios sean efectivos (ver output de la herramienta).</p></li>
+</ul>
+</div>
+<div class="section" id="migrar-repositorio-con-historial-de-un-origen-a-otro">
+<h2>Migrar repositorio (con historial) de un origen a otro<a class="headerlink" href="#migrar-repositorio-con-historial-de-un-origen-a-otro" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Ver: <a class="reference external" href="https://gist.github.com/niksumeiko/8972566">https://gist.github.com/niksumeiko/8972566</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone --mirror &lt;url_of_old_repo&gt;
+<span class="nb">cd</span> &lt;name_of_old_repo&gt;
+git remote add new-origin &lt;url_of_new_repo&gt;
+git push new-origin --mirror
+</pre></div>
+</div>
+</div>
+<div class="section" id="clonar-repositorio-a-partir-de-un-commit-especifico">
+<h2>Clonar Repositorio a partir de un commit específico<a class="headerlink" href="#clonar-repositorio-a-partir-de-un-commit-especifico" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Ver: <a class="reference external" href="https://coderwall.com/p/xyuoza/git-cloning-specific-commits">https://coderwall.com/p/xyuoza/git-cloning-specific-commits</a></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone &lt;URL-commit&gt;
+</pre></div>
+</div>
+</div></blockquote>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
 
 </embed></div>
-</div>
 </div>
 
 
@@ -304,6 +392,9 @@ $ git push
 <li class="toctree-l2"><a class="reference internal" href="#agregar-un-nuevo-remoto">Agregar un nuevo remoto:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#clonar-una-sola-rama">Clonar una sóla rama:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#remover-archivos-completamente-del-historial">Remover archivos completamente del historial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remover-lineas-de-codigo-informacion-sensible-completamente-del-historial">Remover líneas de código (información sensible) completamente del historial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#migrar-repositorio-con-historial-de-un-origen-a-otro">Migrar repositorio (con historial) de un origen a otro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clonar-repositorio-a-partir-de-un-commit-especifico">Clonar Repositorio a partir de un commit específico</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="repos.html">3. Plataformas Repositorios</a></li>
