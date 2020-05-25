@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Docker: Troubleshooting &#8212; documentación de Manual Docker - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Docker: Troubleshooting" href="not.html" />
+    <link rel="prev" title="Docker: Networking" href="networking.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/docker_man_page"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="docker-troubleshooting">
+<h1>Docker: Troubleshooting<a class="headerlink" href="#docker-troubleshooting" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="connection-refused-o-connection-reset-by-peer">
+<span id="connection-refuse-connection-rest-by-peer"></span><h2>&quot;Connection refused&quot; o &quot;Connection reset by peer&quot;<a class="headerlink" href="#connection-refused-o-connection-reset-by-peer" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias</strong>: <a class="reference external" href="https://pythonspeed.com/articles/docker-connection-refused/">https://pythonspeed.com/articles/docker-connection-refused/</a></p>
+<p><strong>Problema</strong>: Esto se produce por que la red del contedor no se está conectando con la red del host, i.e. no hay redireccionamiento de tráfico.
+Ver: <a class="reference internal" href="networking.html#redireccion-de-puertos"><span class="std std-ref">Redirección de Puertos</span></a>
+Como se muestra en el diagrama, esto ocurre en casos en que el <strong>contenedor</strong> está escuchando en la <strong>IP de la red interna</strong>, mientras que la redirección del puerto está llendo hacia <strong>la IP de la red externa del contenedor</strong>.
+En este <strong>ejemplo</strong>, el <strong>contenedor</strong> está escuchando en <strong>&quot;127.0.0.1&quot;</strong>, mientras que la <strong>redirección</strong> del puerto está llendo hacia <strong>&quot;127.17.0.2&quot;</strong>.</p>
+<blockquote>
+<div><img alt="localhost-networking" src="https://d33wubrfki0l68.cloudfront.net/eb92be77f9c223f325cc5937105548e9c0c2111e/b72c8/assets/docker-connection-refused/docker-portforward.svg" /><p>Fuente Imagen: <a class="footnote-reference brackets" href="#id4" id="id1">1</a>.</p>
+</div></blockquote>
+<dl>
+<dt><strong>Solución</strong>:</dt><dd><p>Usar opción <code class="code docutils literal notranslate"><span class="pre">--bind</span></code> + valor <strong>&quot;0.0.0.0&quot;</strong>. Esto significa que la red del <strong>contenedor</strong> escuchará en <strong>todas las interfaces</strong>.
+Ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ docker run -p <span class="m">8000</span>:8000 -it python:3.7-slim python3 -m http.server --bind <span class="m">0</span>.0.0.0
+</pre></div>
+</div>
+<p>Ejemplo de solución don Dockerfile de Flask:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>FROM python:3.7-slim-stretch
+RUN pip install flask
+COPY . .
+ENV <span class="nv">FLASK_APP</span><span class="o">=</span>exampleapp:app
+CMD <span class="o">[</span><span class="s2">&quot;flask&quot;</span>, <span class="s2">&quot;run&quot;</span>, <span class="s2">&quot;--host&quot;</span>, <span class="s2">&quot;0.0.0.0&quot;</span><span class="o">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="bash-command-unexpected-eof-while-looking-for-matching">
+<h2>&quot;bash command unexpected EOF while looking for matching&quot;<a class="headerlink" href="#bash-command-unexpected-eof-while-looking-for-matching" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias</strong>: <a class="reference external" href="https://stackoverflow.com/questions/52515680/bash-command-unexpected-eof-while-looking-for-matching">https://stackoverflow.com/questions/52515680/bash-command-unexpected-eof-while-looking-for-matching</a></p>
+<dl class="simple">
+<dt><strong>Solución</strong>:</dt><dd><p>Código mal escapado. Se debe incluir <strong>'</strong> dentro de <strong>&quot;</strong>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="un-contenedor-se-cierra-inesperadamente-despues-de-entrypoint">
+<h2>Un contenedor se cierra inesperadamente después de ENTRYPOINT<a class="headerlink" href="#un-contenedor-se-cierra-inesperadamente-despues-de-entrypoint" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias</strong>: <a class="reference external" href="https://stackoverflow.com/questions/39864106/docker-interactive-mode-exits-after-entrypoint">https://stackoverflow.com/questions/39864106/docker-interactive-mode-exits-after-entrypoint</a></p>
+<dl class="simple">
+<dt><strong>Solución</strong>:</dt><dd><p><a href="#id2"><span class="problematic" id="id3">**</span></a>ENTRYPOINT / CMD ** tiene que ejecutar un script que se mantenga en el largo plazo, o se cerrará y con esto al contenedor.</p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Itamar Turner-Trauring, <a class="reference external" href="https://pythonspeed.com/articles/docker-connection-refused/">https://pythonspeed.com/articles/docker-connection-refused/</a></p>
+</dd>
+</dl>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Docker</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="instalar.html">1. Instalar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general.html">2. Generales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conceptos.html">3. Conceptos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logs.html">4. Revisar Logs de Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prune.html">5. Borrar, Limpiar Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entrypoint-command.html">6. ENTRYPOINT, COMMAND y RUN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="special-cases.html">7. Casos Especiales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">8. Networking</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#connection-refused-o-connection-reset-by-peer">&quot;Connection refused&quot; o &quot;Connection reset by peer&quot;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bash-command-unexpected-eof-while-looking-for-matching">&quot;bash command unexpected EOF while looking for matching&quot;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#un-contenedor-se-cierra-inesperadamente-despues-de-entrypoint">Un contenedor se cierra inesperadamente después de ENTRYPOINT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="not.html">10. Lo que no se puede hacer</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="networking.html" title="capítulo anterior">Docker: Networking</a></li>
+      <li>Next: <a href="not.html" title="próximo capítulo">Docker: Troubleshooting</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/troubleshooting.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

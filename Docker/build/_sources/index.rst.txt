@@ -4,15 +4,6 @@
    contain the root `toctree` directive.
 
 Manual Docker de Francisco Humeres M.
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   1. Generales <../_sections/general>
-   2. Revisar Logs de Contenedores <../_sections/logs>
-   3. Borrar, Limpiar Contenedores <../_sections/prune>
-=======
 ==================================================
 
 .. toctree::
