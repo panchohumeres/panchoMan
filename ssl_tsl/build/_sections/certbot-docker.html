@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>SSL / TSL: Certbot Docker &#8212; documentación de Manual SSL/TSL - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="SSL / TSL: Certbot" href="certbot.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/ssl_tsl_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="ssl-tsl-certbot-docker">
+<h1>SSL / TSL: Certbot Docker<a class="headerlink" href="#ssl-tsl-certbot-docker" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>SSL / TSL Certbot-Docker:</dt><dd><p>Documentación relativa a Certbot (Let’s Encrypt) en Docker</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul>
+<li><p>Repo Github: <a class="reference external" href="https://github.com/wmnnd/nginx-certbot">https://github.com/wmnnd/nginx-certbot</a></p></li>
+<li><p>Fork de repo Github en panchoMan: <a class="reference external" href="https://github.com/panchohumeres/nginx-certbot">https://github.com/panchohumeres/nginx-certbot</a></p></li>
+<li><p>Artículo Medium: <a class="reference external" href="https://medium.com/&#64;pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71">https://medium.com/&#64;pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Pasos</p>
+<p><strong>Requisitos</strong>: Instalar Docker-compose y clonar cualquiera de los dos repos.</p>
+<hr class="docutils" />
+<blockquote>
+<div><ol class="arabic">
+<li><dl class="simple">
+<dt>Modificar archivos de configuración:</dt><dd><ul class="simple">
+<li><p>Reemplazar (ocurrencias de <strong>«example.org»</strong>) y/o agregar dominios y e-mail en archivo «init-letsencrypt.sh».</p></li>
+<li><p>Reemplazar ocurrencias de <strong>«example.org»</strong> con dominios anteriormente reemplazados en paso 1., esta vez en el archivo <strong>«data/nginx/app.conf»</strong>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Correr script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>   ./init-letsencrypt.sh
+
+Si hay problemas con los permisos, ejecutar:
+
+.. code-block:: bash
+
+    chmod +x init-letsencrypt.sh
+</pre></div>
+</div>
+</li>
+<li><p>Levantar contenedor:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose up
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p>Ejemplo múltiples dominios para múltiples puertos:</p>
+<dl class="simple">
+<dt><strong>Referencias</strong>:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://medium.com/&#64;pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71">https://medium.com/&#64;pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71</a></p></li>
+<li><p><a class="reference external" href="https://sysadmins.co.za/secure-your-elasticsearch-cluster-with-basic-auth-using-nginx-and-ssl-from-letsencrypt/">https://sysadmins.co.za/secure-your-elasticsearch-cluster-with-basic-auth-using-nginx-and-ssl-from-letsencrypt/</a></p></li>
+<li><p><a class="reference external" href="https://serverfault.com/questions/769578/curl-56-recv-failure-connection-reset-by-peer-when-hitting-docker-container">https://serverfault.com/questions/769578/curl-56-recv-failure-connection-reset-by-peer-when-hitting-docker-container</a></p></li>
+<li><p><a class="reference external" href="https://dev.to/ganesshkumar/self-hosting-multiple-applications-in-a-single-machine-1l3o">https://dev.to/ganesshkumar/self-hosting-multiple-applications-in-a-single-machine-1l3o</a></p></li>
+</ul>
+</dd>
+</dl>
+<hr class="docutils" />
+<blockquote>
+<div><ol class="arabic">
+<li><dl>
+<dt>Reemplazar archivo <strong>«/data/nginx/app.conf»</strong> o  <strong>«data/nginx/nginx.conf»</strong> (el archivo que esté sirviendo de configuración para el contenedor nginx), por este contenido:</dt><dd><p><a class="reference external" href="https://github.com/panchohumeres/nginx-certbot/blob/master/data/nginx/example-multihost-nginx.conf">https://github.com/panchohumeres/nginx-certbot/blob/master/data/nginx/example-multihost-nginx.conf</a></p>
+<ul class="simple">
+<li><p>Reemplazar los nombres de servidores por correspondientes nombres para identificarlos:</p></li>
+<li><p>En este ejemplo reemplazar <strong>«bi»,»elastic», y «kibana»</strong>.</p></li>
+<li><p>Reemplazar <strong>«ip_localhost»</strong> con nombre o IP de localhost.</p></li>
+<li><p>Reemplazar el puerto al lado de «ip_localhost» con el correspondiente puerto que va a responder a cada uno de los distintos dominios.</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>upstream bi {
+ip_hash;
+server ip_localhost:8888 fail_timeout=5580s max_fails=1000;
+}
+
+upstream elastic {
+    ip_hash;
+    server ip_localhost:9200 fail_timeout=5580s max_fails=1000;
+}
+
+upstream kibana {
+    ip_hash;
+    server ip_localhost:5601 fail_timeout=5580s max_fails=1000;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Reemplazar nombres de dominios con nombres correspondientes.</p></li>
+<li><p>En este caso <strong>«bi.cl», «kibana.cl» y «elastic.cl»</strong>.</p></li>
+<li><p>Cuidar reemplazarlos en todo el archivo.</p></li>
+<li><p>Ejemplos de directivas donde reemplazar:</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>server {
+    if ($host = bi.cl) {
+    return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    location /.well-known/acme-challenge/ {
+    root /var/www/certbot;
+    }
+listen 80;
+server_name bi.cl;
+return 301 https://$host$request_uri;
+location / {
+proxy_pass http://bi;
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name elastic.cl;
+    server_tokens off;
+
+    ssl_certificate /etc/letsencrypt/live/elastic.cl/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/elastic.cl/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    location / {
+    proxy_pass  http://elastic;
+    proxy_set_header    Host                $http_host;
+    proxy_set_header    X-Real-IP           $remote_addr;
+    proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Crear cada una de estas directivas para cuantos dominios se desee redireccionar.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Reemplazar en script <strong>«init-letsencrypt.sh»</strong>, nombre de dominio con dominio para el cual se desea crear certificados (los mismos de arriba en 1.):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">domains</span><span class="o">=(</span>example.org www.example.org<span class="o">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<ol class="arabic" start="4">
+<li><p>Correr script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./init-letsencrypt.sh
+</pre></div>
+</div>
+</li>
+<li><p>Repetir 2 y 3 para cada uno de los dominios que se desean redireccionar.</p></li>
+</ol>
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual SSL/TSL</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="concept-test.html">1. Prueba de Concepto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">2. Ejemplos de Archivos de Certidicados</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="certbot.html">3. Certbot</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Ejemplo Docker</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="certbot.html">SSL / TSL: Certbot</a><ul>
+      <li>Previous: <a href="certbot.html" title="capítulo anterior">SSL / TSL: Certbot</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/certbot-docker.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

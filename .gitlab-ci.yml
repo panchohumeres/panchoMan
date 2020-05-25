@@ -4,11 +4,10 @@ pages:
   stage: deploy
   script:
     - mkdir .public
-    - cp -r Docker/build/* .public
+    - cp -r ssl_tsl/build/* .public
     - mv .public public
   artifacts:
     paths:
       - public
   only:
     - master
-
