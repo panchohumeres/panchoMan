@@ -132,6 +132,163 @@ git push &lt;nuevo_remoto&gt; &lt;rama_local&gt;:&lt;rama_remota&gt;
 </div>
 </div></blockquote>
 </div>
+<div class="section" id="sincronizar-dos-ramas-de-dos-remotos-distintos">
+<h2>Sincronizar dos ramas de dos remotos distintos<a class="headerlink" href="#sincronizar-dos-ramas-de-dos-remotos-distintos" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Situación:</strong></dt><dd><ul class="simple">
+<li><p>Dos repositorios (&quot;origin&quot; y &quot;target&quot;).</p></li>
+<li><p>Se quiere sincronizar una rama con el mismo nombre (&quot;nombre rama&quot;).</p></li>
+<li><p>Se crea la rama en &quot;target&quot;, con menos archivos que en &quot;origin&quot; (por ejemplo, sólo dentro de una carpeta), con el fin de trackear ese reducido conjunto de cambios en &quot;origin&quot;.</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic">
+<li><p>En target (repo distinto de origin), crear rama:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout -b &lt;nombre_rama&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Agregar origin como nuevo remoto (distinto de &quot;origin&quot; de target):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote add &lt;nombre_nuevo_remoto_origin&gt; &lt;url_nuevo_remoto_origin&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Empujar nueva rama al repo &quot;origin&quot;:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push -u &lt;nombre_origin&gt; &lt;nombre_rama&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>En el repo &quot;origin&quot;:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git pull --all
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>En el repo &quot;origin&quot;:</p>
+<blockquote>
+<div><p>Opción a)</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git pull --all
+
+<span class="c1">#para revisar ramas existentes</span>
+git branch -v
+
+git checkout &lt;nombre_remoto&gt;/&lt;nombre_rama&gt;
+
+<span class="c1">#Output esperado</span>
+<span class="c1">#You are in &#39;detached HEAD&#39; state. You can look around, make experimental</span>
+<span class="c1">#changes and commit them, and you can discard any commits you make in this</span>
+<span class="c1">#state without impacting any branches by performing another checkout.</span>
+
+<span class="c1">#If you want to create a new branch to retain commits you create, you may</span>
+<span class="c1">#do so (now or later) by using -b with the checkout command again. Example:</span>
+
+<span class="c1">#git checkout -b &lt;new-branch-name&gt;</span>
+
+git checkout -b &lt;nombre_rama&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<p>Opción b)</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout -b &lt;nombre_rama&gt;
+git branch --set-upstream-to<span class="o">=</span>origin/&lt;nombre_rama&gt; &lt;nombre_rama&gt;
+
+<span class="c1">#Se sugiere ejecutar en este comando en un entorno de desarrollo que permita resolver conflictos git..</span>
+<span class="c1">#como Visualstudio Code</span>
+git pull --all --allow-unrelated-histories
+
+<span class="c1">#Va a tirar el siguiente error:</span>
+<span class="c1">#Automatic merge failed; fix conflicts and then commit the result.</span>
+
+<span class="c1">#Resolver conflictos y hacer commit</span>
+
+git push origin &lt;nombre_rama&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>En el repo &quot;origin&quot;:</p>
+<blockquote>
+<div><ul>
+<li><p>Si es que en el paso 5, se eligió opción a):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout master
+
+<span class="c1">#ejecutar este comando sólo para probar</span>
+git merge &lt;nombre_rama&gt; <span class="c1">#va a generar el siguiente error:</span>
+<span class="c1">#fatal: refusing to merge unrelated histories</span>
+
+<span class="c1">#Se sugiere ejecutar en este comando en un entorno de desarrollo que permita resolver conflictos git..</span>
+<span class="c1">#como Visualstudio Code</span>
+git merge &lt;nombre_rama&gt; --allow-unrelated-histories
+
+<span class="c1">#Va a tirar el siguiente error:</span>
+<span class="c1">#Automatic merge failed; fix conflicts and then commit the result.</span>
+
+<span class="c1">#Resolver conflictos y hacer commit</span>
+
+git push origin master
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Si es que en el paso 5, se eligió opción b):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout master
+
+git merge &lt;nombre_rama&gt;
+
+<span class="c1">#Puede tirar el siguiente error:</span>
+<span class="c1">#Automatic merge failed; fix conflicts and then commit the result.</span>
+
+<span class="c1">#Resolver conflictos y hacer commit</span>
+
+git push origin master
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<ul>
+<li><dl>
+<dt><strong>Notas:</strong></dt><dd><ul>
+<li><p>Si es que sale este error al intentar sincronizar la rama:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>There is no tracking information <span class="k">for</span> the current branch.
+Please specify which branch you want to merge with.
+See git-pull<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="k">for</span> details.
+
+    git pull &lt;remote&gt; &lt;branch&gt;
+
+If you wish to <span class="nb">set</span> tracking information <span class="k">for</span> this branch you can <span class="k">do</span> so with:
+
+    git branch --set-upstream-to<span class="o">=</span>origin/&lt;branch&gt; linux
+</pre></div>
+</div>
+<p>Ejecutar:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch --set-upstream-to<span class="o">=</span>origin/&lt;nombre_rama&gt; &lt;nombre_rama&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
 <div class="section" id="remover-archivos-completamente-del-historial">
 <h2>Remover archivos completamente del historial<a class="headerlink" href="#remover-archivos-completamente-del-historial" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="metodo-1-para-carpetas">
@@ -391,6 +548,7 @@ git push new-origin --mirror
 <li class="toctree-l2"><a class="reference internal" href="#resetear-repositorio-push-a-remoto-ignorando-historia">Resetear repositorio (push a remoto ignorando historia)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#agregar-un-nuevo-remoto">Agregar un nuevo remoto:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#clonar-una-sola-rama">Clonar una sóla rama:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sincronizar-dos-ramas-de-dos-remotos-distintos">Sincronizar dos ramas de dos remotos distintos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#remover-archivos-completamente-del-historial">Remover archivos completamente del historial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#remover-lineas-de-codigo-informacion-sensible-completamente-del-historial">Remover líneas de código (información sensible) completamente del historial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#migrar-repositorio-con-historial-de-un-origen-a-otro">Migrar repositorio (con historial) de un origen a otro</a></li>
