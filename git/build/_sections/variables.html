@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>NGINX: Variables &#8212; documentación de Manual Nginx - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="NGINX: Comandos Útiles" href="utilidad.html" />
+    <link rel="prev" title="NGINX: Fundamentos" href="fundamentos.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/nginx_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="nginx-variables">
+<h1>NGINX: Variables<a class="headerlink" href="#nginx-variables" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Variables utilizadas en NGINX:</p>
+<hr class="docutils" />
+<div class="section" id="host">
+<h2><strong>$host</strong><a class="headerlink" href="#host" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Variable definida por el header del cliente <strong>HTTP Host</strong>.
+Ver:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://bjornjohansen.no/redirect-to-https-with-nginx">https://bjornjohansen.no/redirect-to-https-with-nginx</a></p></li>
+<li><p><a class="reference internal" href="fundamentos.html#como-nginx-procesa-solicitudes"><span class="std std-ref">Cómo NGINX procesa solicitudes:</span></a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="request-uri">
+<h2><strong>$request_uri</strong><a class="headerlink" href="#request-uri" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>URI completa de la solicitud, con argumentos.
+<strong>Excluye</strong> schema (<strong>&quot;https&quot; o &quot;http&quot;), **puertos</strong>, y <strong>dominio</strong>.
+Ejemplos:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">##CASO 1</span>
+https://www.webhosting24.com/understanding-nginx-request_uri/ <span class="c1">#URL</span>
+/understanding-nginx-request_uri/ <span class="c1">#VALOR DE $request_uri</span>
+
+<span class="c1">##CASO 2</span>
+https://www.webhosting24.com/cp/cart.php?a<span class="o">=</span>add<span class="p">&amp;</span><span class="nv">domain</span><span class="o">=</span>register <span class="c1">#URL</span>
+/cp/cart.php?a<span class="o">=</span>add<span class="p">&amp;</span><span class="nv">domain</span><span class="o">=</span>register <span class="c1">#VALOR DE $request_uri</span>
+
+<span class="c1">##CASO 3</span>
+https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.2 <span class="c1">#URL</span>
+/Protocols/rfc2616/rfc2616-sec3.html <span class="c1">#VALOR DE $request_uri</span>
+<span class="c1"># ANCHOR #sec3.2 NO SE INCLUYE EN LA VARIABLE</span>
+</pre></div>
+</div>
+<p>Ver: <a class="reference external" href="https://www.webhosting24.com/understanding-nginx-request_uri/">https://www.webhosting24.com/understanding-nginx-request_uri/</a></p>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Nginx</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="fundamentos.html">1. Fundamentos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#host"><strong>$host</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#request-uri"><strong>$request_uri</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utilidad.html">3. Comandos de utilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directivas.html">4. Diccionario de Directivas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">5. Docker y Docker-Compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multihost.html">6. Multihost</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="fundamentos.html" title="capítulo anterior">NGINX: Fundamentos</a></li>
+      <li>Next: <a href="utilidad.html" title="próximo capítulo">NGINX: Comandos Útiles</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/variables.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

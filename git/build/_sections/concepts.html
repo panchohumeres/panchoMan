@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>NGINX: Conceptos &#8212; documentación de Manual Nginx - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="NGINX: Comandos Útiles" href="utilidad.html" />
+    <link rel="prev" title="Manual Nginx de Francisco Humeres M." href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/nginx_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="nginx-conceptos">
+<h1>NGINX: Conceptos<a class="headerlink" href="#nginx-conceptos" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="como-nginx-procesa-solicitudes">
+<span id="id1"></span><h2>Cómo NGINX procesa solicitudes:<a class="headerlink" href="#como-nginx-procesa-solicitudes" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias:</strong> <a class="reference external" href="http://nginx.org/en/docs/http/request_processing.html">http://nginx.org/en/docs/http/request_processing.html</a></p>
+<dl>
+<dt><em>Servidores virtuales en base a *</em>&quot;Nombres&quot;<a href="#id2"><span class="problematic" id="id3">**</span></a>:</dt><dd><p>NGINX primero decide cual servidor, definido con la directiva <code class="code docutils literal notranslate"><span class="pre">server</span> <span class="pre">{....}</span></code>, procesará la solicitud o consulta.
+Ejemplo de tres servidores virtuales que escuchan en el puerto 80:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+    listen      <span class="m">80</span><span class="p">;</span>
+    server_name example.org www.example.org<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">80</span><span class="p">;</span>
+    server_name example.net www.example.net<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">80</span><span class="p">;</span>
+    server_name example.com www.example.com<span class="p">;</span>
+    ...
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>En este ejemplo, NGINX prueba solamente el campo <strong>«\Host&quot;</strong> del <strong>header</strong> o cabecera de la solicitud o <strong>&quot;request&quot;</strong> del servidor.
+Si es que el valor de <strong>«\Host&quot;**== algún nombre de servidor (directiva **»server_name»</strong>), redirige al servidor correspondiente.
+Si es que el valor <strong>«\Host&quot;</strong> <strong>NO coincide</strong> con algún nombre de servidor (directiva <strong>«server_name»</strong>):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Redirige al servidor por defecto, en este caso el primero (compartamiento estándar de NGINX).</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><dl>
+<dt>Sobre campo  <strong>«\Header&quot;</strong> del request:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Host: &lt;host&gt;:&lt;puerto&gt;
+
+&lt;host&gt; <span class="c1">#NOMBRE DEL DOMINIO DEL Servidor PARA VIRTUAL HOSTING (PUEDE SER UNA IP)</span>
+&lt;puerto&gt; <span class="c1">#PUERTO (OPCIONAL)---&gt;PUERTO EN QUE ESTÁ ESCUCHANDO (DEFECTO 80)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Ver lo que es el campo <strong>«\Host&quot;</strong> del <strong>header</strong> del <strong>request</strong> acá:</dt><dd><p><a class="reference external" href="https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Host">https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Host</a>
+<a class="reference external" href="https://stackoverflow.com/questions/50321842/http-is-an-ip-address-allowed-in-the-host-header-field">https://stackoverflow.com/questions/50321842/http-is-an-ip-address-allowed-in-the-host-header-field</a></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li><p>Servidores virtuales en <strong>&quot;MIXTOS&quot;</strong>: con <strong>Nombres de Dominios y/o IPs</strong>:</p>
+<p>Ejemplo donde los <strong>servidores virtuales</strong> escuchan a diferentes IP.
+1. En este configuración, NGINX prueba las solicitudes contra las directivas <strong>listen</strong> dentro de los bloques <strong>server</strong>.
+2. Luego prueba campo  <strong>«\Header&quot;</strong> de la solicitud, contra las entradas <strong>server_name</strong> dentro de los bloques <strong>server*.
+3. Si es que **NO</strong> se encuentra <strong>server_name</strong>, la solicitud va a ser tomada por el servidor por <strong>defecto</strong>.
+4. En este caso el servidor por defecto es el primero.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.1:80<span class="p">;</span>
+    server_name example.org www.example.org<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.1:80<span class="p">;</span>
+    server_name example.net www.example.net<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.2:80<span class="p">;</span>
+    server_name example.com www.example.com<span class="p">;</span>
+    ...
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic" start="5">
+<li><p>También se pueden definir servidores por defecto con la directiva <strong>default_server</strong>. Se pueden definir diferentes servidores por <strong>defecto</strong> para diferentes puertos. Ejemplo:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.1:80<span class="p">;</span>
+    server_name example.org www.example.org<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.1:80 default_server<span class="p">;</span>
+    server_name example.net www.example.net<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.2:80 default_server<span class="p">;</span>
+    server_name example.com www.example.com<span class="p">;</span>
+    ...
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Nginx</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Conceptos básicos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#como-nginx-procesa-solicitudes">Cómo NGINX procesa solicitudes:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utilidad.html">2. Comandos de utilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directivas.html">3. Diccionario de Directivas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">4. Docker y Docker-Compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multihost.html">5. Multihost</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="capítulo anterior">Manual Nginx de Francisco Humeres M.</a></li>
+      <li>Next: <a href="utilidad.html" title="próximo capítulo">NGINX: Comandos Útiles</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/concepts.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Docker: Instalar &#8212; documentación de Manual Docker - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Docker: Comandos de utilidad general" href="general.html" />
+    <link rel="prev" title="Manual Docker de Francisco Humeres M." href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/docker_man_page"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="docker-instalar">
+<h1>Docker: Instalar<a class="headerlink" href="#docker-instalar" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Instalar Docker (Ubuntu 18.04):</p>
+<hr class="docutils" />
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Referencias:</dt><dd><p><a class="reference external" href="https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es">https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es</a></p>
+</dd>
+</dl>
+</li>
+</ul>
+<ol class="arabic">
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt update
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install apt-transport-https ca-certificates curl software-properties-common
+</pre></div>
+</div>
+</li>
+<li><p>Luego, agregue la clave GPG para el repositorio oficial de Docker a su sistema:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class="p">|</span> sudo apt-key add -
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Agregue el repositorio de Docker a las fuentes de APT:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo add-apt-repository <span class="s2">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt update
+</pre></div>
+</div>
+</li>
+<li><p>Asegúrese de que va a instalar desde el repositorio de Docker en vez del repositorio de Ubuntu predeterminado:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-cache policy docker-ce
+</pre></div>
+</div>
+<p>Resultado esperado:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-ce:
+    Installed: <span class="o">(</span>none<span class="o">)</span>
+    Candidate: <span class="m">18</span>.03.1~ce~3-0~ubuntu
+    Version table:
+        <span class="m">18</span>.03.1~ce~3-0~ubuntu <span class="m">500</span>
+        <span class="m">500</span> https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+</pre></div>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li><p>Note que docker-ce no está instalado, pero el candidato para la instalación es del repositorio de Docker para Ubuntu 18.04 (bionic).</p></li>
+</ul>
+</li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install docker-ce
+</pre></div>
+</div>
+</li>
+<li><p>Verificar instalación:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl status docker
+</pre></div>
+</div>
+<p>Resultado esperado:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Output
+● docker.service - Docker Application Container Engine
+    Loaded: loaded <span class="o">(</span>/lib/systemd/system/docker.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+    Active: active <span class="o">(</span>running<span class="o">)</span> since Thu <span class="m">2018</span>-07-05 <span class="m">15</span>:08:39 UTC<span class="p">;</span> 2min 55s ago
+    Docs: https://docs.docker.com
+Main PID: <span class="m">10096</span> <span class="o">(</span>dockerd<span class="o">)</span>
+    Tasks: <span class="m">16</span>
+    CGroup: /system.slice/docker.service
+    ├─10096 /usr/bin/dockerd -H fd://
+    └─10113 docker-containerd --config /var/run/docker/containerd/containerd.toml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Arreglos para ejecutar Docker sin «sudo»:</dt><dd><ol class="arabic">
+<li><p>Agregue su nombre de usuario al grupo docker si quiere evitar escribir sudo siempre que deba ejecutar el comando docker:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo usermod -aG docker <span class="si">${</span><span class="nv">USER</span><span class="si">}</span>
+<span class="c1">#en caso que el usuario no sea sudo</span>
+sudo su - <span class="si">${</span><span class="nv">USER</span><span class="si">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<ol class="arabic" start="3">
+<li><dl>
+<dt>Confirme que se haya agregado su usuario al grupo de docker escribiendo:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>id -nG
+</pre></div>
+</div>
+<p>Resultado esperado:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Output
+sammy sudo docker
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<p>Instalar Docker-Compose:</p>
+<hr class="docutils" />
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Referencias:</dt><dd><p><a class="reference external" href="https://www.digitalocean.com/community/tutorials/como-instalar-docker-compose-en-ubuntu-18-04-es">https://www.digitalocean.com/community/tutorials/como-instalar-docker-compose-en-ubuntu-18-04-es</a></p>
+</dd>
+</dl>
+</li>
+</ul>
+<ol class="arabic">
+<li><dl class="simple">
+<dt>Revisar versión más actual:</dt><dd><p><a class="reference external" href="https://github.com/docker/compose/releases">https://github.com/docker/compose/releases</a></p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Descargar repo git reemplazando versión más actual en la ruta:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo curl -L https://github.com/docker/compose/releases/download/<span class="o">{</span><span class="s2">&quot;versión más actual&quot;</span><span class="o">}</span>/docker-compose-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> -o /usr/local/bin/docker-compose
+</pre></div>
+</div>
+<p>Ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo curl -L https://github.com/docker/compose/releases/download/1.26.0-rc2/docker-compose-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> -o /usr/local/bin/docker-compose
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Cambiar los permisos:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo chmod +x /usr/local/bin/docker-compose
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>A continuación, comprobaremos que la instalación se haya realizado de forma correcta revisando la versión:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose --version
+</pre></div>
+</div>
+<p>Resultado esperado:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Output
+docker-compose version <span class="m">1</span>.21.2, build a133471
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Docker</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Instalar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general.html">2. Generales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logs.html">3. Revisar Logs de Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prune.html">4. Borrar, Limpiar Contenedores</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="capítulo anterior">Manual Docker de Francisco Humeres M.</a></li>
+      <li>Next: <a href="general.html" title="próximo capítulo">Docker: Comandos de utilidad general</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/instalar.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

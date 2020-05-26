@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Manual GIT de Francisco Humeres M. &#8212; documentación de Manual Git - 1.0</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="GIT: Comandos" href="_sections/commands.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://panchohumeres.gitlab.io/git_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="manual-git-de-francisco-humeres-m">
+<h1>Manual GIT de Francisco Humeres M.<a class="headerlink" href="#manual-git-de-francisco-humeres-m" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_sections/commands.html">1. Comandos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/commands.html#borrar-ramas-remoto-y-local">Borrar Ramas (Remoto y Local)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/commands.html#borrar-archivo-permanentemente-del-historial">Borrar archivo permanentemente del historial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/commands.html#listar-mostrar-ramas-y-su-info">Listar/mostrar ramas y su info.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/commands.html#deshacer-ultimo-commit">Deshacer último Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/casos.html">2. Casos Especiales</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/casos.html#crear-nuevo-remoto">Crear nuevo remoto:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/casos.html#crear-rama-a-partir-de-una-sola-carpeta">Crear rama a partir de una sola Carpeta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/casos.html#reintegrar-merge-cambios-hechos-en-rama-creada-a-partir-de-una-sola-carpeta">Reintegrar (merge) cambios hechos en rama creada a partir de una sóla Carpeta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/casos.html#resetear-repositorio-push-a-remoto-ignorando-historia">Resetear repositorio (push a remoto ignorando historia)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/casos.html#agregar-un-nuevo-remoto">Agregar un nuevo remoto:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/casos.html#clonar-una-sola-rama">Clonar una sóla rama:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/casos.html#remover-archivos-completamente-del-historial">Remover archivos completamente del historial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/casos.html#remover-lineas-de-codigo-informacion-sensible-completamente-del-historial">Remover líneas de código (información sensible) completamente del historial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/casos.html#migrar-repositorio-con-historial-de-un-origen-a-otro">Migrar repositorio (con historial) de un origen a otro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/casos.html#clonar-repositorio-a-partir-de-un-commit-especifico">Clonar Repositorio a partir de un commit específico</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/repos.html">3. Plataformas Repositorios</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/gitlab.html">1. Gitlab</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/tools.html">4. Herramientas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/visualstudio.html">1. Visual Studio Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">5. Troubleshooting</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Manual Git</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_sections/commands.html">1. Comandos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/casos.html">2. Casos Especiales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/repos.html">3. Plataformas Repositorios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/tools.html">4. Herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">5. Troubleshooting</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="_sections/commands.html" title="próximo capítulo">GIT: Comandos</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
