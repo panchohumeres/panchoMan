@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>NGINX: Casos Especiales &#8212; documentación de Manual Nginx - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="NGINX: Troubleshooting" href="troubleshooting.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/nginx_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="nginx-casos-especiales">
+<h1>NGINX: Casos Especiales<a class="headerlink" href="#nginx-casos-especiales" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Documentación de casos o implementaciones particulares</p>
+<hr class="docutils" />
+<div class="section" id="autenticacion-basica-basic-auth-con-reverse-proxy">
+<h2>Autenticación Básica (&quot;basic auth&quot;) con reverse proxy:<a class="headerlink" href="#autenticacion-basica-basic-auth-con-reverse-proxy" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias:</strong> <a class="reference external" href="http://shairosenfeld.blogspot.com/2011/03/authorization-header-in-nginx-for.html">http://shairosenfeld.blogspot.com/2011/03/authorization-header-in-nginx-for.html</a></p>
+<ul>
+<li><p><strong>Intro &quot;Basic Authorization&quot;</strong>, ver: <a class="reference external" href="https://panchohumeres.gitlab.io/http_man/_sections/headers.html#autenticacion-basica-basic-authentication">https://panchohumeres.gitlab.io/http_man/_sections/headers.html#autenticacion-basica-basic-authentication</a></p></li>
+<li><dl>
+<dt>Ejemplo:</dt><dd><ol class="arabic">
+<li><dl class="simple">
+<dt>Parámetros Autenticación:</dt><dd><ul class="simple">
+<li><p>username: &quot;king&quot;, password &quot;isnaked&quot;.</p></li>
+<li><p>base64: &quot;a2luZzppc25ha2Vk&quot;.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Bloque de <strong>location</strong> (<a class="reference internal" href="fundamentos.html#bloque-location"><span class="std std-ref">location</span></a>) original:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>location / <span class="o">{</span>
+    proxy_set_header Host <span class="nv">$host</span><span class="p">;</span>
+    proxy_set_header X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
+    proxy_set_header X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+    proxy_pass http://6.6.6.6:80<span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Agregar la línea: <code class="code docutils literal notranslate"><span class="pre">proxy_set_header</span> <span class="pre">Authorization</span> <span class="pre">&quot;Basic</span> <span class="pre">a2luZzppc25ha2Vk&quot;;</span></code></p></li>
+<li><p>Nuevo bloque, actualizado:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>location / <span class="o">{</span>
+    proxy_set_header Host <span class="nv">$host</span><span class="p">;</span>
+    proxy_set_header X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
+    proxy_set_header X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+    proxy_pass http://6.6.6.6:80<span class="p">;</span>
+    proxy_set_header Authorization <span class="s2">&quot;Basic a2luZzppc25ha2Vk&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Reiniciar servidor NGINX, ver: <a class="reference internal" href="utilidad.html"><span class="doc">NGINX: Comandos Útiles</span></a></p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="ssl-y-proxy">
+<h2>SSL y Proxy:<a class="headerlink" href="#ssl-y-proxy" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Ejemplo que muestra como encriptar tráfico <strong>HTTP</strong> entre NGINX y un bloque <code class="code docutils literal notranslate"><span class="pre">upstream</span></code> o <strong>servidores proxy</strong>.</p>
+<p><strong>Basado en:</strong> <a class="reference external" href="https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/">https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/</a>
+<a href="#id1"><span class="problematic" id="id2">**</span></a>Directivas empleadas:* <a class="reference internal" href="directivas.html#directivas-proxy-pass-relacionadas"><span class="std std-ref">Directivas relacionadas (proxy_pass)</span></a></p>
+<ol class="arabic simple">
+<li><p>En este ejemplo, <code class="code docutils literal notranslate"><span class="pre">https</span></code> en la directiva <code class="code docutils literal notranslate"><span class="pre">proxy_pass</span></code> especifica que el tráfico <strong>redirigido</strong> por NGINX hacia los bloques <code class="code docutils literal notranslate"><span class="pre">upstream</span></code> esté protegida con esquema <strong>&quot;https&quot;</strong>.</p></li>
+<li><p>Cuando una conexión <strong>segura</strong> (&quot;https&quot;) es pasada por NGINX a <code class="code docutils literal notranslate"><span class="pre">upstream</span></code> por primera vez, el proceso de <strong>&quot;handshake&quot;</strong> completo es ejecutado.</p></li>
+<li><dl class="simple">
+<dt>Las siguientes <strong>directivas</strong> definen la ubicación de los <strong>certificados</strong> en formato PEM requeridos por el servidor <code class="code docutils literal notranslate"><span class="pre">upstream</span></code>. También definen (opcional) protocolos y métodos de encriptación.</dt><dd><ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">proxy_ssl_certificate</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">proxy_ssl_certificate_key</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">proxy_ssl_certificate_key</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">proxy_ssl_protocols</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">proxy_ssl_ciphers</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>La autoridad(es) <strong>&quot;CA&quot;</strong> especificada(s) anteriormente son utilizadas para verificar el certificado en <code class="code docutils literal notranslate"><span class="pre">upstream</span></code>.</p></li>
+<li><p>La directiva <code class="code docutils literal notranslate"><span class="pre">proxy_ssl_verify_depth</span></code> especifica que dos certificados en la cadena de certficados son verificados.</p></li>
+<li><p>Cada vez que NGINX pase una conexión a un bloque <code class="code docutils literal notranslate"><span class="pre">upstream</span></code>, los parámetros de la sesión van a ser <strong>reutilizados</strong> gracias a la directiva <code class="code docutils literal notranslate"><span class="pre">proxy_ssl_session_reuse</span></code>.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http <span class="o">{</span>
+    <span class="c1">#...</span>
+    upstream backend.example.com <span class="o">{</span>
+        server backend1.example.com:443<span class="p">;</span>
+        server backend2.example.com:443<span class="p">;</span>
+<span class="o">}</span>
+
+    server <span class="o">{</span>
+        listen      <span class="m">80</span><span class="p">;</span>
+        server_name www.example.com<span class="p">;</span>
+        <span class="c1">#...</span>
+
+        location /upstream <span class="o">{</span>
+
+            <span class="c1">#LLAMAR AL SERVIDOR UPSTREAM CON HTTPS CON LA DIRECTIVA &quot;proxy_pass&quot;</span>
+            proxy_pass                    https://backend.example.com<span class="p">;</span>
+
+            <span class="c1">#AGREGAR CERTIFICADOS CON LAS DIRECTIVAS &quot;proxy_ssl_certificate&quot; y &quot;proxy_ssl_certificate_key&quot;</span>
+            proxy_ssl_certificate         /etc/nginx/client.pem<span class="p">;</span>
+            proxy_ssl_certificate_key     /etc/nginx/client.key<span class="p">;</span>
+
+            <span class="c1">#OPCIONAL: DEFINIR PROTOCOLS Y MÉTODOS DE ENCRIPTACIÓN</span>
+            proxy_ssl_protocols           TLSv1 TLSv1.1 TLSv1.2<span class="p">;</span>
+            proxy_ssl_ciphers             HIGH:!aNULL:!MD5<span class="p">;</span>
+
+            <span class="c1">#AGREGAR &quot;CA&quot; (Certificate Authority) CON DIRECTIVA &quot;proxy_ssl_trusted_certificate&quot;</span>
+            proxy_ssl_trusted_certificate /etc/nginx/trusted_ca_cert.crt<span class="p">;</span>
+
+            <span class="c1">#OPCIONALMENTE INCLUIR DIRECTIVAS &quot;proxy_ssl_verify&quot; Y &quot;proxy_ssl_verify_depth&quot; PARA ...</span>
+            <span class="c1">#QUE NGINX REVISE LA VALIDEZ DE LOS CERTIFICADOS</span>
+            proxy_ssl_verify        on<span class="p">;</span>
+            proxy_ssl_verify_depth  <span class="m">2</span><span class="p">;</span>
+
+            <span class="c1">#REUTILIZAR HANDSHAKE EN CACHE (PARA NO HACER UNO NUEVO CON CADA CONEXIÓN, QUE USA MUCHA CPU)</span>
+            proxy_ssl_session_reuse on<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+
+    <span class="c1">#PARA CADA SERVIDOR MENCIONADO EN &quot;upstream&quot;, TAMBIÉN SE DEBEN ESPECIFICAR RUTAS A LOS CERTIFICADOS</span>
+    server <span class="o">{</span>
+        listen      <span class="m">443</span> ssl<span class="p">;</span>
+        server_name backend1.example.com<span class="p">;</span>
+
+        ssl_certificate        /etc/ssl/certs/server.crt<span class="p">;</span>
+        ssl_certificate_key    /etc/ssl/certs/server.key<span class="p">;</span>
+
+        <span class="c1">#RUTA A CERTIFICADO DE CLIENTE</span>
+        ssl_client_certificate /etc/ssl/certs/ca.crt<span class="p">;</span>
+
+        ssl_verify_client      optional<span class="p">;</span>
+
+        location /yourapp <span class="o">{</span>
+            proxy_pass http://url_to_app.com<span class="p">;</span>
+        <span class="c1">#...</span>
+        <span class="o">}</span>
+
+    server <span class="o">{</span>
+        listen      <span class="m">443</span> ssl<span class="p">;</span>
+        server_name backend2.example.com<span class="p">;</span>
+
+        ssl_certificate        /etc/ssl/certs/server.crt<span class="p">;</span>
+        ssl_certificate_key    /etc/ssl/certs/server.key<span class="p">;</span>
+        ssl_client_certificate /etc/ssl/certs/ca.crt<span class="p">;</span>
+        ssl_verify_client      optional<span class="p">;</span>
+
+        location /yourapp <span class="o">{</span>
+            proxy_pass http://url_to_app.com<span class="p">;</span>
+        <span class="c1">#...</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Nginx</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="fundamentos.html">1. Fundamentos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">2. Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilidad.html">3. Comandos de utilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directivas.html">4. Diccionario de Directivas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">5. Docker y Docker-Compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multihost.html">6. Multihost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">7. Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Casos Especiales</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#autenticacion-basica-basic-auth-con-reverse-proxy">Autenticación Básica (&quot;basic auth&quot;) con reverse proxy:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ssl-y-proxy">SSL y Proxy:</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="troubleshooting.html" title="capítulo anterior">NGINX: Troubleshooting</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/cases.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

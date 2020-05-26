@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>NGINX: Fundamentos &#8212; documentación de Manual Nginx - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="NGINX: Variables" href="variables.html" />
+    <link rel="prev" title="Manual Nginx de Francisco Humeres M." href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/nginx_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="nginx-fundamentos">
+<h1>NGINX: Fundamentos<a class="headerlink" href="#nginx-fundamentos" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="como-nginx-procesa-solicitudes">
+<span id="id1"></span><h2>Cómo NGINX procesa solicitudes:<a class="headerlink" href="#como-nginx-procesa-solicitudes" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias:</strong> <a class="reference external" href="http://nginx.org/en/docs/http/request_processing.html">http://nginx.org/en/docs/http/request_processing.html</a></p>
+<ul>
+<li><dl>
+<dt>Servidores virtuales en base a <strong>&quot;Nombres&quot;</strong>:</dt><dd><p>NGINX primero decide cual servidor, definido con la directiva <code class="code docutils literal notranslate"><span class="pre">server</span> <span class="pre">{....}</span></code>, procesará la solicitud o consulta.
+Ejemplo de tres servidores virtuales que escuchan en el puerto 80:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+    listen      <span class="m">80</span><span class="p">;</span>
+    server_name example.org www.example.org<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">80</span><span class="p">;</span>
+    server_name example.net www.example.net<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">80</span><span class="p">;</span>
+    server_name example.com www.example.com<span class="p">;</span>
+    ...
+<span class="o">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>En este ejemplo, NGINX prueba solamente el campo <strong>&quot;Host&quot;</strong> del <strong>header</strong> o cabecera de la solicitud o <strong>&quot;request&quot;</strong> del servidor.</p></li>
+<li><p>Si es que el valor de <strong>&quot;Host&quot;</strong> == algún nombre de servidor (directiva <strong>&quot;server_name&quot;</strong>), redirige al servidor correspondiente.</p></li>
+<li><p>Si es que el valor <strong>&quot;Host&quot;</strong> <strong>NO coincide</strong> con algún nombre de servidor (directiva <strong>&quot;server_name&quot;</strong>): Redirige al servidor por defecto, en este caso el primero (compartamiento estándar de NGINX).</p></li>
+</ol>
+<ul>
+<li><dl>
+<dt>Sobre campo  <strong>&quot;Header&quot;</strong> del request:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Host: &lt;host&gt;:&lt;puerto&gt;
+
+&lt;host&gt; <span class="c1">#NOMBRE DEL DOMINIO DEL Servidor PARA VIRTUAL HOSTING (PUEDE SER UNA IP)</span>
+&lt;puerto&gt; <span class="c1">#PUERTO (OPCIONAL)---&gt;PUERTO EN QUE ESTÁ ESCUCHANDO (DEFECTO 80)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Ver lo que es el campo <strong>&quot;Host&quot;</strong> del <strong>header</strong> del <strong>request</strong> acá:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Host">https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Host</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/50321842/http-is-an-ip-address-allowed-in-the-host-header-field">https://stackoverflow.com/questions/50321842/http-is-an-ip-address-allowed-in-the-host-header-field</a></p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Servidores virtuales en <strong>&quot;MIXTOS&quot;</strong>: con <strong>Nombres de Dominios y/o IPs</strong>:</dt><dd><p>Ejemplo donde los <strong>servidores virtuales</strong> escuchan a diferentes IP.</p>
+<ol class="arabic">
+<li><p>En este configuración, NGINX prueba las solicitudes contra las directivas <strong>listen</strong> dentro de los bloques <strong>server</strong>.</p></li>
+<li><p>Luego prueba campo  <strong>&quot;Header&quot;</strong> de la solicitud, contra las entradas <strong>server_name</strong> dentro de los bloques <strong>server</strong>.</p></li>
+<li><p>Si es que <strong>NO</strong> se encuentra <strong>server_name</strong>, la solicitud va a ser tomada por el servidor por <strong>defecto</strong>.</p></li>
+<li><p>En este caso el servidor por defecto es el primero.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.1:80<span class="p">;</span>
+    server_name example.org www.example.org<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.1:80<span class="p">;</span>
+    server_name example.net www.example.net<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.2:80<span class="p">;</span>
+    server_name example.com www.example.com<span class="p">;</span>
+    ...
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>También se pueden definir servidores por defecto con la directiva <strong>default_server</strong>. Se pueden definir diferentes servidores por <strong>defecto</strong> para diferentes puertos. Ejemplo:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.1:80<span class="p">;</span>
+    server_name example.org www.example.org<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.1:80 default_server<span class="p">;</span>
+    server_name example.net www.example.net<span class="p">;</span>
+    ...
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen      <span class="m">192</span>.168.1.2:80 default_server<span class="p">;</span>
+    server_name example.com www.example.com<span class="p">;</span>
+    ...
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="redireccion">
+<h2>Redirección:<a class="headerlink" href="#redireccion" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><p>La manera más simple y efectiva de rediccionar es utilizando la <strong>directiva &quot;return&quot;</strong>. Más info de la directiva en: <a class="reference internal" href="directivas.html#directiva-return"><span class="std std-ref">return</span></a>.
+Se utiliza comúnmente para redireccionar de <strong>http a https</strong>.
+En este caso la solicitud se:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Deja de procesar.</p></li>
+<li><p>Se responde con el código 301 (ver ejemplo). Éste código le dice al browser del cliente que es una <strong>redirección permanente</strong> (lo que hace al browser recordar la dirección, así como los motores de búsqueda).</p></li>
+<li><p>Dado que este código permite redireccionar a una URI o URL, se apendiza ésta.</p></li>
+</ol>
+</div></blockquote>
+<p>Ejemplo:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+    listen <span class="m">80</span><span class="p">;</span>
+    listen <span class="o">[</span>::<span class="o">]</span>:80<span class="p">;</span>
+    hostname example.com www.example.com<span class="p">;</span>
+    <span class="k">return</span> <span class="m">301</span> https://example.com<span class="nv">$host$request_uri</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>En este ejemplo todas las solicitudes para <strong>&quot;http://example.com&quot; o &quot;http//www.example.com&quot;</strong> son <strong>redirigidas</strong> a <strong>&quot;https://example.com&quot;</strong>.</p>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://bjornjohansen.no/nginx-redirect">https://bjornjohansen.no/nginx-redirect</a></p></li>
+<li><p><a class="reference external" href="https://bjornjohansen.no/redirect-to-https-with-nginx">https://bjornjohansen.no/redirect-to-https-with-nginx</a></p></li>
+<li><p>Ver: <a class="reference internal" href="directivas.html#directiva-return"><span class="std std-ref">return</span></a></p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="bloques-server-y-location">
+<h2>Bloques <strong>&quot;Server&quot;</strong> y <strong>&quot;Location&quot;</strong><a class="headerlink" href="#bloques-server-y-location" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Fuentes:</strong> <a class="reference external" href="https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms">https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms</a></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Nginx <strong>divide lógicamente</strong> las <strong>configuraciones</strong> destinadas a servir diferentes contenidos (solicitados) en <strong>bloques</strong>, que conviven en una estructura jerárquica.</p></li>
+<li><p>Cada vez que un <strong>cliente</strong> hace una <strong>solicitud</strong>, Nginx comienza un proceso para determinar <strong>cuál(es) bloque(s) de configuración(es) debe(n) ser usados</strong> para manejar la solicitud.</p></li>
+<li><p><strong>Tipos de soclicitud</strong> pueden ser definidas en base a la IP, dominios y/o puertos solicitados.</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="server">
+<h3>server<a class="headerlink" href="#server" title="Enlazar permanentemente con este título">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Un <strong>bloque</strong> define un <strong>&quot;servidor virtual&quot;</strong> usado para manejar <strong>solicitudes de determinado tipo</strong>.</p></li>
+<li><p>La directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code> a cual <strong>IP y puertos</strong> va a responder el <strong>bloque</strong> de <strong>virtualhost</strong> (servidor virtual).</p></li>
+<li><dl class="simple">
+<dt>La directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code> puede responder a una de las siguientes configuraciones:</dt><dd><ul>
+<li><p>{IP}:{Puerto}</p></li>
+<li><p>{IP} ———&gt;por defecto escuchará en el puerto 80</p></li>
+<li><p>{Puerto} ———&gt;escuchará en <strong>cualquier interfaz</strong> en ese puerto</p></li>
+<li><p>{URI} ——–&gt; ruta a un socket UNIX (generalmente sólo tiene implicancias si se pasan solicitudes entre servidores).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>El valor por <strong>defecto</strong> de la directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code> es <code class="code docutils literal notranslate"><span class="pre">0.0.0.0:80</span></code>.</p></li>
+</ul>
+<ol class="upperalpha simple">
+<li><dl class="simple">
+<dt>Como Nginx decide cual bloque &quot;server&quot; maneja una solicitud (directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code> ):</dt><dd><ol class="arabic simple">
+<li><p>NGINX revisa la <strong>IP y puerto de la solicitud</strong>.</p></li>
+<li><p>Las compara con directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code> dentro de cada <strong>virtualhost</strong> (servidor virtual) para construir una <strong>lista de bloques</strong> que pueden responder a la solicitud.</p></li>
+<li><dl class="simple">
+<dt>Si no existe directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code>, usar el valor por defecto <code class="code docutils literal notranslate"><span class="pre">listen</span></code> es <code class="code docutils literal notranslate"><span class="pre">0.0.0.0:80</span></code>.</dt><dd><dl class="simple">
+<dt>Ejemplos:</dt><dd><ul class="simple">
+<li><p>Bloque con valor <code class="code docutils literal notranslate"><span class="pre">listen</span></code> de <code class="code docutils literal notranslate"><span class="pre">111.111.111.111</span></code> sin puerto escucha al puerto 80, i.e. <code class="code docutils literal notranslate"><span class="pre">111.111.111.111:80</span></code></p></li>
+<li><p>Bloque con valor <code class="code docutils literal notranslate"><span class="pre">listen</span></code> de <code class="code docutils literal notranslate"><span class="pre">8888</span></code> sin IP se transforma en <code class="code docutils literal notranslate"><span class="pre">0.0.0.0:8888</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>NGINX elabora una <strong>lista</strong> de servidores virtuales que coinciden con la IP y/o puerto de la solicitud (en base a la directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code>).</dt><dd><ul class="simple">
+<li><p>Esto significa que cualquier <strong>bloque</strong> que use <cite>0.0.0.0</cite> como IP en la directiva <code class="code docutils literal notranslate"><span class="pre">listen</span></code>, tiene <strong>menor prioridad</strong> en relación a directivas que coincida con <strong>IP y/o puertos</strong> específicos.</p></li>
+<li></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Si es que <strong>hay sólo una coincidencia</strong>, NGINX redirige a ese <strong>virtualhost</strong> o <strong>bloque</strong>.</p></li>
+<li><p>Si es que hay <strong>múltiples coincidencias</strong>, NGINX procede a <strong>revisar la directiva :code:`server_name`</strong>, (<strong>PASO B</strong>).</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Como NGINX decide cual bloque maneja una solicitud en base a <strong>directiva :code:`server_name`</strong>:</dt><dd><ol class="arabic simple">
+<li><p>NGINX evalúa la lista de <strong>bloques</strong> obtenida del <strong>paso A)</strong>.</p></li>
+<li><p>NGINX revisa el <strong>header http &quot;Host&quot;</strong>. Este &quot;header&quot; contiene el <strong>dominio o IP</strong> al cual la solicitud quiere llegar.</p></li>
+<li><p>Primero NGINX intenta encontrar una <strong>coincidencia exacta</strong>. Si hay <strong>multiples coincidencias, elige la primera</strong>.</p></li>
+<li><p>Si <strong>NO se encuentran coincidencias exactas</strong>, NGINX buscará el &quot;wildcard&quot; <code class="code docutils literal notranslate"><span class="pre">*</span></code> al <strong>principio</strong> de los <strong>&quot;strings&quot;</strong> especificados en las directivas <code class="code docutils literal notranslate"><span class="pre">server_name</span></code>. Si se encuentra <strong>una coincidencia exacta, se usa esa</strong>. Si hay <strong>múltipes coincidencias exactas</strong>, se usa el <strong>string más largo</strong>.</p></li>
+<li><p>Si <strong>NO hay coincidencias según el paso 4</strong>, NGINX buscará el &quot;wildcard&quot; <code class="code docutils literal notranslate"><span class="pre">*</span></code> al <strong>FINAL</strong> de los <strong>&quot;strings&quot;</strong> especificados en las directivas <code class="code docutils literal notranslate"><span class="pre">server_name</span></code>. Si se encuentra <strong>una coincidencia exacta, se usa esa</strong>. Si hay <strong>múltipes coincidencias exactas</strong>, se usa el <strong>string más largo</strong>.</p></li>
+<li><p>Si <strong>NO hay coincidencias según el paso 5</strong>, NGINX evalúa <strong>bloques</strong> que definan <code class="code docutils literal notranslate"><span class="pre">server_name</span></code> usando <strong>&quot;expresiones regulares&quot;</strong> (indicadas por el &quot;wildcard&quot; NGINX buscará el &quot;wildcard&quot; <code class="code docutils literal notranslate"><span class="pre">~</span></code> al <strong>principio</strong> de los <strong>&quot;strings&quot;</strong> especificados en las directivas. El <strong>primer bloque que coincida</strong> será utilizado.</p></li>
+<li><p>Si es que <em>NO hay coincidencias en ninguno de los casos anteriores*</em>, NGINX utiliza el bloque por <strong>defecto</strong>.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="location">
+<span id="bloque-location"></span><h3>location<a class="headerlink" href="#location" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Un <strong>bloque</strong> location existe <strong>dentro de un bloque &quot;server&quot;</strong>, y define como NGINX debe manejar diferentes <strong>solicitudes</strong> para distintos <strong>recursos y URIs</strong> para el servidor virtual (ie. <strong>&quot;parent&quot;</strong>). El modelo para subdividir el <strong>espacio de URIs</strong> es bastante flexible.</p>
+<dl>
+<dt>Locaciones:</dt><dd><ul>
+<li><p>Forma:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>location optional_modifier location_match <span class="o">{</span>
+
+    . . .
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">location_match</span></code> define la URI para buscar coincidencias. Posibles <strong>valores</strong> para <code class="code docutils literal notranslate"><span class="pre">optional_modifier</span></code>:</dt><dd><ul class="simple">
+<li><p><strong>Ninguno</strong>: La locación es interpretada como <strong>prefijo</strong> (la coincidencia se evalúa en base al <strong>principio de la URI</strong>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">=:</span></code>: Se considera coincidencia si la <strong>URI solicitad coincide exactamente con la locación</strong>.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">~:</span></code>: Importan <strong>UPPERCASE</strong> o <strong>lowercase</strong> (mayúscula o minúscula) para evaluar las coincidencias.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">~*</span></code>: <strong>NO</strong> importan <strong>UPPERCASE</strong> o <strong>lowercase</strong> (mayúscula o minúscula) para evaluar las coincidencias.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">^~</span></code>: <strong>NO se evalúan expresiones regulares</strong>, si es que el <strong>bloque</strong> es seleccionado como la mejor coincidencia <strong>sin expresiones regulares</strong>.</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt>Como NGINX elige :code:<a href="#id2"><span class="problematic" id="id3">`</span></a>location`(s):</dt><dd><ol class="arabic simple">
+<li><p>Busca todas las coincidencias <strong>SIN expresiones regulares</strong>.</p></li>
+<li><p>Busca una <strong>coincidencia exacta</strong>. Si una locación tiene el operador <code class="code docutils literal notranslate"><span class="pre">=</span></code>, este <strong>bloque</strong> es inmediatamente seleccionado.</p></li>
+<li><p>Si <strong>NO</strong> se cumple caso <strong>2</strong>, NGINX busca <strong>coincidencias no-exactas de prefijos</strong>. Encuentra el prefijo <strong>más largo para evaluar</strong>.</p></li>
+<li><p>Si se cumple caso <strong>3</strong>, y tiene el operador <code class="code docutils literal notranslate"><span class="pre">^~</span></code>, NGINX <strong>para la búsqueda</strong> y <strong>selecciona</strong> esta locación.</p></li>
+<li><p>Si se cumple caso <strong>3</strong>, y <strong>NO</strong> tiene el operador <code class="code docutils literal notranslate"><span class="pre">^~</span></code>, NGINX <strong>guarda la conincidencia</strong>, y procede.</p></li>
+<li><p>NGINX busca <strong>expresiones regulares</strong>.</p></li>
+<li><p>Si se cumple <strong>6</strong> y <strong>3</strong> (dentro de la <strong>expresión regular</strong>), NGINX la sube como <strong>primera prioridad</strong> de locación.</p></li>
+<li><p>NGINX <strong>elige la primera</strong> locación que cumpla el caso <strong>7</strong>.</p></li>
+<li><p>Si no se cumplen <strong>6, 7 y 8</strong>, la locación guardada en paso <strong>5</strong> es ocupada para servir la solicitud.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="orden-de-lineas-i-e-comandos">
+<h2>Orden de lineas i.e. Comandos<a class="headerlink" href="#orden-de-lineas-i-e-comandos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias:</strong> <a class="reference external" href="https://serverfault.com/questions/836504/does-order-of-lines-matter-in-nginx">https://serverfault.com/questions/836504/does-order-of-lines-matter-in-nginx</a></p>
+<p>El <strong>ORDEN IMPORTA</strong> en los comandos dentro de directivas, dependiendo del <strong>CONTEXTO</strong>.
+P.ej:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+listen <span class="m">80</span><span class="p">;</span>
+server_name subdomain.example.com<span class="p">;</span>
+
+<span class="k">return</span> <span class="m">301</span> https://<span class="nv">$server_name$request_uri</span><span class="p">;</span>
+
+location /.well-known/acme-challenge <span class="o">{</span>
+        root /var/www/letsencrypt<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Este ejemplo <strong>falla</strong> debido a que la directiva <strong>&quot;return&quot;</strong> para el proceso, <strong>dejando sin efecto la directiva &quot;location&quot; a continuación</strong>.</p>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Nginx</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Fundamentos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#como-nginx-procesa-solicitudes">Cómo NGINX procesa solicitudes:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#redireccion">Redirección:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bloques-server-y-location">Bloques <strong>&quot;Server&quot;</strong> y <strong>&quot;Location&quot;</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#orden-de-lineas-i-e-comandos">Orden de lineas i.e. Comandos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">2. Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilidad.html">3. Comandos de utilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directivas.html">4. Diccionario de Directivas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">5. Docker y Docker-Compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multihost.html">6. Multihost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">7. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cases.html">8. Casos Especiales</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="capítulo anterior">Manual Nginx de Francisco Humeres M.</a></li>
+      <li>Next: <a href="variables.html" title="próximo capítulo">NGINX: Variables</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/fundamentos.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

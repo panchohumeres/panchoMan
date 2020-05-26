@@ -1,0 +1,23 @@
+.. Docker documentation master file, created by
+   sphinx-quickstart on Sat Oct 12 03:05:57 2019.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Manual Nginx de Francisco Humeres M.
+==================================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contenidos:
+
+   1. Fundamentos <../_sections/fundamentos>
+   2. Variables <../_sections/variables>
+   3. Comandos de utilidad <../_sections/utilidad>
+   4. Diccionario de Directivas <../_sections/directivas>
+   5. Docker y Docker-Compose <../_sections/docker>
+   6. Multihost <../_sections/multihost>
+   7. Troubleshooting <../_sections/troubleshooting>
+   8. Casos Especiales <../_sections/cases>
+
+
+
