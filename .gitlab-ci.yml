@@ -4,7 +4,7 @@ pages:
   stage: deploy
   script:
     - mkdir .public
-    - cp -r linux/build/* .public
+    - cp -r jupyter/build/* .public
     - mv .public public
   artifacts:
     paths:

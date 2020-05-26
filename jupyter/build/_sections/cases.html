@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Jupyter Notebooks: Casos Especiales &#8212; documentación de Manual Jupyter - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Jupyter Notebook: Docker" href="docker.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Jupyter GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/jupyter_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="jupyter-notebooks-casos-especiales">
+<h1>Jupyter Notebooks: Casos Especiales<a class="headerlink" href="#jupyter-notebooks-casos-especiales" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="docker-compose-con-nginx-y-reverse-proxy">
+<h2>Docker-Compose con NGINX y reverse-proxy<a class="headerlink" href="#docker-compose-con-nginx-y-reverse-proxy" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Referencias</strong>:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/jupyter/notebook/issues/4757">https://github.com/jupyter/notebook/issues/4757</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jupyter/notebook/issues/2664">https://github.com/jupyter/notebook/issues/2664</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jupyter/notebook/issues/625">https://github.com/jupyter/notebook/issues/625</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jupyter/jupyter/issues/79">https://github.com/jupyter/jupyter/issues/79</a></p></li>
+<li><dl class="simple">
+<dt>Ejemplo basado en caso de implementación de <strong>NGINX</strong> en <strong>Docker-compose</strong> con <strong>Certbot</strong> (Let’s encrypt), que permite montar un stack de tecnologías usando a NGINX como servidor y con renovación automatizada de certificados <strong>SSL</strong>:</dt><dd><p>Ver ejemplo en: <a class="reference external" href="https://panchohumeres.gitlab.io/nginx_man/_sections/docker.html#templating-de-configuracion-caso-2">https://panchohumeres.gitlab.io/nginx_man/_sections/docker.html#templating-de-configuracion-caso-2</a></p>
+</dd>
+</dl>
+</li>
+<li><p>A continuación se detallan secciones de archivos de configuración <strong>docker-compose.yml</strong>, <strong>nginx.conf</strong> y <strong>.env</strong>, para que el servidor Jupyter Notebook protegido con <strong>SSL</strong> funcione correctamente. Los detalles de estas configuraciones verlas en la referencia anteriormente mencionada.</p></li>
+<li><p><strong>NO OLVIDAR CONSULTAR LA URL CON &quot;HTTPS&quot;</strong>, caso contrario se puede dar un error como este: <a class="reference internal" href="troubleshooting.html#kernel-not-connected"><span class="std std-ref">Kernel &quot;Not Connected&quot; en Servidor remoto</span></a>:</p></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="env">
+<h3>.env<a class="headerlink" href="#env" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Variables de entorno clave en archivo <strong>.env</strong>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">JUPYTER_ALLOW_ORIGIN</span><span class="o">=</span>*
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="docker-compose-yml">
+<h3>docker-compose.yml<a class="headerlink" href="#docker-compose-yml" title="Enlazar permanentemente con este título">¶</a></h3>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>version: <span class="s2">&quot;3&quot;</span>
+<span class="c1">#inaugurando rama staging</span>
+
+services:
+
+jupyter:
+    build:
+    context: ./jupyter
+    ports:
+    - <span class="si">${</span><span class="nv">JUPYTER_PORT</span><span class="si">}</span>:8888 <span class="c1">#default 8888</span>
+    command: jupyter-notebook --NotebookApp.password<span class="o">=</span><span class="si">${</span><span class="nv">JUPYTER_PSSWD</span><span class="si">}</span> --NotebookApp.allow_origin<span class="o">=</span><span class="si">${</span><span class="nv">JUPYTER_ALLOW_ORIGIN</span><span class="si">}</span>
+    environment:
+    - <span class="nv">ELASTIC_USER</span><span class="o">=</span><span class="nv">$ELASTIC_USER</span>
+    - <span class="nv">ELASTIC_PASSWD</span><span class="o">=</span><span class="nv">$ELASTIC_PASSWORD</span>
+    - <span class="nv">ELASTIC_PORT</span><span class="o">=</span><span class="nv">$ELASTIC_PORT</span>
+    volumes:
+    - ./notebooks:/home/jovyan/work
+    - <span class="si">${</span><span class="nv">HOST_DATA_PATH</span><span class="si">}</span>:/data
+    - certs:/certs
+    - ./jupyter_config:/home/jovyan/.jupyter/
+    - ./backup_utils/kibana:/home/jovyan/work/backup_kibana
+
+certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes: <span class="o">[</span><span class="s1">&#39;${HOST_DATA_PATH}/certbot/conf:/etc/letsencrypt&#39;</span>,<span class="s1">&#39;${HOST_DATA_PATH}/certbot/www:/var/www/certbot&#39;</span><span class="o">]</span>
+    entrypoint: <span class="s2">&quot;/bin/sh -c &#39;trap exit TERM; while :; do certbot renew; sleep 12h &amp; wait </span><span class="nv">$$</span><span class="s2">{!}; done;&#39;&quot;</span>
+
+nginx:
+    build:
+    context: ./nginx
+    environment:
+    - <span class="nv">LISTEN_PORT</span><span class="o">=</span><span class="m">80</span>
+    - <span class="nv">DOMAIN_KIBANA</span><span class="o">=</span><span class="nv">$DOMAIN_KIBANA</span>
+    - <span class="nv">DOMAIN_ELASTIC</span><span class="o">=</span><span class="nv">$DOMAIN_ELASTIC</span>
+    - <span class="nv">DOMAIN_JUPYTER</span><span class="o">=</span><span class="nv">$DOMAIN_JUPYTER</span>
+    - <span class="nv">JUPYTER_PORT</span><span class="o">=</span><span class="si">${</span><span class="nv">JUPYTER_PORT</span><span class="si">}</span>
+    - <span class="nv">KIBANA_PORT</span><span class="o">=</span><span class="si">${</span><span class="nv">KIBANA_PORT</span><span class="si">}</span>
+    - <span class="nv">ELASTIC_PORT</span><span class="o">=</span><span class="si">${</span><span class="nv">ELASTIC_PORT</span><span class="si">}</span>
+    - <span class="nv">SERVER_NAME_KIBANA</span><span class="o">=</span><span class="nv">$SERVER_NAME_KIBANA</span>
+    - <span class="nv">SERVER_NAME_ELASTIC</span><span class="o">=</span><span class="nv">$SERVER_NAME_ELASTIC</span>
+    - <span class="nv">SERVER_NAME_JUPYTER</span><span class="o">=</span><span class="nv">$SERVER_NAME_JUPYTER</span>
+    volumes: <span class="o">[</span><span class="s1">&#39;${PWD}/nginx-config/conf:/etc/nginx/conf.d&#39;</span>,<span class="s1">&#39;${HOST_DATA_PATH}/certbot/conf:/etc/letsencrypt&#39;</span>,<span class="s1">&#39;${HOST_DATA_PATH}/certbot/www:/var/www/certbot&#39;</span>,
+    <span class="s1">&#39;${PWD}/nginx-config/sites-enabled:/etc/nginx/sites-enabled&#39;</span><span class="o">]</span>
+    ports:
+    - <span class="s2">&quot;80:80&quot;</span>
+    - <span class="s2">&quot;443:443&quot;</span>
+    command: <span class="s2">&quot;/bin/sh -c &#39;while :; do sleep 6h &amp; wait </span><span class="nv">$$</span><span class="s2">{!}; nginx -s reload; done &amp; nginx -g \&quot;daemon off;\&quot;&#39;&quot;</span>
+
+wait_until_ready:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+    command: /usr/bin/true
+    depends_on: <span class="o">[</span><span class="s2">&quot;es01&quot;</span><span class="o">]</span>
+
+volumes:
+certs:
+    driver: <span class="nb">local</span>
+    driver_opts:
+    type: none
+    device: <span class="nv">$PWD</span>/<span class="si">${</span><span class="nv">HOST_DATA_PATH</span><span class="si">}</span>/certs
+    o: <span class="nb">bind</span>
+http_certs:
+    driver: <span class="nb">local</span>
+    driver_opts:
+    type: none
+    device: <span class="nv">$PWD</span>/<span class="si">${</span><span class="nv">HOST_DATA_PATH</span><span class="si">}</span>/http_certs
+    o: <span class="nb">bind</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="nginx-conf">
+<span id="nginx-conf-reverse-proxy-nginx-docker-compose"></span><h3>nginx.conf<a class="headerlink" href="#nginx-conf" title="Enlazar permanentemente con este título">¶</a></h3>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>upstream <span class="si">${</span><span class="nv">SERVER_NAME_JUPYTER</span><span class="si">}</span> <span class="o">{</span>
+        ip_hash<span class="p">;</span>
+        server <span class="si">${</span><span class="nv">LOCALHOST</span><span class="si">}</span>:<span class="si">${</span><span class="nv">JUPYTER_PORT</span><span class="si">}</span> <span class="nv">fail_timeout</span><span class="o">=</span>5580s <span class="nv">max_fails</span><span class="o">=</span><span class="m">1000</span><span class="p">;</span>
+<span class="o">}</span>
+server <span class="o">{</span>
+
+
+
+        listen <span class="m">80</span><span class="p">;</span>
+        server_name <span class="si">${</span><span class="nv">DOMAIN_JUPYTER</span><span class="si">}</span><span class="p">;</span>
+        server_tokens off<span class="p">;</span>
+        <span class="c1">#return 301 https://$host$request_uri;</span>
+    location /.well-known/acme-challenge/ <span class="o">{</span>
+        root /var/www/certbot<span class="p">;</span>
+    <span class="o">}</span>
+        location / <span class="o">{</span>
+            proxy_pass http://<span class="si">${</span><span class="nv">SERVER_NAME_JUPYTER</span><span class="si">}</span><span class="p">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen <span class="m">443</span> ssl<span class="p">;</span>
+    server_name <span class="si">${</span><span class="nv">DOMAIN_JUPYTER</span><span class="si">}</span><span class="p">;</span>
+    server_tokens off<span class="p">;</span>
+
+    ssl_certificate /etc/letsencrypt/live/<span class="si">${</span><span class="nv">DOMAIN_JUPYTER</span><span class="si">}</span>/fullchain.pem<span class="p">;</span>
+    ssl_certificate_key /etc/letsencrypt/live/<span class="si">${</span><span class="nv">DOMAIN_JUPYTER</span><span class="si">}</span>/privkey.pem<span class="p">;</span>
+    include /etc/letsencrypt/options-ssl-nginx.conf<span class="p">;</span>
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem<span class="p">;</span>
+
+    location / <span class="o">{</span>
+        proxy_pass  http://<span class="si">${</span><span class="nv">SERVER_NAME_JUPYTER</span><span class="si">}</span><span class="p">;</span>
+        proxy_set_header    Host                <span class="nv">$http_host</span><span class="p">;</span>
+        proxy_set_header    X-Real-IP           <span class="nv">$remote_addr</span><span class="p">;</span>
+        proxy_set_header    X-Forwarded-For     <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+    <span class="o">}</span>
+
+location ~ /api/kernels/ <span class="o">{</span>
+proxy_pass http://<span class="si">${</span><span class="nv">SERVER_NAME_JUPYTER</span><span class="si">}</span><span class="p">;</span>
+proxy_set_header Host <span class="nv">$http_host</span><span class="p">;</span>
+<span class="c1"># websocket support</span>
+proxy_http_version <span class="m">1</span>.1<span class="p">;</span>
+proxy_set_header Upgrade <span class="s2">&quot;websocket&quot;</span><span class="p">;</span>
+proxy_set_header Connection <span class="s2">&quot;Upgrade&quot;</span><span class="p">;</span>
+proxy_read_timeout <span class="m">86400</span><span class="p">;</span>
+<span class="o">}</span>
+location ~ /terminals/ <span class="o">{</span>
+proxy_pass http://<span class="si">${</span><span class="nv">SERVER_NAME_JUPYTER</span><span class="si">}</span><span class="p">;</span>
+proxy_set_header Host <span class="nv">$http_host</span><span class="p">;</span>
+<span class="c1"># websocket support</span>
+proxy_http_version <span class="m">1</span>.1<span class="p">;</span>
+proxy_set_header Upgrade <span class="s2">&quot;websocket&quot;</span><span class="p">;</span>
+proxy_set_header Connection <span class="s2">&quot;Upgrade&quot;</span><span class="p">;</span>
+proxy_read_timeout <span class="m">86400</span><span class="p">;</span>
+<span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Jupyter</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usuario.html">1. Manual Nivel Usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seguridad.html">2. Seguridad en Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">3. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">4. Configuración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">5. Docker y Docker-compose</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Casos Especiales</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#docker-compose-con-nginx-y-reverse-proxy">Docker-Compose con NGINX y reverse-proxy</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="docker.html" title="capítulo anterior">Jupyter Notebook: Docker</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/cases.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

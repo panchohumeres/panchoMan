@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Jupyter Notebook: Troubleshooting &#8212; documentación de Manual Jupyter - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Jupyter Notebooks: Configuración" href="config.html" />
+    <link rel="prev" title="Jupyter Notebooks: Seguridad" href="seguridad.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Jupyter GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/jupyter_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="jupyter-notebook-troubleshooting">
+<h1>Jupyter Notebook: Troubleshooting<a class="headerlink" href="#jupyter-notebook-troubleshooting" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Problemas comunes en Jupyter Notebook, y soluciónes</p>
+<hr class="docutils" />
+<div class="section" id="kernel-not-connected-en-servidor-remoto">
+<span id="kernel-not-connected"></span><h2>Kernel &quot;Not Connected&quot; en Servidor remoto<a class="headerlink" href="#kernel-not-connected-en-servidor-remoto" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Referencias</strong>:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/jupyter/notebook/issues/4757">https://github.com/jupyter/notebook/issues/4757</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jupyter/notebook/issues/2664">https://github.com/jupyter/notebook/issues/2664</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jupyter/notebook/issues/625">https://github.com/jupyter/notebook/issues/625</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jupyter/jupyter/issues/79">https://github.com/jupyter/jupyter/issues/79</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jupyter/notebook/issues/5024">https://github.com/jupyter/notebook/issues/5024</a></p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Problema:</strong> Notebook en <strong>servidor remoto NO</strong> se conecta. Las otras funciones de Jupyter funcionan correctamente (crear notebooks o carpetas, subir archivos, etc.).</p>
+<img alt="jupyter-not-connected" src="https://panchoman.s3-sa-east-1.amazonaws.com/jupyter-not-connected.png" />
+<dl>
+<dt><strong>Mensajes de Error</strong>:</dt><dd><ul>
+<li><dl>
+<dt>En Docker:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>W <span class="m">06</span>:57:35.645 NotebookApp<span class="o">]</span> <span class="m">404</span> GET /nbextensions/widgets/notebook/js/extension.js?v<span class="o">=</span><span class="m">20200327084013</span> <span class="o">(</span><span class="m">172</span>.18.0.1<span class="o">)</span> <span class="m">1</span>.76ms <span class="nv">referer</span><span class="o">=</span>https://hola.com/notebooks/Untitled13.ipynb?kernel_name<span class="o">=</span>python3
+
+<span class="o">[</span>W <span class="m">06</span>:44:04.603 NotebookApp<span class="o">]</span> <span class="m">403</span> POST /GponForm/diag_Form?images/ <span class="o">(</span><span class="m">172</span>.18.0.13<span class="o">)</span>: <span class="s1">&#39;_xsrf&#39;</span> argument missing from POST
+
+<span class="o">[</span>W <span class="m">06</span>:37:35.963 NotebookApp<span class="o">]</span> <span class="m">404</span> GET /Report.docx <span class="o">(</span><span class="m">172</span>.18.0.13<span class="o">)</span> <span class="m">2</span>.05ms <span class="nv">referer</span><span class="o">=</span>None
+
+<span class="o">[</span>W <span class="m">06</span>:30:29.023 NotebookApp<span class="o">]</span> Replacing stale connection: <span class="m">12345</span>:7789
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><strong>Solución:</strong></dt><dd><ul class="simple">
+<li><p>Correr servidor Jupyter con <strong>opción</strong> <code class="code docutils literal notranslate"><span class="pre">NotebookApp.allow_origin='*'</span></code>. Ver <a class="reference internal" href="config-options.html#notebookapp-allow-origin"><span class="std std-ref">NotebookApp.allow_origin</span></a>: y <a class="reference internal" href="config.html#editar-config-linea-comando"><span class="std std-ref">Configurar Opciones desde la Línea de Comandos</span></a>:.</p></li>
+<li><p>En caso de estar usando Jupyter en <strong>Docker-compose</strong> detrás de un <strong>&quot;reverse_proxy&quot;</strong> <strong>NGINX</strong> y <strong>SSL</strong>, se recomienda seguir la configuración detallada acá: <a class="reference internal" href="cases.html#nginx-conf-reverse-proxy-nginx-docker-compose"><span class="std std-ref">nginx.conf</span></a>:</p></li>
+<li><p>En caso de tener protegido el servidor Jupyter con <strong>SSL / TSL</strong>, <strong>NO olvidar</strong> consultar el dominio o URL con <strong>&quot;https:&quot;</strong>.</p></li>
+</ul>
+</dd>
+</dl>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Jupyter</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usuario.html">1. Manual Nivel Usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seguridad.html">2. Seguridad en Notebooks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kernel-not-connected-en-servidor-remoto">Kernel &quot;Not Connected&quot; en Servidor remoto</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">4. Configuración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">5. Docker y Docker-compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cases.html">6. Casos Especiales</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="seguridad.html" title="capítulo anterior">Jupyter Notebooks: Seguridad</a></li>
+      <li>Next: <a href="config.html" title="próximo capítulo">Jupyter Notebooks: Configuración</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/troubleshooting.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
