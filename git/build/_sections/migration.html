@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>GIT: Migración de Repositorios &#8212; documentación de Manual Git - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="GIT: Borrar Información Sensible" href="sensitive.html" />
+    <link rel="prev" title="GIT: Comandos" href="commands.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://panchohumeres.gitlab.io/git_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="git-migracion-de-repositorios">
+<h1>GIT: Migración de Repositorios<a class="headerlink" href="#git-migracion-de-repositorios" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Tips para migrar historiales de un remoto a otro.</p>
+<hr class="docutils" />
+<div class="section" id="crear-nuevo-remoto">
+<span id="id1"></span><h2>Crear nuevo remoto:<a class="headerlink" href="#crear-nuevo-remoto" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Fuente:</strong> <a class="reference external" href="https://gitlab.com">https://gitlab.com</a></p>
+<ul>
+<li><p>Desde una carpeta existente:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> existing_folder
+git init
+git remote add origin &lt;url_remoto&gt;
+git add .
+git commit -m <span class="s2">&quot;Initial commit&quot;</span>
+git push -u origin master
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Desde un repo existente:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> existing_repo
+git remote rename origin old-origin
+git remote add origin &lt;url_remoto&gt;
+git push -u origin --all
+git push -u origin --tags
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="migrar-repositorio-con-historial-de-un-origen-a-otro">
+<span id="migrar-repo-con-historial"></span><h2>Migrar repositorio (con historial) de un origen a otro<a class="headerlink" href="#migrar-repositorio-con-historial-de-un-origen-a-otro" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Ver: <a class="reference external" href="https://gist.github.com/niksumeiko/8972566">https://gist.github.com/niksumeiko/8972566</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone --mirror &lt;url_of_old_repo&gt;
+<span class="nb">cd</span> &lt;name_of_old_repo&gt;
+git remote add new-origin &lt;url_of_new_repo&gt;
+git push new-origin --mirror
+</pre></div>
+</div>
+</div>
+<div class="section" id="clonar-repositorio-a-partir-de-un-commit-especifico">
+<span id="clonar-repositorio-de-commit"></span><h2>Clonar Repositorio a partir de un commit específico<a class="headerlink" href="#clonar-repositorio-a-partir-de-un-commit-especifico" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Ver: <a class="reference external" href="https://coderwall.com/p/xyuoza/git-cloning-specific-commits">https://coderwall.com/p/xyuoza/git-cloning-specific-commits</a></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone &lt;URL-commit&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Git</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="commands.html">1. Comandos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Migrar repos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#crear-nuevo-remoto">Crear nuevo remoto:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#migrar-repositorio-con-historial-de-un-origen-a-otro">Migrar repositorio (con historial) de un origen a otro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clonar-repositorio-a-partir-de-un-commit-especifico">Clonar Repositorio a partir de un commit específico</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sensitive.html">3. Borrar información sensible</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sync_remote.html">4. Sincronizar Remotos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repos.html">5. Plataformas Repositorios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">6. Herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">7. Troubleshooting</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="commands.html" title="capítulo anterior">GIT: Comandos</a></li>
+      <li>Next: <a href="sensitive.html" title="próximo capítulo">GIT: Borrar Información Sensible</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/migration.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

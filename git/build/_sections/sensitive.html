@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>GIT: Borrar Información Sensible &#8212; documentación de Manual Git - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="GIT: Sincronización de Remotos" href="sync_remote.html" />
+    <link rel="prev" title="GIT: Migración de Repositorios" href="migration.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://panchohumeres.gitlab.io/git_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="git-borrar-informacion-sensible">
+<h1>GIT: Borrar Información Sensible<a class="headerlink" href="#git-borrar-informacion-sensible" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Tips para borrar información sensible del historial de un repositorio.</p>
+<hr class="docutils" />
+<div class="section" id="remover-archivos-completamente-del-historial">
+<h2>Remover archivos completamente del historial<a class="headerlink" href="#remover-archivos-completamente-del-historial" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="metodo-1-para-carpetas">
+<h3><strong>Método 1:</strong> (Para Carpetas)<a class="headerlink" href="#metodo-1-para-carpetas" title="Enlazar permanentemente con este título">¶</a></h3>
+<blockquote>
+<div><p><strong>Fuente:</strong> <a class="reference external" href="https://myopswork.com/how-remove-files-completely-from-git-repository-history-47ed3e0c4c35">https://myopswork.com/how-remove-files-completely-from-git-repository-history-47ed3e0c4c35</a></p>
+<ol class="arabic">
+<li><p>Navega hacia el <strong>directorio de trabajo</strong> del repositorio.</p></li>
+<li><p>Ejecutar uno de los siguientes comandos (<strong>&quot;path_to_folder&quot;</strong> es ruta a la carpeta a eliminar el historial):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git filter-branch --index-filter <span class="s2">&quot;git rm -rf --cached --ignore-unmatch path_to_folder&quot;</span> HEAD
+
+git filter-branch --force --index-filter <span class="s2">&quot;git rm -rf --cached --ignore-unmatch path_to_folder&quot;</span> --prune-empty --tag-name-filter cat -- --all HEAD
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Ejecutar: <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-all</span></code> o <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">master</span> <span class="pre">--force</span></code> (para forzar, ejemplo rama master en repo origen)</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="metodo-2">
+<h3><strong>Método 2:</strong><a class="headerlink" href="#metodo-2" title="Enlazar permanentemente con este título">¶</a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt><strong>Fuentes :</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository">https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository</a></p></li>
+<li><p><a class="reference external" href="https://www.cocoanetics.com/2012/12/changing-history-gits/">https://www.cocoanetics.com/2012/12/changing-history-gits/</a></p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic">
+<li><p>Navega hacia el <strong>directorio de trabajo</strong> del repositorio.</p></li>
+<li><dl>
+<dt>Ejecuta el siguiente comando, reemplazando PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA por la ruta al archivo que quieres eliminar, no solo con su nombre de archivo. Estos argumentos harán lo siguiente:</dt><dd><ul class="simple">
+<li><p>Forzar a Git a que procese, pero no revise, todo el historial de cada rama y etiqueta</p></li>
+<li><p>Eliminar el archivo especificado y cualquier confirmación vacía generada como resultado</p></li>
+<li><p>Sobreescribir etiquetas existentes.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git filter-branch --force --index-filter <span class="se">\</span>
+<span class="s2">&quot;git rm --cached --ignore-unmatch PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA&quot;</span> <span class="se">\</span>
+--prune-empty --tag-name-filter cat -- --all
+&gt; Rewrite 48dc599c80e20527ed902928085e7861e6b3cbe6 <span class="o">(</span><span class="m">266</span>/266<span class="o">)</span>
+&gt; Ref <span class="s1">&#39;refs/heads/master&#39;</span> was rewritten
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p>Agrega tu archivo con datos confidenciales a .gitignore para asegurar que no lo volviste a confirmar por accidente.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;YOUR-FILE-WITH-SENSITIVE-DATA&quot;</span> &gt;&gt; .gitignore
+$ git add .gitignore
+$ git commit -m <span class="s2">&quot;Add YOUR-FILE-WITH-SENSITIVE-DATA to .gitignore&quot;</span>
+&gt; <span class="o">[</span>master 051452f<span class="o">]</span> Add YOUR-FILE-WITH-SENSITIVE-DATA to .gitignore
+&gt;  <span class="m">1</span> files changed, <span class="m">1</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Una vez que estés conforme con el estado de tu repositorio, realiza un empuje forzado de tus cambios locales para sobrescribir tu GitHub repositorio y todas las ramas que hayas subido:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push origin --force --all
+&gt; Counting objects: <span class="m">1074</span>, <span class="k">done</span>.
+&gt; Delta compression using <span class="m">2</span> threads.
+&gt; Compressing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">677</span>/677<span class="o">)</span>, <span class="k">done</span>.
+&gt; Writing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">1058</span>/1058<span class="o">)</span>, <span class="m">148</span>.85 KiB, <span class="k">done</span>.
+&gt; Total <span class="m">1058</span> <span class="o">(</span>delta <span class="m">590</span><span class="o">)</span>, reused <span class="m">602</span> <span class="o">(</span>delta <span class="m">378</span><span class="o">)</span>
+&gt; To https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+&gt;  + 48dc599...051452f master -&gt; master <span class="o">(</span>forced update<span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Para eliminar el archivo confidencial de tus lanzamientos etiquetados, también deberás realizar un empuje forzado contra tus etiquetas de Git:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push origin --force --tags
+&gt; Counting objects: <span class="m">321</span>, <span class="k">done</span>.
+&gt; Delta compression using up to <span class="m">4</span> threads.
+&gt; Compressing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">166</span>/166<span class="o">)</span>, <span class="k">done</span>.
+&gt; Writing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">321</span>/321<span class="o">)</span>, <span class="m">331</span>.74 KiB <span class="p">|</span> <span class="m">0</span> bytes/s, <span class="k">done</span>.
+&gt; Total <span class="m">321</span> <span class="o">(</span>delta <span class="m">124</span><span class="o">)</span>, reused <span class="m">269</span> <span class="o">(</span>delta <span class="m">108</span><span class="o">)</span>
+&gt; To https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+&gt;  + 48dc599...051452f master -&gt; master <span class="o">(</span>forced update<span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Después de que haya transcurrido un tiempo y estés seguro de que git filter-branch no tuvo efectos secundarios inesperados, puedes forzar a todos los objetos de tu repositorio local a desreferenciarse y recolectar la basura con los siguientes comandos (usando Git 1.8.5 o posterior):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git <span class="k">for</span>-each-ref --format<span class="o">=</span><span class="s2">&quot;delete %(refname)&quot;</span> refs/original <span class="p">|</span> git update-ref --stdin
+$ git reflog expire --expire<span class="o">=</span>now --all
+$ git gc --prune<span class="o">=</span>now
+&gt; Counting objects: <span class="m">2437</span>, <span class="k">done</span>.
+&gt; Delta compression using up to <span class="m">4</span> threads.
+&gt; Compressing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">1378</span>/1378<span class="o">)</span>, <span class="k">done</span>.
+&gt; Writing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">2437</span>/2437<span class="o">)</span>, <span class="k">done</span>.
+&gt; Total <span class="m">2437</span> <span class="o">(</span>delta <span class="m">1461</span><span class="o">)</span>, reused <span class="m">1802</span> <span class="o">(</span>delta <span class="m">1048</span><span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="metodo-3">
+<h3><strong>Método 3:</strong><a class="headerlink" href="#metodo-3" title="Enlazar permanentemente con este título">¶</a></h3>
+<blockquote>
+<div><p><strong>Ver:</strong> <a class="reference external" href="https://help.github.com/es/github/managing-large-files/removing-files-from-a-repositorys-history">https://help.github.com/es/github/managing-large-files/removing-files-from-a-repositorys-history</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git rm --cached giant_file
+<span class="c1"># Prepara nuestro archivo gigante para la eliminación, pero lo deja en el disco</span>
+
+$ git commit --amend -CHEAD
+<span class="c1"># Modifica la confirmación previa con tu cambio</span>
+<span class="c1"># No funcionará hacer simplemente una confirmación nueva, ya que también debes</span>
+<span class="c1"># eliminar el archivo del historial no subido</span>
+
+$ git push
+<span class="c1"># Sube nuestra confirmación reescrita y más pequeña</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="metodo-bfg-repo-cleaner-plug-in">
+<h2><strong>Método &quot;BFG Repo-Cleaner&quot; (Plug-in) :</strong><a class="headerlink" href="#metodo-bfg-repo-cleaner-plug-in" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt><strong>Fuente:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository">https://help.github.com/es/github/authenticating-to-github/removing-sensitive-data-from-a-repository</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/&#64;rhoprhh/removing-keys-passwords-and-other-sensitive-data-from-old-github-commits-on-osx-2fb903604a56">https://medium.com/&#64;rhoprhh/removing-keys-passwords-and-other-sensitive-data-from-old-github-commits-on-osx-2fb903604a56</a></p></li>
+</ul>
+</dd>
+</dl>
+<p>El BFG Repo-Cleaner es una herramienta construida y mantenida por la comunidad de código abierto. Proporciona una alternativa más rápida y simple que git filter-branch para eliminar datos no deseados. Por ejemplo, para eliminar tu archivo con datos confidenciales y dejar intacta tu última confirmación, ejecuta lo siguiente:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bfg --delete-files YOUR-FILE-WITH-SENSITIVE-DATA
+</pre></div>
+</div>
+<p>Para reemplazar todo el texto detallado en passwords.txt donde sea que se encuentre en el historial de tu repositorio, ejecuta lo siguiente:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bfg --replace-text passwords.txt
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="remover-lineas-de-codigo-informacion-sensible-completamente-del-historial">
+<h2>Remover líneas de código (información sensible) completamente del historial<a class="headerlink" href="#remover-lineas-de-codigo-informacion-sensible-completamente-del-historial" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic">
+<li><dl>
+<dt>Instalar Hombebrew, para Linux:</dt><dd><dl class="simple">
+<dt>Ver:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://brew.sh/">https://brew.sh/</a></p></li>
+<li><p><a class="reference external" href="https://docs.brew.sh/Homebrew-on-Linux">https://docs.brew.sh/Homebrew-on-Linux</a></p></li>
+<li><p><a class="reference external" href="https://github.com/rtyley/bfg-repo-cleaner/issues/255">https://github.com/rtyley/bfg-repo-cleaner/issues/255</a></p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/bin/bash -c <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="c1">#estos pasos dependen de la distribución, preferir instrucciones de la línea de comandos</span>
+<span class="nb">test</span> -d ~/.linuxbrew <span class="o">&amp;&amp;</span> <span class="nb">eval</span> <span class="k">$(</span>~/.linuxbrew/bin/brew shellenv<span class="k">)</span>
+<span class="nb">test</span> -d /home/linuxbrew/.linuxbrew <span class="o">&amp;&amp;</span> <span class="nb">eval</span> <span class="k">$(</span>/home/linuxbrew/.linuxbrew/bin/brew shellenv<span class="k">)</span>
+<span class="nb">test</span> -r ~/.bash_profile <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;eval \$(</span><span class="k">$(</span>brew --prefix<span class="k">)</span><span class="s2">/bin/brew shellenv)&quot;</span> &gt;&gt;~/.bash_profile
+<span class="nb">echo</span> <span class="s2">&quot;eval \$(</span><span class="k">$(</span>brew --prefix<span class="k">)</span><span class="s2">/bin/brew shellenv)&quot;</span> &gt;&gt;~/.profile
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Clonar con método &quot;mirror&quot; el repo de origen:code:<cite>git clone –mirror &lt;remote_repo&gt; &lt;nombre_local_repo&gt;</cite>:</dt><dd><p><strong>Nota</strong>: Va a hacer una copia &quot;bare&quot;.</p>
+</dd>
+</dl>
+</li>
+<li><p>cd  &lt;nombre_local_repo&gt;</p></li>
+<li><p>Crear un archivo de texto con reglas de sustitución, por ejemplo:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>PASSWORD1 <span class="c1">#Replace string &#39;PASSWORD1&#39; with &#39;***REMOVED***&#39; (default)</span>
+<span class="nv">PASSWORD2</span><span class="o">==</span>&gt;examplePass         <span class="c1"># replace with &#39;examplePass&#39; instead</span>
+<span class="nv">PASSWORD3</span><span class="o">==</span>&gt;                    <span class="c1"># replace with the empty string</span>
+regex:password<span class="o">=</span><span class="se">\w</span>+<span class="o">==</span>&gt;password<span class="o">=</span>  <span class="c1"># Replace, using a regex</span>
+regex:<span class="se">\r</span><span class="o">(</span><span class="se">\n</span><span class="o">)==</span>&gt;<span class="nv">$1</span>               <span class="c1"># Replace Windows newlines with Unix</span>
+                                newlines
+</pre></div>
+</div>
+<dl class="simple">
+<dt><strong>Nota:</strong> Para expresiones regulares se recomienda ver:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://regexr.com/">https://regexr.com/</a> (simulador de regex)</p></li>
+<li><p><a class="reference external" href="https://www.regular-expressions.info/wordboundaries.html">https://www.regular-expressions.info/wordboundaries.html</a></p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">bfg</span> <span class="pre">--replace-text</span> <span class="pre">&lt;nombre_archivo_sustitución&gt;</span></code></p></li>
+<li><p>Ejectuar comandos que sugiere la herramienta:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git reflog expire --expire<span class="o">=</span>now --all <span class="o">&amp;&amp;</span> git gc --prune<span class="o">=</span>now --  aggressive
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Empujar cambios al repositorio origen: <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></p></li>
+</ol>
+<ul class="simple">
+<li><p><strong>Nota</strong>: Es posible de que primero haya que hacen un commit borrando la data que uno desea eliminar, para que los cambios sean efectivos (ver output de la herramienta).</p></li>
+</ul>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Git</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="commands.html">1. Comandos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">3. Migrar repos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Borrar información sensible</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#remover-archivos-completamente-del-historial">Remover archivos completamente del historial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metodo-bfg-repo-cleaner-plug-in"><strong>Método &quot;BFG Repo-Cleaner&quot; (Plug-in) :</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remover-lineas-de-codigo-informacion-sensible-completamente-del-historial">Remover líneas de código (información sensible) completamente del historial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sync_remote.html">5. Sincronizar Remotos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repos.html">6. Plataformas Repositorios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">7. Herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">8. Troubleshooting</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="migration.html" title="capítulo anterior">GIT: Migración de Repositorios</a></li>
+      <li>Next: <a href="sync_remote.html" title="próximo capítulo">GIT: Sincronización de Remotos</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/sensitive.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
