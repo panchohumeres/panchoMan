@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>GIT: Sincronización de Remotos &#8212; documentación de Manual Git - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="GIT: Plataformas Repositorios" href="repos.html" />
+    <link rel="prev" title="GIT: Borrar Información Sensible" href="sensitive.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Nginx GitLab Repo <a class="reference external" href="https://panchohumeres.gitlab.io/git_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="git-sincronizacion-de-remotos">
+<h1>GIT: Sincronización de Remotos<a class="headerlink" href="#git-sincronizacion-de-remotos" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Tips para sincronizar dos o más repositorios remotos.
+Se recomienda revisar:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="migration.html#crear-nuevo-remoto"><span class="std std-ref">Crear nuevo remoto:</span></a>.</p></li>
+<li><p><a class="reference internal" href="migration.html#migrar-repo-con-historial"><span class="std std-ref">Migrar repositorio (con historial) de un origen a otro</span></a>.</p></li>
+<li><p><a class="reference internal" href="migration.html#clonar-repositorio-de-commit"><span class="std std-ref">Clonar Repositorio a partir de un commit específico</span></a>.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<div class="section" id="crear-rama-a-partir-de-una-sola-carpeta">
+<h2>Crear rama a partir de una sola Carpeta<a class="headerlink" href="#crear-rama-a-partir-de-una-sola-carpeta" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Fuente:</strong> <a class="reference external" href="https://stackoverflow.com/questions/9971332/git-create-a-new-branch-with-only-a-specified-directory-and-its-history-then-pus">https://stackoverflow.com/questions/9971332/git-create-a-new-branch-with-only-a-specified-directory-and-its-history-then-pus</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch subdir_branch HEAD
+git filter-branch --subdirectory-filter dir/to/filter -- subdir_branch
+<span class="c1">#Ó</span>
+git filter-branch -f --subdirectory-filter ./linux -- linux
+</pre></div>
+</div>
+</div>
+<div class="section" id="reintegrar-merge-cambios-hechos-en-rama-creada-a-partir-de-una-sola-carpeta">
+<h2>Reintegrar (merge) cambios hechos en rama creada a partir de una sóla Carpeta<a class="headerlink" href="#reintegrar-merge-cambios-hechos-en-rama-creada-a-partir-de-una-sola-carpeta" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Fuentes:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.datree.io/resources/git-error-fatal-refusing-to-merge-unrelated-histories">https://www.datree.io/resources/git-error-fatal-refusing-to-merge-unrelated-histories</a></p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic">
+<li><p>Clonar repositorio en carpeta local.</p></li>
+<li><p>Ejecutar:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git fetch origin &lt;nombre_rama_filtrada&gt;:&lt;nombre_rama_filtrada&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>VERIFICAR</strong> que sólo se han hecho <strong>cambios en la carpeta filtrada</strong>.</p></li>
+<li><p>Estando en rama master:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git merge &lt;nombre_rama_filtrada&gt; --allow-unrelated-histories
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="resetear-repositorio-push-a-remoto-ignorando-historia">
+<h2>Resetear repositorio (push a remoto ignorando historia)<a class="headerlink" href="#resetear-repositorio-push-a-remoto-ignorando-historia" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push -u --force &lt;nombre_remoto&gt; &lt;data_dict&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="agregar-un-nuevo-remoto">
+<h2>Agregar un nuevo remoto:<a class="headerlink" href="#agregar-un-nuevo-remoto" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote rename origin &lt;antiguo_remoto&gt;
+git remote add origin &lt;nuevo_remoto&gt;
+git push -u origin --all git push -u origin --tags
+git push &lt;nuevo_remoto&gt; &lt;rama_local&gt;:&lt;rama_remota&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="clonar-una-sola-rama">
+<h2>Clonar una sóla rama:<a class="headerlink" href="#clonar-una-sola-rama" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone -b &lt;mybranch&gt; --single-branch &lt;remote_repo&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="sincronizar-dos-ramas-de-dos-remotos-distintos">
+<h2>Sincronizar dos ramas de dos remotos distintos<a class="headerlink" href="#sincronizar-dos-ramas-de-dos-remotos-distintos" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Situación:</strong></dt><dd><ul class="simple">
+<li><p>Dos repositorios (&quot;origin&quot; y &quot;target&quot;).</p></li>
+<li><p>Se quiere sincronizar una rama con el mismo nombre (&quot;nombre rama&quot;).</p></li>
+<li><p>Se crea la rama en &quot;target&quot;, con menos archivos que en &quot;origin&quot; (por ejemplo, sólo dentro de una carpeta), con el fin de trackear ese reducido conjunto de cambios en &quot;origin&quot;.</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic">
+<li><p>En target (repo distinto de origin), crear rama:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout -b &lt;nombre_rama&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Agregar origin como nuevo remoto (distinto de &quot;origin&quot; de target):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote add &lt;nombre_nuevo_remoto_origin&gt; &lt;url_nuevo_remoto_origin&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Empujar nueva rama al repo &quot;origin&quot;:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push -u &lt;nombre_origin&gt; &lt;nombre_rama&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>En el repo &quot;origin&quot;:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git pull --all
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>En el repo &quot;origin&quot;:</p>
+<blockquote>
+<div><p>Opción a)</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git pull --all
+
+<span class="c1">#para revisar ramas existentes</span>
+git branch -v
+
+git checkout &lt;nombre_remoto&gt;/&lt;nombre_rama&gt;
+
+<span class="c1">#Output esperado</span>
+<span class="c1">#You are in &#39;detached HEAD&#39; state. You can look around, make experimental</span>
+<span class="c1">#changes and commit them, and you can discard any commits you make in this</span>
+<span class="c1">#state without impacting any branches by performing another checkout.</span>
+
+<span class="c1">#If you want to create a new branch to retain commits you create, you may</span>
+<span class="c1">#do so (now or later) by using -b with the checkout command again. Example:</span>
+
+<span class="c1">#git checkout -b &lt;new-branch-name&gt;</span>
+
+git checkout -b &lt;nombre_rama&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<p>Opción b)</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout -b &lt;nombre_rama&gt;
+git branch --set-upstream-to<span class="o">=</span>origin/&lt;nombre_rama&gt; &lt;nombre_rama&gt;
+
+<span class="c1">#Se sugiere ejecutar en este comando en un entorno de desarrollo que permita resolver conflictos git..</span>
+<span class="c1">#como Visualstudio Code</span>
+git pull --all --allow-unrelated-histories
+
+<span class="c1">#Va a tirar el siguiente error:</span>
+<span class="c1">#Automatic merge failed; fix conflicts and then commit the result.</span>
+
+<span class="c1">#Resolver conflictos y hacer commit</span>
+
+git push origin &lt;nombre_rama&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>En el repo &quot;origin&quot;:</p>
+<blockquote>
+<div><ul>
+<li><p>Si es que en el paso 5, se eligió opción a):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout master
+
+<span class="c1">#ejecutar este comando sólo para probar</span>
+git merge &lt;nombre_rama&gt; <span class="c1">#va a generar el siguiente error:</span>
+<span class="c1">#fatal: refusing to merge unrelated histories</span>
+
+<span class="c1">#Se sugiere ejecutar en este comando en un entorno de desarrollo que permita resolver conflictos git..</span>
+<span class="c1">#como Visualstudio Code</span>
+git merge &lt;nombre_rama&gt; --allow-unrelated-histories
+
+<span class="c1">#Va a tirar el siguiente error:</span>
+<span class="c1">#Automatic merge failed; fix conflicts and then commit the result.</span>
+
+<span class="c1">#Resolver conflictos y hacer commit</span>
+
+git push origin master
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Si es que en el paso 5, se eligió opción b):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout master
+
+git merge &lt;nombre_rama&gt;
+
+<span class="c1">#Puede tirar el siguiente error:</span>
+<span class="c1">#Automatic merge failed; fix conflicts and then commit the result.</span>
+
+<span class="c1">#Resolver conflictos y hacer commit</span>
+
+git push origin master
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<ul>
+<li><dl>
+<dt><strong>Notas:</strong></dt><dd><ul>
+<li><p>Si es que sale este error al intentar sincronizar la rama:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>There is no tracking information <span class="k">for</span> the current branch.
+Please specify which branch you want to merge with.
+See git-pull<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="k">for</span> details.
+
+    git pull &lt;remote&gt; &lt;branch&gt;
+
+If you wish to <span class="nb">set</span> tracking information <span class="k">for</span> this branch you can <span class="k">do</span> so with:
+
+    git branch --set-upstream-to<span class="o">=</span>origin/&lt;branch&gt; linux
+</pre></div>
+</div>
+<p>Ejecutar:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch --set-upstream-to<span class="o">=</span>origin/&lt;nombre_rama&gt; &lt;nombre_rama&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="clonar-repositorio-a-partir-de-un-commit-especifico">
+<h2>Clonar Repositorio a partir de un commit específico<a class="headerlink" href="#clonar-repositorio-a-partir-de-un-commit-especifico" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Ver: <a class="reference external" href="https://coderwall.com/p/xyuoza/git-cloning-specific-commits">https://coderwall.com/p/xyuoza/git-cloning-specific-commits</a></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone &lt;URL-commit&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Git</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="commands.html">1. Comandos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">2. Migrar repos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensitive.html">3. Borrar información sensible</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Sincronizar Remotos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#crear-rama-a-partir-de-una-sola-carpeta">Crear rama a partir de una sola Carpeta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reintegrar-merge-cambios-hechos-en-rama-creada-a-partir-de-una-sola-carpeta">Reintegrar (merge) cambios hechos en rama creada a partir de una sóla Carpeta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resetear-repositorio-push-a-remoto-ignorando-historia">Resetear repositorio (push a remoto ignorando historia)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#agregar-un-nuevo-remoto">Agregar un nuevo remoto:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clonar-una-sola-rama">Clonar una sóla rama:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sincronizar-dos-ramas-de-dos-remotos-distintos">Sincronizar dos ramas de dos remotos distintos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clonar-repositorio-a-partir-de-un-commit-especifico">Clonar Repositorio a partir de un commit específico</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="repos.html">5. Plataformas Repositorios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">6. Herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">7. Troubleshooting</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="sensitive.html" title="capítulo anterior">GIT: Borrar Información Sensible</a></li>
+      <li>Next: <a href="repos.html" title="próximo capítulo">GIT: Plataformas Repositorios</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/sync_remote.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
