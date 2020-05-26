@@ -4,7 +4,7 @@ pages:
   stage: deploy
   script:
     - mkdir .public
-    - cp -r ssl_tsl/build/* .public
+    - cp -r linux/build/* .public
     - mv .public public
   artifacts:
     paths:

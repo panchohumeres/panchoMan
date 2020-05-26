@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Linux: Bash $ y Expansión de Parámetros &#8212; documentación de Manual Linux - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Linux: Usos de Comillas" href="quotes-bash.html" />
+    <link rel="prev" title="Linux: Bash Strings" href="strings-bash.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/linux_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="linux-bash-y-expansion-de-parametros">
+<h1>Linux: Bash $ y Expansión de Parámetros<a class="headerlink" href="#linux-bash-y-expansion-de-parametros" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>Bash:</dt><dd><p>Expansión de Parámetros: Conceptos</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<ul>
+<li><dl class="simple">
+<dt><strong>Referencias</strong>:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.gnu.org/software/bash/manual/htmlnode/Shell-Parameter-Expansion.html">https://www.gnu.org/software/bash/manual/htmlnode/Shell-Parameter-Expansion.html</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>El carácter <strong>&quot;$&quot;</strong> introduce expansión de parámetros, substitución de comandos, o expresión aritmética.</p></li>
+<li><dl class="simple">
+<dt>Forma convencional:</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">${parameter}</span></code>
+El valor de <strong>parameter</strong> es sustituido. <strong>parameter</strong> es un parámetro del shell como se describe anteriormente, o una referencia a un array.</p>
+</dd>
+</dl>
+</li>
+<li><p>El nombre del parámetro o símbolo puede estar contenido en corchetes, i.e. <strong>&quot;{}&quot;</strong>, los sirven para proteger la variable a ser expandida de otros carácteres que le siguen inmediatamente, y no sean confundidos como un string o parte del nombre de la variable.</p></li>
+<li><p>Los corchetes <strong>&quot;{}&quot;</strong> son <strong>REQUERIDOS</strong> si es que el <strong>parámetros</strong> es <strong>posicional y con más de un dígito.</strong></p></li>
+<li><p><strong>SI ES QUE NO HAY OTRO TEXTO CONTIGUO</strong>, los corchetes <strong>&quot;{}&quot;</strong> son <strong>OPCIONALES</strong>.</p></li>
+<li><dl>
+<dt>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>NO es un nameref</strong> (Ver: <a class="reference internal" href="shell-parameters-bash.html"><span class="doc">Linux: Bash y Parámetros del Shell</span></a>), se conoce como <strong>&quot;expansión indirecta&quot;</strong>:</dt><dd><ol class="arabic simple">
+<li><p>Bash usa el valor formado por el resto del <strong>parameter</strong> como un <strong>&quot;nuevo&quot; parameter</strong>.</p></li>
+</ol>
+<p>2. Luego este <strong>&quot;nuevo» parameter</strong> es expandido, y este valor es utilizado en el resto de la expresión, en lugar del parámetro original.
+Ejemplo:</p>
+<blockquote>
+<div><p>** Ref:** http://ahmed.amayem.com/bash-indirect-expansion-exploration/</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fn<span class="o">()</span>
+<span class="o">{</span>
+    <span class="nb">echo</span> <span class="si">${</span><span class="p">!1</span><span class="si">}</span>
+<span class="o">}</span>
+fn x
+</pre></div>
+</div>
+<p>Resultado Esperado:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./indirect.sh
+<span class="m">2</span>
+</pre></div>
+</div>
+<p>Explicación:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="p">!1</span><span class="si">}</span>
+<span class="c1">#ES:</span>
+<span class="si">${</span><span class="nv">x</span><span class="si">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>ES un nameref</strong> (Ver: <a class="reference internal" href="shell-parameters-bash.html"><span class="doc">Linux: Bash y Parámetros del Shell</span></a>):</dt><dd><ol class="arabic simple">
+<li><p>Se expande al valor de la variable referenciada por <strong>parameter</strong>, en lugar de la «expansión indirecta».</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+<hr class="docutils" />
+<dl>
+<dt>Bash:</dt><dd><p>Usos del signo $.</p>
+<p><strong>Referencia</strong>: <a class="reference external" href="https://stackoverflow.com/questions/10870719/inline-code-highlighting-in-restructuredtext">https://stackoverflow.com/questions/10870719/inline-code-highlighting-in-restructuredtext</a></p>
+</dd>
+</dl>
+<hr class="docutils" />
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$1,</span> <span class="pre">$2,</span> <span class="pre">$3</span></code></dt><dd><p>Parámetros posicionales</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">&quot;$&#64;&quot;</span></code></dt><dd><dl class="simple">
+<dt>Parámetros posicionales, como array: i.e. la forma:</dt><dd><p>{$1, $2, $3 …}.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">&quot;$*&quot;</span></code></dt><dd><p>«Expansión» <strong>IFS</strong> de parámetros posicionales. P.ej (IFS=”|”): «$1|$2|$3».
+Ver: <a class="reference external" href="https://bash.cyberciti.biz/guide/$IFS">https://bash.cyberciti.biz/guide/$IFS</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$#</span></code></dt><dd><p>El número de parámetros posicionales.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$-</span></code></dt><dd><p>Número de opciones para el «Shell» actual.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$$</span></code></dt><dd><p>«Process ID» <strong>(PID)</strong> del actual «Shell» (<strong>NO</strong> sub-shell).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$</span></code></dt><dd><p>Parámetro más reciente.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$IFS</span></code></dt><dd><p>Separador o delimitador de parámetros en string de entrada (input). Ver: <a class="reference internal" href="strings-bash.html"><span class="doc">Linux: Bash Strings</span></a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$?</span></code></dt><dd><p>Status más reciente anterior a un «exit».</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$!</span></code></dt><dd><p>PID del comando más reciente ejecutado en el background.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">$0</span></code></dt><dd><p>El nombre del shell o script shell.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Linux</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="useful-commands.html">1. Comandos Útiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">2. Nube pública (Cloud)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bash.html">3. Bash</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="arrays-bash.html">1. Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="args-bash.html">2. Pasar argumentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. $ y Expansión de Parámetros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quotes-bash.html">5. Uso de &quot; &quot; y ' '</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shell-parameters-bash.html">6. Parámetros Shell</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alpine.html">5. Alpine Linux</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="bash.html">Linux: Bash</a><ul>
+      <li>Previous: <a href="strings-bash.html" title="capítulo anterior">Linux: Bash Strings</a></li>
+      <li>Next: <a href="quotes-bash.html" title="próximo capítulo">Linux: Usos de Comillas</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/$-bash.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
