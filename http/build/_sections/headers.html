@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Networking: Headers &#8212; documentación de Manual Networking (HTTP-TCP) - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Networking: Browsers" href="browsers-cookies.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan HTTP GitLab Repo <a class="reference external" href="https://panchohumeres.gitlab.io/http_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="networking-headers">
+<h1>Networking: Headers<a class="headerlink" href="#networking-headers" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Documentación sobre <strong>&quot;HTTP(S)&quot;</strong> <strong>&quot;Headers&quot;</strong> o cabeceras.</p>
+<div class="section" id="autenticacion-basica-basic-authentication">
+<h2>Autenticación Básica (&quot;Basic Authentication&quot;):<a class="headerlink" href="#autenticacion-basica-basic-authentication" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="descripcion">
+<h3>Descripción<a class="headerlink" href="#descripcion" title="Enlazar permanentemente con este título">¶</a></h3>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://swagger.io/docs/specification/authentication/basic-authentication/">https://swagger.io/docs/specification/authentication/basic-authentication/</a></p></li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li><p><strong>&quot;Basic Authentication&quot;</strong> es un esquema de autorización simple embebido en el protocolo <strong>HTTP</strong>.</p></li>
+<li><p>El <strong>cliente</strong> envía <strong>solicitudes</strong> HTTP con la cabecera o <strong>&quot;header&quot;</strong>: <strong>&quot;Authorization&quot;</strong>.</p></li>
+<li><p>El valor de <strong>&quot;Authorization&quot;</strong> contiene la palabra <strong>&quot;Basic&quot;</strong>, seguida de un <strong>espacio</strong> y un <strong>string en base64</strong> de la forma: <code class="code docutils literal notranslate"><span class="pre">username:password</span></code>.</p></li>
+<li><p>Dado que <strong>base64</strong> es fácil de <strong>decodificar</strong>, se recomienda combinarla con otros mecanismos como <strong>HTTPS/SSL</strong>.</p></li>
+<li><dl class="simple">
+<dt>Ejemplo 1, <strong>Usuario: &quot;demo&quot;, Password: &quot;p&#64;55w0rd&quot;</strong>, el cliente enviaría la siguiente solicitud:</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Basic</span> <span class="pre">ZGVtbzpwQDU1dzByZA==</span></code></p>
+</dd>
+</dl>
+</li>
+<li><p>EJemplo 2, Ver: <a class="reference external" href="http://shairosenfeld.blogspot.com/2011/03/authorization-header-in-nginx-for.html">http://shairosenfeld.blogspot.com/2011/03/authorization-header-in-nginx-for.html</a>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#&quot;user:password&quot; # formato estándar autenticación básica</span>
+http://foo:bar@example.com <span class="c1">#EJEMPLO</span>
+
+<span class="c1">#base64</span>
+<span class="s2">&quot;dXNlcjpwYXNzd29yZA==&quot;</span> <span class="c1">#Ejemplo en Base 64</span>
+
+<span class="c1">#Cabecera completa</span>
+<span class="s2">&quot;Basic dXNlcjpwYXNzd29yZA==&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="flujo">
+<h3>Flujo<a class="headerlink" href="#flujo" title="Enlazar permanentemente con este título">¶</a></h3>
+<dl>
+<dt>Flujo definido por estándar (RFC 7235)[<a class="reference external" href="https://tools.ietf.org/html/rfc7235">https://tools.ietf.org/html/rfc7235</a>].</dt><dd><ol class="arabic">
+<li><p>Servidor responde a la solicitud del cliente con <code class="code docutils literal notranslate"><span class="pre">401</span> <span class="pre">(Unauthorized)</span></code>.</p></li>
+<li><p>Devuelve al cliente <strong>información de como autorizarse</strong> con <strong>encabezado de respuesta</strong> <code class="code docutils literal notranslate"><span class="pre">WWW-Authenticate</span></code>.</p></li>
+<li><p>Cliente responde con encabezado de autorización <code class="code docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Basic</span> <span class="pre">ZGVtbzpwQDU1dzByZA==</span></code> (del ejemplo mencionado en el punto anterior).</p>
+<blockquote>
+<div><img alt="http-basic-auth-flujo" src="https://panchoman.s3-sa-east-1.amazonaws.com/HTTPAuth.png" />
+<p>Fuente Imagen: <a class="footnote-reference brackets" href="#id2" id="id1">1</a>.</p>
+</div></blockquote>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+<div class="section" id="herramientas-para-codificar-decodificar-en-base64">
+<h3>Herramientas para codificar/decodificar en Base64<a class="headerlink" href="#herramientas-para-codificar-decodificar-en-base64" title="Enlazar permanentemente con este título">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.base64decode.org/">https://www.base64decode.org/</a></p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>MDN web docs, <a class="reference external" href="https://developer.mozilla.org/es/docs/Web/HTTP/Authentication">https://developer.mozilla.org/es/docs/Web/HTTP/Authentication</a></p>
+</dd>
+</dl>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Networking (HTTP-TCP)</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="codes.html">1. Códigos HTTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CORS.html">2. CORS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="browsers.html">3. Browsers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Headers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#autenticacion-basica-basic-authentication">Autenticación Básica (&quot;Basic Authentication&quot;):</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="browsers-cookies.html" title="capítulo anterior">Networking: Browsers</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/headers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

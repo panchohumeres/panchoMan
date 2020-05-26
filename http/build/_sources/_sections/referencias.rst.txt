@@ -1,0 +1,5 @@
+=====================================
+Docker: Referencias
+=====================================
+
+.. [1] Itamar Turner-Trauring, https://pythonspeed.com/articles/docker-connection-refused/

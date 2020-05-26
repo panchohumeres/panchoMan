@@ -4,7 +4,7 @@ pages:
   stage: deploy
   script:
     - mkdir .public
-    - cp -r nginx/build/* .public
+    - cp -r http/build/* .public
     - mv .public public
   artifacts:
     paths:
