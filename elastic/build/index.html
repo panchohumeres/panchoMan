@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Manual Elasticsearch de Francisco Humeres M. &#8212; documentación de Manual Elasticsearch - 1.0</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Elasticsearch: Fundamentos" href="_sections/fundamentos.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<p><a class="reference external" href="URL">panchoMan</a></p>
+<div class="section" id="manual-elasticsearch-de-francisco-humeres-m">
+<h1>Manual Elasticsearch de Francisco Humeres M.<a class="headerlink" href="#manual-elasticsearch-de-francisco-humeres-m" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_sections/fundamentos.html">1. Fundamentos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/fundamentos.html#documentos">Documentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/fundamentos.html#indices">Índices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/docker.html">2. Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/docker.html#ejemplos-detallados">Ejemplos detallados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/docker.html#caso-ssl-interno">Caso SSL interno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/docker.html#caso-ssl-con-comunicaciones-http-manejadas-por-proxy">Caso SSL con comunicaciones HTTP manejadas por Proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/queries-ssl.html">3. Queries usando SSL / TSL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-ssl.html#ejemplo-de-respuesta-esperada">Ejemplo de Respuesta esperada</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-ssl.html#curl">curl</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/python.html">4. API Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/python.html#conexion-normal">Conexión Normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/python.html#conexion-ssl-usando-archivos-de-certificados">Conexión SSL (usando archivos de certificados)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/queries-kibana.html">5. Ejemplos queries en Kibana DevTools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-kibana.html#histograma">Histograma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-kibana.html#percentiles">Percentiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-kibana.html#histograma-filtrados-por-valores-unicos-de-un-campo">Histograma filtrados por valores únicos de un campo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-kibana.html#agregados-por-field-name">Agregados por field_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-kibana.html#agregados-por-dia">Agregados por dia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-kibana.html#agregado-promedio-por-dia-x-field-name">Agregado promedio por dia x field_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-kibana.html#dividir-dos-campos-suma-de-ellos">dividir dos campos (suma de ellos)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-kibana.html#listar-index-patterns-por-nombre-y-id">listar index patterns por nombre y ID</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/queries-ssl.html">6. Ejemplos queries usando HTTPS (SSL/TSL)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-ssl.html#ejemplo-de-respuesta-esperada">Ejemplo de Respuesta esperada</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/queries-ssl.html#curl">curl</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">7. Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/troubleshooting.html#request-entity-too-large">413 Request Entity Too Large</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Manual Elasticsearch</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_sections/fundamentos.html">1. Fundamentos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/docker.html">2. Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/queries-ssl.html">3. Queries usando SSL / TSL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/python.html">4. API Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/queries-kibana.html">5. Ejemplos queries en Kibana DevTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/queries-ssl.html">6. Ejemplos queries usando HTTPS (SSL/TSL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">7. Troubleshooting</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="_sections/fundamentos.html" title="próximo capítulo">Elasticsearch: Fundamentos</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

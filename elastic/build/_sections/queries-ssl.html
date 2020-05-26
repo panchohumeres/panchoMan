@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Elasticsearch: Queries SSL / TSL &#8212; documentación de Manual Elasticsearch - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title=".env" href="example-docker-proxy-ssl.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="elasticsearch-queries-ssl-tsl">
+<h1>Elasticsearch: Queries SSL / TSL<a class="headerlink" href="#elasticsearch-queries-ssl-tsl" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Ejemplos de Queries usando certificados SSL / TSL</p>
+<hr class="docutils" />
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.5/cat-indices.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.5/cat-indices.html</a></p></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="ejemplo-de-respuesta-esperada">
+<h2>Ejemplo de Respuesta esperada<a class="headerlink" href="#ejemplo-de-respuesta-esperada" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+<span class="s2">&quot;name&quot;</span> : <span class="s2">&quot;es01&quot;</span>,
+<span class="s2">&quot;cluster_name&quot;</span> : <span class="s2">&quot;docker-cluster&quot;</span>,
+<span class="s2">&quot;cluster_uuid&quot;</span> : <span class="s2">&quot;obw-CSWyRliGmXUbcw6znQ&quot;</span>,
+<span class="s2">&quot;version&quot;</span> : <span class="o">{</span>
+<span class="s2">&quot;number&quot;</span> : <span class="s2">&quot;7.2.0&quot;</span>,
+<span class="s2">&quot;build_flavor&quot;</span> : <span class="s2">&quot;default&quot;</span>,
+<span class="s2">&quot;build_type&quot;</span> : <span class="s2">&quot;docker&quot;</span>,
+<span class="s2">&quot;build_hash&quot;</span> : <span class="s2">&quot;508c38a&quot;</span>,
+<span class="s2">&quot;build_date&quot;</span> : <span class="s2">&quot;2019-06-20T15:54:18.811730Z&quot;</span>,
+<span class="s2">&quot;build_snapshot&quot;</span> : false,
+<span class="s2">&quot;lucene_version&quot;</span> : <span class="s2">&quot;8.0.0&quot;</span>,
+<span class="s2">&quot;minimum_wire_compatibility_version&quot;</span> : <span class="s2">&quot;6.8.0&quot;</span>,
+<span class="s2">&quot;minimum_index_compatibility_version&quot;</span> : <span class="s2">&quot;6.0.0-beta1&quot;</span>
+<span class="o">}</span>,
+<span class="s2">&quot;tagline&quot;</span> : <span class="s2">&quot;You Know, for Search&quot;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="curl">
+<span id="queries-ssl-curl"></span><h2>curl<a class="headerlink" href="#curl" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="probar-acceso-a-host-elasticsearch">
+<h3>Probar acceso a host elasticsearch<a class="headerlink" href="#probar-acceso-a-host-elasticsearch" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl --cacert <span class="o">{</span>CERTS_DIR<span class="o">}</span>/certificates/ca/ca.crt https://<span class="o">{</span>USER<span class="o">}</span>:<span class="o">{</span>PSSWD<span class="o">}</span>@<span class="o">{</span>HOST<span class="o">}</span>:<span class="o">{</span>PUERTO<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="listar-todos-los-indices">
+<h3>Listar todos los índices<a class="headerlink" href="#listar-todos-los-indices" title="Enlazar permanentemente con este título">¶</a></h3>
+<p><strong>Rerencias</strong>: <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.5/cat-indices.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.5/cat-indices.html</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl http://<span class="o">{</span>HOST<span class="o">}</span>:<span class="o">{</span>PUERTO<span class="o">}</span>/_aliases
+</pre></div>
+</div>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Elasticsearch</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="docker.html">2. Docker</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Queries usando SSL / TSL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ejemplo-de-respuesta-esperada">Ejemplo de Respuesta esperada</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#curl">curl</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="example-docker-proxy-ssl.html" title="capítulo anterior">.env</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/queries-ssl.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

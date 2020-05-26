@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Elasticsearch: Fundamentos &#8212; documentación de Manual Elasticsearch - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Elasticsearch: Docker" href="docker.html" />
+    <link rel="prev" title="Manual Elasticsearch de Francisco Humeres M." href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="elasticsearch-fundamentos">
+<h1>Elasticsearch: Fundamentos<a class="headerlink" href="#elasticsearch-fundamentos" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="documentos">
+<h2>Documentos<a class="headerlink" href="#documentos" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul>
+<li><p>La unidad atómica de elastiseach. Corresponde a un <strong>JSON</strong> (<strong>diccionario</strong>), con <strong>llaves</strong> o nombres de &quot;variables&quot; y sus correspondientes valores.</p></li>
+<li><p>Cada <strong>lave</strong> tiene <em>un</em> valor correspondiente.</p></li>
+<li><p>Las <strong>llaves</strong> o nombres de variables son <strong>comunes</strong> a todos los documentos en el <strong>índice</strong>.</p></li>
+<li><p>Los <strong>valores</strong> pueden contener otro <strong>diccionario</strong> (o <strong>JSON</strong>), es decir <strong>documentos anidados</strong> (aunque en estos casos, el documento anidado <strong>NO</strong> se contabiliza como un documento del índice propiamente tal).</p></li>
+<li><dl>
+<dt>Ejemplo de <strong>UN Documento</strong>:</dt><dd><ul>
+<li><p>Como <strong>&quot;Tabla&quot;</strong>:</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/elastic_document_table.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/elastic_document_table.png" />
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Como <strong>JSON</strong>:</dt><dd><p><strong>Nota:</strong> Documento propiamente tal está dentro de elemento <strong>&quot;_source&quot;</strong>.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="nt">&quot;_index&quot;</span><span class="p">:</span> <span class="s2">&quot;kibana_sample_data_flights&quot;</span><span class="p">,</span>
+<span class="nt">&quot;_type&quot;</span><span class="p">:</span> <span class="s2">&quot;_doc&quot;</span><span class="p">,</span>
+<span class="nt">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;YPVpFXEB5UWALlwhWs1x&quot;</span><span class="p">,</span>
+<span class="nt">&quot;_version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="nt">&quot;_score&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+<span class="nt">&quot;_source&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;FlightNum&quot;</span><span class="p">:</span> <span class="s2">&quot;T1QZM86&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;DestCountry&quot;</span><span class="p">:</span> <span class="s2">&quot;AT&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;OriginWeather&quot;</span><span class="p">:</span> <span class="s2">&quot;Rain&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;OriginCityName&quot;</span><span class="p">:</span> <span class="s2">&quot;Torino&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;AvgTicketPrice&quot;</span><span class="p">:</span> <span class="mf">528.7028432390307</span><span class="p">,</span>
+    <span class="nt">&quot;DistanceMiles&quot;</span><span class="p">:</span> <span class="mf">469.0630980224625</span><span class="p">,</span>
+    <span class="nt">&quot;FlightDelay&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;DestWeather&quot;</span><span class="p">:</span> <span class="s2">&quot;Damaging Wind&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;Dest&quot;</span><span class="p">:</span> <span class="s2">&quot;Vienna International Airport&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;FlightDelayType&quot;</span><span class="p">:</span> <span class="s2">&quot;No Delay&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;OriginCountry&quot;</span><span class="p">:</span> <span class="s2">&quot;IT&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;dayOfWeek&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;DistanceKilometers&quot;</span><span class="p">:</span> <span class="mf">754.8838824238619</span><span class="p">,</span>
+    <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-04-14T04:49:02&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;DestLocation&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;lat&quot;</span><span class="p">:</span> <span class="s2">&quot;48.11029816&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lon&quot;</span><span class="p">:</span> <span class="s2">&quot;16.56970024&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;DestAirportID&quot;</span><span class="p">:</span> <span class="s2">&quot;VIE&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;Carrier&quot;</span><span class="p">:</span> <span class="s2">&quot;Kibana Airlines&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;Cancelled&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;FlightTimeMin&quot;</span><span class="p">:</span> <span class="mf">50.32559216159079</span><span class="p">,</span>
+    <span class="nt">&quot;Origin&quot;</span><span class="p">:</span> <span class="s2">&quot;Turin Airport&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;OriginLocation&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;lat&quot;</span><span class="p">:</span> <span class="s2">&quot;45.200802&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lon&quot;</span><span class="p">:</span> <span class="s2">&quot;7.64963&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;DestRegion&quot;</span><span class="p">:</span> <span class="s2">&quot;AT-9&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;OriginAirportID&quot;</span><span class="p">:</span> <span class="s2">&quot;TO11&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;OriginRegion&quot;</span><span class="p">:</span> <span class="s2">&quot;IT-21&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;DestCityName&quot;</span><span class="p">:</span> <span class="s2">&quot;Vienna&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;FlightTimeHour&quot;</span><span class="p">:</span> <span class="mf">0.8387598693598465</span><span class="p">,</span>
+    <span class="nt">&quot;FlightDelayMin&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">},</span>
+<span class="nt">&quot;fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;hour_of_day&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">4</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;2020-04-14T04:49:02.000Z&quot;</span>
+    <span class="p">]</span>
+<span class="p">},</span>
+<span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">1586839742000</span>
+<span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="indices">
+<h2>Índices<a class="headerlink" href="#indices" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Un índice es una colección de documentos. Es como una <strong>&quot;Tabla&quot;</strong>, por ejemplo:</p>
+<p>Listado de documentos de un índice:</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/elastic_4_documents_list.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/elastic_4_documents_list.png" />
+</div></blockquote>
+<p>Símil con una <strong>&quot;Tabla&quot;</strong> o <strong>&quot;Planilla&quot;</strong>. En <strong>amarillo</strong> se resaltan los 4 documentos correspondientes al ejemplo de arriba:</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/elastic_sheet_analog.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/elastic_sheet_analog.png" />
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Elasticsearch</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Fundamentos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#documentos">Documentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#indices">Índices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">2. Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queries-ssl.html">3. Queries usando SSL / TSL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">4. API Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queries-kibana.html">5. Ejemplos queries en Kibana DevTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queries-ssl.html">6. Ejemplos queries usando HTTPS (SSL/TSL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">7. Troubleshooting</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="capítulo anterior">Manual Elasticsearch de Francisco Humeres M.</a></li>
+      <li>Next: <a href="docker.html" title="próximo capítulo">Elasticsearch: Docker</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/fundamentos.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

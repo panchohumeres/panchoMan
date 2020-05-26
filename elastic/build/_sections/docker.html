@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Elasticsearch: Docker &#8212; documentación de Manual Elasticsearch - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Elasticsearch: Ejemplo Docker SSL Interno" href="example-docker-ssl.html" />
+    <link rel="prev" title="Manual Elasticsearch de Francisco Humeres M." href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="elasticsearch-docker">
+<h1>Elasticsearch: Docker<a class="headerlink" href="#elasticsearch-docker" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Documentación para implementar Elasticsearch en Docker y Docker-compose.</p>
+<hr class="docutils" />
+<div class="section" id="ejemplos-detallados">
+<h2>Ejemplos detallados<a class="headerlink" href="#ejemplos-detallados" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example-docker-ssl.html">1. SSL Interno</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example-docker-ssl.html#generar-certificados">Generar certificados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-docker-ssl.html#env">.env</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-docker-ssl.html#docker-compose-yml">docker-compose.yml</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example-docker-proxy-ssl.html">2. SSL con Certbot y proxy NGINX / TSL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example-docker-proxy-ssl.html#env">.env</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-docker-proxy-ssl.html#docker-compose-yml">docker-compose.yml</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="caso-ssl-interno">
+<span id="caso-ssl-docker"></span><h2>Caso SSL interno<a class="headerlink" href="#caso-ssl-interno" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul class="simple">
+<li><p>Caso de comunicaciones SSL i.e. <strong>TSL</strong> (Transport Layer Security) y <strong>Http</strong>, gestionados con certificados auto-firmados creados con herramientas de Elasticsearch.</p></li>
+<li><p>Maneja comunicaciones entre nodos a nivel de capa <strong>TSL</strong> y <strong>HTTP</strong>.</p></li>
+<li><p>Se usa X-Pack.</p></li>
+<li><p>Ver: <a class="reference internal" href="example-docker-ssl.html#ejemplo-ssl-docker"><span class="std std-ref">Elasticsearch: Ejemplo Docker SSL Interno</span></a> para ver ejemplo implementado (con archivos docker-compose).</p></li>
+<li><p>Asume Variables de entorno especificadas para este docker-compose en particular: <a class="reference internal" href="example-docker-ssl.html#ejemplo-ssl-docker"><span class="std std-ref">Elasticsearch: Ejemplo Docker SSL Interno</span></a></p></li>
+</ul>
+<div class="section" id="probar-acceso-a-host-elasticsearch-desde-el-contenedor-de-elasticsearch">
+<h3>Probar acceso a host elasticsearch, desde el contenedor de elasticsearch<a class="headerlink" href="#probar-acceso-a-host-elasticsearch-desde-el-contenedor-de-elasticsearch" title="Enlazar permanentemente con este título">¶</a></h3>
+<ul>
+<li><ol class="arabic simple">
+<li><p>Ingresar al contenedor del nodo principal de Elasticsearch.</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#Docker-compose, bash</span>
+docker-compose <span class="nb">exec</span> &lt;nombre_contenedor_elasticsearch_nodo_principal&gt; bash
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl --cacert <span class="o">{</span>CERTS_PATH<span class="o">}</span>/certs/ca/ca.crt https://<span class="o">{</span>USER<span class="o">}</span>:<span class="o">{</span>PSSWD<span class="o">}</span>@<span class="o">{</span>HOST<span class="o">}</span>:<span class="o">{</span>PUERTO<span class="o">}</span>
+
+<span class="c1">#POR LO GENERAL CERTS_PATH=/usr/share/elasticsearch/config/certificates</span>
+curl --cacert /usr/share/elasticsearch/config/certificates/certs/ca/ca.crt https://<span class="o">{</span>USER<span class="o">}</span>:<span class="o">{</span>PSSWD<span class="o">}</span>@<span class="o">{</span>HOST<span class="o">}</span>:<span class="o">{</span>PUERTO<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="probar-conexion-desde-host-sin-entrar-en-contenedor">
+<h3>Probar Conexión desde Host (sin entrar en Contenedor):<a class="headerlink" href="#probar-conexion-desde-host-sin-entrar-en-contenedor" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl --cacert <span class="o">{</span>VOLUMEN_EXTERNO<span class="o">}</span>/certs/ca/ca.crt https://<span class="o">{</span>USER<span class="o">}</span>:<span class="o">{</span>PSSWD<span class="o">}</span>@<span class="o">{</span>HOST<span class="o">}</span>:<span class="o">{</span>PUERTO<span class="o">}</span>/_cat/indices
+</pre></div>
+</div>
+</div>
+<div class="section" id="listar-todos-los-indices">
+<h3>Listar todos los índices<a class="headerlink" href="#listar-todos-los-indices" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl --cacert <span class="o">{</span>VOLUMEN_EXTERNO<span class="o">}</span>/certs/ca/ca.crt https://<span class="o">{</span>USER<span class="o">}</span>:<span class="o">{</span>PSSWD<span class="o">}</span>@<span class="o">{</span>HOST<span class="o">}</span>:<span class="o">{</span>PUERTO<span class="o">}</span>/_cat/indices
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="caso-ssl-con-comunicaciones-http-manejadas-por-proxy">
+<span id="caso-ssl-docker-proxy"></span><h2>Caso SSL con comunicaciones HTTP manejadas por Proxy<a class="headerlink" href="#caso-ssl-con-comunicaciones-http-manejadas-por-proxy" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><strong>Referencias:</strong> <a class="reference external" href="https://discuss.elastic.co/t/setting-https-for-kibana-with-nginx-and-a-fqdn/205010">https://discuss.elastic.co/t/setting-https-for-kibana-with-nginx-and-a-fqdn/205010</a></p>
+<dl class="simple">
+<dt>En este caso:</dt><dd><ul class="simple">
+<li><p>Las comunicaciones <strong>HTTP(S)</strong> son gestionadas por certificados generados por una autoridad externa (como CERTBOT de Let’s Encrypt).</p></li>
+<li><p>Por ende, los <strong>certificados auto-firmados de X-Pack» de Elasticsearch, **NO</strong> se usan para habilitar SSL en la conexión al endpoint de Elasticsearch.</p></li>
+<li><p>Los <strong>certificados auto-firmados de X-Pack» de Elasticsearch</strong> <strong>SÓLO</strong> se usan para comunicaciones internas entre nodos o con Kibana.</p></li>
+<li><p>Por ende <strong>NO</strong> se puede consultar Elasticsearch desde el <strong>host</strong> (usando <strong>&quot;locaholst&quot;</strong> u otras IP o dominios internos).</p></li>
+<li><p>Ver: <a class="reference internal" href="example-docker-proxy-ssl.html#ejemplo-ssl-docker-proxy"><span class="std std-ref">Elasticsearch: Ejemplo Docker SSL Interno / Proxy NGINX</span></a></p></li>
+</ul>
+</dd>
+</dl>
+<ul class="simple">
+<li><p><strong>EN ESTE CASO</strong> Consultas como:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl --cacert /usr/share/elasticsearch/config/certificates/certs/ca/ca.crt https://<span class="o">{</span>USER<span class="o">}</span>:<span class="o">{</span>PSSWD<span class="o">}</span>@<span class="o">{</span>HOST<span class="o">}</span>:<span class="o">{</span>PUERTO<span class="o">}</span>
+</pre></div>
+</div>
+<p>Van a <strong>generar errores</strong> como este:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@a442067776e0b elasticsearch<span class="o">]</span><span class="c1"># curl -u {USER}:{PSSWD} https://localhost:9200 --cacert /usr/share/elasticsearch/config/certificates/ca/ca.crt</span>
+curl: <span class="o">(</span><span class="m">35</span><span class="o">)</span> SSL received a record that exceeded the maximum permissible length.
+</pre></div>
+</div>
+<p>Por ende se debe consultar la <strong>DNS</strong> u <strong>DNS</strong> asingada a través del <strong>servidor proxy</strong>:</p>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Elasticsearch</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ejemplos-detallados">Ejemplos detallados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caso-ssl-interno">Caso SSL interno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caso-ssl-con-comunicaciones-http-manejadas-por-proxy">Caso SSL con comunicaciones HTTP manejadas por Proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="queries-ssl.html">3. Queries usando SSL / TSL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">4. API Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queries-kibana.html">5. Ejemplos queries en Kibana DevTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queries-ssl.html">6. Ejemplos queries usando HTTPS (SSL/TSL)</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="capítulo anterior">Manual Elasticsearch de Francisco Humeres M.</a></li>
+      <li>Next: <a href="example-docker-ssl.html" title="próximo capítulo">Elasticsearch: Ejemplo Docker SSL Interno</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/docker.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -4,7 +4,7 @@ pages:
   stage: deploy
   script:
     - mkdir .public
-    - cp -r git/build/* .public
+    - cp -r elastic/build/* .public
     - mv .public public
   artifacts:
     paths:
