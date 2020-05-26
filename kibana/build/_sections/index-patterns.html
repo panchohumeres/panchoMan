@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kibana: Index Patterns &#8212; documentación de Manual Kibana - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Kibana: Manejo de Usuarios" href="usuarios.html" />
+    <link rel="prev" title="Kibana: Reportes, manual Nivel Usuario" href="usuario-reportes.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="kibana-index-patterns">
+<h1>Kibana: Index Patterns<a class="headerlink" href="#kibana-index-patterns" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="conceptos">
+<span id="index-pattern-conceptos"></span><h2>Conceptos<a class="headerlink" href="#conceptos" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul class="simple">
+<li><p>Para poder crear visualizaciones para un(os) índice(s) (<strong>&quot;index&quot;</strong>) de Elasticsearch, en particular, <strong>primero</strong> es necesario crear un <strong>&quot;index pattern&quot;</strong>, una entidad que hace disponibles los datos de un(os) índice(s) para generar visualizaciones en kibana.</p></li>
+<li><dl class="simple">
+<dt>Se sugiere <strong>primero revisar los fundamentos de Elasticsearch</strong> (conceptos de <strong>&quot;documentos&quot; e &quot;índices&quot;</strong>):</dt><dd><ul>
+<li><p><a class="reference external" href="https://panchohumeres.gitlab.io/elastic_man/_sections/fundamentos.html">https://panchohumeres.gitlab.io/elastic_man/_sections/fundamentos.html</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="crear-index-pattern">
+<span id="id1"></span><h2>Crear &quot;Index Pattern&quot;<a class="headerlink" href="#crear-index-pattern" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl>
+<dt>Pasos para crear un <strong>&quot;index pattern&quot;</strong>:</dt><dd><ol class="arabic">
+<li><p>Hacer click en el botón de <strong>&quot;settings&quot;</strong> (o configuración) de Kibana (esquina inferior izquierda):</p>
+<blockquote>
+<div><img alt="settings-button" src="https://panchoman.s3-sa-east-1.amazonaws.com/settings_icon_kibana.png" />
+</div></blockquote>
+</li>
+<li><p>Hacer click en el botón <strong>&quot;Create index pattern&quot;</strong>:</p>
+<blockquote>
+<div><img alt="create-index-pattern-button" src="https://panchoman.s3-sa-east-1.amazonaws.com/create_index_pattern_button.png" />
+</div></blockquote>
+</li>
+<li><p>Se va a desplegar un listado de los <strong>índices disponibles</strong>:</p>
+<blockquote>
+<div><img alt="create-index-pattern-index-list" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_panel_choose_index.png" />
+</div></blockquote>
+</li>
+<li><p>Escribir el nombre del <strong>índice</strong> en la casilla <strong>&quot;Index pattern&quot;</strong>, tiene que <strong>coincidir exactamente</strong>.</p>
+<blockquote>
+<div><img alt="create-index-pattern-fill-box" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_create_index_pattern_filling_box_1.png" />
+<p>Alternativamente, usar el wildcard <strong>&quot;*&quot;</strong>, para incluir <strong>cualquier índice que coincida parcialmente con el texto</strong>:</p>
+<img alt="create-index-pattern-fill-box-*" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_create_index_pattern_filling_box_2.png" />
+<dl class="simple">
+<dt><strong>Más referencias al respecto:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.elastic.co/guide/en/kibana/current/tutorial-define-index.html">https://www.elastic.co/guide/en/kibana/current/tutorial-define-index.html</a></p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p>Luego hacer click en <strong>&quot;Next Step&quot;</strong>.</p></li>
+<li><p><strong>Si es que Kibana detecta un campo con data temporal</strong> en el(los) índice(s) incluido en el <strong>&quot;index pattern&quot;</strong>, seleccionar el <strong>campo</strong> que se desea utiliza como <strong>filtro de tiempo por defecto:</strong></p>
+<blockquote>
+<div><img alt="create-index-pattern-select-time-field" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_index_pattern_select_time_field.png" />
+</div></blockquote>
+</li>
+<li><p>Hacker click en el botón <strong>&quot;Create index pattern&quot;</strong> para finalizar:</p>
+<blockquote>
+<div><img alt="create-index-pattern-final" src="https://panchoman.s3-sa-east-1.amazonaws.com/create_index_pattern_widget_kibana.png" />
+</div></blockquote>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+<div class="section" id="listado-de-campos">
+<span id="index-pattern-listado-de-campos"></span><h2>Listado de Campos<a class="headerlink" href="#listado-de-campos" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul>
+<li><p>Ya sea al <strong>finalizar la creación de un &quot;Index Pattern&quot;</strong>, o a través del menú <strong>&quot;Settings&quot;—-&gt;&quot;Index Patterns&quot;</strong>, se puede acceder al listado de campos y otros parámetros de referencia sobre un <strong>&quot;Index Pattern&quot;</strong>:</p>
+<blockquote>
+<div><img alt="create-index-pattern-fields-list" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_index_pattern_fields_list.png" />
+</div></blockquote>
+</li>
+<li><p>Este listado contiene el listado de <strong>\Index Patterns\</strong>, los <strong>campos disponibles</strong>, y sus <strong>características</strong>.</p></li>
+<li><dl>
+<dt>Entre las opciones que permite este panel, están:</dt><dd><ul>
+<li><dl>
+<dt><strong>Borrar</strong> un &quot;Index Pattern&quot;:</dt><dd><img alt="delete-index-pattern" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_delete_index_pattern_icon.png" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Actualizar o refrescar</strong> un &quot;Index Pattern&quot;, paso necesario cuando ha cambiado la data de un índice sustancialmente (nuevo campo, data-type del campo, etc.):</dt><dd><img alt="delete-index-pattern" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_reload_index_pattern_icon.png" />
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Kibana</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="usuario.html">1. Manual Nivel Usuario</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usuario-dashboard.html">1. Dashboards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html">2. Visualizaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usuario-reportes.html">3. Reportes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Index Patterns</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usuarios.html">2. Manejo de Usuarios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vega.html">3. Vega</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cases.html">5. Casos Especiales</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="usuario.html">Kibana: Manual Nivel Usuario</a><ul>
+      <li>Previous: <a href="usuario-reportes.html" title="capítulo anterior">Kibana: Reportes, manual Nivel Usuario</a></li>
+      <li>Next: <a href="usuarios.html" title="próximo capítulo">Kibana: Manejo de Usuarios</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/index-patterns.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

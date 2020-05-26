@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kibana: Casos Especiales &#8212; documentación de Manual Kibana - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Kibana: Troubleshooting en Docker" href="troubleshooting_docker.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="kibana-casos-especiales">
+<h1>Kibana: Casos Especiales<a class="headerlink" href="#kibana-casos-especiales" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Ejemplos de configuraciones para Casos de Uso Especiales.</p>
+<hr class="docutils" />
+<div class="section" id="front-end-by-paseando-pantalla-de-autenticacion">
+<h2>Front-end by-paseando pantalla de autenticación<a class="headerlink" href="#front-end-by-paseando-pantalla-de-autenticacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Front-end auto-autenticado protegido con SSL, usando NGINX.</p>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://serverfault.com/questions/828130/how-to-run-nginx-ssl-on-non-standard-port">https://serverfault.com/questions/828130/how-to-run-nginx-ssl-on-non-standard-port</a></p></li>
+<li><p><a class="reference external" href="https://discuss.elastic.co/t/auto-authenticating-to-iframe-embedded-kibana-dashboard/46091">https://discuss.elastic.co/t/auto-authenticating-to-iframe-embedded-kibana-dashboard/46091</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/&#64;saurabhiiti123/anonymous-access-to-kibana-dashboard-using-nginx-a-workaround-a1896b44c4c8">https://medium.com/&#64;saurabhiiti123/anonymous-access-to-kibana-dashboard-using-nginx-a-workaround-a1896b44c4c8</a></p></li>
+</ul>
+</dd>
+<dt>Ejemplo basado en configuración <strong>Certbot</strong> (Let’s Encrypt), con protección automatizada SSL para contenedores Docker:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://panchohumeres.gitlab.io/ssl_tsl_man/_sections/certbot-docker.html">https://panchohumeres.gitlab.io/ssl_tsl_man/_sections/certbot-docker.html</a></p></li>
+<li><p><a class="reference external" href="https://github.com/panchohumeres/nginx-certbot">https://github.com/panchohumeres/nginx-certbot</a></p></li>
+<li><p><a class="reference external" href="https://panchohumeres.gitlab.io/nginx_man/_sections/cases.html#ssl-y-proxy">https://panchohumeres.gitlab.io/nginx_man/_sections/cases.html#ssl-y-proxy</a></p></li>
+</ul>
+</dd>
+<dt>Ejemplo de <strong>variables de entorno</strong> (reemplazar usando envsubst).</dt><dd><p>Ver: <a class="reference external" href="https://panchohumeres.gitlab.io/nginx_man/_sections/docker.html#templating-de-configuracion-caso-2">https://panchohumeres.gitlab.io/nginx_man/_sections/docker.html#templating-de-configuracion-caso-2</a></p>
+</dd>
+</dl>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">DOMAIN_KIBANA</span><span class="o">=</span>kibana.mydomain.com
+<span class="nv">SERVER_NAME_KIBANA</span><span class="o">=</span>kibana
+<span class="nv">KIBANA_GUEST_PORT</span><span class="o">=</span><span class="m">8080</span>
+</pre></div>
+</div>
+<p>Ejemplo de archivo de configuración NGINX (<strong>&quot;nginx.conf&quot;</strong>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>upstream <span class="si">${</span><span class="nv">SERVER_NAME_KIBANA</span><span class="si">}</span> <span class="o">{</span>
+        ip_hash<span class="p">;</span>
+        server <span class="si">${</span><span class="nv">LOCALHOST</span><span class="si">}</span>:<span class="si">${</span><span class="nv">KIBANA_PORT</span><span class="si">}</span> <span class="nv">fail_timeout</span><span class="o">=</span>5580s <span class="nv">max_fails</span><span class="o">=</span><span class="m">1000</span><span class="p">;</span>
+<span class="o">}</span>
+
+
+server <span class="o">{</span>
+        listen <span class="m">80</span><span class="p">;</span>
+        server_name <span class="si">${</span><span class="nv">DOMAIN_KIBANA</span><span class="si">}</span><span class="p">;</span>
+        server_tokens off<span class="p">;</span>
+        <span class="c1">#return 301 https://$host$request_uri;</span>
+            location /.well-known/acme-challenge/ <span class="o">{</span>
+        root /var/www/certbot<span class="p">;</span>
+    <span class="o">}</span>
+
+        location / <span class="o">{</span>
+            proxy_pass http://<span class="si">${</span><span class="nv">SERVER_NAME_KIBANA</span><span class="si">}</span><span class="p">;</span>
+        <span class="o">}</span>
+
+<span class="o">}</span>
+
+
+server <span class="o">{</span>
+    listen <span class="m">443</span> ssl<span class="p">;</span>
+    server_name <span class="si">${</span><span class="nv">DOMAIN_KIBANA</span><span class="si">}</span><span class="p">;</span>
+    server_tokens off<span class="p">;</span>
+
+    ssl_certificate /etc/letsencrypt/live/<span class="si">${</span><span class="nv">DOMAIN_KIBANA</span><span class="si">}</span>/fullchain.pem<span class="p">;</span>
+    ssl_certificate_key /etc/letsencrypt/live/<span class="si">${</span><span class="nv">DOMAIN_KIBANA</span><span class="si">}</span>/privkey.pem<span class="p">;</span>
+    include /etc/letsencrypt/options-ssl-nginx.conf<span class="p">;</span>
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem<span class="p">;</span>
+
+    location / <span class="o">{</span>
+        proxy_pass  http://<span class="si">${</span><span class="nv">SERVER_NAME_KIBANA</span><span class="si">}</span><span class="p">;</span>
+        proxy_set_header    Host                <span class="nv">$http_host</span><span class="p">;</span>
+        proxy_set_header    X-Real-IP           <span class="nv">$remote_addr</span><span class="p">;</span>
+        proxy_set_header    X-Forwarded-For     <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+server <span class="o">{</span>
+    listen <span class="m">8080</span> ssl<span class="p">;</span>
+server_name <span class="si">${</span><span class="nv">DOMAIN_KIBANA</span><span class="si">}</span>:<span class="si">${</span><span class="nv">KIBANA_GUEST_PORT</span><span class="si">}</span><span class="p">;</span>
+server_tokens off<span class="p">;</span>
+
+    ssl_certificate /etc/letsencrypt/live/<span class="si">${</span><span class="nv">DOMAIN_KIBANA</span><span class="si">}</span>/fullchain.pem<span class="p">;</span>
+    ssl_certificate_key /etc/letsencrypt/live/<span class="si">${</span><span class="nv">DOMAIN_KIBANA</span><span class="si">}</span>/privkey.pem<span class="p">;</span>
+    include /etc/letsencrypt/options-ssl-nginx.conf<span class="p">;</span>
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem<span class="p">;</span>
+
+    location / <span class="o">{</span>
+    proxy_pass  http://<span class="si">${</span><span class="nv">SERVER_NAME_KIBANA</span><span class="si">}</span><span class="p">;</span>
+        proxy_set_header    Host                <span class="nv">$http_host</span><span class="p">;</span>
+        proxy_set_header    X-Real-IP           <span class="nv">$remote_addr</span><span class="p">;</span>
+        proxy_set_header    X-Forwarded-For     <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+        proxy_set_header  Authorization <span class="si">${</span><span class="nv">KIBANA_GUEST_AUTH</span><span class="si">}</span><span class="p">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Kibana</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usuario.html">1. Manual Nivel Usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usuarios.html">2. Manejo de Usuarios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vega.html">3. Vega</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Casos Especiales</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#front-end-by-paseando-pantalla-de-autenticacion">Front-end by-paseando pantalla de autenticación</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="troubleshooting_docker.html" title="capítulo anterior">Kibana: Troubleshooting en Docker</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/cases.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

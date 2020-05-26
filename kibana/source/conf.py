@@ -17,7 +17,7 @@ master_doc = 'index'
 
 # -- Project information -----------------------------------------------------
 
-project = 'Manual Docker'
+project = 'Manual Kibana'
 copyright = '2020, Francisco Humeres M.'
 author = 'Francisco Humeres M.'
 
@@ -62,7 +62,6 @@ html_theme = 'alabaster'
 html_static_path = ['_static']
 
 
-
 rst_prolog = """
 panchoMan |panchoman| panchoMan GitHub Repo |github| panchoMan Kibana GitLab Repo |gitlab|
 
@@ -77,7 +76,7 @@ panchoMan |panchoman| panchoMan GitHub Repo |github| panchoMan Kibana GitLab Rep
     :width: 20
 
 .. |gitlab| image:: https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png
-    :target: https://gitlab.com/panchohumeres/docker_man_page
+    :target: https://gitlab.com/panchohumeres/kibana_man
     :height: 20
     :width: 20
 """

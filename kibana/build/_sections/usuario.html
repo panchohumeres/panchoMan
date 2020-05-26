@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kibana: Manual Nivel Usuario &#8212; documentación de Manual Kibana - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Kibana: Dashboards" href="usuario-dashboard.html" />
+    <link rel="prev" title="Manual Kibana de Francisco Humeres M." href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="kibana-manual-nivel-usuario">
+<h1>Kibana: Manual Nivel Usuario<a class="headerlink" href="#kibana-manual-nivel-usuario" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>Manual Nivel Usuario de Kibana, entre los contenidos se encuentran:</dt><dd><ul class="simple">
+<li><p>Interfaz Kibana.</p></li>
+<li><p>Crear, editar y filtrar contenido de <strong>Dashboards</strong>.</p></li>
+<li><p>Crear y editar <strong>Visualizaciones</strong>.</p></li>
+<li><p>Crear e imprimir (i.e. exportar a imagen o .pdf) <strong>Reportes</strong>.</p></li>
+<li><p>Crear &quot;Index Patterns&quot;.</p></li>
+</ul>
+</dd>
+<dt>Se sugiere <strong>primero revisar los fundamentos de Elasticsearch</strong> (conceptos de <strong>&quot;documentos&quot; e &quot;índices&quot;</strong>):</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://panchohumeres.gitlab.io/elastic_man/_sections/fundamentos.html">https://panchohumeres.gitlab.io/elastic_man/_sections/fundamentos.html</a></p></li>
+</ul>
+</dd>
+</dl>
+<hr class="docutils" />
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usuario-dashboard.html">1. Dashboards</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usuario-dashboard-access.html">1. Acceder Dashboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usuario-dashboard-crear-editar.html">2. Crear y Editar Dashboards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usuario-dashboard-filtros.html">3. Filtrar contenido de Dashboards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualizaciones.html">2. Visualizaciones</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html#fundamentos">Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html#crear-visualizaciones">Crear Visualizaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html#tipos-de-visualizaciones">Tipos de Visualizaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html#indice-general">Índice General</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usuario-reportes.html">3. Reportes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usuario-reportes.html#pasos-para-acceder-e-imprimir-un-reporte-solo-si-licencia-platinum-esta-activada">Pasos para acceder e imprimir un reporte (sólo si Licencia Platinum está activada):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usuario-reportes.html#pasos-para-acceder-e-imprimir-un-reporte-metodo-plug-in-chrome">Pasos para acceder e imprimir un reporte (método Plug-In Chrome):</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index-patterns.html">4. Index Patterns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index-patterns.html#conceptos">Conceptos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-patterns.html#crear-index-pattern">Crear &quot;Index Pattern&quot;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-patterns.html#listado-de-campos">Listado de Campos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="export-import-data.html">5. Exportar e Importar Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="export-import-data.html#requisitos">Requisitos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export-import-data.html#exportar-data">Exportar Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export-import-data.html#importar-data">Importar Data</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Kibana</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Manual Nivel Usuario</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usuario-dashboard.html">1. Dashboards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html">2. Visualizaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usuario-reportes.html">3. Reportes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-patterns.html">4. Index Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export-import-data.html">5. Exportar e Importar Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usuarios.html">2. Manejo de Usuarios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vega.html">3. Vega</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cases.html">5. Casos Especiales</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="capítulo anterior">Manual Kibana de Francisco Humeres M.</a></li>
+      <li>Next: <a href="usuario-dashboard.html" title="próximo capítulo">Kibana: Dashboards</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/usuario.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

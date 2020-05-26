@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kibana: Gráficas de Línea, Ejemplo &#8212; documentación de Manual Kibana - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Kibana: Reportes, manual Nivel Usuario" href="usuario-reportes.html" />
+    <link rel="prev" title="Kibana: Crear Visualizaciones" href="create-viz.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="kibana-graficas-de-linea-ejemplo">
+<h1>Kibana: Gráficas de Línea, Ejemplo<a class="headerlink" href="#kibana-graficas-de-linea-ejemplo" title="Enlazar permanentemente con este título">¶</a></h1>
+<a class="reference internal image-reference" href="https://panchoman.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png"><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/line-chart-kibana-icon.png" style="width: 80px;" /></a>
+<dl class="simple">
+<dt><strong>Data:</strong> Factor de Emisión (Promedio Mensual) para la red eléctrica en Chile, disponible en el portal &quot;Minería Abierta&quot;:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="http://energiaabierta.cl/visualizaciones/factor-de-emision-sic-sing/">http://energiaabierta.cl/visualizaciones/factor-de-emision-sic-sing/</a></p></li>
+<li><p><a class="reference external" href="http://datos.energiaabierta.cl/dataviews/245974/factor-de-emision-promedio-mensual/">http://datos.energiaabierta.cl/dataviews/245974/factor-de-emision-promedio-mensual/</a></p></li>
+<li><p><a class="reference external" href="http://cne.cloudapi.junar.com/api/v2/datastreams/FACTO-DE-EMISI-PROME-MENSU/data.ajson/">http://cne.cloudapi.junar.com/api/v2/datastreams/FACTO-DE-EMISI-PROME-MENSU/data.ajson/</a>?auth_key=YOUR_API_KEY&amp;limit=50&amp;</p></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="requisitos">
+<h2>Requisitos<a class="headerlink" href="#requisitos" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic">
+<li><p>Haber creado un <strong>índice en Elasticsearch</strong> con la data. Ver: <a class="reference external" href="https://panchohumeres.gitlab.io/elastic_man/_sections/fundamentos.html">https://panchohumeres.gitlab.io/elastic_man/_sections/fundamentos.html</a></p></li>
+<li><dl class="simple">
+<dt>Crear el <strong>&quot;Index Pattern&quot;</strong> correspondiente en Kibana, ver:</dt><dd><ul class="simple">
+<li><p><strong>Fundamentos</strong>: <a class="reference internal" href="index-patterns.html#index-pattern-conceptos"><span class="std std-ref">Conceptos</span></a></p></li>
+<li><p><strong>Crear</strong>: <a class="reference internal" href="index-patterns.html#crear-index-pattern"><span class="std std-ref">Crear &quot;Index Pattern&quot;</span></a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Asegurarse que el <strong>&quot;Index Pattern&quot;</strong> haya sido creado con un <strong>campo de tiempo por defecto</strong>.</dt><dd><ul>
+<li><dl>
+<dt>Ejemplo de lista de campos utilizadas en este ejemplo:</dt><dd><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_index_pattern_field_list_example_factor_emision.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_index_pattern_field_list_example_factor_emision.png" />
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Entender los conceptos fundamentales que definen a una visualización, ver: <a class="reference internal" href="visualizaciones.html"><span class="doc">Kibana: Visualizaciones</span></a>.</p></li>
+<li><p>Haber creado visualización (contenedor), ver: <a class="reference internal" href="create-viz.html"><span class="doc">Kibana: Crear Visualizaciones</span></a>.</p></li>
+</ol>
+</div>
+<div class="section" id="pasos-ejemplo">
+<h2>Pasos Ejemplo<a class="headerlink" href="#pasos-ejemplo" title="Enlazar permanentemente con este título">¶</a></h2>
+<ol class="arabic">
+<li><p><strong>Panel Métricas (&quot;Metrics&quot;):</strong></p>
+<blockquote>
+<div><p>En este panel se define como se <strong>resume</strong> la data en el <strong>Eje Y</strong>:</p>
+<ul>
+<li><p>En <strong>&quot;Aggregation&quot;</strong> seleccionar <strong>&quot;Average&quot;</strong> (Promedio). Esta es la agregación que va a ejecutar sobre los <strong>grupos</strong> definidos por <strong>&quot;Bucket&quot;</strong>.</p></li>
+<li><p>En <strong>&quot;Field&quot;</strong> seleccionar el campo que contiene la data a resumir, en este caso <strong>&quot;factor_emision_avg&quot;</strong> equivale al &quot;Factor de Emisión Mensual&quot; en la data original.</p></li>
+<li><p>Rellenar <strong>&quot;Custom Label&quot;</strong> con la <strong>etiqueta</strong> de preferencia para el <strong>Eje Y</strong> (en este caso &quot;Factor Emisión Promedio (Ton CO2 eq. / MWh&quot;).</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_metrics.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_metrics.png" />
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Panel Métricas (&quot;Buckets&quot;):</strong></p>
+<blockquote>
+<div><ul>
+<li><p>En este panel se define como se <strong>divide o agrupa</strong> la data en el <strong>Eje X</strong>.</p></li>
+<li><p>En este caso en particular <strong>es una serie de tiempo</strong> (se agrupa con unidades temporales), el <strong>caso más común</strong>.</p>
+<blockquote>
+<div><ul>
+<li><p>En <strong>&quot;Aggregation&quot;</strong> seleccionar <strong>&quot;Date Histogram&quot;</strong> (Histograma definido por unidades de tiempo).</p></li>
+<li><p>En <strong>&quot;Field&quot;</strong> seleccionar el campo que contiene data en formato fecha, en este caso <strong>&quot;date&quot;</strong> , que contiene los meses en formato YYYY-MM (más un residual de Día y Hora configurado a las 12 AM del día 1 por defecto).</p></li>
+<li><p>Definir <strong>intervalo de tiempo</strong> para el histograma en <strong>&quot;Minimum Interval&quot;</strong>, en este caso <strong>&quot;Monthly&quot;</strong> para que divida la data en <strong>meses</strong>.</p></li>
+<li><p>Rellenar <strong>&quot;Custom Label&quot;</strong> con la <strong>etiqueta</strong> de preferencia para el <strong>Eje X</strong> (en este caso &quot;Mes&quot;).</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_bucket_snippet.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_bucket_snippet.png" />
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Hacer click en botón &quot;Add sub-buckets&quot; para agregar un <strong>sub-grupo</strong> o <strong>grupo anidado</strong> (en referencia al grupo definido en paso 2.).</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_viz_add_sub_bucket.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_viz_add_sub_bucket.png" />
+</div></blockquote>
+</li>
+<li><p>Para este ejemplo, elegir <strong>sub-dividir la serie</strong> de tiempo (<strong>&quot;Split Series&quot;</strong>):</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_select_bucket_type.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_select_bucket_type.png" />
+</div></blockquote>
+</li>
+<li><p><strong>Panel Sub-Grupos (&quot;Split Series&quot;):</strong></p>
+<blockquote>
+<div><ul>
+<li><p>En este panel se define como se <strong>sub-divide</strong> la data en el <strong>Eje X</strong>.</p>
+<blockquote>
+<div><ul>
+<li><p>En <strong>&quot;Sub aggregation&quot;</strong> seleccionar <strong>&quot;Terms&quot;</strong>, esto va a definir <strong>sub-grupos</strong> en base a los valores únicos presentes en el campo indicado a continuación.</p></li>
+<li><p>En <strong>&quot;Field&quot;</strong> seleccionar el campo que contiene los <strong>valores únicos que definen los sub-grupos</strong>. En este caso es <strong>&quot;sistema.keyword&quot;</strong>, que corresponde al campo <strong>&quot;sistema&quot;</strong> (que contiene las etiquetas de la red eléctrica en particular), más la convención de Kibana <strong>&quot;.keyword&quot;</strong> (que indica específicamente tomar el valor de texto o &quot;string&quot;).</p></li>
+<li><p><strong>&quot;Size&quot;</strong> define cuántos sub-grupos se van a mostrar.</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_sub-agg.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_sub-agg.png" />
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Hacer click en botón <strong>&quot;Run&quot;</strong> para ver reflejados las agregaciones en la gráfica:</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_run_viz_button.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_run_viz_button.png" />
+</div></blockquote>
+</li>
+<li><p>Guardar la gráfica, haciendo click en el botón <strong>&quot;Save&quot;</strong> en la esquina superior izquierda, y definiendo el nombre en el panel de diálogo correspondiente. Luego hacer click en <strong>&quot;Confirm Save&quot;</strong>:</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_save_viz_factor_emision.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_save_viz_factor_emision.png" />
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="resultado">
+<h2>Resultado<a class="headerlink" href="#resultado" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Gráfica que muestra el <strong>Factor de Emisión Mensual</strong>, con una línea para cada <strong>grupo</strong> definido por el <strong>sistema o red eléctrica en particular</strong>.</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_chart.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_example_factor_emision_chart.png" />
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Kibana</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="usuario.html">1. Manual Nivel Usuario</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usuario-dashboard.html">1. Dashboards</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="visualizaciones.html">2. Visualizaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usuario-reportes.html">3. Reportes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-patterns.html">4. Index Patterns</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usuarios.html">2. Manejo de Usuarios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vega.html">3. Vega</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cases.html">5. Casos Especiales</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="usuario.html">Kibana: Manual Nivel Usuario</a><ul>
+  <li><a href="visualizaciones.html">Kibana: Visualizaciones</a><ul>
+      <li>Previous: <a href="create-viz.html" title="capítulo anterior">Kibana: Crear Visualizaciones</a></li>
+      <li>Next: <a href="usuario-reportes.html" title="próximo capítulo">Kibana: Reportes, manual Nivel Usuario</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/viz-linechart.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

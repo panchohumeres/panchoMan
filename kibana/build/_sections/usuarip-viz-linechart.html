@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kibana: Gráficas de Línea &#8212; documentación de Manual Kibana - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="kibana-graficas-de-linea">
+<h1>Kibana: Gráficas de Línea<a class="headerlink" href="#kibana-graficas-de-linea" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>Filtros para Dashboards:</dt><dd><ul class="simple">
+<li><p>En esta sección se indica como filtrar el contenido que se despliega en los Dashboards.</p></li>
+<li><p>Los ejemplos están hechos en base al Dashboard mostrado en esta URL: <a class="reference external" href="https://d3bhn81c8dm26x.cloudfront.net/">https://d3bhn81c8dm26x.cloudfront.net/</a></p></li>
+<li><p>Dicho ejemplo es un demo que muestra estadísticas de carga de datasets al Portal de Datos Abiertos del Gobierno de Chile: datos.gob.cl</p></li>
+</ul>
+</dd>
+</dl>
+<hr class="docutils" />
+<p><strong>Filtro General de Tiempo</strong>:
+El Dashboard como un todo <strong>va a contener los datos filtrados en el filtro general de tiempo</strong>. A este filtro se accede en la barra superior derecha.</p>
+<hr class="docutils" />
+<blockquote>
+<div><ul class="simple">
+<li><p>Se pueden introducir filtros <strong>«relativos»</strong> de tiempo (i.e. La hora actual - X segundos, minutos, horas, días, meses, años, etc.).</p></li>
+</ul>
+<img alt="filtro_gen_1" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana-filtros-gen-1.png" />
+<ul class="simple">
+<li><p>También se pueden introducir rangos de fechas exactas, o <strong>«absolutas»</strong>.</p></li>
+</ul>
+<img alt="filtro_gen_2" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana-filtros-gen-2.png" />
+<ul class="simple">
+<li><p><strong>OJO!:</strong> Los datos que queden excluido por este filtro general <a href="#id1"><span class="problematic" id="id2">**</span></a>NO SE MOSTRARÁN EN EL DASHBOARD, NI SERÁN REEMPLAZADOS POR FILTROS ESPECÍFICOS».</p></li>
+<li><p><strong>OJO!:</strong> Apretar botón <strong>«Update»</strong> para aplicar el cambio de filtro.</p></li>
+<li><p>En panel de <strong>«Quick select»</strong> se puede acceder a filtros de fecha generales ingresados anteriormente por el mismo usuario.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<p>Pasos para filtrar contenido de un Dashboard:
+Ejemplo filtro de <strong>Campo de Texo</strong>:</p>
+<hr class="docutils" />
+<blockquote>
+<div><ol class="arabic">
+<li><dl>
+<dt>Apretar <strong>«+ Add Filter»</strong> en barra o espacio superior, al lado del botón de configuración (con forma de tuerca).</dt><dd><img alt="add_filter" src="https://panchoman.s3-sa-east-1.amazonaws.com/add_filter_kibana.png" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Se va a desplegar un panel que permite variados filtros por campo, se mostrarán dos ejemplos (campos de texto y numéricos):</dt><dd><img alt="add_filter" src="https://panchoman.s3-sa-east-1.amazonaws.com/panel_add_filter_kibana.png" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>En este primer ejemplo aplicaremos un filtro sobre un campo de texto, en este el campo <strong>«inst»</strong>, que contiene nombres de instituciones donde se han publicado datasets:</dt><dd><ul>
+<li><p>Primero se debe seleccionar el campo (Menú <strong>Field</strong>), <strong>OJO: En los campos de texto debe ser el campo con extensión .keyword</strong>. Para los campos de texto Kibana crea un campo duplicado con extensión <strong>.keyword</strong>, que es navegable por la interfaz. Elegir siempre este campo en los casos de campos de texto.</p></li>
+<li><dl>
+<dt>Luego se debe seleccionar un operador del Menú <strong>Operator</strong>. Son 6:</dt><dd><ol class="arabic simple">
+<li><p><strong>is</strong> = coincidencia exacta con un término</p></li>
+<li><p><strong>is not</strong> = campo no contiene el término</p></li>
+<li><p><strong>is one of</strong> = contiene algunos de los términos de una lista especificada</p></li>
+</ol>
+<p>4. <strong>is not one of</strong> = <strong>NO</strong> contiene los términos especificados en una lista
+4. <strong>exists</strong> = elige registros que no sean nulos en este campo
+5. <strong>does no exist</strong> = registros nulos para este campo</p>
+</dd>
+</dl>
+</li>
+</ul>
+<img alt="keyword_filter_1" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_keyword_filter_1.png" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>En este ejemplo, aplicaremos filtro <strong>N°3, «is one of»</strong>.</dt><dd><ul class="simple">
+<li><p>Luego elegimos libremente de la lista de valores desplegadas en el <strong>Menú «Values»</strong>, la cantidad de valores únicos que deseamos agregar a lista para el filtro.</p></li>
+</ul>
+<img alt="keyword_filter_2" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_keyword_filter_2.png" />
+<ul class="simple">
+<li><p>En este ejemplo, se han agregado dos valores <strong>«Comisión Nacional de Energía»</strong> y <strong>«Municipalidad de Puente Alto»</strong>.</p></li>
+<li><p>Esto significa, que para el <strong>campo «inst»</strong>, <strong>SÓLO va a SELECCIONAR</strong> los registros que contengan los valores mencionados anteriormente.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<hr class="docutils" />
+<p>Pasos para filtrar contenido de un Dashboard:
+Ejemplo filtro de <strong>Campo Numérico</strong>:</p>
+<hr class="docutils" />
+<blockquote>
+<div><ol class="arabic">
+<li><dl>
+<dt>En este caso elegimos un Campo Numérico, como <strong>«mes»</strong> en este ejemplo, que ha sido extraído de la fecha de carga de un dataset, y convertido a valor numérico.</dt><dd><ul class="simple">
+<li><p>Tenemos <a href="#id3"><span class="problematic" id="id4">**</span></a>dos nuevos posibles operadores: «is between», «is not between».</p></li>
+<li><p><strong>«is between»</strong> = rango de números entre los que van a caer valores del campo seleccionado</p></li>
+<li><p><strong>«is not between»</strong> = mismo caso anterio, pero <strong>EXCLUYENDO</strong> un rango de números para los valores del campo seleccionado</p></li>
+</ul>
+<img alt="numeric_filter_1" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_numeric_filter_1.png" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>En este ejemplo, usamos el <strong>operador «is between»</strong>, para seleccionar un rango (entre meses Agosto y Noviembre p.ej.):</dt><dd><img alt="numeric_filter_2" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_numeric_filter_2.png" />
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<hr class="docutils" />
+<p>Pasos para filtrar contenido de un Dashboard:
+Ejemplo filtro de <strong>Campo de Fecha</strong>:</p>
+<hr class="docutils" />
+<blockquote>
+<div><ol class="arabic">
+<li><dl>
+<dt>Mismo caso anterior, sólo que en este caso hay que <strong>introducir valores en formato «»datetime»», según especificación de Elasticsearch</strong>:</dt><dd><ul class="simple">
+<li><p>Más información en: <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.2/common-options.html#date-math">https://www.elastic.co/guide/en/elasticsearch/reference/7.2/common-options.html#date-math</a></p></li>
+</ul>
+<img alt="date_filter" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana-date-filter.png" />
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Kibana</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usuario.html">1. Manual Nivel Usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usuarios.html">2. Manejo de Usuarios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vega.html">3. Vega</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cases.html">5. Casos Especiales</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/usuarip-viz-linechart.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

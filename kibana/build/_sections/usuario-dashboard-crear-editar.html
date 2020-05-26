@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kibana: Crear y Editar Dashboards &#8212; documentación de Manual Kibana - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Kibana: Filtros para Dashboards, Nivel Usuario" href="usuario-dashboard-filtros.html" />
+    <link rel="prev" title="Kibana: Acceder Dashboard" href="usuario-dashboard-access.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/kibana_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="kibana-crear-y-editar-dashboards">
+<h1>Kibana: Crear y Editar Dashboards<a class="headerlink" href="#kibana-crear-y-editar-dashboards" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="requisitos">
+<h2>Requisitos<a class="headerlink" href="#requisitos" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Tener un <strong>&quot;Index Pattern&quot;</strong> en base a cual se quiere crear la visualización. Referencias sobre &quot;Index Patterns&quot;:</dt><dd><ul>
+<li><p><strong>Fundamentos</strong>: <a class="reference internal" href="index-patterns.html#index-pattern-conceptos"><span class="std std-ref">Conceptos</span></a></p></li>
+<li><p><strong>Crear</strong>: <a class="reference internal" href="index-patterns.html#crear-index-pattern"><span class="std std-ref">Crear &quot;Index Pattern&quot;</span></a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Haber <strong>creado visualizaciones</strong> para agregar al Dashboard. Ver:</dt><dd><ul>
+<li><p><a class="reference internal" href="visualizaciones.html"><span class="doc">Kibana: Visualizaciones</span></a></p></li>
+<li><p><a class="reference internal" href="create-viz.html"><span class="doc">Kibana: Crear Visualizaciones</span></a></p></li>
+<li><p><a class="reference internal" href="viz-linechart.html"><span class="doc">Kibana: Gráficas de Línea, Ejemplo</span></a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Entender los conceptos y como manipular los filtros de Tiempo, ver: <a class="reference internal" href="usuario-dashboard-filtros.html"><span class="doc">Kibana: Filtros para Dashboards, Nivel Usuario</span></a></p></li>
+<li><p>Definir un <strong>filtro de tiempo</strong> lo <strong>suficientemente amplio</strong> como para contener la data que se desea visualizar.</p></li>
+</ul>
+</div>
+<div class="section" id="crear-dashboard">
+<h2>Crear Dashboard<a class="headerlink" href="#crear-dashboard" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Apretar botón dashboards en barra lateral izquierda:</p>
+<blockquote>
+<div><img alt="icono-dashboard" src="https://panchoman.s3-sa-east-1.amazonaws.com/icono-dashboard-kibana.png" />
+</div></blockquote>
+</li>
+<li><p>Se despliega el listado de los Dashboards:</p>
+<blockquote>
+<div><img alt="listado-dashboard" src="https://panchoman.s3-sa-east-1.amazonaws.com/dahsboard-listados.png" />
+</div></blockquote>
+</li>
+</ol>
+<ol class="arabic" start="4">
+<li><p>Se despliega el listado de los Dashboards:</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/dahsboard-listados.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/dahsboard-listados.png" />
+</div></blockquote>
+</li>
+<li><p>Hacer click en el botón <strong>&quot;Create new dashboard&quot;</strong>:</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_create_new_dashboard_button.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_create_new_dashboard_button.png" />
+</div></blockquote>
+</li>
+<li><p>Hacer click en <strong>&quot;Add&quot;</strong> en la barra superior izquierda para agregar visualizaciones al Dashboard:</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_add_viz_button_dashboard.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_add_viz_button_dashboard.png" />
+</div></blockquote>
+</li>
+<li><p>Se desplegará listado de visualizaciones disponibles. Se puede utilizar la barra de búsqueda para filtrar el listado por nombre. Hacer click en las visualizaciones para agregar al Dashboard.</p>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_add_viz_dashboard_panel.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_add_viz_dashboard_panel.png" />
+</div></blockquote>
+</li>
+<li><p>Se desplegará el panel del Dashboard en modo &quot;borrador&quot;, con las <strong>visualizaciones</strong> (dentro de <strong>contenedores o marcos</strong>) que se hayan agregado. Algunas operaciones básicas que se pueden ejecutar:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>En la <strong>esquina inferior derecha</strong> de cada <strong>visualización</strong> se puede <strong>modificar el tamaño de ésta</strong> (más bien de su marco contenedor).</p></li>
+<li><p>En la <strong>esquina superior derecha</strong> de cada <strong>visualización</strong> (ícono tuerca), se puede ir directamente a <strong>editar la visualización en el origen</strong>.</p></li>
+</ul>
+<img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_dashboard_chart_draft.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_dashboard_chart_draft.png" />
+</div></blockquote>
+</li>
+<li><p>Hacer click en <strong>&quot;Save&quot; (menú superior izquierdo, sobre el filtro de tiempo), para desplegar el panel de **guardar Dashboard</strong>. Para <strong>volver a editar</strong> (en modo borrador), hacer click en <strong>\Edit\</strong>:</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="resultado">
+<h2>Resultado<a class="headerlink" href="#resultado" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><img alt="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_dashboard_chart_result.png" src="https://panchoman.s3-sa-east-1.amazonaws.com/kibana_dashboard_chart_result.png" />
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Kibana</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="usuario.html">1. Manual Nivel Usuario</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="usuario-dashboard.html">1. Dashboards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualizaciones.html">2. Visualizaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usuario-reportes.html">3. Reportes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-patterns.html">4. Index Patterns</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usuarios.html">2. Manejo de Usuarios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vega.html">3. Vega</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cases.html">5. Casos Especiales</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="usuario.html">Kibana: Manual Nivel Usuario</a><ul>
+  <li><a href="usuario-dashboard.html">Kibana: Dashboards</a><ul>
+      <li>Previous: <a href="usuario-dashboard-access.html" title="capítulo anterior">Kibana: Acceder Dashboard</a></li>
+      <li>Next: <a href="usuario-dashboard-filtros.html" title="próximo capítulo">Kibana: Filtros para Dashboards, Nivel Usuario</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/usuario-dashboard-crear-editar.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
