@@ -6,7 +6,8 @@ Instrucciones (en Linux) para montar un volumen en servicios cloud (como AWS o A
 ----------------------------------------------------------------------------------------
 
 * **Referencias**:
-    https://www.youtube.com/watch?v=DwdSRt9gfrU
+    - https://www.youtube.com/watch?v=DwdSRt9gfrU
+    - https://docs.microsoft.com/en-us/azure/virtual-machines/linux/add-disk
 
 * Ejemplo con un volumen nuevo llamado **"data"**.
 
@@ -27,15 +28,39 @@ Instrucciones (en Linux) para montar un volumen en servicios cloud (como AWS o A
         └─xvda1 ext4     25G /          cloudimg-rootfs
         xvdb            200G
 
-2. Crear nueva partición::
+2. Crear nueva partición:
 
-    sudo fdisk /dev/xvdb
-    n
-    p
-    1
-    Enter
-    Enter
-    w
+    .. code-block:: bash
+
+        sudo fdisk /dev/xvdb
+        n
+        p
+        1
+        Enter
+        Enter
+        w
+
+    Ejemplo:
+
+    .. code-block:: bash
+
+        Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
+        Building a new DOS disklabel with disk identifier 0x2a59b123.
+        Changes will remain in memory only, until you decide to write them.
+        After that, of course, the previous content won't be recoverable.
+
+        Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
+
+        Command (m for help): n
+        Partition type:
+        p   primary (0 primary, 0 extended, 4 free)
+        e   extended
+        Select (default p): p
+        Partition number (1-4, default 1): 1
+        First sector (2048-10485759, default 2048):
+        Using default value 2048
+        Last sector, +sectors or +size{K,M,G} (2048-10485759, default 10485759):
+        Using default value 10485759
 
 3. Crear sistema de archivos XFS (Red Hat):
     https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-xfs
@@ -71,13 +96,15 @@ Instrucciones (en Linux) para montar un volumen en servicios cloud (como AWS o A
     .. code-block:: bash
 
         sudo vim /etc/fstab
-        /dev/xvdb1    home/ubuntu/data    xfs    defaults,noatime    0    2
+        /dev/xvdb1    /home/ubuntu/data    xfs    defaults,noatime    0    2
         sudo mount -a
 
     Cambiar permisos:
+    * En este ejemplo \\"<carpeta_destino>\\" sería \\"data\\".
     
     .. code-block:: bash
     
-        sudo chown -R ubuntu /data
-        chown -R ubuntu:group /data
+        sudo chmod -R g+rwx <carpeta_destino>
+        sudo chgrp -R 1000 <carpeta_destino>
+        sudo chown -R 1000 <carpeta_destino>
 
