@@ -4,6 +4,21 @@ Jupyter Notebooks: Anaconda
 
 Información de referencia sobre como configurar entornos virtuales basados en Anaconda, y ejecutar o automatizar rutinas en Linux bajo ellos.
 
+Anaconda: Comandos Básicos
+-----------------------------
+
+**Referencias:**
+    - https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf
+
+    .. code-block:: bash
+
+        conda env list #listar entornos virtuales con sus rutas 
+
+        conda activate #activar entorno virtual
+        
+        conda deactivate #desactivar entorno virtual
+
+
 Correr un entorno virtual **dentro** de un script **BASH**
 -----------------------------------------------------------
 
