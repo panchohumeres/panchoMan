@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Linux: CRON tab &#8212; documentación de Manual Linux - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="LINUX: Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="Linux: Bash y Parámetros del Shell" href="shell-parameters-bash.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/linux_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="linux-cron-tab">
+<h1>Linux: CRON tab<a class="headerlink" href="#linux-cron-tab" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>El archivo <strong>&quot;crontab&quot;</strong> contiene secuencias de comandos para ser ejecutadas según un <strong>&quot;timestamp&quot;</strong> especificado.</p>
+<div class="section" id="scope-y-entornos">
+<h2>Scope y entornos<a class="headerlink" href="#scope-y-entornos" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.computerhope.com/unix/ucrontab.htm">https://www.computerhope.com/unix/ucrontab.htm</a></p></li>
+</ul>
+</dd>
+</dl>
+<p>Los archivos crontab existen para usuarios individuales.</p>
+</div>
+<div class="section" id="archivos-de-configuracion">
+<h2>Archivos de configuración<a class="headerlink" href="#archivos-de-configuracion" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.computerhope.com/unix/ucrontab.htm">https://www.computerhope.com/unix/ucrontab.htm</a></p></li>
+</ul>
+</dd>
+</dl>
+<p>Si los siguientes archivos de configuración <strong>NO</strong> existen, sólo el <strong>&quot;superusuario&quot;</strong> puede ejecutar tareas CRON:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 81%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Arhivo</p></td>
+<td><p>Descripción</p></td>
+</tr>
+<tr class="row-even"><td><p>\etc\cron.allow</p></td>
+<td><p>Si este archivo existe, los usuarios deben estar listados en éste para ejecutar tareas CRON</p></td>
+</tr>
+<tr class="row-odd"><td><p>\etc\cron.deny</p></td>
+<td><p>Si este archivo existe, los usuarios listados tienen prohibido ejecutar tareas CRON.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="comandos-generales">
+<h2>Comandos Generales<a class="headerlink" href="#comandos-generales" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl>
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.computerhope.com/unix/ucrontab.htm">https://www.computerhope.com/unix/ucrontab.htm</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/10193788/restarting-cron-after-changing-crontab-file">https://stackoverflow.com/questions/10193788/restarting-cron-after-changing-crontab-file</a></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>crontab -e <span class="c1">#Editar archivo crontab</span>
+
+crontab -l <span class="c1">#Revisar archivo crontab</span>
+
+crontab -r <span class="c1">#listar contenido de archivo crontab</span>
+
+crontab -r <span class="c1">#remover archivo crontab (se pierden las tareas)</span>
+
+sudo crontab -u charles -e <span class="c1">#editar crontab de usuario llamado &quot;charles&quot;, -u es para sudo</span>
+
+sudo crontab -l -u jeff <span class="c1">#ver el crontab del usuario llamado &quot;jeff&quot;</span>
+
+sudo crontab -r -u sandy <span class="c1">#borrar crontab de usuario llamado &quot;sandy&quot;</span>
+
+sudo service cron reload <span class="c1">#reiniciar servicio cron (no es necesario ya que se reinicia con cada edición del archivo)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="sintaxis">
+<h2>Sintaxis<a class="headerlink" href="#sintaxis" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.computerhope.com/unix/ucrontab.htm">https://www.computerhope.com/unix/ucrontab.htm</a></p></li>
+<li><p><a class="reference external" href="https://crontab.guru/every-1-minute">https://crontab.guru/every-1-minute</a></p></li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li><p>Cada línea del archivo son comandos que se ejecutan en el timestamp especificado, p.ej:</p>
+<blockquote>
+<div><p>Ejemplos:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#Ejecuta el script backup.sh, a las 12:01, todos los Lunes de Enero.</span>
+<span class="m">01</span> <span class="m">00</span> * Jan Monday  /home/melissa/backup.sh
+
+<span class="c1">#Ejecuta el script backup.sh, en Enero 2 a las 6:15 A.M.</span>
+<span class="m">15</span> <span class="m">6</span> <span class="m">2</span> <span class="m">1</span> * /home/melissa/backup.sh
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>La sintaxis es:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>minuto hora día<span class="o">(</span>del mes<span class="o">)</span> mes día<span class="o">(</span>de la semana<span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Los operadores son:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>* <span class="c1">#Cualquier Valor</span>
+, <span class="c1">#separador de lista</span>
+- <span class="c1">#rango de valores</span>
+/ <span class="c1">#&quot;Steps&quot; o pasos</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="rutas-relativas-y-absolutas">
+<h2>Rutas relativas y absolutas<a class="headerlink" href="#rutas-relativas-y-absolutas" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/21420945/using-relative-paths-in-crontab">https://stackoverflow.com/questions/21420945/using-relative-paths-in-crontab</a></p></li>
+<li><p><a class="reference external" href="https://superuser.com/questions/155576/linux-how-to-run-a-command-in-a-given-directory">https://superuser.com/questions/155576/linux-how-to-run-a-command-in-a-given-directory</a></p></li>
+<li><p><a class="reference external" href="https://unix.stackexchange.com/questions/38951/what-is-the-working-directory-when-cron-executes-a-job">https://unix.stackexchange.com/questions/38951/what-is-the-working-directory-when-cron-executes-a-job</a></p></li>
+</ul>
+</dd>
+</dl>
+<p>CRON tab funciona con rutas absolutas, según el <strong>home</strong> del <strong>usuario</strong>.
+Para ejecutar con rutas relativas, simplemente se utiliza el comando <strong>cd</strong>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>* * * * * <span class="nb">cd</span> /home/fake_user/Desktop/folder1/folder2 <span class="o">&amp;&amp;</span> ./script.sh
+
+<span class="c1">#PARA HACERLO COMO ROOT</span>
+* * * * * root <span class="nb">cd</span> /home/fake_user/Desktop/folder1/folder2 <span class="o">&amp;&amp;</span> ./script.sh
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="logs">
+<h2>Logs<a class="headerlink" href="#logs" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://askubuntu.com/questions/56683/where-is-the-cron-crontab-log">https://askubuntu.com/questions/56683/where-is-the-cron-crontab-log</a></p></li>
+<li><p><a class="reference external" href="https://askubuntu.com/questions/222512/cron-info-no-mta-installed-discarding-output-error-in-the-syslog">https://askubuntu.com/questions/222512/cron-info-no-mta-installed-discarding-output-error-in-the-syslog</a></p></li>
+</ul>
+</dd>
+</dl>
+<p>Los logs se encuentran en:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/var/log/syslog
+</pre></div>
+</div>
+</div></blockquote>
+<p>Para ver los logs:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep CRON /var/log/syslog
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>NOTA:</strong> Sin embargo, si <strong>no</strong> hay instalado un servidor de correo, se va a ver la siguiente línea en los logs:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CRON<span class="o">[</span><span class="m">8380</span><span class="o">]</span>: <span class="o">(</span>CRON<span class="o">)</span> info <span class="o">(</span>No MTA installed, discarding output<span class="o">)</span>
+</pre></div>
+</div>
+<p><strong>Posibles Soluciones:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Enviar el oputput del comando a un archivo dentro de la misma entrada crontab, p.ej:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>* * * * * yourCommand &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Linux</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="useful-commands.html">1. Comandos Útiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">2. Nube pública (Cloud)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bash.html">3. Bash</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. CRON tab</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#scope-y-entornos">Scope y entornos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#archivos-de-configuracion">Archivos de configuración</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comandos-generales">Comandos Generales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sintaxis">Sintaxis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rutas-relativas-y-absolutas">Rutas relativas y absolutas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logs">Logs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alpine.html">6. Alpine Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">7. Networking</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="shell-parameters-bash.html" title="capítulo anterior">Linux: Bash y Parámetros del Shell</a></li>
+      <li>Next: <a href="troubleshooting.html" title="próximo capítulo">LINUX: Troubleshooting</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/crontab.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <title>Manual Linux de Francisco Humeres M. &#8212; documentación de Manual Linux - 1.0</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/translations.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
     <link rel="next" title="Linux: Comandos Útiles" href="_sections/useful-commands.html" />
@@ -57,13 +57,22 @@
 <li class="toctree-l2"><a class="reference internal" href="_sections/shell-parameters-bash.html">6. Parámetros Shell</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">4. Troubleshooting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/alpine.html">5. Alpine Linux</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="_sections/crontab.html">4. CRON tab</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/crontab.html#scope-y-entornos">Scope y entornos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/crontab.html#archivos-de-configuracion">Archivos de configuración</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/crontab.html#comandos-generales">Comandos Generales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/crontab.html#sintaxis">Sintaxis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/crontab.html#rutas-relativas-y-absolutas">Rutas relativas y absolutas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/crontab.html#logs">Logs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/alpine.html">6. Alpine Linux</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_sections/alpine.html#introduccion">Introducción:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_sections/alpine.html#comandos-para-administrar-servicios">Comandos para administrar servicios:</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/networking.html">6. Networking</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="_sections/networking.html">7. Networking</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_sections/networking.html#interfaces">Interfaces:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_sections/networking.html#codigos-http">Códigos HTTP</a></li>
 </ul>
@@ -98,9 +107,10 @@
 <li class="toctree-l1"><a class="reference internal" href="_sections/useful-commands.html">1. Comandos Útiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_sections/cloud.html">2. Nube pública (Cloud)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_sections/bash.html">3. Bash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">4. Troubleshooting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/alpine.html">5. Alpine Linux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sections/networking.html">6. Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/crontab.html">4. CRON tab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/alpine.html">6. Alpine Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/networking.html">7. Networking</a></li>
 </ul>
 
 <div class="relations">
@@ -120,7 +130,7 @@
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -137,7 +147,7 @@
       &copy;2020, Francisco Humeres M..
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
