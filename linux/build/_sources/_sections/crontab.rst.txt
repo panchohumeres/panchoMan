@@ -116,6 +116,7 @@ Logs
 **Referencias:**
     - https://askubuntu.com/questions/56683/where-is-the-cron-crontab-log
     - https://askubuntu.com/questions/222512/cron-info-no-mta-installed-discarding-output-error-in-the-syslog
+    - https://superuser.com/questions/445347/why-is-my-crontab-not-running
 
 Los logs se encuentran en:
 
@@ -137,10 +138,14 @@ Para ver los logs:
 
     **Posibles Soluciones:**
 
-        - Enviar el oputput del comando a un archivo dentro de la misma entrada crontab, p.ej:
+        1. Instalar algún MTP como postfix: :code:`sudo apt-get install postfix` (configurarlo como servidor **\\"local\\"**).
+        2. Enviar el oputput del comando a un archivo dentro de la misma entrada crontab, p.ej:
 
         .. code-block:: bash
 
-            * * * * * yourCommand >/dev/null 2>&1
+            * * * * * yourCommand.sh >/dev/null 2>&1
+
+        3. Revisar logs en dichos archivos o en la carpeta de correos local :code:`tail -f /var/mail/<your_username>` .
+    
 
 

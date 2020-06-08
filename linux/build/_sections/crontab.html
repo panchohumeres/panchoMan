@@ -171,6 +171,7 @@ Para ejecutar con rutas relativas, simplemente se utiliza el comando <strong>cd<
 <dt><strong>Referencias:</strong></dt><dd><ul class="simple">
 <li><p><a class="reference external" href="https://askubuntu.com/questions/56683/where-is-the-cron-crontab-log">https://askubuntu.com/questions/56683/where-is-the-cron-crontab-log</a></p></li>
 <li><p><a class="reference external" href="https://askubuntu.com/questions/222512/cron-info-no-mta-installed-discarding-output-error-in-the-syslog">https://askubuntu.com/questions/222512/cron-info-no-mta-installed-discarding-output-error-in-the-syslog</a></p></li>
+<li><p><a class="reference external" href="https://superuser.com/questions/445347/why-is-my-crontab-not-running">https://superuser.com/questions/445347/why-is-my-crontab-not-running</a></p></li>
 </ul>
 </dd>
 </dl>
@@ -193,12 +194,16 @@ Para ejecutar con rutas relativas, simplemente se utiliza el comando <strong>cd<
 </div>
 <p><strong>Posibles Soluciones:</strong></p>
 <blockquote>
-<div><ul class="simple">
+<div><ol class="arabic simple">
+<li><p>Instalar algún MTP como postfix: <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">postfix</span></code> (configurarlo como servidor <strong>&quot;local&quot;</strong>).</p></li>
 <li><p>Enviar el oputput del comando a un archivo dentro de la misma entrada crontab, p.ej:</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>* * * * * yourCommand &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>* * * * * yourCommand.sh &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
 </pre></div>
 </div>
+<ol class="arabic simple" start="3">
+<li><p>Revisar logs en dichos archivos o en la carpeta de correos local <code class="code docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-f</span> <span class="pre">/var/mail/&lt;your_username&gt;</span></code> .</p></li>
+</ol>
 </div></blockquote>
 </div></blockquote>
 <hr class="docutils" />
