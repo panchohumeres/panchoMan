@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Jupyter Notebooks: Anaconda &#8212; documentación de Manual Jupyter - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Jupyter Notebooks: Casos Especiales" href="cases.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Jupyter GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/jupyter_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="jupyter-notebooks-anaconda">
+<h1>Jupyter Notebooks: Anaconda<a class="headerlink" href="#jupyter-notebooks-anaconda" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Información de referencia sobre como configurar entornos virtuales basados en Anaconda, y ejecutar o automatizar rutinas en Linux bajo ellos.</p>
+<div class="section" id="correr-un-entorno-virtual-dentro-de-un-script-bash">
+<h2>Correr un entorno virtual <strong>dentro</strong> de un script <strong>BASH</strong><a class="headerlink" href="#correr-un-entorno-virtual-dentro-de-un-script-bash" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl>
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/conda/conda/issues/7980">https://github.com/conda/conda/issues/7980</a></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>conda shell.bash hook<span class="k">)</span><span class="s2">&quot;</span>
+conda activate &lt;nombre_entorno&gt;
+
+&lt;......resto del script....&gt;
+
+conda deactivate
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="section" id="parametrizar-script-con-papermill">
+<h3>Parametrizar script con Papermill:<a class="headerlink" href="#parametrizar-script-con-papermill" title="Enlazar permanentemente con este título">¶</a></h3>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/48750055/how-to-run-a-python-jupyter-notebook-daily-automatically">https://stackoverflow.com/questions/48750055/how-to-run-a-python-jupyter-notebook-daily-automatically</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/y-data-stories/automating-jupyter-notebooks-with-papermill-4b8543ece92f">https://medium.com/y-data-stories/automating-jupyter-notebooks-with-papermill-4b8543ece92f</a></p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="agregar-script-a-cron-tab">
+<h3>Agregar script a CRON tab<a class="headerlink" href="#agregar-script-a-cron-tab" title="Enlazar permanentemente con este título">¶</a></h3>
+<dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/36365801/run-a-crontab-job-using-an-anaconda-env">https://stackoverflow.com/questions/36365801/run-a-crontab-job-using-an-anaconda-env</a></p></li>
+</ul>
+</dd>
+<dt><strong>Ver:</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://panchohumeres.gitlab.io/linux_man/_sections/crontab.html">https://panchohumeres.gitlab.io/linux_man/_sections/crontab.html</a></p></li>
+</ul>
+</dd>
+</dl>
+<p>Ejemplo para dejarlo ejecutando cada minuto:</p>
+<ol class="arabic" start="0">
+<li><p>Tomando como base el script anterior…</p></li>
+<li><p>Copiar cola agregada por Anaconda al archivo <code class="code docutils literal notranslate"><span class="pre">~/.bashrc</span></code>, ejemplo:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
+<span class="c1"># !! Contents within this block are managed by &#39;conda init&#39; !!</span>
+<span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="s1">&#39;/opt/anaconda3/bin/conda&#39;</span> <span class="s1">&#39;shell.bash&#39;</span> <span class="s1">&#39;hook&#39;</span> <span class="m">2</span>&gt; /dev/null<span class="k">)</span><span class="s2">&quot;</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">eval</span> <span class="s2">&quot;</span><span class="nv">$__conda_setup</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+    <span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;/opt/anaconda3/etc/profile.d/conda.sh&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        . <span class="s2">&quot;/opt/anaconda3/etc/profile.d/conda.sh&quot;</span>
+    <span class="k">else</span>
+        <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/anaconda3/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+    <span class="k">fi</span>
+<span class="k">fi</span>
+<span class="nb">unset</span> __conda_setup
+<span class="c1"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<ol class="arabic" start="3">
+<li><p>Crear un nuevo archivo, <code class="code docutils literal notranslate"><span class="pre">~/.bashrc_conda</span></code> con snippet copiado de paso anterior.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">crontab</span> <span class="pre">-e</span></code>, y agregar estas líneas:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">SHELL</span><span class="o">=</span>/bin/bash
+<span class="nv">BASH_ENV</span><span class="o">=</span>/home/&lt;user&gt;/.bashrc_conda
+* * * * * <span class="nb">cd</span> /home/&lt;user&gt;/path/to/folder <span class="o">&amp;&amp;</span> ./script.sh -p parameter_value &gt; ./outputs/log_file.txt <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Jupyter</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usuario.html">1. Manual Nivel Usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seguridad.html">2. Seguridad en Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">3. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">4. Configuración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">5. Docker y Docker-compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cases.html">6. Casos Especiales</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Entornos Virtuales Anaconda</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#correr-un-entorno-virtual-dentro-de-un-script-bash">Correr un entorno virtual <strong>dentro</strong> de un script <strong>BASH</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="cases.html" title="capítulo anterior">Jupyter Notebooks: Casos Especiales</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/anaconda.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

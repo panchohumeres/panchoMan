@@ -13,5 +13,6 @@ Manual Jupyter Notebook de Francisco Humeres M.
    4. Configuración <../_sections/config>
    5. Docker y Docker-compose <../_sections/docker>
    6. Casos Especiales <../_sections/cases>
+   7. Entornos Virtuales Anaconda <../_sections/anaconda>
 
 
