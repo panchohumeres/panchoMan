@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Linux: Bash y Parámetros del Shell &#8212; documentación de Manual Linux - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Linux: Usos de Comillas" href="quotes-bash.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/linux_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="linux-bash-y-parametros-del-shell">
+<h1>Linux: Bash y Parámetros del Shell<a class="headerlink" href="#linux-bash-y-parametros-del-shell" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="simple">
+<dt>Bash:</dt><dd><p>Parámetros: Conceptos</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<ul>
+<li><dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><p><a class="reference external" href="https://www.gnu.org/software/bash/manual/htmlnode/Shell-Parameters.html">https://www.gnu.org/software/bash/manual/htmlnode/Shell-Parameters.html</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>A una variable se le puede asignar el nombre de la forma:</dt><dd><p><code class="code docutils literal notranslate"><span class="pre">nombre=valor</span></code>
+Si el <strong>valor</strong> <strong>NO</strong> se especifica, se le asigna un <strong>string null</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Cuando se le aplica el operador <strong>«+=»</strong> a una variable:</dt><dd><ul class="simple">
+<li><p>Si es un <strong>integer</strong>, se le suma el <strong>valor</strong>.</p></li>
+<li><p>Si es un <strong>array</strong>, se le apendiza el <strong>valor</strong> como el último elemento. Ver: <span class="xref std std-doc">../sections/arrays-bash</span></p></li>
+<li><p>Si es un <strong>string</strong>, se le apendiza el <strong>valor</strong> al string.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>nameref</strong>:</dt><dd><ul>
+<li><p>Referencia a otra variable.</p></li>
+<li><p>Cualquiere operación aplicada sobre <strong>nameref</strong> se le aplica a la variable referenciada.</p></li>
+<li><p>Forma de declararla:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">declare</span> -n <span class="nv">ref</span><span class="o">=</span><span class="nv">$1</span>
+</pre></div>
+</div>
+<p>En este caso «<strong>ref</strong>» es el nombre de la variable que hace referencia a otra.</p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Linux</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="useful-commands.html">1. Comandos Útiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">2. Nube pública (Cloud)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bash.html">3. Bash</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="arrays-bash.html">1. Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="args-bash.html">2. Pasar argumentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="$-bash.html">4. $ y Expansión de Parámetros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quotes-bash.html">5. Uso de &quot;&quot; y ''</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6. Parámetros Shell</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="bash.html">Linux: Bash</a><ul>
+      <li>Previous: <a href="quotes-bash.html" title="capítulo anterior">Linux: Usos de Comillas</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/shell-parameters-bash.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

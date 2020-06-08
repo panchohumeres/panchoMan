@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Manual Docker de Francisco Humeres M. &#8212; documentación de Manual Docker - 1.0</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Docker: Instalar" href="_sections/instalar.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/docker_man_page"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="manual-docker-de-francisco-humeres-m">
+<h1>Manual Docker de Francisco Humeres M.<a class="headerlink" href="#manual-docker-de-francisco-humeres-m" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_sections/instalar.html">1. Instalar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/general.html">2. Generales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/conceptos.html">3. Conceptos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/conceptos.html#especificar-volumenes-en-dockerfile-y-en-mapeo">Especificar volúmenes en Dockerfile y en mapeo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/conceptos.html#workdir">&quot;Workdir&quot;:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/conceptos.html#imagenes-docker-y-capas">Imágenes Docker y Capas:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/conceptos.html#shell-y-exec">&quot;Shell&quot; y &quot;Exec&quot;:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/volumes.html">4. Volúmenes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/volumes.html#especificar-volumenes-en-dockerfile-y-en-mapeo">Especificar volúmenes en Dockerfile y en mapeo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/containers.html">5. Contenedores</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/ps.html">1. Listar Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/logs.html">2. Revisar Logs de Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/prune.html">2. Borrar, Limpiar Contenedores</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/entrypoint-command.html">6. ENTRYPOINT, COMMAND y RUN</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/entrypoint-command-concepts.html">1. Conceptos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/entrypoint-command-general.html">2. Generales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/entrypoint-command-envsubst.html">2. Reemplazar variables de entorno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/entrypoint-command-troubleshooting.html">3. Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/special-cases.html">7. Casos Especiales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/networking.html">8. Networking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/networking.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/networking.html#redireccion-de-puertos">Redirección de Puertos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/networking.html#localhost-en-docker-compose"><strong>&quot;localhost&quot;</strong> en Docker-Compose:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">9. Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/troubleshooting.html#connection-refused-o-connection-reset-by-peer">&quot;Connection refused&quot; o &quot;Connection reset by peer&quot;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/troubleshooting.html#bash-command-unexpected-eof-while-looking-for-matching">&quot;bash command unexpected EOF while looking for matching&quot;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_sections/troubleshooting.html#un-contenedor-se-cierra-inesperadamente-despues-de-entrypoint">Un contenedor se cierra inesperadamente después de ENTRYPOINT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/not.html">10. Lo que no se puede hacer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/not.html#montar-volumenes-en-un-dockerfile">Montar volúmenes en un Dockerfile</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/borrar.html">11. Borrar Contenedores, Imágenes y Volúmenes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_sections/borrar.html#borrar-volumenes-en-docker-compose">Borrar Volúmenes en Docker-compose:</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Manual Docker</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_sections/instalar.html">1. Instalar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/general.html">2. Generales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/conceptos.html">3. Conceptos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/volumes.html">4. Volúmenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/containers.html">5. Contenedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/entrypoint-command.html">6. ENTRYPOINT, COMMAND y RUN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/special-cases.html">7. Casos Especiales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/networking.html">8. Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/troubleshooting.html">9. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/not.html">10. Lo que no se puede hacer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sections/borrar.html">11. Borrar Contenedores, Imágenes y Volúmenes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="_sections/instalar.html" title="próximo capítulo">Docker: Instalar</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

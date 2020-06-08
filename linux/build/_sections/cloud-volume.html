@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Linux: Cloud - Montar Volúmenes &#8212; documentación de Manual Linux - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Linux: Bash" href="bash.html" />
+    <link rel="prev" title="Linux: Nube Pública (Cloud)" href="cloud.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/linux_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="linux-cloud-montar-volumenes">
+<h1>Linux: Cloud - Montar Volúmenes<a class="headerlink" href="#linux-cloud-montar-volumenes" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="instrucciones-en-linux-para-montar-un-volumen-en-servicios-cloud-como-aws-o-amazon">
+<h2>Instrucciones (en Linux) para montar un volumen en servicios cloud (como AWS o Amazon):<a class="headerlink" href="#instrucciones-en-linux-para-montar-un-volumen-en-servicios-cloud-como-aws-o-amazon" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Referencias</strong>:</dt><dd><p><a class="reference external" href="https://www.youtube.com/watch?v=DwdSRt9gfrU">https://www.youtube.com/watch?v=DwdSRt9gfrU</a></p>
+</dd>
+</dl>
+</li>
+<li><p>Ejemplo con un volumen nuevo llamado <strong>«data»</strong>.</p></li>
+</ul>
+<ol class="arabic">
+<li><p>Listar volumenes existentes</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL
+</pre></div>
+</div>
+<p>Ejemplo respuesta</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>NAME    FSTYPE  SIZE MOUNTPOINT LABEL
+xvda             25G
+└─xvda1 ext4     25G /          cloudimg-rootfs
+xvdb            200G
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Crear nueva partición:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">fdisk</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">xvdb</span>
+<span class="n">n</span>
+<span class="n">p</span>
+<span class="mi">1</span>
+<span class="n">Enter</span>
+<span class="n">Enter</span>
+<span class="n">w</span>
+</pre></div>
+</div>
+</li>
+<li><dl>
+<dt>Crear sistema de archivos XFS (Red Hat):</dt><dd><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-xfs">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-xfs</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkfs.xfs -L data /dev/xvdb1
+</pre></div>
+</div>
+<p>Ejemplo Output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>meta-data<span class="o">=</span>/dev/xvdb1             <span class="nv">isize</span><span class="o">=</span><span class="m">512</span>    <span class="nv">agcount</span><span class="o">=</span><span class="m">4</span>, <span class="nv">agsize</span><span class="o">=</span><span class="m">13107136</span> <span class="nv">blks</span>
+         <span class="o">=</span>                       <span class="nv">sectsz</span><span class="o">=</span><span class="m">512</span>   <span class="nv">attr</span><span class="o">=</span><span class="m">2</span>, <span class="nv">projid32bit</span><span class="o">=</span><span class="nv">1</span>
+         <span class="o">=</span>                       <span class="nv">crc</span><span class="o">=</span><span class="m">1</span>        <span class="nv">finobt</span><span class="o">=</span><span class="m">1</span>, <span class="nv">sparse</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">data</span>     <span class="o">=</span>                       <span class="nv">bsize</span><span class="o">=</span><span class="m">4096</span>   <span class="nv">blocks</span><span class="o">=</span><span class="m">52428544</span>, <span class="nv">imaxpct</span><span class="o">=</span><span class="nv">25</span>
+         <span class="o">=</span>                       <span class="nv">sunit</span><span class="o">=</span><span class="m">0</span>      <span class="nv">swidth</span><span class="o">=</span><span class="m">0</span> blks
+<span class="nv">naming</span>   <span class="o">=</span>version <span class="m">2</span>              <span class="nv">bsize</span><span class="o">=</span><span class="m">4096</span>   ascii-ci<span class="o">=</span><span class="m">0</span> <span class="nv">ftype</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">log</span>      <span class="o">=</span>internal log           <span class="nv">bsize</span><span class="o">=</span><span class="m">4096</span>   <span class="nv">blocks</span><span class="o">=</span><span class="m">25599</span>, <span class="nv">version</span><span class="o">=</span><span class="nv">2</span>
+         <span class="o">=</span>                       <span class="nv">sectsz</span><span class="o">=</span><span class="m">512</span>   <span class="nv">sunit</span><span class="o">=</span><span class="m">0</span> blks, lazy-count<span class="o">=</span><span class="m">1</span>
+<span class="nv">realtime</span> <span class="o">=</span>none                   <span class="nv">extsz</span><span class="o">=</span><span class="m">4096</span>   <span class="nv">blocks</span><span class="o">=</span><span class="m">0</span>, <span class="nv">rtextents</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Crear directorio y montar volumen:</dt><dd><p>Crear directorio:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir /data
+</pre></div>
+</div>
+<p>Cambiar archivo fstab, con directivas para montar automáticamente el volumen cuando se reinicia el sistema, y montar volumen:
+<a class="reference external" href="https://es.wikipedia.org/wiki/Fstab">https://es.wikipedia.org/wiki/Fstab</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo vim /etc/fstab
+/dev/xvdb1    home/ubuntu/data    xfs    defaults,noatime    <span class="m">0</span>    <span class="m">2</span>
+sudo mount -a
+</pre></div>
+</div>
+<p>Cambiar permisos:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo chown -R ubuntu /data
+chown -R ubuntu:group /data
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Linux</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="useful-commands.html">1. Comandos Útiles</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="cloud.html">2. Nube pública (Cloud)</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Montar volumen externo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bash.html">3. Bash</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="cloud.html">Linux: Nube Pública (Cloud)</a><ul>
+      <li>Previous: <a href="cloud.html" title="capítulo anterior">Linux: Nube Pública (Cloud)</a></li>
+      <li>Next: <a href="bash.html" title="próximo capítulo">Linux: Bash</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/cloud-volume.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

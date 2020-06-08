@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Linux: Bash &#8212; documentación de Manual Linux - 1.0</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Linux: Bash Strings" href="strings-bash.html" />
+    <link rel="prev" title="Linux: Bash Arrays" href="arrays-bash.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/linux_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
+<div class="section" id="linux-bash">
+<h1>Linux: Bash<a class="headerlink" href="#linux-bash" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="comandos">
+<h2>Comandos<a class="headerlink" href="#comandos" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>set -u | Tratar variables <strong>NO &quot;seteadas&quot;</strong> como <strong>ERROR</strong> al sustituir.</dt><dd><p>Ver: <a class="reference external" href="https://unix.stackexchange.com/questions/544993/what-does-set-u-do-in-bash-script">https://unix.stackexchange.com/questions/544993/what-does-set-u-do-in-bash-script</a></p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Ejemplos de pasar argumentos en scripts Bash:</p>
+<hr class="docutils" />
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Referencias:</strong></dt><dd><p><a class="reference external" href="https://medium.com/&#64;Drew_Stokes/bash-argument-parsing-54f3b81a6a8f">https://medium.com/&#64;Drew_Stokes/bash-argument-parsing-54f3b81a6a8f</a>
+<a class="reference external" href="https://www.poftut.com/how-to-pass-and-parse-linux-bash-script-arguments-and-parameters/">https://www.poftut.com/how-to-pass-and-parse-linux-bash-script-arguments-and-parameters/</a></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="caso-1-while-loop">
+<h2><strong>Caso 1</strong>, while LOOP:<a class="headerlink" href="#caso-1-while-loop" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nv">PARAMS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="k">while</span> <span class="o">((</span> <span class="s2">&quot;</span><span class="nv">$#</span><span class="s2">&quot;</span> <span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+    <span class="k">case</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> in
+        -f<span class="p">|</span>--flag-with-argument<span class="o">)</span>
+            <span class="nv">FARG</span><span class="o">=</span><span class="nv">$2</span>
+            <span class="nb">shift</span> <span class="m">2</span>
+            <span class="p">;;</span>
+    --<span class="o">)</span> <span class="c1"># end argument parsing</span>
+        <span class="nb">shift</span>
+        <span class="nb">break</span>
+        <span class="p">;;</span>
+    -*<span class="p">|</span>--*<span class="o">=)</span> <span class="c1"># unsupported flags</span>
+        <span class="nb">echo</span> <span class="s2">&quot;Error: Unsupported flag </span><span class="nv">$1</span><span class="s2">&quot;</span> &gt;<span class="p">&amp;</span><span class="m">2</span>
+        <span class="nb">exit</span> <span class="m">1</span>
+        <span class="p">;;</span>
+    *<span class="o">)</span> <span class="c1"># preserve positional arguments</span>
+        <span class="nv">PARAMS</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PARAMS</span><span class="s2"> </span><span class="nv">$1</span><span class="s2">&quot;</span>
+        <span class="nb">shift</span>
+        <span class="p">;;</span>
+<span class="k">esac</span>
+<span class="k">done</span>
+<span class="c1"># set positional arguments in their proper place</span>
+<span class="nb">eval</span> <span class="nb">set</span> -- <span class="s2">&quot;</span><span class="nv">$PARAMS</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="caso-2-usando-getopts">
+<h2><strong>Caso 2</strong>, usando getopts<a class="headerlink" href="#caso-2-usando-getopts" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="k">while</span> <span class="nb">getopts</span> u:p: option
+<span class="k">do</span>
+    <span class="k">case</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">option</span><span class="si">}</span><span class="s2">&quot;</span>
+    in
+    u<span class="o">)</span> <span class="nv">USER</span><span class="o">=</span><span class="si">${</span><span class="nv">OPTARG</span><span class="si">}</span><span class="p">;;</span>
+    p<span class="o">)</span> <span class="nv">PASSWORD</span><span class="o">=</span><span class="si">${</span><span class="nv">OPTARG</span><span class="si">}</span><span class="p">;;</span>
+    <span class="k">esac</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;User:&quot;</span><span class="nv">$USER</span>
+<span class="nb">echo</span> <span class="s2">&quot;Password:&quot;</span><span class="nv">$PASSWORD</span>
+</pre></div>
+</div>
+<p>probarlo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./myscript.sh -u ismail p poftut
+</pre></div>
+</div>
+<p>resultado esperado:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>User:ismail
+Password:poftut
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="como-llamar-otro-script-bash">
+<h2>Como llamar otro Script Bash:<a class="headerlink" href="#como-llamar-otro-script-bash" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Llamar el otro script como un comando normal (después de hacerlo ejecutable y agregarlo a la variable de entorno $PATH).</p></li>
+<li><p>Lammarlo con source:</p>
+<blockquote>
+<div><p>source another_script.sh</p>
+<p>#O con Alias «.».</p>
+<p>. another_script.sh</p>
+</div></blockquote>
+</li>
+<li><p>Llamarlo con bash:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash another_script.sh
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>1. y 3.</strong> ejecutan el otro script como otro nuevo proceso, por lo que no comparte ni hereda variables de entorno.</p></li>
+<li><p><strong>2.</strong> trae variables de entorno del otro script, las agrega a las propias y ejecuta el segundo script.</p></li>
+<li><p>Comando <strong>&quot;exit&quot;</strong> rompe ambos scripts en caso <strong>2.</strong>, lo que <strong>NO</strong> ocurre en <strong>1. y 3.</strong>.</p></li>
+<li><p><strong>Referencias:</strong> <a class="reference external" href="https://stackoverflow.com/questions/8352851/how-to-call-one-shell-script-from-another-shell-script">https://stackoverflow.com/questions/8352851/how-to-call-one-shell-script-from-another-shell-script</a></p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<embed>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
+
+</embed></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Manual Linux</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="useful-commands.html">1. Comandos Útiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">2. Nube pública (Cloud)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bash.html">3. Bash</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="arrays-bash.html">1. Arrays</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Pasar argumentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="$-bash.html">4. $ y Expansión de Parámetros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quotes-bash.html">5. Uso de &quot; &quot; y ' '</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shell-parameters-bash.html">6. Parámetros Shell</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">4. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alpine.html">5. Alpine Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">6. Networking</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="bash.html">Linux: Bash</a><ul>
+      <li>Previous: <a href="arrays-bash.html" title="capítulo anterior">Linux: Bash Arrays</a></li>
+      <li>Next: <a href="strings-bash.html" title="próximo capítulo">Linux: Bash Strings</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Francisco Humeres M..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_sections/args-bash.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
