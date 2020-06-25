@@ -16,3 +16,5 @@ Tips para scripts Bash en Linux:
    4. $ y Expansión de Parámetros <../_sections/$-bash>
    5. Uso de " " y ' ' <../_sections/quotes-bash>
    6. Parámetros Shell <../_sections/shell-parameters-bash>
+   7. Variables de Entorno <../_sections/env-bash>
+   8. Redirección <../_sections/redireccion>

@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html lang="es">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
     <title>Linux: Bash $ y Expansión de Parámetros &#8212; documentación de Manual Linux - 1.0</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../_static/translations.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
     <link rel="next" title="Linux: Usos de Comillas" href="quotes-bash.html" />
@@ -36,11 +36,8 @@
   <p>panchoMan <a class="reference external" href="https://panchohumeres.github.io/panchoMan"><img alt="panchoman" src="https://panchoman.s3-sa-east-1.amazonaws.com/panthom_logo.png" style="width: 20px; height: 20px;" /></a> panchoMan GitHub Repo <a class="reference external" href="https://github.com/panchohumeres/panchoMan"><img alt="github" src="https://panchoman.s3-sa-east-1.amazonaws.com/GitHub-Mark-32px.png" style="width: 20px; height: 20px;" /></a> panchoMan Kibana GitLab Repo <a class="reference external" href="https://gitlab.com/panchohumeres/linux_man"><img alt="gitlab" src="https://panchoman.s3-sa-east-1.amazonaws.com/gitlab-logo-white-stacked-rgb_small.png" style="width: 20px; height: 20px;" /></a></p>
 <div class="section" id="linux-bash-y-expansion-de-parametros">
 <h1>Linux: Bash $ y Expansión de Parámetros<a class="headerlink" href="#linux-bash-y-expansion-de-parametros" title="Enlazar permanentemente con este título">¶</a></h1>
-<dl class="simple">
-<dt>Bash:</dt><dd><p>Expansión de Parámetros: Conceptos</p>
-</dd>
-</dl>
-<hr class="docutils" />
+<div class="section" id="expansion-de-parametros-conceptos">
+<h2>Expansión de Parámetros: Conceptos<a class="headerlink" href="#expansion-de-parametros-conceptos" title="Enlazar permanentemente con este título">¶</a></h2>
 <ul>
 <li><dl class="simple">
 <dt><strong>Referencias</strong>:</dt><dd><ul class="simple">
@@ -59,14 +56,14 @@ El valor de <strong>parameter</strong> es sustituido. <strong>parameter</strong>
 <li><p>El nombre del parámetro o símbolo puede estar contenido en corchetes, i.e. <strong>&quot;{}&quot;</strong>, los sirven para proteger la variable a ser expandida de otros carácteres que le siguen inmediatamente, y no sean confundidos como un string o parte del nombre de la variable.</p></li>
 <li><p>Los corchetes <strong>&quot;{}&quot;</strong> son <strong>REQUERIDOS</strong> si es que el <strong>parámetros</strong> es <strong>posicional y con más de un dígito.</strong></p></li>
 <li><p><strong>SI ES QUE NO HAY OTRO TEXTO CONTIGUO</strong>, los corchetes <strong>&quot;{}&quot;</strong> son <strong>OPCIONALES</strong>.</p></li>
-<li><dl>
-<dt>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>NO es un nameref</strong> (Ver: <a class="reference internal" href="shell-parameters-bash.html"><span class="doc">Linux: Bash y Parámetros del Shell</span></a>), se conoce como <strong>&quot;expansión indirecta&quot;</strong>:</dt><dd><ol class="arabic simple">
-<li><p>Bash usa el valor formado por el resto del <strong>parameter</strong> como un <strong>&quot;nuevo&quot; parameter</strong>.</p></li>
-</ol>
-<p>2. Luego este <strong>&quot;nuevo» parameter</strong> es expandido, y este valor es utilizado en el resto de la expresión, en lugar del parámetro original.
-Ejemplo:</p>
+<li><p>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>NO es un nameref</strong> (Ver: <a class="reference internal" href="shell-parameters-bash.html"><span class="doc">Linux: Bash y Parámetros del Shell</span></a>), se conoce como <strong>&quot;expansión indirecta&quot;</strong>:</p>
 <blockquote>
-<div><p>** Ref:** http://ahmed.amayem.com/bash-indirect-expansion-exploration/</p>
+<div><ol class="arabic simple">
+<li><p>Bash usa el valor formado por el resto del <strong>parameter</strong> como un <strong>&quot;nuevo&quot; parameter</strong>.</p></li>
+<li><p>Luego este <strong>&quot;nuevo» parameter</strong> es expandido, y este valor es utilizado en el resto de la expresión, en lugar del parámetro original.</p></li>
+</ol>
+<dl>
+<dt>Ejemplo:</dt><dd><p>** Ref:** http://ahmed.amayem.com/bash-indirect-expansion-exploration/</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fn<span class="o">()</span>
 <span class="o">{</span>
     <span class="nb">echo</span> <span class="si">${</span><span class="p">!1</span><span class="si">}</span>
@@ -85,9 +82,9 @@ fn x
 <span class="si">${</span><span class="nv">x</span><span class="si">}</span>
 </pre></div>
 </div>
-</div></blockquote>
 </dd>
 </dl>
+</div></blockquote>
 </li>
 <li><dl class="simple">
 <dt>Si es que el <strong>primer carácter</strong> de <strong>parameter</strong> es un signo de exclamación, i.e. <strong>!</strong>, y <strong>ES un nameref</strong> (Ver: <a class="reference internal" href="shell-parameters-bash.html"><span class="doc">Linux: Bash y Parámetros del Shell</span></a>):</dt><dd><ol class="arabic simple">
@@ -97,13 +94,15 @@ fn x
 </dl>
 </li>
 </ul>
-<hr class="docutils" />
-<dl>
-<dt>Bash:</dt><dd><p>Usos del signo $.</p>
-<p><strong>Referencia</strong>: <a class="reference external" href="https://stackoverflow.com/questions/10870719/inline-code-highlighting-in-restructuredtext">https://stackoverflow.com/questions/10870719/inline-code-highlighting-in-restructuredtext</a></p>
+</div>
+<div class="section" id="usos-del-signo">
+<h2>Usos del signo <strong>&quot;$&quot;</strong><a class="headerlink" href="#usos-del-signo" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="simple">
+<dt><strong>Referencias</strong>:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/10870719/inline-code-highlighting-in-restructuredtext">https://stackoverflow.com/questions/10870719/inline-code-highlighting-in-restructuredtext</a></p></li>
+</ul>
 </dd>
 </dl>
-<hr class="docutils" />
 <ul class="simple">
 <li><dl class="simple">
 <dt><code class="code docutils literal notranslate"><span class="pre">$1,</span> <span class="pre">$2,</span> <span class="pre">$3</span></code></dt><dd><p>Parámetros posicionales</p>
@@ -165,11 +164,100 @@ Ver: <a class="reference external" href="https://bash.cyberciti.biz/guide/$IFS">
 </dl>
 </li>
 </ul>
+</div>
+<div class="section" id="output-de-comandos-a-variable-de-entorno">
+<h2>Output de comandos a Variable de Entorno<a class="headerlink" href="#output-de-comandos-a-variable-de-entorno" title="Enlazar permanentemente con este título">¶</a></h2>
+<ul>
+<li><p>Sintaxis:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">variable</span><span class="o">=</span><span class="k">$(</span>comando<span class="k">)</span>
+<span class="nv">variable</span><span class="o">=</span><span class="k">$(</span>comando <span class="o">[</span>opción…<span class="o">]</span> argumento1 argumento2 …<span class="k">)</span>
+<span class="nv">variable</span><span class="o">=</span><span class="k">$(</span>/ruta/al/comando<span class="k">)</span>
+
+
+<span class="nv">variable</span><span class="o">=</span><span class="sb">`</span>comando<span class="sb">`</span>
+<span class="nv">variable</span><span class="o">=</span><span class="sb">`</span>comando <span class="o">[</span>opción…<span class="o">]</span> argumento1 argumento2 …<span class="sb">`</span>
+<span class="nv">variable</span><span class="o">=</span><span class="sb">`</span>/ruta/al/comando<span class="sb">`</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Nota:</strong> No usar espacios ni antes ni después de igualdad <strong>&quot;=&quot;</strong>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Ejemplos:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Usar comando <strong>&quot;date&quot;</strong> para mostrar timestamp actual, y guardarlo en variable <strong>&quot;$current_date&quot;</strong> e imprimirla:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">current_date</span><span class="o">=</span><span class="k">$(</span>date<span class="k">)</span>
+$ <span class="nb">echo</span> <span class="s2">&quot;Today is </span><span class="nv">$current_date</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<img alt="https://linuxhint.com/wp-content/uploads/2018/11/1-23.png" src="https://linuxhint.com/wp-content/uploads/2018/11/1-23.png" />
+<p>Fuente Imagen: <a class="footnote-reference brackets" href="#id4" id="id1">1</a>.</p>
+</div></blockquote>
+</li>
+<li><p>Usar comando <strong>&quot;pwd&quot;</strong> para mostrar ruta a directorio activo, y guardarlo en variable <strong>&quot;$current_dir&quot;</strong> e imprimirla:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">current_dir</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>
+$ <span class="nb">echo</span> <span class="s2">&quot;The current directory is : </span><span class="nv">$current_dir</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<img alt="https://linuxhint.com/wp-content/uploads/2018/11/2-23.png" src="https://linuxhint.com/wp-content/uploads/2018/11/2-23.png" />
+<p>Fuente Imagen: <a class="footnote-reference brackets" href="#id4" id="id2">1</a>.</p>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Ejemplo con <strong>parámetros</strong>:</dt><dd><ul>
+<li><p>Usar comando <strong>&quot;wc&quot;</strong> para contar el número total de líneas, palabras y carácteres de un archivo.</p></li>
+<li><p>Se usan las opciones <strong>&quot;-c, -w y -l&quot;</strong> y el nombre del archivo como argumento.</p></li>
+<li><p>Ejemplo archivo <strong>&quot;fruits.txt&quot;</strong>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fruits.txt
+Mango
+Orange
+Banana
+Grape
+Guava
+Apple
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Ejemplo comando:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">count_words</span><span class="o">=</span><span class="sb">`</span>wc -w fruits.txt<span class="sb">`</span>
+$ <span class="nb">echo</span> <span class="s2">&quot;Total words in fruits.txt is </span><span class="nv">$count_words</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>Output:</p>
+<img alt="https://linuxhint.com/wp-content/uploads/2018/11/3-22.png" src="https://linuxhint.com/wp-content/uploads/2018/11/3-22.png" />
+<p>Fuente Imagen: <a class="footnote-reference brackets" href="#id4" id="id3">1</a>.</p>
+</dd>
+</dl>
+</li>
+<li></li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>)</span></dt>
+<dd><p>Fahmida Yesmin, <a class="reference external" href="https://linuxhint.com/bash_command_output_variable/">https://linuxhint.com/bash_command_output_variable/</a></p>
+</dd>
+</dl>
 <hr class="docutils" />
 <embed>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional </a>
 
 </embed></div>
+</div>
 
 
           </div>
@@ -199,6 +287,8 @@ Ver: <a class="reference external" href="https://bash.cyberciti.biz/guide/$IFS">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">4. $ y Expansión de Parámetros</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quotes-bash.html">5. Uso de &quot; &quot; y ' '</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shell-parameters-bash.html">6. Parámetros Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env-bash.html">7. Variables de Entorno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="redireccion.html">8. Redirección</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="crontab.html">4. CRON tab</a></li>
@@ -227,7 +317,7 @@ Ver: <a class="reference external" href="https://bash.cyberciti.biz/guide/$IFS">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script>
 
 
 
@@ -244,7 +334,7 @@ Ver: <a class="reference external" href="https://bash.cyberciti.biz/guide/$IFS">
       &copy;2020, Francisco Humeres M..
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

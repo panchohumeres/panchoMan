@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html lang="es">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta charset="utf-8" />
     <title>Linux: Bash &#8212; documentación de Manual Linux - 1.0</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../_static/translations.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
     <link rel="next" title="Linux: Bash Arrays" href="arrays-bash.html" />
@@ -50,9 +50,22 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="strings-bash.html">3. Manipular strings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="$-bash.html">4. $ y Expansión de Parámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="$-bash.html">4. $ y Expansión de Parámetros</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="$-bash.html#expansion-de-parametros-conceptos">Expansión de Parámetros: Conceptos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="$-bash.html#usos-del-signo">Usos del signo <strong>&quot;$&quot;</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="$-bash.html#output-de-comandos-a-variable-de-entorno">Output de comandos a Variable de Entorno</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="quotes-bash.html">5. Uso de &quot; &quot; y ' '</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shell-parameters-bash.html">6. Parámetros Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env-bash.html">7. Variables de Entorno</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="env-bash.html#pasar-variables-de-entorno-desde-un-archivo-de-texto">Pasar variables de entorno desde un archivo de texto</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="redireccion.html">8. Redirección</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="redireccion.html#codigos-de-redireccion-de-output">Códigos de redirección de output</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -89,6 +102,8 @@
 <li class="toctree-l2"><a class="reference internal" href="$-bash.html">4. $ y Expansión de Parámetros</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quotes-bash.html">5. Uso de &quot; &quot; y ' '</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shell-parameters-bash.html">6. Parámetros Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env-bash.html">7. Variables de Entorno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="redireccion.html">8. Redirección</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="crontab.html">4. CRON tab</a></li>
@@ -115,7 +130,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script>
 
 
 
@@ -132,7 +147,7 @@
       &copy;2020, Francisco Humeres M..
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
