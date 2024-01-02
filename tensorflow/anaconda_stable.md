@@ -31,15 +31,15 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
 2. Open terminal and activate environment: ``` conda activate [environment name] ```
 3. Install CUDA Toolkit and cudNN, with latest stable versions combinations:
      - Available versions in the conda-forge repository:
-      * https://conda.anaconda.org/conda-forge/linux-64/
-      * https://anaconda.org/conda-forge/cudatoolkit
-     ``` conda install -c conda-forge cudatoolkit=11.8 cudnn=8.8 ```
+           -  https://conda.anaconda.org/conda-forge/linux-64/
+           - https://anaconda.org/conda-forge/cudatoolkit
+     - command: ``` conda install -c conda-forge cudatoolkit=11.8 cudnn=8.8 ```
 4. Set Paths:
-4.1 ``` mkdir -p $CONDA_PREFIX/etc/conda/activate.d ``` -> Create file for executing commands every time environment is activated
-4.2 ```echo 'export LD_LIBRARY_PATH=$CONDA_PREFIX/lib/' > $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh``` -> Change CUDA path (read from conva env instead of system)
-4.3 Test paths: ``` conda deactivate
-                     conda activate [environment name]
-                     echo $LD_LIBRARY_PATH ```
+    - ``` mkdir -p $CONDA_PREFIX/etc/conda/activate.d ``` -> Create file for executing commands every time environment is activated
+    - ```echo 'export LD_LIBRARY_PATH=$CONDA_PREFIX/lib/' > $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh``` -> Change CUDA path (read from conva env instead of system)
+    - Test paths: ``` conda deactivate
+                         conda activate [environment name]
+                         echo $LD_LIBRARY_PATH ```
 5 Install Tensor RT:
   - Availible version of tensorrrt library: ```python -m pip index versions tensorrt```
   - Get Tensor RT Path: ```
@@ -71,5 +71,7 @@ TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)"))
 - https://gretel.ai/blog/install-tensorflow-with-cuda-cdnn-and-gpu-support-in-4-easy-steps
 - https://copyprogramming.com/howto/how-to-set-the-cuda-path-in-the-conda-environment
 - http://www.sciama.icg.port.ac.uk/gpu_anaconda.html
+
+   
 
    
