@@ -40,8 +40,8 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
     - Test paths: ``` conda deactivate
                          conda activate [environment name]
                          echo $LD_LIBRARY_PATH ```
-5 Install Tensor RT:
-  - Availible version of tensorrrt library: ```python -m pip index versions tensorrt```
+5. Install Tensor RT:
+  - Available version of tensorrrt library: ```python -m pip index versions tensorrt```
   - Install Tensor RT: ```python -m pip install tensorrt==8.5.3.1```
   - Get Tensor RT Path: ```
        TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)")) ```
