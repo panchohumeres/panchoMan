@@ -41,19 +41,19 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
                          conda activate [environment name]
                          echo $LD_LIBRARY_PATH ```
 5. Install Tensor RT:
-  - Available version of tensorrrt library: ```python -m pip index versions tensorrt```
-  - Install Tensor RT: ```python -m pip install tensorrt==8.5.3.1```
-  - Get Tensor RT Path: ```
-       TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)")) ```
-  - Test Tensor RT PATH: ```echo $TENSORRT_PATH```
-  - Append Tensor RT Path to env startup file:
-      - ```echo 'TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh```
-      - ```echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TENSORRT_PATH' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh```
-      - ```conda deactivate```
-6. Install Tensor Flow:
+       - Available version of tensorrrt library: ```python -m pip index versions tensorrt```
+          - Install Tensor RT: ```python -m pip install tensorrt==8.5.3.1```
+                - Get Tensor RT Path: ```
+                     TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)")) ```
+                - Test Tensor RT PATH: ```echo $TENSORRT_PATH```
+                - Append Tensor RT Path to env startup file:
+             - ```echo 'TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh```
+             - ```echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TENSORRT_PATH' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh```
+             - ```conda deactivate```
+7. Install Tensor Flow:
      - ```conda activate [environment name]```
      - ```python -m pip install tensorflow==2.13``` -> Check last version available that doesn´t cause trouble with CUDA libraries in Conda ENV
-7. Test (in Conda ENV):
+8. Test (in Conda ENV):
      - ```python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices(‘GPU’))"```
      - in python test cudNN version:
        ```python
@@ -63,7 +63,7 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
        - Test if they are different from system's Cuda (Outside Conda Env):
          * ```nvcc --version``` -> CUDA Toolkit
          * ```nvidia-smi``` -> CUDA Driver and GPU status
-8. Solve "NUMA node information" warning (optional):
+9. Solve "NUMA node information" warning (optional):
      - Refer to this solution by Zukhriddin (Applies to system kernel, not only conda env): https://zrruziev.medium.com/fixing-the-successful-numa-node-read-from-sysfs-had-negative-value-1-but-there-must-be-at-7d798d5b912d
    
 #### Other Untested approaches:
