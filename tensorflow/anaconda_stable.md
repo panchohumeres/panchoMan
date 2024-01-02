@@ -41,12 +41,11 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
                          conda activate [environment name]
                          echo $LD_LIBRARY_PATH ```
 5. Install Tensor RT:
-       - Available version of tensorrrt library: ```python -m pip index versions tensorrt```
-          - Install Tensor RT: ```python -m pip install tensorrt==8.5.3.1```
-                - Get Tensor RT Path: ```
-                     TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)")) ```
-                - Test Tensor RT PATH: ```echo $TENSORRT_PATH```
-                - Append Tensor RT Path to env startup file:
+   - Available version of tensorrrt library: ```python -m pip index versions tensorrt```
+   - Install Tensor RT: ```python -m pip install tensorrt==8.5.3.1```
+   - Get Tensor RT Path: ```TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)")) ```
+   - Test Tensor RT PATH: ```echo $TENSORRT_PATH```
+   - Append Tensor RT Path to env startup file:
              - ```echo 'TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh```
              - ```echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TENSORRT_PATH' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh```
              - ```conda deactivate```
