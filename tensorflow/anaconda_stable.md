@@ -23,5 +23,13 @@ TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)"))
   - Append Tensor RT Path to env startup file:
       - ```echo 'TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh```
       - ```echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TENSORRT_PATH' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh```
+      - ```conda deactivate```
+6. Install Tensor Flow:
+     - ```conda activate [environment name]```
+     - ```python -m pip install tensorflow==2.13``` -> Check last version available that doesn´t cause trouble with CUDA libraries in Conda ENV
+7. Test:
+     - ```python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices(‘GPU’))"```
+8. Solve "NUMA node information" warning (optional):
+     - Refer to this solution by Zukhriddin (Applies to system kernel, not only conda env): https://zrruziev.medium.com/fixing-the-successful-numa-node-read-from-sysfs-had-negative-value-1-but-there-must-be-at-7d798d5b912d
 
    
