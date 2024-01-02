@@ -35,7 +35,7 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
            - https://anaconda.org/conda-forge/cudatoolkit
      - command: ``` conda install -c conda-forge cudatoolkit=11.8 cudnn=8.8 ```
 4. Set Paths:
-    - ``` mkdir -p $CONDA_PREFIX/etc/conda/activate.d ``` -> Create file for executing commands every time environment is activated
+    - ``` touch $CONDA_PREFIX/etc/conda/activate.d ``` -> Create file for executing commands every time environment is activated
     - ```echo 'export LD_LIBRARY_PATH=$CONDA_PREFIX/lib/' > $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh``` -> Change CUDA path (read from conva env instead of system)
     - Test paths: ``` conda deactivate
                          conda activate [environment name]
