@@ -4,14 +4,15 @@
 - **Tested on**: Pop Os ! Ubuntu 22.04 LTS , NVIDIA GEFORCE GTX 1650
 
 - **Solution for Tensor Flow installs in Anaconda ENVS that read systems CUDA Libraries (CUDA Toolkit and cudNN) instead of Conda Env Cuda libraries** :
-         * For example when Cuda Toolkit and cudNN are installed using Conda and TF using ```pip install tensorflow``` or ```conda install -c conda-forge tensorflow```.
-         * Or using tensorflow install with CUDA Libs. as recommended by TF docs: ```pip install tensorflow[and-cuda]``` -> https://www.tensorflow.org/install/pip?hl=es-419
-         * Example errors reported:
-                - https://github.com/tensorflow/tensorflow/issues/52988
-                - https://github.com/tensorflow/tensorflow/issues/62075
-                - https://github.com/tensorflow/tensorflow/issues/61468
-                - https://github.com/tensorflow/tensorflow/issues/42738
-                - https://stackoverflow.com/questions/76028164/tensorflow-object-detection-tf-trt-warning-could-not-find-tensorrt
+
+  * For example when Cuda Toolkit and cudNN are installed using Conda and TF using ```pip install tensorflow``` or ```conda install -c conda-forge tensorflow```.
+  * Or using tensorflow install with CUDA Libs. as recommended by TF docs: ```pip install tensorflow[and-cuda]``` -> https://www.tensorflow.org/install/pip?hl=es-419
+  * Example errors reported:
+    - https://github.com/tensorflow/tensorflow/issues/52988
+    - https://github.com/tensorflow/tensorflow/issues/62075
+    - https://github.com/tensorflow/tensorflow/issues/61468
+    - https://github.com/tensorflow/tensorflow/issues/42738
+    - https://stackoverflow.com/questions/76028164/tensorflow-object-detection-tf-trt-warning-could-not-find-tensorrt
 ```
   python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
 2023-12-24 14:10:34.169720: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
