@@ -91,8 +91,8 @@ tf_build_info.build_info['is_cuda_build']
 tf_build_info.build_info['is_tensorrt_build']
 
 import tensorflow.compiler as tf_cc
-tf_cc.pywrap_py_utils.get_linked_tensorrt_version() #linked Tensor RT version
-tf_cc.tf2tensorrt.pywrap_py_utils.get_linked_tensorrt_version() Actually loaded Tensor RT version, breaks if wrong
+tf_cc.tf2tensorrt._pywrap_py_utils.get_linked_tensorrt_version() #linked Tensor RT version
+tf_cc.tf2tensorrt._pywrap_py_utils.get_linked_tensorrt_version() #Actually loaded Tensor RT version, breaks if wrong
 ```
 
    
