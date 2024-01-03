@@ -65,9 +65,19 @@ echo $LD_LIBRARY_PATH
        print('cudnn version: ',tf_build_info.build_info['cudnn_version'])
        print('cudnn version: ',tf_build_info.build_info['cuda_version'])
        ```
-       - Test if they are different from system's Cuda (Outside Conda Env):
-         * ```nvcc --version``` -> CUDA Toolkit
-         * ```nvidia-smi``` -> CUDA Driver and GPU status
+     - Test if they are different from system's Cuda (Outside Conda Env):
+       * ```nvcc --version``` -> CUDA Toolkit
+       * ```nvidia-smi``` -> CUDA Driver and GPU status
+     - Test TF is using GPU (from    https://www.tensorflow.org/guide/gpu?hl=es-419):
+       ```python
+       tf.debugging.set_log_device_placement(True)
+       # Create some tensors
+       a = tf.constant([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
+       b = tf.constant([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]])
+       c = tf.matmul(a, b)
+
+       print(c)
+       ```       
 10. Solve "NUMA node information" warning (optional):
      - Refer to this solution by Zukhriddin (Applies to system kernel, not only conda env): https://zrruziev.medium.com/fixing-the-successful-numa-node-read-from-sysfs-had-negative-value-1-but-there-must-be-at-7d798d5b912d
    
