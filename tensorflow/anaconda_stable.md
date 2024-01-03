@@ -49,7 +49,7 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
    - Append Tensor RT Path to env startup file:
 ```
      echo 'TENSORRT_PATH=$(dirname $(python -c "import tensorrt;print(tensorrt.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-    'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TENSORRT_PATH' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TENSORRT_PATH' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
    conda deactivate
 ```
 8. Install Tensor Flow:
