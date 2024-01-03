@@ -58,7 +58,7 @@ echo $LD_LIBRARY_PATH
      - ```conda activate [environment name]```
      - ```python -m pip install tensorflow==2.13``` -> Check last version available that doesn´t cause trouble with CUDA libraries in Conda ENV
 9. Test (in Conda ENV):
-     - ```python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices(‘GPU’))"```
+     - ```python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"```
      - in python test cudNN version:
        ```python
        from tensorflow.python.platform import build_info as tf_build_info
