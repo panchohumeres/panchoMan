@@ -79,7 +79,12 @@ echo $LD_LIBRARY_PATH
        print(c)
        ```       
 10. Solve "NUMA node information" warning (optional):
-     - Refer to this solution by Zukhriddin (Applies to system kernel, not only conda env): https://zrruziev.medium.com/fixing-the-successful-numa-node-read-from-sysfs-had-negative-value-1-but-there-must-be-at-7d798d5b912d
+    Non-fatal warning, refer to solutions (fix at system level, non-permanent):
+     - Solution by Zukhriddin (Applies to system kernel, not only conda env): https://zrruziev.medium.com/fixing-the-successful-numa-node-read-from-sysfs-had-negative-value-1-but-there-must-be-at-7d798d5b912d
+     - https://gist.github.com/zrruziev/b93e1292bf2ee39284f834ec7397ee9f
+     - https://stackoverflow.com/questions/44232898/memoryerror-in-tensorflow-and-successful-numa-node-read-from-sysfs-had-negativ -> how to make fix permanent
+     - https://github.com/tensorflow/tensorflow/issues/42738 -> states is non-fatal warning
+     - https://www.kaggle.com/discussions/questions-and-answers/272476 -> warning not error
    
 ### Diagnostics
 ```python
