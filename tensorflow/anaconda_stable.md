@@ -70,9 +70,18 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
    
 ### Diagnostics
 ```python
+import tensorflow as tf
+
+# if all these tests are true and compiler tests fail, problem is Tensor RT
+tf.test.is_built_with_gpu_support()
+tf.test.is_built_with_gpu_support()
+tf.test.is_built_with_cuda()
+
+
 import tensorflow.compiler as tf_cc
 tf_cc.pywrap_py_utils.get_linked_tensorrt_version() #linked Tensor RT version
-tf_cc.tf2tensorrt.pywrap_py_utils.get_linked_tensorrt_version() Actually loaded Tensor RT version, breaks if wrong```
+tf_cc.tf2tensorrt.pywrap_py_utils.get_linked_tensorrt_version() Actually loaded Tensor RT version, breaks if wrong
+```
 
    
 #### Other Untested approaches:
