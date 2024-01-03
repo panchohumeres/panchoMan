@@ -62,7 +62,8 @@ echo $LD_LIBRARY_PATH
      - in python test cudNN version:
        ```python
        from tensorflow.python.platform import build_info as tf_build_info
-       print(tf_build_info.build_info['cudnn_version'])
+       print('cudnn version: ',tf_build_info.build_info['cudnn_version'])
+       print('cudnn version: ',tf_build_info.build_info['cuda_version'])
        ```
        - Test if they are different from system's Cuda (Outside Conda Env):
          * ```nvcc --version``` -> CUDA Toolkit
@@ -74,11 +75,20 @@ echo $LD_LIBRARY_PATH
 ```python
 import tensorflow as tf
 
+print(tf.__version__)
+
+
 # if all these tests are true and compiler tests fail, problem is Tensor RT
 tf.test.is_built_with_gpu_support()
 tf.test.is_built_with_gpu_support()
 tf.test.is_built_with_cuda()
 
+from tensorflow.python.platform import build_info as tf_build_info
+tf_build_info.build_info
+tf_build_info.build_info['cpu_compiler']
+tf_build_info.build_info['cuda_compute_capabilities']
+tf_build_info.build_info['is_cuda_build']
+tf_build_info.build_info['is_tensorrt_build']
 
 import tensorflow.compiler as tf_cc
 tf_cc.pywrap_py_utils.get_linked_tensorrt_version() #linked Tensor RT version
