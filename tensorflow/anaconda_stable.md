@@ -78,7 +78,21 @@ echo $LD_LIBRARY_PATH
 
        print(c)
        ```       
-10. Solve "NUMA node information" warning (optional):
+10. Install Jupyter Notebooks:
+       * Install ipykernel (for jupyter notebooks seeing this kernel):
+         ```
+         python -m pip install ipykernel
+         ```
+       * Set up kernel for this environment (with name):
+         ```
+         python -m ipykernel install --user --name=[your-kernel-name]
+         ```
+       * Install jupyter notebooks with conda (conda-forge repo):
+         ```conda install -c conda-forge notebook```
+       * Launch notebooks, then select [your-kernel-name] kernel:
+         ```conda install -c conda-forge notebook```
+       * Testing -> get list of packages installed, with source (python, conda, etc.) : ```jupyter-notebook```
+12. Solve "NUMA node information" warning (optional):
     Non-fatal warning, refer to solutions (fix at system level, non-permanent):
      - Solution by Zukhriddin (Applies to system kernel, not only conda env): https://zrruziev.medium.com/fixing-the-successful-numa-node-read-from-sysfs-had-negative-value-1-but-there-must-be-at-7d798d5b912d
      - https://gist.github.com/zrruziev/b93e1292bf2ee39284f834ec7397ee9f
