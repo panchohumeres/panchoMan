@@ -117,6 +117,7 @@ tf_cc.tf2tensorrt._pywrap_py_utils.get_linked_tensorrt_version() #Actually loade
 - https://copyprogramming.com/howto/how-to-set-the-cuda-path-in-the-conda-environment
 - http://www.sciama.icg.port.ac.uk/gpu_anaconda.html
 - https://github.com/prodramp/DeepWorks/tree/main/DeepLearningRig -> install CUDA toolkit and CudNN in system, and rest in conda
+- https://phoenixnap.com/kb/how-to-install-tensorflow-ubuntu -> with miniconda (changing lib paths in same fashion)
 
    
 
