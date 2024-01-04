@@ -2,6 +2,8 @@
 
 ## Stable installation for Pop OS:
   - based on nvidia-docker2 (apprently will not be supported in the future) and Pop OS **22.04**
+  - Based on solution by Nikita Melkozerov:
+    https://nikita.melkozerov.dev/posts/nvidia-docker-pop-os-install/
 
 1. set the priority of the official Nvidia repo higher (apparently Pop OS uses a different one):
   - Create file:
