@@ -4,7 +4,8 @@
 Docker Engine as installed by Docker Desktop and installed in the system have different **"contexts"** (paths, environments, etc.). Most notably:
 - System docker daemon is at : ```/etc/docker/daemon.json``` -> [https://docs.docker.com/desktop/settings/linux/#docker-engine](https://docs.docker.com/config/daemon/)
 - Docker Desktop daemon is at: ```$HOME/.docker/daemon.json``` -> https://docs.docker.com/desktop/settings/linux/#docker-engine
-Switching **contexts**:
+- They can be **installed side by side**.
+Switching **contexts** (https://docs.docker.com/desktop/faqs/linuxfaqs/):
 - list contexts: ```docker context ls```
 - Usally "default" is system engine, and "desktop-linux" is desktop.
 - ```*``` Indicates the active context.
