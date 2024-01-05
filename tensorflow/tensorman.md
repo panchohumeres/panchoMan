@@ -12,6 +12,41 @@ Switching **contexts** (https://docs.docker.com/desktop/faqs/linuxfaqs/):
 - ```*``` Indicates the active context.
 - To swith to default context for example: ```docker context use default```
 
+#### Install System Docker Engine:
+Refs:
+  - https://docs.docker.com/engine/install/ubuntu/
+  - [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/linux-postinstall/)
+1. Set up Docker's apt repository.
+```
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+2. Install the Docker packages.
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+3. Create the docker group, Add your user to the docker group.
+```
+sudo groupadd docker
+sudo usermod -aG docker $USER
+```
+4. Restart computer.
+5. TEST:
+```
+docker run hello-world
+```
+
 
 #### Stable installation for Pop OS:
   - based on nvidia-docker2 (apprently will not be supported in the future) and Pop OS **22.04**
