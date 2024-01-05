@@ -16,6 +16,8 @@ Switching **contexts** (https://docs.docker.com/desktop/faqs/linuxfaqs/):
 Refs:
   - https://docs.docker.com/engine/install/ubuntu/
   - [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/linux-postinstall/)
+
+0. swith to default context: ```docker context use default```
 1. Set up Docker's apt repository.
 ```
 # Add Docker's official GPG key:
