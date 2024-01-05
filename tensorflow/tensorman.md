@@ -87,3 +87,5 @@ export distribution=ubuntu22.04
 ```
 docker run --rm --gpus all nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
 ```
+### Other untested approaches:
+- https://support.system76.com/articles/cuda/ -> official pop os recommended install
