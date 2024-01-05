@@ -1,6 +1,17 @@
 ### Install NVIDIA-docker toolkit
 
-## Stable installation for Pop OS:
+#### Docker-Engine Background:
+Docker Engine as installed by Docker Desktop and installed in the system have different **"contexts"** (paths, environments, etc.). Most notably:
+- System docker daemon is at : ```/etc/docker/daemon.json``` -> [https://docs.docker.com/desktop/settings/linux/#docker-engine](https://docs.docker.com/config/daemon/)
+- Docker Desktop daemon is at: ```$HOME/.docker/daemon.json``` -> https://docs.docker.com/desktop/settings/linux/#docker-engine
+Switching **contexts**:
+- list contexts: ```docker context ls```
+- Usally "default" is system engine, and "desktop-linux" is desktop.
+- ```*``` Indicates the active context.
+- To swith to default context for example: ```docker context use default```
+
+
+#### Stable installation for Pop OS:
   - based on nvidia-docker2 (apprently will not be supported in the future) and Pop OS **22.04**
   - To see the difference with most updated nvidia-toolkit see:
     * https://gist.github.com/kuang-da/2796a792ced96deaf466fdfb7651aa2e
