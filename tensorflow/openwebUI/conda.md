@@ -1,8 +1,12 @@
-#Sources
+### Sources
 
 - https://www.youtube.com/watch?v=bvRLpRWgyBc
 - https://docs.openwebui.com/getting-started/
-- https://stackoverflow.com/questions/62325068/cannot-install-latest-nodejs-using-conda-on-mac
+- https://stackoverflow.com/questions/62325068/cannot-install-latest-nodejs-using-conda-on-mac #how tu upgrade node in anaconda env
+
+#### Secondary sources
+- https://loisthash.medium.com/getting-started-in-node-js-with-conda-cd543de24311 #installing node in anaconda
+- https://anaconda.org/conda-forge/nodejs #conda forge links for node
 
 0. System Wide Installs
 ```bash
@@ -31,7 +35,33 @@ Has to be done in this way as dependencies are broken in conda-forge and will no
 ```bash
 conda upgrade -c conda-forge nodejs
 ```
-3.
+3. Copy node environment
+```bash
+cp .env.example .env
+```
+4. Install and build node environment (Fron-end)
+```bash
+npm install
+npm run build
+```
+5. Install python environment (Back-end)
+```bash
+cd .\backend
+pip install -r requirements.txt -U
+```
+6. Start
+```bash
+bash start.sh
+```
+### TROUBLESHOOTING:
+
+- As is running the app fails with this tensorflow error:
+```bash
+from torch._C import *  # noqa: F403
+./nvidia/cusparse/lib/libcusparse.so.12: undefined symbol: __nvJitLinkComplete_12_4, version libnvJitLink.so.12
+```
+It is related with CUDA version to which is pointing in an environment config
+https://github.com/pytorch/pytorch/issues/134929
 
 
 
