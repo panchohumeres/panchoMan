@@ -53,6 +53,32 @@ pip install -r requirements.txt -U
 ```bash
 bash start.sh
 ```
+##### OLLAMA CONFIG
+https://github.com/ollama/ollama
+Quickstart (just donwload and run llama 3.2) in terminal mode (ctrl+z to exit)
+```bash
+ollama run llama3.2
+```
+list ollama running models and cpu/gpu usage
+```bash
+ollama ps
+```
+run same model server mode
+```bash
+ollama serve
+ollama run llama3.2
+```
+test run
+```bash
+ollama run llama3.2 "Summarize this file: $(cat README.md)"
+```
+test model is running
+- default URL where Ollama endpoint is running: http://localhost:11434/
+- Should display "Ollama is running" in browser.
+
+
+
+
 ### TROUBLESHOOTING:
 
 - As is running the app fails with this tensorflow error:
