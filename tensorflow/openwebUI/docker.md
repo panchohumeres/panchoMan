@@ -1,5 +1,6 @@
 ### Sources
 https://docs.openwebui.com/getting-started/ -> Docker Compose section
+https://peter-nhan.github.io/posts/Ollama-intro/
 
 #### Docker Commands
 - https://stackoverflow.com/questions/33083385/getting-console-output-from-a-docker-container -> logs
@@ -34,13 +35,14 @@ See:
 - https://stackoverflow.com/questions/41322541/rebuild-docker-container-on-file-changes
 ```bash
 #replace open-webui with the actual name of the container
-docker rm -f open-webui #remove container
 docker stop open-webui #stop container
+docker rm -f open-webui #remove container
 docker logs -f open-webui #replace open-webui with the actual name of the container
 
 #re-start and re-build container (change command with new env variables)
-docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=http://localhost:11434 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
+docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=http://host.docker.internal:11434 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
 ```
+http://host.docker.internal:11434 
 
 
 Check container logs real-time
@@ -75,3 +77,6 @@ TROUBLESHOOTING:
   - https://serverfault.com/questions/1128587/change-the-docker-context-in-docker-desktop
   - https://forums.docker.com/t/docker-ps-a-doesnt-show-running-containers/121046/3
   - https://unix.stackexchange.com/questions/106561/finding-the-pid-of-the-process-using-a-specific-port
+ 
+* cannot see ollama localhost server outside of docker
+ - https://github.com/open-webui/open-webui/issues/209
