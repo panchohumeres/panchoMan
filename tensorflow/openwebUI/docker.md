@@ -1,6 +1,13 @@
 ### Sources
 https://docs.openwebui.com/getting-started/ -> Docker Compose section
 
+#### Docker Commands
+- https://stackoverflow.com/questions/33083385/getting-console-output-from-a-docker-container -> logs
+- https://stackoverflow.com/questions/26153686/how-do-i-run-a-command-on-an-already-existing-docker-container -> commands
+- https://docs.docker.com/reference/cli/docker/container/start/ -> docker start ref
+- https://stackoverflow.com/questions/41322541/rebuild-docker-container-on-file-changes -> containers - images
+- https://stackoverflow.com/questions/30233105/docker-compose-up-for-only-certain-containers -> docker-compose fine grained execution services
+
 If Ollama is on a Different Server, use this command:
 
 To connect to Ollama on another server, change the OLLAMA_BASE_URL to the server's URL:
@@ -15,9 +22,35 @@ docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=http://localhost:11434 -v open-web
 ```
 Example localhost port 11434
 ```bash
-docker start open-webui -d -p 3000:8080 -e OLLAMA_BASE_URL=http://localhost:11434 -v open-webui:/app/backend/data
+docker rm -f open-webui
+docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=http://localhost:11434 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
+```
+_________________________________________________________________________________
+#### Other docker commands
+Re-starting container with new environment variables
+Container has to be re-moved and re-built
+See:
+- https://forums.docker.com/t/passing-environment-variables-to-the-container-at-docker-restart-container-name/85832
+- https://stackoverflow.com/questions/41322541/rebuild-docker-container-on-file-changes
+```bash
+#replace open-webui with the actual name of the container
+docker rm -f open-webui #remove container
+docker stop open-webui #stop container
+docker logs -f open-webui #replace open-webui with the actual name of the container
+
+#re-start and re-build container (change command with new env variables)
+docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=http://localhost:11434 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
 ```
 
+
+Check container logs real-time
+```bash
+docker logs -f open-webui #replace open-webui with the actual name of the container
+```
+list running containers with ports and names
+```bash
+docker ps -a
+```
 
 _________________________________________________________________________________________________________
 
