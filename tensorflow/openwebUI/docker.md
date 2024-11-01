@@ -27,12 +27,17 @@ docker rm -f open-webui
 docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=http://localhost:11434 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
 ```
 
+docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -e OLLAMA_BASE_URL=http://localhost:11434 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
+
+
 host.docker.internal:host-gateway
 
 ```bash
 docker rm -f open-webui
 docker run -d -p 3000:8080 -e -e OLLAMA_BASE_URL=http://localhost:11434 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
 ```
+
+
 
 _________________________________________________________________________________
 #### Other docker commands
