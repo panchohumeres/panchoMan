@@ -63,6 +63,12 @@ Check container logs real-time
 ```bash
 docker logs -f open-webui #replace open-webui with the actual name of the container
 ```
+
+Log into container
+```bash
+docker exec -it open-webui sh #replace open-webui with the actual name of the container
+```
+
 list running containers with ports and names
 ```bash
 docker ps -a
