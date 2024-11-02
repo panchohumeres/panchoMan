@@ -8,6 +8,7 @@ https://peter-nhan.github.io/posts/Ollama-intro/
 - https://docs.docker.com/reference/cli/docker/container/start/ -> docker start ref
 - https://stackoverflow.com/questions/41322541/rebuild-docker-container-on-file-changes -> containers - images
 - https://stackoverflow.com/questions/30233105/docker-compose-up-for-only-certain-containers -> docker-compose fine grained execution services
+- https://stackoverflow.com/questions/30494050/how-do-i-pass-environment-variables-to-docker-containers -> env vars
 
 If Ollama is on a Different Server, use this command:
 
@@ -65,6 +66,17 @@ docker logs -f open-webui #replace open-webui with the actual name of the contai
 list running containers with ports and names
 ```bash
 docker ps -a
+```
+
+https://bsmadhu.wordpress.com/2023/10/01/using-host-docker-internal-to-access-the-docker-host-from-inside-a-container/
+update: I realized you probably want to run something on the host so you want to access it from the container. In that case “host.docker.internal” should work on Mac without additional configuration, but if not, you can set the extra host this way:
+```bash
+docker run --rm -it –add-host=host.docker.internal:host-gateway <<container>>
+```
+
+```yaml
+extra_hosts:
+  - "host.docker.internal:host-gateway"
 ```
 
 _________________________________________________________________________________________________________
