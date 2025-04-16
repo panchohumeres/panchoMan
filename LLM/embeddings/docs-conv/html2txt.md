@@ -1,4 +1,5 @@
-#### Using pandoc and specifying an output directory: 
+#### Using pandoc:
+-------------------
 pandoc ignores images and other non-text content when converting from HTML to plain text by default, stripping out non-text elements like images, videos, and embedded files, leaving only the plain textual content.
 
 **includes**:
@@ -14,7 +15,6 @@ pandoc ignores images and other non-text content when converting from HTML to pl
 -HTML structure: It discards any HTML tags, so no ```<div>, <span>```, or other non-text tags will appear in the output.
 
 **Typical use**
----------------
 * convert all .html files in a source directory (```/path/to/source/```) and save the ```.txt``` files to a target directory (```sudo apt install pandoc
 /path/to/target/```).
 ```
@@ -33,6 +33,7 @@ pandoc ```"$0" -o "/path/to/target/$(basename "${0%.html}.txt")"```: Converts ea
 - 
 
 #### Using lynx:
+-------------------
 ```
 sudo apt install lynx #install lynx
 find /path/to/source -name "*.html" -exec sh -c 'lynx -dump "$0" > "/path/to/target/$(basename "${0%.html}.txt")"' {} \;
