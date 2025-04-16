@@ -1,3 +1,3 @@
 #### LLM Manual Index
 
-[Embeddings](,/embeddings/)
+[Embeddings](,/embeddings/embeddings.md)
