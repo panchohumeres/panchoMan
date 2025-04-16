@@ -1,3 +1,3 @@
 ### Tips for docs conversion for embeddings
 
-[Unix Utils convert bulk html to txt]()
+[Unix Utils convert bulk html to txt](html2txt.md)
