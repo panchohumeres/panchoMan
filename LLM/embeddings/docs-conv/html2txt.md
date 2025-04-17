@@ -30,7 +30,7 @@ pandoc ```"$0" -o "/path/to/target/$(basename "${0%.html}.txt")"```: Converts ea
 
 **Sources**:
 - https://pandoc.org/
-- 
+- https://github.com/jgm/pandoc/wiki
 
 #### Using lynx:
 -------------------
@@ -45,4 +45,14 @@ Explanation:
 ```> "/path/to/target/$(basename "${0%.html}.txt")"```: Redirects the output to a ```.txt``` file in the ```/path/to/target/``` directory, using the same name as the original HTML file.
 
 This will save all the converted ```.txt``` files to ```/path/to/target/```.
+
+#### Optional: Use sed or awk for additional processing
+--------------------------------------------------
+If you need to further clean the text or remove unwanted tags (e.g., scripts, styles), you can process the output using sed or awk.
+
+For example, to remove extra line breaks or unwanted tags before saving:
+```
+find /path/to/directory -name "*.html" -exec sh -c 'lynx -dump "$0" | sed "/^$/d" > "${0%.html}.txt"' {} \;
+
+```
 
