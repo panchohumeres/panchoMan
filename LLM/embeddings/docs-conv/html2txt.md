@@ -32,6 +32,14 @@ pandoc ```"$0" -o "/path/to/target/$(basename "${0%.html}.txt")"```: Converts ea
 - https://pandoc.org/
 - https://github.com/jgm/pandoc/wiki
 
+#### Using html2text
+```
+$ html2text http://example.com/ #----------------> converts html page to terminal output
+$ cat file.html | html2text -o file.txt ##----------------> pipe to output to file
+```
+**refs**:
+- https://superuser.com/questions/673878/how-to-convert-html-to-text
+
 #### Using lynx:
 -------------------
 ```
