@@ -2,9 +2,10 @@
 ### Example Use
 -----------------------
 1. create a lua file in the root folder (where a source and destination html -> txt folders), for the lua exception rules. For example $remove-images.lua$.
-2. populate the file with according lua exception rules for rendered images in the html file(s). Model in (remove-images.lua)[./remove-images.lua]  
+2. populate the file with according lua exception rules for rendered images in the html file(s). Model in
+(remove-images.lua)[./remove-images.lua]  
 
-3. execute this code in the same folder (with a source and destination html -> txt folders)
+4. execute this code in the same folder (with a source and destination html -> txt folders)
 ```
   find ./htmls/ -name "*.html" -exec sh -c '
   pandoc "$0" --lua-filter=remove-images.lua -o "./txt/$(basename "${0%.html}.txt")"
