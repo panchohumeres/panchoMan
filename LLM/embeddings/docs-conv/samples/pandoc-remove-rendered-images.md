@@ -1,4 +1,9 @@
 
+## Remove images in pandoc output (html -> txt) with .lua filters
+-------------------------------------------------------------------
+Pandoc allows you to apply Lua filters to modify the document's abstract syntax tree (AST) during conversion. By creating a Lua filter that removes all image elements, you can ensure that no embedded images are included in the output.
+Modify a pandoc conversion command to include the --lua-filter option, specifying the path to a local $.lua$ file with filters for supressing rendered images (in the html input) on the $.txt$ output.
+
 ### Example Use
 -----------------------
 1. create a lua file in the root folder (where a source and destination html -> txt folders), for the lua exception rules. For example $remove-images.lua$.
