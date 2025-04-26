@@ -28,6 +28,9 @@ basename ```"${0%.html}.txt"```: Extracts the filename (without the ```.html``` 
 
 pandoc ```"$0" -o "/path/to/target/$(basename "${0%.html}.txt")"```: Converts each HTML file to .txt and saves it to the ```/path/to/target/ directory```.
 
+**additional filters**
+- rendered images -> (lua image filters)[./samples/pandoc-remove-rendered-images.md]
+
 **Sources**:
 - https://pandoc.org/
 - https://github.com/jgm/pandoc/wiki
