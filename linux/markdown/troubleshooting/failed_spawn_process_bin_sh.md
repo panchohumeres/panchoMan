@@ -55,7 +55,10 @@ What to look for:
 In the example above, `/dev/nvme0n1p2` is likely the root partition (ext4, no "EFI" or "swap" label).
 Usually in Pop OS 64 the root partition would be called `/dev/data-root`.
 
-3. Run `fsck -y /dev/data-root` for repairing the unit (replace with the corresponding root unit).
+Most likely partition:
+------------------------
+```/dev/mapper/data-root``` -> In popOs System64
+3. Run `fsck -y /dev/mapper/data-root` for repairing the unit (replace with the corresponding root unit).
 
 3.1. Verifify Root partition
 if step 3 fails because `fsck` tells you that the root unit doesn't exist:
@@ -63,6 +66,9 @@ Option A: Check device mapper:
 ```ls /dev/mapper/     # Look for "data-root"```
 If you see /dev/mapper/data-root, run:
 ```fsck -y /dev/mapper/data-root```
+
+4. Reboot
+```reboot -f```
 
 System should boot into normal GUI asking for password.
 
