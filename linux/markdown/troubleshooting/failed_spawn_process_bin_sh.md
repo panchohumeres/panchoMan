@@ -25,7 +25,11 @@ Try SysRq (Magic Key) Reboot – This is the safest way to force a reboot withou
 
         Wait a second between each key press.
 
-2. Identify the Root Partition
+   Recommended Action:
+   --------------------
+   ``` ALT + SysRq + B``` -> Clean Reboot
+
+3. Identify the Root Partition
  (it is assumed that after reboot the OS most likely will get into `initramfs`
 Run the following commands in the ```initramfs``` prompt:
 ```blkid```
