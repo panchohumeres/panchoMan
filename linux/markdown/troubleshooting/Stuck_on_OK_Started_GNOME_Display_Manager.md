@@ -6,6 +6,7 @@
 - Then Terminal gets stucked on displaying the underscore dash character : ```_```
 
 1. **First Priority Solution (Safest)**:
+-------------------------------------------
  1.1. Press Ctrl+Alt+F3 (or F2, F4-F6) to switch to a full-screen text console (TTY)
  1.2. Enter your username and password to log in. 
  1.3. Finish and or clean updates, or upgrades: ```sudo apt-get upgrade```
