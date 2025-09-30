@@ -14,7 +14,7 @@
     4. clean reboot: ```reboot```
  Mostly this solution should work, even with the GPU drivers (specially form NVIDIA), which are the most probable cause.
 
-3. **Alternative solutions** (if it doesn't work):
+2. **Alternative solutions** (if it doesn't work):
    - Most probably is an issue with video drivers, mostly with NVIDIA cards (as reported on internet).
    - NVIDIA driver issues are a common cause of this problem, especially after updates (Warning!! recommended to read the sources first before executing these commands).
    - In the TTY, run these commands to remove the old drivers and reinstall the System76-provided ones:
@@ -22,6 +22,9 @@
        2. ```sudo apt purge system76-driver-nvidia```
        3. ```sudo apt install system76-driver-nvidia```
        4. Finally, reboot your system.
+ 3. **Other Solutions (Last Resort)**:
+     - reinstall desktop manager, Gnome, or ubuntu.
+ 
 #### **Sources**:
 - [Redditt: Stuck on [ OK ] Started GNOME Display Manager after failed upgrade to 20.04](https://www.reddit.com/r/pop_os/comments/gdhe2j/stuck_on_ok_started_gnome_display_manager_after/#:~:text=If%20you're%20stuck%20on%20%22Started%20GNOME%20Display,purge%20nvidia*%20*%20sudo%20apt%20purge%20system76%2Ddriver%2Dnvidia)
 - [PopOs video card - black screen, troubleshooting](https://support.system76.com/articles/login-loop-pop/)
