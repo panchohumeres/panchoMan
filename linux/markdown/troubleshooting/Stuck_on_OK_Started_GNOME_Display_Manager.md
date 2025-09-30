@@ -21,5 +21,6 @@
        2. ```sudo apt purge system76-driver-nvidia```
        3. ```sudo apt install system76-driver-nvidia```
        4. Finally, reboot your system.
-    **Sources**: - https://www.reddit.com/r/pop_os/comments/gdhe2j/stuck_on_ok_started_gnome_display_manager_after/#:~:text=If%20you're%20stuck%20on%20%22Started%20GNOME%20Display,purge%20nvidia*%20*%20sudo%20apt%20purge%20system76%2Ddriver%2Dnvidia
+    **Sources**:
+        - [Redditt: Stuck on [ OK ] Started GNOME Display Manager after failed upgrade to 20.04](https://www.reddit.com/r/pop_os/comments/gdhe2j/stuck_on_ok_started_gnome_display_manager_after/#:~:text=If%20you're%20stuck%20on%20%22Started%20GNOME%20Display,purge%20nvidia*%20*%20sudo%20apt%20purge%20system76%2Ddriver%2Dnvidia)
 
