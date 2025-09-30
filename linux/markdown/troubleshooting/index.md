@@ -8,7 +8,7 @@
  failed to spawn process /bin/sh
  failed to write entry …. …..despite vacumming, ignoring: input:output error
 ```
-2. [Stuck on [ OK ] Started GNOME Display Manager]()
+2. [Stuck on [ OK ] Started GNOME Display Manager](Stuck_on_OK_Started_GNOME_Display_Manager.md)
 - After startup, after the message 
 ```
  [ OK ] Started GNOME Display Manager
