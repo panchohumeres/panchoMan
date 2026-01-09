@@ -14,3 +14,9 @@
  [ OK ] Started GNOME Display Manager
 ```
 - Terminal gets stucked on displaying the underscore dash character : ```_```
+
+3. [Warning of few space left in the boot unit](space_boot_unit.md)
+Warning of few space left in the boot unit (PopOs example).
+After it, updates such as those that involve updating the kernel are not possible.
+```sudo apt upgrade``` won't be able to run.
+
