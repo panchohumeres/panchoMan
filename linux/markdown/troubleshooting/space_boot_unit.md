@@ -24,3 +24,15 @@ E: Sub-process /usr/bin/dpkg returned an error code (1)
  ### Description
  -----------------
  Usually happens when old & unused kernels are stored in the boot partition (after several updates).
+
+- Check boot partition usage:
+```
+ df -h /boot
+ls -la /boot
+```
+Or conversely (on PopOs) use GUI app **"Disk Usage Analysis"**, ---> ```/boot```.
+You would see most of the files contained within ```/boot```
+
+### FIX
+--------------
+1. First remove a couple of outdated kernels for making room for running apt purge. Otherwise ```sudo apt autoremove --purge``` will fail. **apt autoremove itself needs space** to run its cleanup operations. When ```/boot``` is ~100% full (960MB/1GB), even cleanup operations can fail because:
