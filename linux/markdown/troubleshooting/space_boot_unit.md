@@ -68,9 +68,56 @@ sudo apt remove --purge linux-image-6.9.0-XXXX-generic
 2. Then Run autoremove:
 After you have ~100-200MB free, apt autoremove can run successfully:
 ```
+# 6. PURGE
 sudo apt autoremove --purge
 
 # 7. Finally, complete the interrupted update
 sudo apt --fix-broken install
 sudo apt upgrade
+
+# Clean everything
+sudo apt clean
+sudo apt autoclean
+```
+#### Recommended SOurces:
+--------------------------
+- https://bluebird-documentation.com/documentation/page/Clearing%20up%20Space%20on%20Pop%20OS/NGzFPNeV9GY1g6q2PFX7SfQmRqw1
+- https://askubuntu.com/questions/89710/how-do-i-free-up-more-space-in-boot
+- https://www.reddit.com/r/pop_os/comments/188bb7l/how_to_remove_old_kernel_config/
+- https://unix.stackexchange.com/questions/741152/how-to-remove-old-kernel-images
+
+  #### OPtional
+  ----------------
+*  To prevent future issues:
+```
+# Install and configure localpurge to keep /boot cleaner
+sudo apt install localepurge
+
+# Check kernel autoremove settings
+sudo apt install ubuntu-maintenance-kit
+
+# Create a cron job to clean old kernels monthly
+sudo crontab -e
+# Add: 0 0 1 * * apt autoremove --purge
+```
+* Alternative: Use purge-old-kernels script:
+```
+# Install the script
+sudo apt install byobu  # Contains purge-old-kernels
+# OR get it directly
+wget https://raw.githubusercontent.com/royaldark/purge-old-kernels/master/purge-old-kernels
+chmod +x purge-old-kernels
+sudo ./purge-old-kernels --keep 2
+```
+* Create the autoremove configuration:
+```  
+  # Create the file to automatically remove old kernels
+sudo tee /etc/apt/apt.conf.d/01autoremove-kernels << 'EOF'
+# Automatically remove unused kernels
+APT::Periodic::Autoremove-Kernels "true";
+# Keep only the latest 2 kernels
+APT::NeverAutoRemove "^linux-image-.*-generic";
+APT::NeverAutoRemove "^linux-modules-.*-generic";
+APT::NeverAutoRemove "^linux-headers-.*-generic";
+EOF
 ```
