@@ -21,3 +21,6 @@ Errors were encountered while processing:
  linux-image-6.17.9-76061709-generic
 E: Sub-process /usr/bin/dpkg returned an error code (1)
 ```
+ ### Description
+ -----------------
+ Usually happens when old & unused kernels are stored in the boot partition (after several updates).
