@@ -36,3 +36,41 @@ You would see most of the files contained within ```/boot```
 ### FIX
 --------------
 1. First remove a couple of outdated kernels for making room for running apt purge. Otherwise ```sudo apt autoremove --purge``` will fail. **apt autoremove itself needs space** to run its cleanup operations. When ```/boot``` is ~100% full (960MB/1GB), even cleanup operations can fail because:
+  - Some cleanup operations need temporary space
+  - Package removal scripts may need to write logs or temporary files
+  - The package database updates need some free space
+
+a) List all installed kernels (they should be listed along with the Linux version to which they correspond):
+```
+# See all installed kernels
+dpkg -l | grep -E 'linux-(image|modules|headers)-[0-9]+' | awk '{print $2 " " $3}'
+# OR List all kernels (alternative command)
+dpkg -l | grep linux-image
+
+# Check current running kernel
+uname -r
+# Example output: 6.17.9-76061709-generic
+```
+b) Remove specific old kernels (keeping current + 1 previous). **BE CAREFUL OF NOT DELETING ACTUAL KERNEL, SEE PREVIOUS OUTPUT**:
+```
+# See all installed kernels
+# Example - adjust versions based on your list (1 line per kernel to be removed)
+sudo apt remove --purge linux-image-6.8.0-XXXX-generic
+
+# 4. Check free space now
+df -h /boot
+
+# 5. If still full, remove another old kernel
+sudo apt remove --purge linux-image-6.9.0-XXXX-generic
+
+```
+
+2. Then Run autoremove:
+After you have ~100-200MB free, apt autoremove can run successfully:
+```
+sudo apt autoremove --purge
+
+# 7. Finally, complete the interrupted update
+sudo apt --fix-broken install
+sudo apt upgrade
+```
