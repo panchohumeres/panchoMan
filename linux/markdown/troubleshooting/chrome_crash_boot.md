@@ -41,18 +41,16 @@ Guía de Diagnóstico: PC Congelada y Fallo de Video (NVIDIA + Multi-monitor)
 El sistema se bloquea (soft-lock) tras un fallo de software o drivers, impidiendo ver incluso el logo de la BIOS/Placa Base al reiniciar.
 2. Señales Críticas del Teclado (Bloq Num / Caps Lock)
 Antes de asumir un fallo de hardware, observa los indicadores LED del teclado:
-Estado del LED
-Significado
-Acción Sugerida
-Luz reacciona (enciende/apaga al tocar)
-La placa base pasó el POST. El sistema funciona pero no hay señal de video.
-Apagar monitores secundarios o cambiar cables de puerto.
-Luz fija (no cambia al tocar)
-La placa base o el procesador están bloqueados en un bucle.
-Realizar un ciclo de energía o reset de CMOS (quitar pila).
-Luz parpadeante
-Indica un error de hardware específico (Kernel Panic o fallo de RAM).
-Revisar los módulos de memoria RAM.
+- Estado del LED
+- Luz reacciona (enciende/apaga al tocar):
+  - La placa base pasó el POST. El sistema funciona pero no hay señal de video.
+  - Apagar monitores secundarios o cambiar cables de puerto.
+- Luz fija (no cambia al tocar):
+  - La placa base o el procesador están bloqueados en un bucle.
+  - Realizar un ciclo de energía o reset de CMOS (quitar pila).
+- Luz parpadeante:
+  - Indica un error de hardware específico (Kernel Panic o fallo de RAM).
+  - Revisar los módulos de memoria RAM.
 
 3. Teclas para Forzar el Menú de Arranque (Boot Menu)
 Si el sistema tiene energía pero la pantalla está en negro, intenta usar estas teclas inmediatamente después de presionar el botón de encendido:
