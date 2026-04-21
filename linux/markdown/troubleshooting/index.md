@@ -20,3 +20,6 @@ Warning of few space left in the boot unit (PopOs example).
 After it, updates such as those that involve updating the kernel are not possible.
 ```sudo apt upgrade``` won't be able to run.
 
+4. [Chrome Crash, No video signal after boot](chrome_crash_boot.md)
+After Google Chrome Crash, no video signal at start (not even boot into BIOS). Keys and diagnostic procedures (Spoiler: Usually the problem is "swapped" video signals in multi screen setting). In spanish.
+
