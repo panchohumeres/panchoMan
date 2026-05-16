@@ -1,2 +1,2 @@
 
-[Install](comfyui-install.md)
+[Install ComfyUI](comfyui-install.md)
