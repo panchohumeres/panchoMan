@@ -28,6 +28,11 @@ conda install pytorch -c pytorch -c nvidia
 cd ComfyUI
 python main.py
 ```
+Go to URL in CLI, usually
+```
+To see the GUI go to: http://127.0.0.1:8188
+```
+
 
 ### Troubleshooting
 ---------------------
