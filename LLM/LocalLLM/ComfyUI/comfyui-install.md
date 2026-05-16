@@ -1,4 +1,5 @@
 ## Install ComfyUI Linux - Conda Install (NVIDIA)
+--------------------------------------------------
 
 Sources: 
  - ComfyUI Docs https://docs.comfy.org/installation/manual_install#nvidia
@@ -29,8 +30,8 @@ python main.py
 ```
 
 ### Troubleshooting
-Broken install due to problems with pytorch.
-----------------------------------------------------
+---------------------
+#### Broken install due to problems with pytorch.
 If Following ComfyUI NVIDIA GPU dependencies instructions:
 ```
 conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
@@ -50,5 +51,6 @@ Accordin to Google Overview -> The ImportError: undefined symbol: iJIT_NotifyEve
   pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121
   ```
   Sources:
+  
     - https://github.com/Comfy-Org/ComfyUI/issues/10259#issuecomment-3380711477
     - https://github.com/jeffffffli/HybrIK/issues/246
