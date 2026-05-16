@@ -1,5 +1,7 @@
 ### Sources:
 - https://www.youtube.com/watch?v=l4CiwGS2ewY
+- https://blog.comfy.org/p/qwen-image-in-comfyui-new-era-of
+- https://docs.comfy.org/development/core-concepts/models
 
 ### RUN
 0. If install in conda environment,
@@ -15,6 +17,8 @@ python main.py
 ```
 To see the GUI go to: http://127.0.0.1:8188
 ```
+
+### Download Models and Workflows:
 
 
 
