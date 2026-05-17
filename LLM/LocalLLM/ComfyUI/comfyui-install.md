@@ -23,6 +23,11 @@ git clone https://github.com/Comfy-Org/ComfyUI.git
 pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121
 conda install pytorch -c pytorch -c nvidia
 ```
+3.1. Install Node Manager (**recommended**):
+```
+pip install -U --pre comfyui-manager
+```
+
 4. RUN
 ```
 cd ComfyUI
