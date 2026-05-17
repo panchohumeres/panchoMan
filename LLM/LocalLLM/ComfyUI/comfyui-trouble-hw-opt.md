@@ -29,7 +29,8 @@ CLI Monitoring
   ```
 - Pro-Tip: The "All-in-One" Custom Command
   ```
-   echo "--- FREE VRAM ---"; nvidia-smi --query-gpu=memory.free --format=csv,noheader; echo "--- FREE RAM ---"; free -h | grep Mem | awk '{print $7 " available"}'```
+  echo "--- FREE VRAM ---"; nvidia-smi --query-gpu=memory.free --format=csv,noheader; echo "--- FREE RAM ---"; free -h | grep   Mem | awk '{print $7 " available"}'
+  ```
 
 
 
