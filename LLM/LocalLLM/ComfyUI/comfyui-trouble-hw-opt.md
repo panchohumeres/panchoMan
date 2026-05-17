@@ -34,6 +34,11 @@ CLI Monitoring
   echo "--- FREE VRAM ---"; nvidia-smi --query-gpu=memory.free --format=csv,noheader; echo "--- FREE RAM ---"; free -h | grep   Mem | awk '{print $7 " available"}'
   ```
 
+### Alternative IDEs
+WanGP by DeepBeepMeep : The best Open Source Video Generative Models Accessible to the GPU Poor
+WanGP supports the Wan (and derived models) but also Hunyuan Video, Flux, Qwen, Z-Image, LongCat, Kandinsky, LTXV, LTX-2, Qwen3 TTS, Chatterbox, HearMula, ... with
+- https://github.com/deepbeepmeep/Wan2GP
+
 ### Memory Problems
 Si el sistema está tan congelado que el puntero del mouse no se mueve, significa que tu computadora se quedó sin memoria RAM libre (un estado llamado Out of Memory o OOM) y está colapsada.
 Dado que no puedes usar el mouse, debes usar el teclado para forzar el cierre de Chrome mediante la terminal. Sigue estos pasos en orden:
