@@ -1,6 +1,39 @@
+### RUN
+0. If installed in conda environment,
+```
+conda activate comfyenv
+```
+1. CD into ComfyUI folder (where install is) and run the python script
+```
+cd ComfyUI
+python main.py
+```
+2. Go to url shown in CLI, usually:
+```
+To see the GUI go to: http://127.0.0.1:8188
+```
+
+3. With Manager:
+```
+python main.py --enable-manager
+```
+
+
+
 ### Stop ComfyUI Server
+
+- **Sources**
+  - https://github.com/Comfy-Org/ComfyUI/issues/12441
+  - https://www.reddit.com/r/StableDiffusion/comments/1t7thaz/why_does_exiting_comfyui_not_remove_it_from_memory/
+  - https://stackoverflow.com/questions/43724467/what-is-the-difference-between-kill-and-kill-9
+  - https://www.suse.com/c/observability-sigkill-vs-sigterm-a-developers-guide-to-process-termination/
+  - https://www.reddit.com/r/StableDiffusion/comments/1o488hl/cancel_a_comfyui_run_instantly_with_this_custom/
+  - https://www.reddit.com/r/comfyui/comments/1asdkeq/is_there_a_graceful_exitshutdown_for_comfyui/
+  - https://github.com/Acly/krita-ai-diffusion/issues/390
+  - https://github.com/Comfy-Org/ComfyUI-Manager/issues/357
+
 - **Type** <kbd>Ctrl</kbd> + <kbd>C</kbd>
-**Note**: <kbd>Ctrl</kbd> + <kbd>Z</kbd> does not stop the server, just pauses it in the background. You can bring it back to the foreground and kill it properly:
+- **Note**: <kbd>Ctrl</kbd> + <kbd>Z</kbd> does not stop the server, just pauses it in the background. You can bring it back to the foreground and kill it properly:
 Type ```fg```
 and press <kbd>Enter</kbd>
 
