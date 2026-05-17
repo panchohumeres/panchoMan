@@ -42,8 +42,10 @@ CLI Monitoring
   - https://comfyui-wiki.com/en/tutorial/advanced/image/qwen/qwen-image
   - https://huggingface.co/Phr00t/Qwen-Image-Edit-Rapid-AIO
   - https://docs.comfy.org/tutorials/image/z-image/z-image
-    
-Usar modelos especializados, destilados u versiones pequeñas:
+
+
+Usar modelos especializados, flujos de edición alternativos, destilados u versiones pequeñas.
+La razón técnica es que, para poder hacer una edición basada en instrucciones (por ejemplo, cambiarle la ropa a alguien o añadir un objeto), la tarjeta gráfica debe realizar un proceso doble: primero tiene que usar un codificador visual (VAE Encoder) para "leer" y transformar tu imagen original en datos matemáticos (lo que consume VRAM extra), y luego debe ejecutar el mismo número de pasos de difusión (KSampler) para fusionar tu orden de texto con la imagen.
 - **Modelos de Un Solo Paso (Lightning o Turbo)**: Tanto para generar como para editar, existen versiones llamadas Lightning o Hyper. Si descargas e integras un Lightning LoRA en tu flujo de trabajo, el nodo KSampler solo necesitará calcular 4 pasos (Steps) en lugar de los 20 o 30 habituales. Esto reduce el tiempo de procesamiento en un 80%.
 - **Inpainting Tradicional (Pintado de máscaras)**: En lugar de usar modelos multimodales gigantescos como Qwen (de 20B de parámetros), utiliza modelos tradicionales de Inpainting basados en SD 1.5 o SDXL. Creas una máscara negra sobre la zona exacta que quieres cambiar (por ejemplo, el fondo) y la IA solo trabajará en esos píxeles, dejando el resto intacto. Una GTX 1080 maneja SD 1.5 en cuestión de segundos.
 - **Modelos de ControlNet Estructurales**: Herramientas como Canny o Depth te permiten subir una imagen, extraer sus líneas o silueta, y generar algo nuevo basándose exclusivamente en esa estructura básica. Al no tener que interpretar semánticamente la imagen completa mediante un codificador de lenguaje pesado, la tarjeta gráfica trabaja mucho más holgada
