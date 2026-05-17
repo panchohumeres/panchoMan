@@ -9,4 +9,5 @@
 Run a basic workflow, download models (with example).
 
 4. Troubleshooting
+
 4.1. [Hardware Optimizations](comfyui-trouble-hw-opt.md)
