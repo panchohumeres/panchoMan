@@ -8,10 +8,14 @@
 ```
 conda activate comfyenv
 ```
-1. CD into ComfyUI folder (where install is) and run the python script
+1. CD into ComfyUI folder (where it is installed) and run the python script
 ```
 cd ComfyUI
 python main.py
+```
+1.1. With Manager (**Recommended**, requires installation of manager separately):
+```
+python main.py --enable-manager
 ```
 2. Go to url shown in CLI, usually:
 ```
