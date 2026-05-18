@@ -2,6 +2,8 @@
 -------------------------------------------
 [Workflow file example](../workflows/swap_faces.json)
 
+The Method: Use Reactor or InsightFace. Why it works on 4GB: This does not use diffusion models at all. It uses a hyper-fast script that detects facial landmarks, crops the face, and can swap it onto another body in less than 2 seconds, using virtually zero VRAM. Keywords to search in ComfyUI Manager: ComfyUI-Reactor.
+
 0. Ejecutar ComfyUI con Node Manager:
     
     ```
