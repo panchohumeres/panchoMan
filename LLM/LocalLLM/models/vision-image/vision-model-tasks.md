@@ -6,8 +6,9 @@
 
 2. Extracting a face from an image
    ----------------------------------------
-   [ComfyUI Workflow Example](../../../ComfyUI/tasks/swap-faces.md)
-     The Method: Use Reactor or InsightFace.
+   [ComfyUI Workflow Example](../../ComfyUI/tasks/swap-faces.md)
+
+   The Method: Use Reactor or InsightFace.
      Why it works on 4GB: This does not use diffusion models at all. It uses a hyper-fast script that detects facial landmarks, crops the face, and can swap it onto another body in less than 2 seconds, using virtually zero VRAM.
      Keywords to search in ComfyUI Manager: ComfyUI-Reactor.
 
