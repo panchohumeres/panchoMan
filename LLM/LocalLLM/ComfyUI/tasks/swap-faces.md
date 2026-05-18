@@ -1,5 +1,6 @@
 ### Worflow for Swapping Faces in ComfyUI
 -------------------------------------------
+[Workflow file example](../workflows/swap_faces.json)
 
 0. Ejecutar ComfyUI con Node Manager:
     
