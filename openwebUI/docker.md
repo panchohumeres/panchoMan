@@ -1,6 +1,7 @@
 ### Sources
 https://docs.openwebui.com/getting-started/ -> Docker Compose section
-https://peter-nhan.github.io/posts/Ollama-intro/
+https://peter-nhan.github.io/posts/Ollama-intro/ -> ollama intro
+https://github.com/ollama/ollama -> basic ollama commands
 
 #### Docker Commands
 - https://stackoverflow.com/questions/33083385/getting-console-output-from-a-docker-container -> logs
@@ -9,6 +10,49 @@ https://peter-nhan.github.io/posts/Ollama-intro/
 - https://stackoverflow.com/questions/41322541/rebuild-docker-container-on-file-changes -> containers - images
 - https://stackoverflow.com/questions/30233105/docker-compose-up-for-only-certain-containers -> docker-compose fine grained execution services
 - https://stackoverflow.com/questions/30494050/how-do-i-pass-environment-variables-to-docker-containers -> env vars
+
+̣̣̣̣̣̣______________________________________________
+### Ollama commands
+
+If ollama is being run separately, start server
+```bash
+ollama run llama3.2 #start ollama server with llama3.2, replace model of choice
+```
+
+list models
+```bash
+ollama list #models on computer
+ollama ps #models running, with cpu/gpu usage info
+```
+
+If ollama is being run separately, start server
+```bash
+ollama run llama3.2 #start ollama server with llama3.2, replace model of choice
+```
+leave OLLAMA terminal (interactive mode) -> WILL NOT SHUT DOWN THE SERVER
+```bash
+CTRL + Z 
+```
+
+Check Ollama is running
+http://localhost:11434/ 
+
+*Default port is 11434
+
+Should display
+```
+Ollama is running
+```
+
+
+stop model
+```bash
+ollama stop llama3.2
+```
+_______________________________________________________
+
+
+### Install and quick-startup
 
 If Ollama is on a Different Server, use this command:
 
@@ -38,7 +82,10 @@ docker rm -f open-webui
 docker run -d -p 3000:8080 -e -e OLLAMA_BASE_URL=http://localhost:11434 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
 ```
 
-
+Start Open-webui service (if container is already built)
+```bash
+docker start open-webui #replace with actual container name
+```
 
 _________________________________________________________________________________
 #### Other docker commands
