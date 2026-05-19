@@ -97,7 +97,8 @@ Preparar ComfyUI para abrir archivos GGUF:
   3. Busca el nodo llamado ComfyUI-GGUF e instálalo.
   4. Reinicia la interfaz de ComfyUI (o la consola) para que el cambio surta efecto. 
 
-### Configurar ComfyUI en Modo de Baja Memoria (Bajo Linux)
+### Configurar Modo Baja Memoria
+Bajo Linux
 **Sources**:
   - https://docs.comfy.org/interface/settings/server-config
   - https://github.com/Comfy-Org/ComfyUI/issues/2914

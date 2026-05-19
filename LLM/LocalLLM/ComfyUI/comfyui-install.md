@@ -5,30 +5,31 @@ Sources:
  - ComfyUI Docs https://docs.comfy.org/installation/manual_install#nvidia
 
 
-1. Create an environment with Conda.
+##### 1.  Create an environment with Conda.
 ```
 
 conda create -n comfyenv
 conda activate comfyenv
 ```
-2. Clone the ComfyUI code repository
+##### 2. Clone the ComfyUI code repository
 Note: Assumes location of public repo https://github.com/Comfy-Org/ComfyUI (tap on code -> clone for getting the https url)
 ```
 git clone https://github.com/Comfy-Org/ComfyUI.git
 ```
 
-3. Install GPU dependencies
+##### 3. Install GPU dependencies
 **Note**: Differs slightly from the install instructions on ComfyUI (Torch installs) due to broken install (see troubleshooting)
 ```
 pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121
 conda install pytorch -c pytorch -c nvidia
 ```
-3.1. Install Node Manager (**recommended**):
+###### a. Install Node Manager 
+**recommended**
 ```
 pip install -U --pre comfyui-manager
 ```
 
-4. RUN
+##### 4. RUN
 ```
 cd ComfyUI
 python main.py
