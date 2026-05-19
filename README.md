@@ -1,6 +1,6 @@
 # panchoMan
 Manuales varios de Francisco Humeres M.
-Vínculos:
+Manuales:
 
 [Home](https://panchohumeres.github.io/panchoMan/)
 
