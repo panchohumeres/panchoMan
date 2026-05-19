@@ -1,6 +1,7 @@
 # panchoMan
 Manuales varios de Francisco Humeres M.
-Manuales:
+
+Índice Manuales:
 
 [Home](https://panchohumeres.github.io/panchoMan/)
 
@@ -12,7 +13,7 @@ Manuales:
 
 [Sphinx](/sphinx/sphinx.md)
 
-[Git](/GIT/git.md)
+[Git](/git/git.md)
 
 [SSL/TSL](https://panchohumeres.gitlab.io/ssl_tsl_man)
 
