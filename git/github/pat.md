@@ -75,7 +75,7 @@ You can embed your token directly into the remote URL. This bypasses the credent
     - Because you are creating a Fine-grained token, your permissions are split into individual categories
 
 
-####  Classic Token
+### Classic Token
 If you prefer the single "repo" checkbox, go back to the menu: 
 
 1. Click Personal access tokens in the far-left sidebar.
@@ -86,7 +86,7 @@ You only need to check one main box:
 - ✅ repo (Full control of private repositories)
 - **Note**: Checking this automatically selects the sub-scopes (repo:status, repo_deployment, public_repo, etc.), which allows you to clone, push, pull, and manage branches.
 
-#### Fine Grained Token
+### Fine Grained Token
 1. Scroll past "Repository security advisories" until you find these two settings: 
 2. Contents: Click the dropdown next to it and select Read and Write. (This gives you permission to push, pull, and commit code).
 3. Pull requests: Select Read and Write. (This allows you to open PRs for your code contributions). 
@@ -102,13 +102,6 @@ Under Repository permissions, set these three to Read and Write:
 Leave everything else unchecked unless you specifically need to:
 workflow (Classic) / Actions (Fine-grained): If you need to edit GitHub Actions .github/workflows files.
 write:packages: If your project publishes Docker images or npm packages to GitHub.
-If you are ready to set it up, would you like the terminal commands to permanently save this token on your computer so you do not have to type it again?
 
-
-
-
-
-
-
-Step 2: Use the Token as Your Password
-The next time you perform a git push or git pull and are prompted for your password, paste the PAT you just created instead of your account password. 
+----------------------------------------
+ Made with the assistance of Gemini Overviews
