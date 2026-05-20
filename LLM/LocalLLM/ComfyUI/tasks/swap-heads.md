@@ -123,7 +123,7 @@ Cuando aplicas una máscara en la cabeza, el nodo `VAE Encode (for Inpainting)`
 	 - `steps`: 20 o 25.
 	 - `cfg`: 6.0 o 7.0.
 	 - `denoise`: Configúralo estrictamente entre **0.60 y 0.70**. Si lo subes a 1.0 perderá la forma natural del cuello y la postura corporal de la foto original.
- -  **Bajar el `denoise` en el KSampler** a un valor entre **`0.65` y `0.75`** forzará a la IA a respetar la estructura y los diseños originales de la vestimenta y cuerpo en los bordes, enfocando su poder de generación únicamente en rellenar el cabello y el rostro.
+ -  **Bajar el `denoise` en el KSampler** a un valor entre `0.72` y `0.78` forzará a la IA a respetar la estructura y los diseños originales de la vestimenta y cuerpo en los bordes, enfocando su poder de generación únicamente en rellenar el cabello y el rostro.
 - **Mantener el `grow_mask_by`**  en el nodo `VAE Encode (for Inpainting)`en valores bajos (por ejemplo, en **`4` o `6`**). Si es muy alto, la máscara se "desborda" hacia el pecho, distorsionando la vestimenta o el resto del cuerpo.
 - **Prompts**
 	- **En el nodo Positivo:** Escribe algo muy simple en inglés como `photorealistic face portrait, high quality hair, cinematic lighting`
