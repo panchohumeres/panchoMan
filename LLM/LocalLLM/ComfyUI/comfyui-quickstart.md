@@ -45,4 +45,6 @@ To see the GUI go to: http://127.0.0.1:8188
 ### Download Models and Workflows:
 
 
+-------------------------------------------------------------------
+ Generado con la asistencia de Gemini AI Overviews
 

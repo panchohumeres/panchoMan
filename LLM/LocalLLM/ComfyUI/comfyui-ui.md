@@ -8,4 +8,7 @@ Basics of ComfyUI User Interface
 	2. Hacer click en botón **Install Custom Nodes**.
 	3. En el cuadro de búsqueda superior, escribe exactamente: `IPAdapter plus`.
 	![128](assets/comfyui-node-manager-browser.png)
-	
+
+
+-------------------------------------------------------------------
+ Generado con la asistencia de Gemini AI Overviews
