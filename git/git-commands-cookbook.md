@@ -1,3 +1,6 @@
+
+## Git Commands Cookbook
+------------------------------------------
 ## crear rama de una sóla carpeta
 https://stackoverflow.com/questions/9971332/git-create-a-new-branch-with-only-a-specified-directory-and-its-history-then-pus
 
@@ -46,3 +49,11 @@ https://www.git-tower.com/learn/git/faq/undo-last-commit
 git reset --soft HEAD~1
 
 git filter-branch --force --index-filter "git rm -rf --cached --ignore-unmatch build" --prune-empty --tag-name-filter cat -- --all HEAD
+
+
+* **Check-out into branch and update with changes from master**
+		- https://stackoverflow.com/questions/5340724/get-changes-from-master-into-branch-in-git
+		```
+		git checkout {your_branch}
+		git rebase master
+		```

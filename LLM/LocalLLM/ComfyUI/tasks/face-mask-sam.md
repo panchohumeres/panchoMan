@@ -1,3 +1,35 @@
+
+https://github.com/storyicon/comfyui_segment_anything
+
+0. Start ComfyUI
+	- Cd into in ComfyUI folder and activate conda env if necessary
+			```
+			conda activate comfyenv
+			#for listing available environments
+			conda env list			
+			```
+	- Launch with node manager and low vram mode (recommended)	```
+		#lowvram mode & manager enabled
+		python main.py --lowvram --enable-manager
+	- Go to url in terminal, usually:
+		- - http://127.0.0.1:8188
+
+#### 
+El nodo que debes instalar en el **ComfyUI Manager** se llama exactamente **`segment anything`** (escrito en minúsculas y sin guiones bajos). 
+
+El motivo por el cual solo ves un detector de _Segment Anything 3_ es porque el buscador te está mostrando extensiones más nuevas. El paquete clásico de GitHub que usa el bloque _LangSAMModelLoader_ que revisamos tiene un nombre genérico en la tienda de ComfyUI. 
+
+Sigue estos pasos precisos en el instalador para encontrarlo sin perderte:
+
+🛠️ Cómo encontrarlo e instalarlo en el Manager
+
+1. Abre el **ComfyUI Manager**.
+2. Haz clic en **Install Custom Nodes**.
+3. En la barra de búsqueda escribe únicamente: **`segment anything`**.
+4. Desplázate por la lista de resultados. Debes buscar el recuadro que tenga los siguientes datos exactos:
+    - **Name:** `segment anything`
+    - **Author:** `storyicon`
+
 Opción 1: Segment Anything + GroundingDINO (La más precisa por texto)
 
 Esta combinación (conocida como **ImpactPack - SEGS**) te permite crear una máscara escribiendo la palabra de lo que quieres borrar.
