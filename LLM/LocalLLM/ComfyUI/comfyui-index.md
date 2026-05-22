@@ -9,7 +9,7 @@
 Run a basic workflow, download models (with example).
 
 4. Troubleshooting
-   1. [Hardware Optimizations](comfyui-trouble-hw-opt.md)
+   
   
 5. [Tasks - Workflows](tasks/comfyui-tasks.md)
    Instructions for typical Tasks and Workflows for executing in ComfyUI (operations such as swapping or cutting faces, background removal, etc.), optimized for running on commodity hardware.
