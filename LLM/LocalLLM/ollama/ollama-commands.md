@@ -1,2 +1,0 @@
-## Ollama Commands
-

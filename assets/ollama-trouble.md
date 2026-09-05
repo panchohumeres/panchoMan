@@ -1,1 +1,0 @@
-1. [Shutting Down Service](ollama-shut-down)
