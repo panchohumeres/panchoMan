@@ -103,5 +103,65 @@ Leave everything else unchecked unless you specifically need to:
 workflow (Classic) / Actions (Fine-grained): If you need to edit GitHub Actions .github/workflows files.
 write:packages: If your project publishes Docker images or npm packages to GitHub.
 
+
+### How to Use Token
+-----------------------------
+
+**Sources**:
+- https://stackoverflow.com/questions/75128935/what-permissions-should-i-choose-for-github-fine-grained-personal-tokens
+- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+- https://bulk.vttoth.com/CMS/technical-notes/388-using-githubs-fine-grained-tokens
+
+#### Easiest way
+
+```
+#replace main with the branch of interest
+git push origin main
+
+#When prompted for username and password--
+username: your user
+password: the PAT (personal access token)
+```
+Set this config for git remembering the credentials and not prompting for PAT every time you push changes:
+```
+git config --global credential.helper store
+```
+
+
+### Troubleshooting
+----------------------------------
+fatal: unable to access 'https:/<your_repo>git/': The requested URL returned error: 403
+
+The ```/``` at the indicates either:
+- the remote URL is wrongly set:
+```
+# Check the config file to see if the remote URL is malformed	
+git config --local --edit
+
+# Clear and Reset the remote URL (recommended)
+#This will overwrite your actual remote
+git remote set-url origin https://github.com/<your_user>/<your_repo>.git
+```
+* **Most likely**: The token is wrong or does not have the permissions (thus it appends the ```/``` at the end as it is it not escaping characters )
+```
+#Create the new token with the aprropiate permissions (see above)
+
+#clean any cached tokens
+git config --global --unset credential.helper	
+
+#replace main with the branch of interest (push changes)
+git push origin main
+
+#When prompted for username and password--
+username: your user
+password: the PAT (personal access token)
+
+#remember your credentials
+git config --global credential.helper store
+```
+
+
+
+
 ----------------------------------------
  Made with the assistance of Gemini Overviews
