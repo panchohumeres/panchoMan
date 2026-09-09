@@ -2,6 +2,9 @@
 
 **Sources**:
 - https://docs.gpt4all.io/gpt4all_api_server/home.html#key-features
+- https://github.com/nomic-ai/gpt4all/wiki/Local-API-Server
+- https://www.centron.de/tutorials/install-and-run-gpt4all-locally-with-secure-api-access
+- https://docs.gpt4all.io/gpt4all_desktop/localdocs.html#create-localdocs
 
 ### Launch API
 * In the GPT4All app, go to  **Settings** -> **Application**, scroll down to **Advanced** and check the box of **Enable API Server**.
@@ -36,7 +39,8 @@ Body:
 "content": "qué es AGI"
 }
 ],
-"temperature": 0.2
+"temperature": 0.2,
+"max_tokens": 2048,
 }
 ```
 
@@ -53,9 +57,45 @@ curl --location 'http://localhost:4891/v1/chat/completions' \
       "content": "qué es AGI"
     }
   ],
+  "max_tokens": 2048,
   "temperature": 0.2
 }'
 ```
+
+
+Example with OpenAI Python Client
+Install with  `pip install "openai ~= 0.28"
+
+```python
+import openai
+
+#openai.api_base = "https://api.openai.com/v1"
+openai.api_base = "http://localhost:4891/v1"
+
+openai.api_key = "not needed for a local LLM"
+
+# Set up the prompt and other parameters for the API request
+prompt = "Who is Michael Jordan?"
+
+#model = "gpt-3.5-turbo"
+model = "Phi-3 Mini Instruct"
+
+# Make the API request
+response = openai.Completion.create(
+    model=model,
+    prompt=prompt,
+    max_tokens=50,
+    temperature=0.28,
+    top_p=0.95,
+    n=1,
+    echo=True,
+    stream=False
+)
+
+# Print the generated completion
+print(response)
+```
+
 
 #### Models
 
