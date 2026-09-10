@@ -1,6 +1,7 @@
 **Sources**:
 - https://docs.gpt4all.io/old/gpt4all_cli.html
 - https://github.com/nomic-ai/gpt4all/wiki/Python-CLI
+- https://github.com/nomic-ai/gpt4all/issues/3033
 
 GPT4All CLI is a python wrapper. It can be run either through a command line interface or within Python.
 
@@ -23,6 +24,17 @@ pip install gpt4all typer
 ###other packages it may complain if not installed in the env
 pip install typing-extensions
 ```
+
+**Recommended (for Conda ENV):** Install **CUDA in environment** (otherwise GPT4All will fall back only to CPU)
+
+GPT4All looks for `libcudart.so.11.0` (**CUDA 11**) or `libcudart.so.12` (**CUDA 12**). Despite newer versions of CUDA being retrocompatible with older versions, GPT4All will fail in finding the CUDA libraries.
+
+This command will install gpt4all bundled with the necessary CUDA libs:
+```
+pip install "gpt4all[cuda]"
+```
+
+
 
 **The CLI is a self-contained script called [app.py](https://github.com/nomic-ai/gpt4all/blob/main/gpt4all-bindings/cli/app.py)**;  [download](https://raw.githubusercontent.com/nomic-ai/gpt4all/main/gpt4all-bindings/cli/app.py) and save it anywhere you like.
 **Note**: Check the official download link in the GPT4All documentation.
@@ -66,3 +78,12 @@ Run model
 #replace deepseek in the example with your model
 python app.py repl --model /home/user/my-gpt4all-models/DeepSeek-R1-Distill-Llama-8B-Q4_0.gguf
 ```
+
+### Syntax
+------------------------
+
+
+#### Alternatives
+------------------
+Non official CLI
+- https://pypi.org/project/gpt4all-cli/
