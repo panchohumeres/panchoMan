@@ -2,4 +2,4 @@
 
 [Linux Utils convert bulk html to txt](html2txt.md)
 
-[Bulk copy-paste files Linux](../../../linux/markdown/files-folders.md)
+[Bulk copy-paste files Linux](files-folders.md)

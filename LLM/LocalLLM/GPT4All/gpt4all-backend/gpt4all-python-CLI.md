@@ -2,8 +2,16 @@
 - https://docs.gpt4all.io/old/gpt4all_cli.html
 - https://github.com/nomic-ai/gpt4all/wiki/Python-CLI
 - https://github.com/nomic-ai/gpt4all/issues/3033
+- https://github.com/nomic-ai/gpt4all/wiki/Python-Bindings
+- https://github.com/nomic-ai/gpt4all/issues/1125
 
 GPT4All CLI is a python wrapper. It can be run either through a command line interface or within Python.
+
+#### **Note: Important**
+-------------------------
+- The **python backend does NOT have available all the functionalities of the GUI**.
+- **Chat with `LocalDocs` is not possible** as in the UI App.
+- Regarding RAG, **only embeddings library is available**.
 
 #### Install
 -----------------------------------
@@ -83,6 +91,19 @@ python app.py repl --model /home/user/my-gpt4all-models/DeepSeek-R1-Distill-Llam
 ------------------------
 
 
+**Closing the session**
+Within python
+```python
+# Load Model pointing using GPU  
+model = GPT4All("Llama-3.2-3B-Instruct-Q4_0.gguf", device="cuda")
+
+#closing the model session (will liberate RAM or VRAM)
+model.close()
+```
+Calling Python from the terminal (Bash)
+```
+CTRL + C
+```
 #### Alternatives
 ------------------
 Non official CLI

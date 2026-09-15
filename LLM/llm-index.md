@@ -1,5 +1,5 @@
 #### LLM Manual Index
 
-[Embeddings](embeddings/embeddings.md)
+[Embeddings](embeddings.md)
 
 [Local LLM](LocalLLM/index.md)
