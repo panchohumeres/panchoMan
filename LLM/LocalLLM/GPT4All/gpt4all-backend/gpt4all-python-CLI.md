@@ -108,3 +108,8 @@ CTRL + C
 ------------------
 Non official CLI
 - https://pypi.org/project/gpt4all-cli/
+
+Python Examples
+------------------------------------------
+Examples on chat sessions, tokenizers, embeddings, RAG and chat templates (Jupyter Notebooks).
+[GPT4All Python examples](gpt4all-python-ex.md)
