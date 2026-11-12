@@ -23,3 +23,14 @@ After it, updates such as those that involve updating the kernel are not possibl
 4. [Chrome Crash, No video signal after boot](chrome_crash_boot.md)
 After Google Chrome Crash, no video signal at start (not even boot into BIOS). Keys and diagnostic procedures (Spoiler: Usually the problem is "swapped" video signals in multi screen setting). In spanish.
 
+5. [Emergency Mode (after mounting drives)](solucion_emergency_mode_fstab) (spanish)
+Linux enters in emergency mode; after editing drives mounts in ```fstab```:
+```
+You are in emergency mode. After logging in, type "journalctl -xb" to view
+system logs, "systemctl reboot" to reboot, "systemctl default" or "exit"
+to boot into default mode.
+Press Enter for maintenance
+(or press Control-D to continue):
+```
+
+
