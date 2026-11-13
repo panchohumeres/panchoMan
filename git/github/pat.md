@@ -35,11 +35,17 @@ git config --global credential.helper store
 
 C. **Alternative**:
 You can embed your token directly into the remote URL. This bypasses the credential manager entirely.
-1. Run this command inside your project folder:
+0. Clean current remotes for re-setting:
+
+```
+#replace origin with the corresponding remote label (if necessary)
+git remote remove origin 
+```
+0. Run this command inside your project folder:
         ```
         git remote set-url origin https://github.com
         ```
-2. Replace these placeholders:
+1. Replace these placeholders:
         - YOUR_TOKEN: Paste your fine-grained token here.
         - USERNAME: Your GitHub username (or organization name).
         - REPOSITORY: The exact name of your repository.
