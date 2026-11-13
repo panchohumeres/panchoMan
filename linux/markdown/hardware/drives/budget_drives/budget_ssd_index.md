@@ -20,3 +20,6 @@ Guides (in spanish) for optimizing bugdet SSD Drives (mostly chinese developed),
 	- Extra config for workload intensive apps such as docker or zotero.
 	-  Why drive unmounting happens with these budget drives.
 	- Fixing data corruption issues.
+
+ 4. [Hardware Monitoring](monitoreo_validacion_ssd_nvme-v2.md)
+	 Instructions for monitoring hw status (temperature, etc.) and validate its working correctly.
